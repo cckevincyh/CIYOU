@@ -16,8 +16,6 @@ class Admin implements Serializable{
     private Integer isAvalible
     //权限
     private List<Permission> permissionList
-    //所属角色
-    private Role role
 
     Integer getAdminId() {
         return adminId
@@ -51,14 +49,6 @@ class Admin implements Serializable{
         this.isAvalible = isAvalible
     }
 
-    Role getRole() {
-        return role
-    }
-
-    void setRole(Role role) {
-        this.role = role
-    }
-
     List<Permission> getPermissionList() {
         return permissionList
     }
@@ -76,7 +66,6 @@ class Admin implements Serializable{
                 ", password='" + password + '\'' +
                 ", isAvalible=" + isAvalible +
                 ", permissionList=" + permissionList +
-                ", role=" + role +
                 '}';
     }
 }

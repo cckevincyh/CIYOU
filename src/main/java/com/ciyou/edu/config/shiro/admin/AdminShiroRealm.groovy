@@ -42,11 +42,11 @@ class AdminShiroRealm extends AuthorizingRealm {
         //验证通过返回一个封装了用户信息的AuthenticationInfo实例即可。
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 admin, //用户信息
-                admin.getPassword(), //密码
+                admin?.getPassword(), //密码
                 getName() //realm name
         )
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(admin?.getAdminName())) //设置盐
-
+        println authenticationInfo
         return authenticationInfo
     }
 
@@ -59,7 +59,7 @@ class AdminShiroRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
         Admin admin = (Admin) principals?.getPrimaryPrincipal()
         admin?.getPermissionList()?.each {current_Permission ->
-            authorizationInfo?.addRole(admin?.getRole()?.getRoleName())
+            authorizationInfo?.addRole("Admin")
             authorizationInfo?.addStringPermission(current_Permission?.getPermission())
         }
         return authorizationInfo

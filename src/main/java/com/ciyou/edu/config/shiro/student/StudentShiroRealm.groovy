@@ -1,8 +1,8 @@
 package com.ciyou.edu.config.shiro.student
 
 import com.ciyou.edu.config.shiro.common.UserToken
-import com.ciyou.edu.entity.Admin
-import com.ciyou.edu.service.AdminService
+import com.ciyou.edu.entity.Student
+import com.ciyou.edu.service.StudentService
 import org.apache.shiro.authc.*
 import org.apache.shiro.authz.AuthorizationInfo
 import org.apache.shiro.authz.SimpleAuthorizationInfo
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class StudentShiroRealm extends AuthorizingRealm {
 
      @Autowired
-     private AdminService adminService
+     private StudentService studentService
 
 
 
@@ -27,21 +27,21 @@ class StudentShiroRealm extends AuthorizingRealm {
 
         println("开始Student身份验证")
         UserToken userToken = (UserToken)token
-        String adminName =  userToken?.getUsername() //获取用户名，默认和login.html中的adminName对应。
-        Admin admin = adminService?.findByAdminName(adminName)
+        String studentId =  userToken?.getUsername() //获取用户名，默认和login.html中的adminName对应。
+        Student student = studentService?.findByStudentId(studentId)
 
-        if (admin == null) {
+        if (student == null) {
             //没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
             throw new UnknownAccountException("用户不存在！")
         }
 
         //验证通过返回一个封装了用户信息的AuthenticationInfo实例即可。
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                admin, //用户信息
-                admin.getPassword(), //密码
+                student, //用户信息
+                student?.getPassword(), //密码
                 getName() //realm name
         )
-        authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(admin?.getAdminName())) //设置盐
+        authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(student?.getStudentId())) //设置盐
 
         return authenticationInfo
     }
@@ -53,11 +53,8 @@ class StudentShiroRealm extends AuthorizingRealm {
         println("开始Student权限配置")
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
-        Admin admin = (Admin) principals?.getPrimaryPrincipal()
-        admin?.getPermissionList()?.each {current_Permission ->
-            authorizationInfo?.addRole(admin?.getRole()?.getRoleName())
-            authorizationInfo?.addStringPermission(current_Permission?.getPermission())
-        }
+        Student student = (Student) principals?.getPrimaryPrincipal()
+        authorizationInfo?.addRole("Student")
         return authorizationInfo
     }
 }

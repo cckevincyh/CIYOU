@@ -2,7 +2,6 @@ package com.ciyou.edu.admin
 
 import com.ciyou.edu.app.App
 import com.ciyou.edu.entity.Admin
-import com.ciyou.edu.entity.Role
 import com.ciyou.edu.service.AdminService
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,9 +26,6 @@ class AdminTest {
         admin.setAdminName("1111")
         admin.setPassword("1111")
         admin.setIsAvalible(1)
-        Role role = new Role()
-        role.setRoleId(1)
-        admin.setRole(role)
         println adminService.addAdmin(admin)
     }
 

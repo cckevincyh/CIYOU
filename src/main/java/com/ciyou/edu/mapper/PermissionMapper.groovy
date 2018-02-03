@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Select
  */
 interface PermissionMapper {
 
-    @Select("select Permission.* from Admin,Permission where Admin.adminId = #{adminId} and Admin.adminId = Permission.adminId")
+    @Select("select Permission.* from Admin_Permission,Permission where Admin_Permission.adminId = #{adminId} and Admin_Permission.PermissionId = Permission.PermissionId")
     List<Permission> findPermissionByAdmin(@Param("adminId")Integer id)
 }
