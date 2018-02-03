@@ -11,4 +11,6 @@ interface AdminService {
     int addAdmin(Admin admin)
 
     Admin findAdminById(Integer adminId)
+
+    Admin findByAdminName(String adminName)
 }

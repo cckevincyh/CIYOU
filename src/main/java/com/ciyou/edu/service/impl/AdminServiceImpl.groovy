@@ -39,4 +39,9 @@ class AdminServiceImpl implements AdminService{
         admin?.setPermissionList(permissionList)
         return admin
     }
+
+    @Override
+    Admin findByAdminName(String adminName) {
+        return null
+    }
 }

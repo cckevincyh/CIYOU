@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan
  */
 
 @SpringBootApplication
-@ComponentScan(basePackages = ["com.ciyou.edu.controller","com.ciyou.edu.aop","com.ciyou.edu.service"])
+@ComponentScan(basePackages = ["com.ciyou.edu.controller","com.ciyou.edu.aop","com.ciyou.edu.service","com.ciyou.edu.config"])
 @MapperScan(basePackages = "com.ciyou.edu.mapper")
 class App {
     public static void main(String[] args) {
