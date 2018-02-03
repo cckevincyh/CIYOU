@@ -31,15 +31,15 @@ class WebLogAspect {
     public void doBefore(JoinPoint joinPoint) throws Throwable {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest()
+        HttpServletRequest request = attributes?.getRequest()
         // 记录下请求内容
-        logger.info("URL : " + request.getRequestURL().toString())
-        logger.info("HTTP_METHOD : " + request.getMethod())
-        logger.info("IP : " + request.getRemoteAddr())
-        Enumeration<String> enu = request.getParameterNames()
-        while (enu.hasMoreElements()) {
-            String name = (String) enu.nextElement()
-            logger.info("name:{},value:{}", name, request.getParameter(name))
+        logger.info("URL : " + request?.getRequestURL()?.toString())
+        logger.info("HTTP_METHOD : " + request?.getMethod())
+        logger.info("IP : " + request?.getRemoteAddr())
+        Enumeration<String> enu = request?.getParameterNames()
+        while (enu?.hasMoreElements()) {
+            String name = (String) enu?.nextElement()
+            logger.info("name:{},value:{}", name, request?.getParameter(name))
         }
     }
 

@@ -2,9 +2,8 @@ package com.ciyou.edu.admin
 
 import com.ciyou.edu.app.App
 import com.ciyou.edu.entity.Admin
-import com.ciyou.edu.entity.Permission
 import com.ciyou.edu.entity.Role
-import com.ciyou.edu.mapper.AdminMapper
+import com.ciyou.edu.service.AdminService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner
 class AdminTest {
 
     @Autowired
-    private AdminMapper adminMapper
+    private AdminService adminService
 
     @Test
     void addAdminTest(){
@@ -31,9 +30,11 @@ class AdminTest {
         Role role = new Role()
         role.setRoleId(1)
         admin.setRole(role)
-        Permission p = new Permission()
-        p.setPermissionId(1)
-        admin.setPermission(p)
-        println adminMapper.addAdmin(admin)
+        println adminService.addAdmin(admin)
+    }
+
+    @Test
+    void findAdminById(){
+        println adminService.findAdminById(1)
     }
 }

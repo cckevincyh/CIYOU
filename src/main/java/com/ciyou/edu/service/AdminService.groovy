@@ -9,4 +9,6 @@ import com.ciyou.edu.entity.Admin
 interface AdminService {
 
     int addAdmin(Admin admin)
+
+    Admin findAdminById(Integer adminId)
 }

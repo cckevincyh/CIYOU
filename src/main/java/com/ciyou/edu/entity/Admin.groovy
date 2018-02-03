@@ -15,7 +15,7 @@ class Admin implements Serializable{
     //状态 1：正常 2：冻结
     private Integer isAvalible
     //权限
-    private Permission permission
+    private List<Permission> permissionList
     //所属角色
     private Role role
 
@@ -51,19 +51,32 @@ class Admin implements Serializable{
         this.isAvalible = isAvalible
     }
 
-    Permission getPermission() {
-        return permission
-    }
-
-    void setPermission(Permission permission) {
-        this.permission = permission
-    }
-
     Role getRole() {
         return role
     }
 
     void setRole(Role role) {
         this.role = role
+    }
+
+    List<Permission> getPermissionList() {
+        return permissionList
+    }
+
+    void setPermissionList(List<Permission> permissionList) {
+        this.permissionList = permissionList
+    }
+
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "adminId=" + adminId +
+                ", adminName='" + adminName + '\'' +
+                ", password='" + password + '\'' +
+                ", isAvalible=" + isAvalible +
+                ", permissionList=" + permissionList +
+                ", role=" + role +
+                '}';
     }
 }
