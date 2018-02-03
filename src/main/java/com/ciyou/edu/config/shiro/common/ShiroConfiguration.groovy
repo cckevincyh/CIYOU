@@ -13,6 +13,7 @@ import org.apache.shiro.mgt.SecurityManager;
 /**
  * @Author C.
  * @Date 2018-02-03 9:54
+ * Shiro 配置类
  */
 @Configuration
 class ShiroConfiguration {
@@ -20,22 +21,21 @@ class ShiroConfiguration {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean()
+        shiroFilterFactoryBean.setSecurityManager(securityManager)
 
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/logout", "logout");
-        filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>()
+        filterChainDefinitionMap.put("/logout", "logout")
+        filterChainDefinitionMap.put("/favicon.ico", "anon")
+        filterChainDefinitionMap.put("/**", "authc")
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
 
 
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/403"); //这里设置403并不会起作用，参考http://www.jianshu.com/p/e03f5b54838c
+        shiroFilterFactoryBean.setLoginUrl("/login")
+        shiroFilterFactoryBean.setSuccessUrl("/index")
 
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        return shiroFilterFactoryBean;
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap)
+        return shiroFilterFactoryBean
     }
 
 

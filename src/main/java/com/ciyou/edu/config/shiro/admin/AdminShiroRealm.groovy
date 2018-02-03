@@ -8,11 +8,14 @@ import org.apache.shiro.authc.AuthenticationInfo
 import org.apache.shiro.authc.AuthenticationToken
 import org.apache.shiro.authc.SimpleAuthenticationInfo
 import org.apache.shiro.authc.UnknownAccountException
+import org.apache.shiro.authz.AuthorizationException
 import org.apache.shiro.authz.AuthorizationInfo
 import org.apache.shiro.authz.SimpleAuthorizationInfo
 import org.apache.shiro.realm.AuthorizingRealm
 import org.apache.shiro.subject.PrincipalCollection
 import org.apache.shiro.util.ByteSource
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
@@ -20,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired
  * @Date 2018-02-02 14:58
  */
 class AdminShiroRealm extends AuthorizingRealm {
+
+    private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class)
 
      @Autowired
      private AdminService adminService
@@ -29,7 +34,7 @@ class AdminShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-        println("开始Admin身份验证")
+        logger.info("开始Admin身份认证...")
         UserToken userToken = (UserToken)token
         String adminName =  userToken?.getUsername() //获取用户名，默认和login.html中的adminName对应。
         Admin admin = adminService?.findByAdminName(adminName)
@@ -46,7 +51,6 @@ class AdminShiroRealm extends AuthorizingRealm {
                 getName() //realm name
         )
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(admin?.getAdminName())) //设置盐
-        println authenticationInfo
         return authenticationInfo
     }
 
@@ -54,8 +58,10 @@ class AdminShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-        println("开始Admin权限配置")
-
+        logger.info("开始Admin权限授权")
+        if (principals == null) {
+            throw new AuthorizationException("PrincipalCollection method argument cannot be null.")
+        }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
         Admin admin = (Admin) principals?.getPrimaryPrincipal()
         admin?.getPermissionList()?.each {current_Permission ->

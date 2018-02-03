@@ -5,6 +5,8 @@ import org.apache.shiro.authc.AuthenticationInfo
 import org.apache.shiro.authc.AuthenticationToken
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator
 import org.apache.shiro.realm.Realm
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * @Author C.
@@ -17,9 +19,13 @@ import org.apache.shiro.realm.Realm
  * 并且，他们不能相互包含，例如，处理学生验证的Realm的全类名中不应该包含字符串"Admin"。
  */
 class UserModularRealmAuthenticator extends ModularRealmAuthenticator {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserModularRealmAuthenticator.class)
+
     @Override
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken)
             throws AuthenticationException {
+        logger.info("UserModularRealmAuthenticator:method doAuthenticate() execute ")
         // 判断getRealms()是否返回为空
         assertRealmsConfigured()
         // 强制转换回自定义的CustomizedToken
