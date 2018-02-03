@@ -1,13 +1,9 @@
-package com.ciyou.edu.config.shiro.admin
+package com.ciyou.edu.config.shiro.student
 
 import com.ciyou.edu.config.shiro.common.UserToken
 import com.ciyou.edu.entity.Admin
 import com.ciyou.edu.service.AdminService
-import org.apache.shiro.authc.AuthenticationException
-import org.apache.shiro.authc.AuthenticationInfo
-import org.apache.shiro.authc.AuthenticationToken
-import org.apache.shiro.authc.SimpleAuthenticationInfo
-import org.apache.shiro.authc.UnknownAccountException
+import org.apache.shiro.authc.*
 import org.apache.shiro.authz.AuthorizationInfo
 import org.apache.shiro.authz.SimpleAuthorizationInfo
 import org.apache.shiro.realm.AuthorizingRealm
@@ -19,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
  * @Author C.
  * @Date 2018-02-02 14:58
  */
-class AdminShiroRealm extends AuthorizingRealm {
+class StudentShiroRealm extends AuthorizingRealm {
 
      @Autowired
      private AdminService adminService
@@ -29,7 +25,7 @@ class AdminShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-        println("开始Admin身份验证")
+        println("开始Student身份验证")
         UserToken userToken = (UserToken)token
         String adminName =  userToken?.getUsername() //获取用户名，默认和login.html中的adminName对应。
         Admin admin = adminService?.findByAdminName(adminName)
@@ -54,7 +50,7 @@ class AdminShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-        println("开始Admin权限配置")
+        println("开始Student权限配置")
 
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
         Admin admin = (Admin) principals?.getPrimaryPrincipal()
