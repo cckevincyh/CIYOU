@@ -32,8 +32,18 @@ class AdminServiceImpl implements AdminService{
         Admin admin = adminMapper?.findAdminById(adminId)
         //获取权限
         List<Permission> permissionList =  permissionMapper?.findPermissionByAdmin(adminId)
-        //获取父权限
-
+        //获取父权限,去掉重复的父权限
+        Set<Integer> parentSet = new HashSet<Integer>()
+        permissionList?.each {current_Permission ->
+            parentSet?.add(current_Permission?.getParentId())
+        }
+        //查询相关父权限，加入当前Admin的权限
+        parentSet?.each {current_Parent ->
+            Permission permission = permissionMapper?.findPermissionById(current_Parent)
+            if(permission){
+                permissionList?.add(permission)
+            }
+        }
         admin?.setPermissionList(permissionList)
         return admin
     }
@@ -43,13 +53,22 @@ class AdminServiceImpl implements AdminService{
         Admin admin = adminMapper?.findAdminByName(adminName)
         //获取权限
         List<Permission> permissionList =  permissionMapper?.findPermissionByAdmin(admin?.getAdminId())
-        //获取父权限
-        Permission p = new Permission()
-        p.setPermissionId(2)
-        p.setPermission("2")
-        permissionList?.add(p)
-
+        //获取父权限,去掉重复的父权限
+        Set<Integer> parentSet = new HashSet<Integer>()
+        permissionList?.each {current_Permission ->
+            parentSet?.add(current_Permission?.getParentId())
+        }
+        //查询相关父权限，加入当前Admin的权限
+        parentSet?.each {current_Parent ->
+            Permission permission = permissionMapper?.findPermissionById(current_Parent)
+            if(permission){
+                permissionList?.add(permission)
+            }
+        }
         admin?.setPermissionList(permissionList)
         return admin
     }
+
+
+
 }

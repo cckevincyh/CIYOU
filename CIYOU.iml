@@ -13,7 +13,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-log4j2:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.7" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.24" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.7" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.24" level="project" />
@@ -86,6 +85,10 @@
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.3" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.shiro:shiro-web:1.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.crazycake:shiro-redis:2.4.2.1-RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: redis.clients:jedis:2.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.24" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:1.5.2.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:1.5.2.RELEASE" level="project" />

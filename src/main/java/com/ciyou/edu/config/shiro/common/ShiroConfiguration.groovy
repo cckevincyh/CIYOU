@@ -1,6 +1,8 @@
 package com.ciyou.edu.config.shiro.common
 
 import com.ciyou.edu.config.shiro.admin.AdminShiroRealm
+import com.ciyou.edu.entity.Permission
+import com.ciyou.edu.service.PermissionService
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator
@@ -8,6 +10,7 @@ import org.apache.shiro.realm.Realm
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.apache.shiro.mgt.SecurityManager;
@@ -19,21 +22,48 @@ import org.apache.shiro.mgt.SecurityManager;
 @Configuration
 class ShiroConfiguration {
 
+    @Autowired(required = false)
+    private PermissionService permissionService
+
+    /**
+     * ShiroFilterFactoryBean 处理拦截资源文件问题。
+     * 注意：单独一个ShiroFilterFactoryBean配置是或报错的，因为在
+     * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager
+     * Filter Chain定义说明 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过
+     *
+     * 部分过滤器可指定参数，如perms，roles
+     * @param securityManager
+     * @return
+     */
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean()
         shiroFilterFactoryBean.setSecurityManager(securityManager)
 
+        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+        shiroFilterFactoryBean.setLoginUrl("/login")
+        //登录成功后要跳转的链接
+        shiroFilterFactoryBean.setSuccessUrl("/index")
+        // 未授权界面;
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403")
+
+        // 权限控制map.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>()
+        // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/logout", "logout")
         filterChainDefinitionMap.put("/favicon.ico", "anon")
+        // 从数据库获取所有的权限
+        List<Permission> permissionList = permissionService?.findAllPermission()
+        permissionList?.each {current_Permission ->
+            //规则："roles[admin,user]", "perms[file:edit]"
+            filterChainDefinitionMap?.put(current_Permission?.getUrl(),"perms["+current_Permission?.getPermission()+"]")
+        }
+
+        //   过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
         filterChainDefinitionMap.put("/**", "authc")
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
 
-
-        shiroFilterFactoryBean.setLoginUrl("/login")
-        shiroFilterFactoryBean.setSuccessUrl("/index")
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap)
         return shiroFilterFactoryBean
@@ -84,6 +114,7 @@ class ShiroConfiguration {
      *  开启shiro aop注解支持.
      *  使用代理方式;所以需要开启代码支持;
      *  开启 权限注解
+     *  Controller才能使用@RequiresPermissions
      * @param securityManager
      * @return
      */

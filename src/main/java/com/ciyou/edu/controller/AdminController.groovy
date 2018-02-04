@@ -38,6 +38,8 @@ class AdminController {
     @ResponseBody
     public String loginAdmin(@RequestParam("adminName") String username,@RequestParam("password")String password){
         //获取Subject实例对象
+        //在shiro里面所有的用户的会话信息都会由Shiro来进行控制，那么也就是说只要是与用户有关的一切的处理信息操作都可以通过Shiro取得，
+        // 实际上可以取得的信息可以有用户名、主机名称等等，这所有的信息都可以通过Subject接口取得
         Subject currentAdmin = SecurityUtils.getSubject()
         if (!currentAdmin?.isAuthenticated()) {
             //将用户名和密码封装到继承了UsernamePasswordToken的userToken

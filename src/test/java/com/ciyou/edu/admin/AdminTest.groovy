@@ -36,7 +36,8 @@ class AdminTest {
 
     @Test
     void findAdminById(){
-        println adminService.findAdminById(1)
+        Admin admin =  adminService.findAdminById(1)
+        println admin.adminName
     }
 
 

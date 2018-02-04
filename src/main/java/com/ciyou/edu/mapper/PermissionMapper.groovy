@@ -12,4 +12,10 @@ interface PermissionMapper {
 
     @Select("select Permission.* from Admin_Permission,Permission where Admin_Permission.adminId = #{adminId} and Admin_Permission.PermissionId = Permission.PermissionId")
     List<Permission> findPermissionByAdmin(@Param("adminId")Integer id)
+
+    @Select("select * from Permission where permissionId = #{permissionId}")
+    Permission findPermissionById(@Param("permissionId")Integer id)
+
+    @Select("select * from Permission")
+    List<Permission> findAllPermission()
 }

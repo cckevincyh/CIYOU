@@ -89,6 +89,14 @@
             <version>1.2.2</version>
         </dependency>
 
+
+        <!-- shiro+redis缓存插件 -->
+        <dependency>
+            <groupId>org.crazycake</groupId>
+            <artifactId>shiro-redis</artifactId>
+            <version>2.4.2.1-RELEASE</version>
+        </dependency>
+
         <!-- spring boot test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
