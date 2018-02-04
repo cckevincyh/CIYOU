@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody
  */
 @Controller
 class IndexController {
-    private static final Logger logger = LoggerFactory.getLogger(getClass())
+    private static final Logger logger = LoggerFactory.getLogger(IndexController.class)
 
     @RequestMapping("/hello")
     @ResponseBody

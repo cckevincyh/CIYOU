@@ -13,15 +13,19 @@ import org.apache.shiro.util.ByteSource
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 
 /**
  * @Author C.
  * @Date 2018-02-02 14:58
  */
 class StudentShiroRealm extends AuthorizingRealm {
-    private static final Logger logger = LoggerFactory.getLogger(getClass())
+    private static final Logger logger = LoggerFactory.getLogger(StudentShiroRealm.class)
 
+    //在自定义Realm中注入的Service声明中加入@Lazy注解即可解决@cacheble注解无效问题
+    //解决同时使用Redis缓存数据和缓存shiro时，@cacheble无效的问题
      @Autowired
+     @Lazy
      private StudentService studentService
 
 

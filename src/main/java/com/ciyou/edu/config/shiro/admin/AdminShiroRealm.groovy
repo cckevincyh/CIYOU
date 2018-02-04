@@ -17,6 +17,7 @@ import org.apache.shiro.util.ByteSource
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 
 /**
  * @Author C.
@@ -27,6 +28,7 @@ class AdminShiroRealm extends AuthorizingRealm {
     private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class)
 
      @Autowired
+     @Lazy
      private AdminService adminService
 
 

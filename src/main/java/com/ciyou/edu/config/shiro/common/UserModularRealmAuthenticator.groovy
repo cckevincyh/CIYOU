@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory
  */
 class UserModularRealmAuthenticator extends ModularRealmAuthenticator {
 
-    private static final Logger logger = LoggerFactory.getLogger(getClass())
+    private static final Logger logger = LoggerFactory.getLogger(UserModularRealmAuthenticator.class)
 
     @Override
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken)

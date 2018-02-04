@@ -97,6 +97,14 @@
             <version>2.4.2.1-RELEASE</version>
         </dependency>
 
+
+        <!-- 添加Redis缓存支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>1.4.3.RELEASE</version>
+        </dependency>
+
         <!-- spring boot test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

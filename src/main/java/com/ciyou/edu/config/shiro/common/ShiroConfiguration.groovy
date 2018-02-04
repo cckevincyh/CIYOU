@@ -6,7 +6,6 @@ import com.ciyou.edu.service.PermissionService
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator
-import org.apache.shiro.codec.Base64
 import org.apache.shiro.realm.Realm
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean
@@ -35,7 +34,7 @@ class ShiroConfiguration {
     @Autowired(required = false)
     private PermissionService permissionService
 
-    private static final Logger logger = LoggerFactory.getLogger(getClass())
+    private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class)
 
     //获取application.properties参数
     @Value('${spring.redis.host}')
@@ -116,8 +115,8 @@ class ShiroConfiguration {
      * 使用的是shiro-redis开源插件
      * @return
      */
-    @Bean
     public RedisManager redisManager() {
+        logger.info("创建shiro redisManager,连接Redis..URL= " + host + ":" + port)
         RedisManager redisManager = new RedisManager()
         redisManager.setHost(host)
         redisManager.setPort(port)
@@ -132,8 +131,8 @@ class ShiroConfiguration {
      * 使用的是shiro-redis开源插件
      * @return
      */
-    @Bean
     public RedisCacheManager cacheManager() {
+        logger.info("创建RedisCacheManager...")
         RedisCacheManager redisCacheManager = new RedisCacheManager()
         redisCacheManager.setRedisManager(redisManager())
         return redisCacheManager

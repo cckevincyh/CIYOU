@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 //@RequestMapping("/admin")
 class AdminController {
 
-    private static final Logger logger = LoggerFactory.getLogger(getClass())
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class)
     private static final String ADMIN_LOGIN_TYPE = LoginType.ADMIN.toString()
 
     @Autowired
@@ -34,6 +34,12 @@ class AdminController {
     public String addAdmin(){
 
         return "success"
+    }
+
+    @RequestMapping("/findAdmin")
+    @ResponseBody
+    public String findAdmin(){
+        return adminService?.findAdminById(1)
     }
 
 
