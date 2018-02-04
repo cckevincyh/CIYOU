@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired
  * @Date 2018-02-02 14:58
  */
 class StudentShiroRealm extends AuthorizingRealm {
-    private static final Logger logger = LoggerFactory.getLogger(StudentShiroRealm.class)
+    private static final Logger logger = LoggerFactory.getLogger(getClass())
 
      @Autowired
      private StudentService studentService

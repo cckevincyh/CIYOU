@@ -35,7 +35,7 @@ class ShiroConfiguration {
     @Autowired(required = false)
     private PermissionService permissionService
 
-    private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class)
+    private static final Logger logger = LoggerFactory.getLogger(getClass())
 
     //获取application.properties参数
     @Value('${spring.redis.host}')
@@ -68,8 +68,7 @@ class ShiroConfiguration {
         shiroFilterFactoryBean.setLoginUrl("/login")
         //登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index")
-        // 未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403")
+
 
         // 权限控制map.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>()
@@ -117,6 +116,7 @@ class ShiroConfiguration {
      * 使用的是shiro-redis开源插件
      * @return
      */
+    @Bean
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager()
         redisManager.setHost(host)
@@ -132,6 +132,7 @@ class ShiroConfiguration {
      * 使用的是shiro-redis开源插件
      * @return
      */
+    @Bean
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager()
         redisCacheManager.setRedisManager(redisManager())
@@ -164,6 +165,7 @@ class ShiroConfiguration {
      * cookie对象;
      * @return
      */
+    @Bean
     public SimpleCookie rememberMeCookie(){
         //这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe")
@@ -176,6 +178,7 @@ class ShiroConfiguration {
      * cookie管理对象;记住我功能
      * @return
      */
+    @Bean
     public CookieRememberMeManager rememberMeManager(){
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager()
         cookieRememberMeManager.setCookie(rememberMeCookie())
