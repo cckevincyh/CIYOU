@@ -64,6 +64,7 @@ class AdminShiroRealm extends AuthorizingRealm {
         }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
         Admin admin = (Admin) principals?.getPrimaryPrincipal()
+        logger.info("当前Admin :" + admin )
         admin?.getPermissionList()?.each {current_Permission ->
             authorizationInfo?.addRole("Admin")
             authorizationInfo?.addStringPermission(current_Permission?.getPermission())

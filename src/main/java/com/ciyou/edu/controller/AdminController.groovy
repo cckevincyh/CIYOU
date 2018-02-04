@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody
  * @Date 2018-02-02 20:46
  */
 @Controller
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
 class AdminController {
 
-    private static final String USER_LOGIN_TYPE = LoginType.ADMIN.toString()
+    private static final String ADMIN_LOGIN_TYPE = LoginType.ADMIN.toString()
 
     @Autowired
     private AdminService adminService
@@ -34,18 +34,18 @@ class AdminController {
     }
 
 
-    @RequestMapping(value="/login",method=RequestMethod.POST)
+    @RequestMapping(value="/login",method=RequestMethod.GET)
     @ResponseBody
     public String loginAdmin(@RequestParam("adminName") String username,@RequestParam("password")String password){
         //获取Subject实例对象
         Subject currentAdmin = SecurityUtils.getSubject()
         if (!currentAdmin?.isAuthenticated()) {
             //将用户名和密码封装到继承了UsernamePasswordToken的userToken
-            UserToken userToken = new UserToken(username, password, USER_LOGIN_TYPE)
+            UserToken userToken = new UserToken(username, password, ADMIN_LOGIN_TYPE)
             userToken.setRememberMe(false)
             try {
                 //认证
-                // 传到ModularRealmAuthenticator类中，然后根据USER_LOGIN_TYPE传到AdminShiroRealm的方法进行认证
+                // 传到ModularRealmAuthenticator类中，然后根据ADMIN_LOGIN_TYPE传到AdminShiroRealm的方法进行认证
                 currentAdmin?.login(userToken)
                 return "success"
             } catch (AuthenticationException ae) {

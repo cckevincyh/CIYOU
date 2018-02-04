@@ -1,5 +1,7 @@
 package com.ciyou.edu.controller
 
+import org.apache.shiro.authz.annotation.RequiresPermissions
+import org.apache.shiro.authz.annotation.RequiresRoles
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 class IndexController {
 
     @RequestMapping("/hello")
+    @RequiresRoles("Admin")
     @ResponseBody
     public String hello(){
         def str = "hello world!!哈哈"

@@ -44,7 +44,10 @@ class AdminServiceImpl implements AdminService{
         //获取权限
         List<Permission> permissionList =  permissionMapper?.findPermissionByAdmin(admin?.getAdminId())
         //获取父权限
-
+        Permission p = new Permission()
+        p.setPermissionId(2)
+        p.setPermission("2")
+        permissionList?.add(p)
 
         admin?.setPermissionList(permissionList)
         return admin
