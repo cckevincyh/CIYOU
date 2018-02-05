@@ -1,7 +1,5 @@
 package com.ciyou.edu.controller
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 
@@ -10,8 +8,6 @@ import org.springframework.web.servlet.ModelAndView
  * @Date 2018-02-04 21:07
  */
 class ErrorController {
-
-    private static final Logger logger = LoggerFactory.getLogger(getClass())
 
     /**
      * 找不到资源

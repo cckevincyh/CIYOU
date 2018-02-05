@@ -6,8 +6,6 @@ import com.ciyou.edu.entity.Permission
 import com.ciyou.edu.mapper.AdminMapper
 import com.ciyou.edu.mapper.PermissionMapper
 import com.ciyou.edu.service.AdminService
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.Cacheable
@@ -25,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional
 @CacheConfig(cacheNames = "admin")
 class AdminServiceImpl implements AdminService{
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class)
     @Autowired
     private AdminMapper adminMapper
     @Autowired

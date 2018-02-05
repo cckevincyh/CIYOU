@@ -34,7 +34,7 @@ class ShiroConfiguration {
     @Autowired(required = false)
     private PermissionService permissionService
 
-    private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class)
+    private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class)
 
     //获取application.properties参数
     @Value('${spring.redis.host}')

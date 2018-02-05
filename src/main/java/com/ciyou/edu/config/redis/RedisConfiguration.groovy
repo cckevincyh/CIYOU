@@ -25,7 +25,8 @@ import java.lang.reflect.Method
 class RedisConfiguration extends CachingConfigurerSupport{
 
 
-    private static final Logger logger = LoggerFactory.getLogger(CachingConfigurerSupport.class)
+    private static final Logger logger = LoggerFactory.getLogger(RedisConfiguration.class)
+
     /**
      * 采用RedisCacheManager作为缓存管理器
      * @param redisTemplate

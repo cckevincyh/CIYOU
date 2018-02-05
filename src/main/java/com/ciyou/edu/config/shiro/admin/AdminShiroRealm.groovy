@@ -25,8 +25,7 @@ import org.springframework.context.annotation.Lazy
  */
 class AdminShiroRealm extends AuthorizingRealm {
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class)
-
+     private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class)
      @Autowired
      @Lazy
      private AdminService adminService

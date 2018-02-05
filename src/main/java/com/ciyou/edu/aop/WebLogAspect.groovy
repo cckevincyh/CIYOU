@@ -1,5 +1,7 @@
 package com.ciyou.edu.aop
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.stereotype.Component
@@ -8,9 +10,6 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory
-
 import javax.servlet.http.HttpServletRequest;
 /**
  * @Author C.
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 class WebLogAspect {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(WebLogAspect.class)
 
     // 匹配com.ciyou.edu.controller包下所有类的、
     // 所有方法的执行作为切入点
