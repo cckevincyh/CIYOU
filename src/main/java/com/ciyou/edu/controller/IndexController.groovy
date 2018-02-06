@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody
 class IndexController {
 
     @RequestMapping("/hello")
-    @ResponseBody
     public String hello(){
-        def str = "hello world!!哈哈"
-        return str
+        return "index"
     }
 
 }
