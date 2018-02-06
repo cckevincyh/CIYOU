@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody
 @Controller
 class IndexController {
 
-    @RequestMapping("/hello")
+    @RequestMapping("/index")
     public String hello(){
         return "index"
+    }
+
+
+    @RequestMapping("/adminLogin")
+    public String adminLogin(){
+        return "adminLogin"
     }
 
 }
