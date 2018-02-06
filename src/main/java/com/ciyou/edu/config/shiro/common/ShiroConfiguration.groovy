@@ -66,7 +66,7 @@ class ShiroConfiguration {
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login")
         //登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index")
+        //shiroFilterFactoryBean.setSuccessUrl("/index")
 
 
         // 权限控制map.
@@ -74,6 +74,9 @@ class ShiroConfiguration {
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
         filterChainDefinitionMap.put("/logout", "logout")
         filterChainDefinitionMap.put("/favicon.ico", "anon")
+        filterChainDefinitionMap.put("/adminLogin", "anon")
+        //允许访问静态资源
+        filterChainDefinitionMap.put("/static/**", "anon")
         // 从数据库获取所有的权限
         List<Permission> permissionList = permissionService?.findAllPermission()
         permissionList?.each {current_Permission ->
@@ -179,6 +182,7 @@ class ShiroConfiguration {
      */
     @Bean
     public CookieRememberMeManager rememberMeManager(){
+         logger.info("开启记住我功能...")
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager()
         cookieRememberMeManager.setCookie(rememberMeCookie())
         return cookieRememberMeManager
