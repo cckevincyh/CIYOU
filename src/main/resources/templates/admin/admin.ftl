@@ -18,10 +18,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="${base}/static/dist/css/skins/_all-skins.min.css">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="${base}/static/bower_components/morris.js/morris.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="${base}/static/bower_components/jvectormap/jquery-jvectormap.css">
+
   <!-- Date Picker -->
   <link rel="stylesheet" href="${base}/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
@@ -317,7 +314,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> 管理员管理</a></li>
+            <li class="active"><a href="${base}/admin/manageAdmin"><i class="fa fa-circle-o"></i> 管理员管理</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> 教师管理</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> 学生管理</a></li>
           </ul>
@@ -373,12 +370,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        系统描述
-        <small>控制面板</small>
+          首页
+        <small>系统描述</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">系统描述</li>
+        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
       </ol>
     </section>
     
@@ -533,26 +529,7 @@
     reserved.
   </footer>
 
-<!-- 右侧隐藏栏 -->
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-    </ul>
-    <!-- Tab panes -->
-    <!-- 右侧隐藏栏面板 -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-      </div>
-      <!-- /.tab-pane -->
 
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 

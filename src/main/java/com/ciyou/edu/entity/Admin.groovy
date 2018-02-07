@@ -10,6 +10,8 @@ class Admin implements Serializable{
     private Integer adminId
     //管理员用户名
     private String adminName
+    //真实姓名
+    private String name
     //密码
     private String password
     //状态 1：正常 2：冻结
@@ -57,12 +59,21 @@ class Admin implements Serializable{
         this.permissionList = permissionList
     }
 
+    String getName() {
+        return name
+    }
+
+    void setName(String name) {
+        this.name = name
+    }
+
 
     @Override
     public String toString() {
         return "Admin{" +
                 "adminId=" + adminId +
                 ", adminName='" + adminName + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", isAvalible=" + isAvalible +
                 ", permissionList=" + permissionList +

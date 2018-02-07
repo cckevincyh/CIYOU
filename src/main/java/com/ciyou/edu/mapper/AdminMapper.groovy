@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select
  */
 interface AdminMapper {
 
-    @Insert("insert into Admin(adminName,password,isAvalible) values(#{adminName},#{password},#{isAvalible})")
+    @Insert("insert into Admin(adminName,password,name,isAvalible) values(#{adminName},#{password},#{name},#{isAvalible})")
     int addAdmin(Admin admin)
 
     @Select("select * from Admin where adminId = #{adminId}")

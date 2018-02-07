@@ -52,6 +52,7 @@ class AdminShiroRealm extends AuthorizingRealm {
                 getName() //realm name
         )
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(admin?.getAdminName())) //设置盐
+        logger.info("返回Admin认证信息：" + authenticationInfo)
         return authenticationInfo
     }
 

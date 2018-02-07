@@ -11,15 +11,33 @@ import org.springframework.web.bind.annotation.ResponseBody
 @Controller
 class IndexController {
 
+    /**
+     * 进入首页
+     * @return
+     */
     @RequestMapping("/index")
     public String hello(){
         return "index"
     }
 
-
+    /**
+     * 进入admin登录界面
+     * @return
+     */
     @RequestMapping("/adminLogin")
     public String adminLogin(){
         return "adminLogin"
     }
+
+
+    /**
+     *  登录成功进入后台首页
+     * @return 后台首页
+     */
+    @RequestMapping("/admin/admin")
+    public String admin(){
+        return "/admin/admin"
+    }
+
 
 }

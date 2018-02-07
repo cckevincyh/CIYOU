@@ -27,9 +27,10 @@ class AdminTest {
     @Test
     void addAdminTest(){
         Admin admin = new Admin()
-        admin.setAdminName("asd")
+        admin.setAdminName("admin1")
+        admin.setName("admin1")
         admin.setIsAvalible(1)
-        String passwordMd5= new Md5Hash("asd","asd",2).toHex()
+        String passwordMd5= new Md5Hash("admin1","admin1",2).toHex()
         admin.setPassword(passwordMd5)
         println adminService.addAdmin(admin)
     }

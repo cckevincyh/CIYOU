@@ -82,10 +82,11 @@ class ShiroConfiguration {
         permissionList?.each {current_Permission ->
             //规则："roles[admin,user]", "perms[file:edit]"
             filterChainDefinitionMap?.put(current_Permission?.getUrl(),"perms["+current_Permission?.getPermission()+"]")
+            logger.info("从数据库加载的拦截器规则：资源路径： " + current_Permission?.getUrl() + " ,需要权限：" +current_Permission?.getPermission())
         }
 
         //   过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
-        filterChainDefinitionMap.put("/**", "authc")
+        //filterChainDefinitionMap.put("/**", "authc")
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
 
 
@@ -182,7 +183,6 @@ class ShiroConfiguration {
      */
     @Bean
     public CookieRememberMeManager rememberMeManager(){
-         logger.info("开启记住我功能...")
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager()
         cookieRememberMeManager.setCookie(rememberMeCookie())
         return cookieRememberMeManager
