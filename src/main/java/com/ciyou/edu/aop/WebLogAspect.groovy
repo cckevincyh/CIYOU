@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Author C.
  * @Date 2018-02-02 12:27
+ * 监控controller的请求信息和响应信息
  */
 @Aspect
 @Component
