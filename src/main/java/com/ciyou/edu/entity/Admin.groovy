@@ -14,6 +14,8 @@ class Admin implements Serializable{
     private String name
     //密码
     private String password
+    //联系方式
+    private String phone
     //状态 1：正常 2：冻结
     private Integer isAvalible
     //权限
@@ -67,6 +69,14 @@ class Admin implements Serializable{
         this.name = name
     }
 
+    String getPhone() {
+        return phone
+    }
+
+    void setPhone(String phone) {
+        this.phone = phone
+    }
+
 
     @Override
     public String toString() {
@@ -75,6 +85,7 @@ class Admin implements Serializable{
                 ", adminName='" + adminName + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
                 ", isAvalible=" + isAvalible +
                 ", permissionList=" + permissionList +
                 '}';
