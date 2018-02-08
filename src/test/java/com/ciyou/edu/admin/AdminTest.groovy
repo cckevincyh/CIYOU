@@ -2,7 +2,9 @@ package com.ciyou.edu.admin
 
 import com.ciyou.edu.app.App
 import com.ciyou.edu.entity.Admin
+import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.service.AdminService
+import com.github.pagehelper.Page
 import org.apache.shiro.crypto.hash.Md5Hash
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,10 +29,10 @@ class AdminTest {
     @Test
     void addAdminTest(){
         Admin admin = new Admin()
-        admin.setAdminName("admin1")
-        admin.setName("admin1")
+        admin.setAdminName("admin")
+        admin.setName("admin")
         admin.setIsAvalible(1)
-        String passwordMd5= new Md5Hash("admin1","admin1",2).toHex()
+        String passwordMd5= new Md5Hash("admin","admin",2).toHex()
         admin.setPassword(passwordMd5)
         println adminService.addAdmin(admin)
     }
@@ -55,5 +57,13 @@ class AdminTest {
         } catch (NoSuchAlgorithmException e) {
             return null;
         }
+    }
+
+    @Test
+    void findByPage(){
+        Page<Admin> admins = adminService.findByPage(5, 1)
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<Admin> pageInfo = new PageInfo<Admin>(admins)
+        println pageInfo
     }
 }

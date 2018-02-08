@@ -6,6 +6,8 @@ import com.ciyou.edu.entity.Permission
 import com.ciyou.edu.mapper.AdminMapper
 import com.ciyou.edu.mapper.PermissionMapper
 import com.ciyou.edu.service.AdminService
+import com.github.pagehelper.Page
+import com.github.pagehelper.PageHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.Cacheable
@@ -78,6 +80,9 @@ class AdminServiceImpl implements AdminService{
         return admin
     }
 
-
-
+    @Override
+    Page<Admin> findByPage(int pageNo, int pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
+        return adminMapper?.findAllAdmin()
+    }
 }

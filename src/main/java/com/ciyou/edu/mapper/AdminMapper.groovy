@@ -1,6 +1,7 @@
 package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Admin
+import com.github.pagehelper.Page
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
@@ -19,4 +20,11 @@ interface AdminMapper {
 
     @Select("select * from Admin where adminName = #{adminName}")
     Admin findAdminByName(@Param("adminName")String name)
+
+
+    @Select("select * from Admin")
+    Page<Admin> findAllAdmin()
+
+
+
 }

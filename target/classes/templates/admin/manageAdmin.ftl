@@ -381,9 +381,9 @@
           <div class="row">
               <div class="col-xs-12">
                   <div class="box">
-                      <div class="box-header">
+                      <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs"><i class="fa fa-fw fa-user-plus"></i></button> 添加管理员</div>
+                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-user-plus"></i></button> 添加管理员</div>
                           <div class="box-tools">
                               <div class="input-group input-group-sm" style="width: 150px;">
                                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -396,42 +396,22 @@
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover">
+                          <table class="table table-bordered">
                               <tr>
                                   <th>ID</th>
-                                  <th>User</th>
-                                  <th>Date</th>
-                                  <th>Status</th>
-                                  <th>Reason</th>
+                                  <th>账号</th>
+                                  <th>姓名</th>
+                                  <th>账号操作</th>
+                                  <th>权限操作</th>
                               </tr>
                               <tr>
-                                  <td>183</td>
-                                  <td>John Doe</td>
-                                  <td>11-7-2014</td>
-                                  <td><span class="label label-success">Approved</span></td>
-                                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                  <td>1</td>
+                                  <td>admin</td>
+                                  <td>admin</td>
+                                  <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></td>
+                                  <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
                               </tr>
-                              <tr>
-                                  <td>219</td>
-                                  <td>Alexander Pierce</td>
-                                  <td>11-7-2014</td>
-                                  <td><span class="label label-warning">Pending</span></td>
-                                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                              </tr>
-                              <tr>
-                                  <td>657</td>
-                                  <td>Bob Doe</td>
-                                  <td>11-7-2014</td>
-                                  <td><span class="label label-primary">Approved</span></td>
-                                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                              </tr>
-                              <tr>
-                                  <td>175</td>
-                                  <td>Mike Doe</td>
-                                  <td>11-7-2014</td>
-                                  <td><span class="label label-danger">Denied</span></td>
-                                  <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                              </tr>
+
                           </table>
                       </div>
                       <!-- /.box-body -->
@@ -470,7 +450,85 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- ./wrapper -->
+
+<!--------------------------------------添加的模糊框------------------------>
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        添加新管理员
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addUsername"  placeholder="请输入管理员用户名">
+                            <label class="control-label" for="addUsername" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
+                            <label class="control-label" for="addName" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">联系电话</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
+                            <label class="control-label" for="addPhone" style="display:none;"></label>
+                        </div>
+                    </div>
+                    <!---------------------表单-------------------->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="addAdmin">
+                        添加
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!--------------------------------------添加的模糊框------------------------>
+
+
+<div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="infoModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12" id="div_info"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btn_info_close" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- jQuery 3 -->
 <script src="${base}/static/bower_components/jquery/dist/jquery.min.js"></script>
@@ -484,6 +542,8 @@
 <script src="${base}/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
+
+<script src="${base}/static/js/admin/addAdmin.js"></script>
 
 </body>
 </html>
