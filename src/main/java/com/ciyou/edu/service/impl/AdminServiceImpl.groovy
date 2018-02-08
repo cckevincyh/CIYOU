@@ -80,9 +80,15 @@ class AdminServiceImpl implements AdminService{
         return admin
     }
 
+    /**
+     *  分页查询
+     * @param pageNo 当前页面
+     * @param pageSize 每页条数，默认为10
+     * @return
+     */
     @Override
-    Page<Admin> findByPage(int pageNo, int pageSize) {
-        PageHelper.startPage(pageNo, pageSize);
+    Page<Admin> findByPage(int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
         return adminMapper?.findAllAdmin()
     }
 }

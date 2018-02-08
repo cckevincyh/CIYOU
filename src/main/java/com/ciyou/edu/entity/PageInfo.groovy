@@ -29,6 +29,8 @@ class PageInfo<T> implements Serializable {
     //所有导航页号
     private List<Integer> navigatepageNums
 
+    private String url //url的条件
+
 
     public PageInfo() {
     }
@@ -150,6 +152,14 @@ class PageInfo<T> implements Serializable {
     void setNavigatepageNums(List<Integer> navigatepageNums) {
         this.navigatepageNums = navigatepageNums
     }
+
+    String getUrl() {
+        return url
+    }
+
+    void setUrl(String url) {
+        this.url = url
+    }
 /**
      * 根据显示的导航页码数 计算得到导航条
      * @param navigatePages 显示的导航页码数
@@ -201,6 +211,7 @@ class PageInfo<T> implements Serializable {
                 ", isLastPage=" + isLastPage +
                 ", navigatePages=" + navigatePages +
                 ", navigatepageNums=" + navigatepageNums +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

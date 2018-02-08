@@ -1,7 +1,9 @@
 package com.ciyou.edu.controller.admin
 
 import com.ciyou.edu.entity.Admin
+import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.service.AdminService
+import com.github.pagehelper.Page
 import org.apache.shiro.crypto.hash.Md5Hash
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.servlet.ModelAndView
 
 import java.util.regex.Pattern
 
@@ -25,15 +28,21 @@ class ManageAdminController {
     @Autowired
     private AdminService adminService
 
-    @RequestMapping("/admin/manageAdmin")
-    String findAdmin(){
-        return "admin/manageAdmin"
-    }
 
-    @RequestMapping("/admin/findByPage")
-    String findAdminByPage(){
-        logger.info("接收到信息")
-        return "success"
+    @RequestMapping("/admin/manageAdmin")
+    ModelAndView findAdminByPage(Integer page){
+        if(!page){
+            page = 1
+        }
+        ModelAndView mv = new ModelAndView("admin/manageAdmin")
+        logger.info("findAdminByPage : 查询第${page}页")
+        //不赋值pageSize，默认为10
+        Page<Admin> admins = adminService.findByPage(page)
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<Admin> pageInfo = new PageInfo<Admin>(admins)
+        pageInfo?.setUrl("/admin/manageAdmin?")
+        mv?.addObject("pageInfo",pageInfo)
+        return mv
     }
 
     @RequestMapping(value="/admin/addAdmin", method=RequestMethod.POST)
@@ -74,6 +83,11 @@ class ManageAdminController {
         }
 
     }
+
+
+
+
+
 
 
 

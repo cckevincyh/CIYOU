@@ -401,28 +401,44 @@
                                   <th>ID</th>
                                   <th>账号</th>
                                   <th>姓名</th>
+                                  <th>电话</th>
                                   <th>账号操作</th>
                                   <th>权限操作</th>
                               </tr>
-                              <tr>
-                                  <td>1</td>
-                                  <td>admin</td>
-                                  <td>admin</td>
-                                  <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></td>
-                                  <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
-                              </tr>
-
+                              <#list pageInfo.list as admin>
+                                  <tr>
+                                      <td>${admin.adminId!}</td>
+                                      <td>${admin.adminName!}</td>
+                                      <td>${admin.name!}</td>
+                                      <td>${admin.phone!}</td>
+                                      <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></td>
+                                      <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
+                                  </tr>
+                              </#list>
                           </table>
                       </div>
                       <!-- /.box-body -->
 
                       <div class="box-footer clearfix">
                           <ul class="pagination pagination-sm no-margin pull-right">
-                              <li><a href="#">&laquo;</a></li>
-                              <li class="active"><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">&raquo;</a></li>
+                              <li class="disabled"><a href="#">第${pageInfo.pageNum}页/共${pageInfo.pages}页</a></li>
+                              <#if pageInfo.pageNum == 1>
+                                  <li class="disabled"><a>&laquo;</a></li>
+                              <#else>
+                                  <li><a href="${pageInfo.url}page=${pageInfo.pageNum - 1}">&laquo;</a></li>
+                              </#if>
+                                <#list pageInfo.navigatepageNums as num>
+                                    <#if pageInfo.pageNum == num>
+                                         <li class="active"><a>${num}</a></li>
+                                    <#else>
+                                        <li><a href="${pageInfo.url}page=${num}">${num}</a></li>
+                                    </#if>
+                                </#list>
+                                <#if pageInfo.pageNum == pageInfo.pages>
+                                    <li class="disabled"><a>&raquo;</a></li>
+                                <#else>
+                                    <li><a href="${pageInfo.url}page=${pageInfo.pageNum + 1}">&raquo;</a></li>
+                                </#if>
                           </ul>
                       </div>
                   </div>
