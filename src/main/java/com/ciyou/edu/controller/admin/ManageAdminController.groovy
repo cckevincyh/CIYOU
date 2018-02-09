@@ -57,7 +57,7 @@ class ManageAdminController {
             return "姓名不能为空"
         }else if(!admin?.getPhone() || admin?.getPhone()?.trim() == ""){
             return "电话号码不能为空"
-        }else if(admin?.getAdminName()?.length() < 3 || admin?.getAdminName()?.length() > 16){
+        }else if(admin?.getAdminName()?.trim()?.length() < 3 || admin?.getAdminName()?.trim()?.length() > 15){
             return "用户名长度必须在3~15之间"
         }else if(!Pattern.compile("[\\u4E00-\\u9FFF]+")?.matcher(admin?.getName())?.matches()){
             return "姓名必须为中文"
@@ -122,7 +122,7 @@ class ManageAdminController {
             return "姓名不能为空"
         }else if(!admin?.getPhone() || admin?.getPhone()?.trim() == ""){
             return "电话号码不能为空"
-        }else if(admin?.getAdminName()?.length() < 3 || admin?.getAdminName()?.length() > 16){
+        }else if(admin?.getAdminName()?.trim()?.length() < 3 || admin?.getAdminName()?.trim()?.length() > 15){
             return "用户名长度必须在3~15之间"
         }else if(!Pattern.compile("[\\u4E00-\\u9FFF]+")?.matcher(admin?.getName())?.matches()){
             return "姓名必须为中文"
@@ -211,9 +211,9 @@ class ManageAdminController {
             return "新密码不能为空"
         }else if(!confirmPwd || confirmPwd?.trim() == ""){
             return "确认密码不能为空"
-        }else if(oldPwd?.length() < 3 || oldPwd?.length() > 15){
+        }else if(oldPwd?.trim()?.length() < 3 || oldPwd?.trim()?.length() > 15){
             return "原密码长度必须在3~15之间"
-        }else if(newPwd?.length() < 3 || newPwd?.length() > 15){
+        }else if(newPwd?.trim()?.length() < 3 || newPwd?.trim()?.length() > 15){
             return "新密码长度必须在3~15之间"
         }else if(newPwd != confirmPwd){
             return "确认密码不一致"

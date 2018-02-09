@@ -196,7 +196,7 @@
                       <!-- /.box-body -->
                         <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
                              <div class="box-footer clearfix">
-                                   <ul class="pagination pagination-sm no-margin pull-right">
+                                   <ul class="pagination no-margin pull-right">
                               <li class="disabled"><a href="#">第${pageInfo.pageNum}页/共${pageInfo.pages}页</a></li>
                               <#if pageInfo.pageNum == 1>
                                   <li class="disabled"><a>&laquo;</a></li>
@@ -244,7 +244,7 @@
 <!-- ./wrapper -->
 
 
-<!--------------------------------------添加的模糊框------------------------>
+<!-------添加的模糊框----->
 <form class="form-horizontal">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -300,12 +300,8 @@
     </div>
 
 </form>
-<!--------------------------------------添加的模糊框------------------------>
 
 
-
-<!-- 修改模态框（Modal） -->
-<!-------------------------------------------------------------->
 
 <!-- 修改模态框（Modal） -->
 <form class="form-horizontal">   <!--保证样式水平不混乱-->
@@ -366,11 +362,10 @@
     </div>
 
 </form>
-<!-------------------------------------------------------------->
 
 
 
-<!-------------------------个人资料模糊框------------------------------------->
+<!--个人资料模糊框------->
 
 <form class="form-horizontal">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
@@ -429,10 +424,9 @@
     </div>
 
 </form>
-<!-------------------------------------------------------------->
 
 
-<!------------------------------修改密码模糊框-------------------------------->
+<!------修改密码模糊框------->
 
 <form class="form-horizontal">   <!--保证样式水平不混乱-->
     <!-- 模态框（Modal） -->
@@ -490,11 +484,9 @@
     </div>
 
 </form>
-<!-------------------------------------------------------------->
 
 
-
-
+<!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -23,7 +23,7 @@ interface AdminMapper {
     Admin findAdminByName(@Param("adminName")String name)
 
 
-    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 1")
+    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 1 order by adminId")
     Page<Admin> findAllAdmin(@Param("adminId")Integer id)
 
     @Update("update Admin set name = #{name} , phone = #{phone} where adminId = #{adminId}")
@@ -34,7 +34,7 @@ interface AdminMapper {
 
     //在mybatis里面写就是应该是 like  '%${name} %' 而不是 '%#{name} %'
     //否则报错：Parameter index out of range (1 > number of parameters, which is 0)类似的错误
-    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 1 and ( adminId like '%\${value}%' or adminName like '%\${value}%' or  name like '%\${value}%' or phone like '%\${value}%' )")
+    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 1 and ( adminId like '%\${value}%' or adminName like '%\${value}%' or  name like '%\${value}%' or phone like '%\${value}%' ) order by adminId")
     Page<Admin> queryAdmin(@Param("adminId")Integer id,@Param("value")String value)
 
     @Update("update Admin set password = #{password} where adminId = #{adminId}")
