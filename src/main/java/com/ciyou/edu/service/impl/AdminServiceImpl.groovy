@@ -107,4 +107,13 @@ class AdminServiceImpl implements AdminService{
     int deleteAdmin(Integer adminId) {
         return adminMapper?.deleteAdmin(adminId)
     }
+
+    @Override
+    Page<Admin> queryAdminByPage(String value,int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        //获取当前Admin
+        Admin admin = (Admin)SecurityUtils.getSubject()?.getPrincipal()
+        //查询非当前的所有Admin
+        return adminMapper?.queryAdmin(admin?.getAdminId(),value)
+    }
 }

@@ -31,4 +31,9 @@ interface AdminMapper {
 
     @Update("update Admin set isAvalible = 0 where adminId = #{adminId}")
     int deleteAdmin(@Param("adminId")Integer id)
+
+    //在mybatis里面写就是应该是 like  '%${name} %' 而不是 '%#{name} %'
+    //否则报错：Parameter index out of range (1 > number of parameters, which is 0)类似的错误
+    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 1 and ( adminId like '%\${value}%' or adminName like '%\${value}%' or  name like '%\${value}%' or phone like '%\${value}%' )")
+    Page<Admin> queryAdmin(@Param("adminId")Integer id,@Param("value")String value)
 }

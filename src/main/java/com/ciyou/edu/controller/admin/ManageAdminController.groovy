@@ -162,8 +162,26 @@ class ManageAdminController {
         }
     }
 
+    @RequestMapping(value="/admin/queryAdmin")
+    ModelAndView queryAdmin(String searchContent,Integer page){
+        if(!page){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            //重定向到findAdminByPage Controller
+            ModelAndView mv = new ModelAndView("redirect:manageAdmin")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/admin/manageAdmin")
+            logger.info("queryAdmin : 查询第${page}页，携带查询参数=${searchContent}")
+            //不赋值pageSize，默认为10
+            Page<Admin> admins = adminService?.queryAdminByPage(searchContent,page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Admin> pageInfo = new PageInfo<Admin>(admins)
+            pageInfo?.setUrl("/admin/queryAdmin?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
 
-
-
-
+    }
 }
