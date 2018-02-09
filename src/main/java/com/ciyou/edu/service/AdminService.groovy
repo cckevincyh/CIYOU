@@ -24,4 +24,6 @@ interface AdminService {
     Page<Admin> findByPage(int pageNo, int pageSize)
 
     int updateAdmin(Admin admin)
+
+    int deleteAdmin(Integer adminId)
 }

@@ -96,8 +96,15 @@ class AdminServiceImpl implements AdminService{
         return adminMapper?.findAllAdmin(admin?.getAdminId())
     }
 
+    @Transactional
     @Override
     int updateAdmin(Admin admin) {
         return adminMapper?.updateAdmin(admin)
+    }
+
+    @Transactional
+    @Override
+    int deleteAdmin(Integer adminId) {
+        return adminMapper?.deleteAdmin(adminId)
     }
 }

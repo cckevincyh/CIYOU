@@ -411,7 +411,7 @@
                                       <td>${admin.adminName!}</td>
                                       <td>${admin.name!}</td>
                                       <td>${admin.phone!}</td>
-                                      <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></td>
+                                      <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${admin.adminId!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                       <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
                                   </tr>
                               </#list>
@@ -628,6 +628,7 @@
 
 <script src="${base}/static/js/admin/addAdmin.js"></script>
 <script src="${base}/static/js/admin/updateAdmin.js"></script>
+<script src="${base}/static/js/admin/deleteAdmin.js"></script>
 
 </body>
 </html>

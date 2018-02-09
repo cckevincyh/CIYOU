@@ -140,18 +140,26 @@ class ManageAdminController {
     String getAdmin(Integer adminId){
         Admin admin = adminService?.findAdminById(adminId)
         logger.info("获得指定的Admin：" + admin)
+        //这里要转为json对象，前端ajax才解析的了
         JSONObject jsonObject = JSONObject.fromObject(admin)
         return jsonObject.toString()
     }
 
 
 
-
-
     @RequestMapping(value="/admin/deleteAdmin", method=RequestMethod.POST)
     @ResponseBody
-    String deleteAdmin(Admin admin){
-        return "success"
+    String deleteAdmin(Integer adminId){
+        try{
+            if(adminService?.deleteAdmin(adminId)){
+                return "删除成功"
+            }else{
+                return "删除失败"
+            }
+        }catch (Exception e){
+            logger.info("删除Admin错误：" + e.getMessage())
+            return "删除失败，请重试"
+        }
     }
 
 
