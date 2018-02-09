@@ -5,6 +5,7 @@ import com.github.pagehelper.Page
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.Update
 
 /**
  * @Author C.
@@ -15,16 +16,16 @@ interface AdminMapper {
     @Insert("insert into Admin(adminName,password,name,phone) values(#{adminName},#{password},#{name},#{phone})")
     int addAdmin(Admin admin)
 
-    @Select("select * from Admin where adminId = #{adminId}")
+    @Select("select * from Admin where adminId = #{adminId} and isAvalible = 0")
     Admin findAdminById(@Param("adminId")Integer id)
 
-    @Select("select * from Admin where adminName = #{adminName}")
+    @Select("select * from Admin where adminName = #{adminName} and isAvalible = 0")
     Admin findAdminByName(@Param("adminName")String name)
 
 
-    @Select("select * from Admin")
-    Page<Admin> findAllAdmin()
+    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 0")
+    Page<Admin> findAllAdmin(@Param("adminId")Integer id)
 
-
-
+    @Update("update Admin set adminName = #{adminName} , name = #{name} , phone = #{phone} where adminId = #{adminId}")
+    int updateAdmin(Admin admin)
 }

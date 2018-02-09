@@ -22,4 +22,6 @@ interface AdminService {
      * @return
      */
     Page<Admin> findByPage(int pageNo, int pageSize)
+
+    int updateAdmin(Admin admin)
 }

@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SecurityManager
 /**
  * @Author C.
  * @Date 2018-02-03 9:54
@@ -229,6 +229,7 @@ class ShiroConfiguration {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager)
         return authorizationAttributeSourceAdvisor
     }
+
 
 }
 

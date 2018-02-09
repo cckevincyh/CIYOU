@@ -8,6 +8,7 @@ import com.ciyou.edu.mapper.PermissionMapper
 import com.ciyou.edu.service.AdminService
 import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
+import org.apache.shiro.SecurityUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheConfig
 import org.springframework.cache.annotation.Cacheable
@@ -89,6 +90,14 @@ class AdminServiceImpl implements AdminService{
     @Override
     Page<Admin> findByPage(int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
-        return adminMapper?.findAllAdmin()
+        //获取当前Admin
+        Admin admin = (Admin)SecurityUtils.getSubject()?.getPrincipal()
+        //查询非当前的所有Admin
+        return adminMapper?.findAllAdmin(admin?.getAdminId())
+    }
+
+    @Override
+    int updateAdmin(Admin admin) {
+        return adminMapper?.updateAdmin(admin)
     }
 }

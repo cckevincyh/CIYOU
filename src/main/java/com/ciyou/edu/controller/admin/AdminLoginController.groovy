@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 
+import javax.servlet.http.HttpServletRequest
+
 /**
  * @Author C.
  * @Date 2018-02-02 20:46
@@ -31,7 +33,7 @@ class AdminLoginController {
      */
     @RequestMapping(value="/adminLogin",method=RequestMethod.POST)
     @ResponseBody
-    public String loginAdmin(Admin admin){
+    public String loginAdmin(HttpServletRequest request, Admin admin){
         logger.info("登录Admin: " + admin)
         //后台校验提交的用户名和密码
         if(!admin?.getAdminName() || admin?.adminName?.trim() == ""){
@@ -47,7 +49,7 @@ class AdminLoginController {
         //获取Subject实例对象
         //在shiro里面所有的用户的会话信息都会由Shiro来进行控制，那么也就是说只要是与用户有关的一切的处理信息操作都可以通过Shiro取得，
         // 实际上可以取得的信息可以有用户名、主机名称等等，这所有的信息都可以通过Subject接口取得
-        Subject currentAdmin = SecurityUtils.getSubject()
+        Subject subject = SecurityUtils.getSubject()
 
         //将用户名和密码封装到继承了UsernamePasswordToken的userToken
         UserToken userToken = new UserToken(admin?.getAdminName(), admin?.getPassword(), ADMIN_LOGIN_TYPE)
@@ -55,7 +57,9 @@ class AdminLoginController {
         try {
             //认证
             // 传到ModularRealmAuthenticator类中，然后根据ADMIN_LOGIN_TYPE传到AdminShiroRealm的方法进行认证
-            currentAdmin?.login(userToken)
+            subject?.login(userToken)
+            //Admin存入session
+            request?.getSession()?.setAttribute("admin",(Admin)subject?.getPrincipal())
             return "success"
         } catch (AuthenticationException e) {
             //认证失败就会抛出AuthenticationException这个异常，就对异常进行相应的操作，这里的处理是抛出一个自定义异常ResultException

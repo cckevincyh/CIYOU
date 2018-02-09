@@ -4,6 +4,7 @@ import com.ciyou.edu.entity.Admin
 import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.service.AdminService
 import com.github.pagehelper.Page
+import net.sf.json.JSONObject
 import org.apache.shiro.crypto.hash.Md5Hash
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -65,7 +66,7 @@ class ManageAdminController {
         }
 
         //按照账号查找管理员，查看用户名是否已经存在
-        Admin addAdmin = adminService?.findByAdminName(admin?.adminName)
+        Admin addAdmin = adminService?.findByAdminName(admin?.getAdminName())
         if(addAdmin){
             //如果已经存在
             return "用户名已存在"
@@ -74,20 +75,84 @@ class ManageAdminController {
                 //密码默认:123456
                 String passwordMd5= new Md5Hash("123456",admin.getAdminName(),2).toHex()
                 admin.setPassword(passwordMd5)
-                adminService?.addAdmin(admin)
+                if(adminService?.addAdmin(admin)){
+                    return "添加成功"
+                }else{
+                    return "添加失败"
+                }
             }catch (Exception e){
                 logger.info("添加Admin错误：" + e.getMessage())
                 return "添加失败，请重试"
             }
-            return "添加成功"
         }
 
+    }
+
+    @RequestMapping(value="/admin/updateAdmin", method=RequestMethod.POST)
+    @ResponseBody
+    String updateAdmin(Admin admin){
+        logger.info("修改Admin...admin信息：" + admin)
+        //校验提交的admin
+        if(!admin?.getAdminName() || admin?.getAdminName()?.trim() == ""){
+            return "用户名不能为空"
+        }else if(!admin?.getName() || admin?.getName()?.trim() == ""){
+            return "姓名不能为空"
+        }else if(!admin?.getPhone() || admin?.getPhone()?.trim() == ""){
+            return "电话号码不能为空"
+        }else if(admin?.getAdminName()?.length() < 3 || admin?.getAdminName()?.length() > 16){
+            return "用户名长度必须在3~15之间"
+        }else if(!Pattern.compile("[\\u4E00-\\u9FFF]+")?.matcher(admin?.getName())?.matches()){
+            return "姓名必须为中文"
+        }else if(!Pattern.compile('^1[34578]\\d{9}$')?.matcher(admin?.getPhone())?.matches()){
+            return "电话号码有误"
+        }
+
+        //按照账号查找管理员，查看用户名是否已经存在
+        Admin updateAdmin = adminService?.findByAdminName(admin?.getAdminName())
+        if(updateAdmin && updateAdmin?.getAdminId() != admin?.getAdminId()){
+            //如果已经存在
+            return "用户名已存在"
+        }else{
+            try{
+                if(adminService?.updateAdmin(admin)){
+                    return "修改成功"
+                }else{
+                    return "修改失败"
+                }
+            }catch (Exception e){
+                logger.info("修改Admin错误：" + e.getMessage())
+                return "修改失败，请重试"
+            }
+        }
+    }
+
+    /**
+     * 得到指定的管理员
+     * Ajax请求该方法
+     * 向浏览器返回该管理员的json对象
+     *
+     * Response的Body部分确实是正确的JSON格式字符串,但是收到的响应消息类型是text/plain
+     * 在@RequestMapping增加一个produces参数项 produces="application/json;charset=UTF-8"
+     * @return
+     */
+    @RequestMapping(value="/admin/getAdmin", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getAdmin(Integer adminId){
+        Admin admin = adminService?.findAdminById(adminId)
+        logger.info("获得指定的Admin：" + admin)
+        JSONObject jsonObject = JSONObject.fromObject(admin)
+        return jsonObject.toString()
     }
 
 
 
 
 
+    @RequestMapping(value="/admin/deleteAdmin", method=RequestMethod.POST)
+    @ResponseBody
+    String deleteAdmin(Admin admin){
+        return "success"
+    }
 
 
 

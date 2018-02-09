@@ -411,7 +411,7 @@
                                       <td>${admin.adminName!}</td>
                                       <td>${admin.name!}</td>
                                       <td>${admin.phone!}</td>
-                                      <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></td>
+                                      <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash"></i></button></td>
                                       <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
                                   </tr>
                               </#list>
@@ -526,6 +526,73 @@
 <!--------------------------------------添加的模糊框------------------------>
 
 
+
+<!-- 修改模态框（Modal） -->
+<!-------------------------------------------------------------->
+
+<!-- 修改模态框（Modal） -->
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="updateModalLabel">
+                        修改管理员信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-7">
+                            <input type="hidden" id="updateId">
+                            <input type="text" class="form-control" id="updateUsername" placeholder="请输入管理员用户名">
+                            <label class="control-label" for="updateUsername" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
+                            <label class="control-label" for="updateName" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">联系电话</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
+                            <label class="control-label" for="updatePhone" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <!---------------------表单-------------------->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="updateAdmin">
+                        修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!-------------------------------------------------------------->
+
+
+
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -560,6 +627,7 @@
 <script src="${base}/static/dist/js/demo.js"></script>
 
 <script src="${base}/static/js/admin/addAdmin.js"></script>
+<script src="${base}/static/js/admin/updateAdmin.js"></script>
 
 </body>
 </html>
