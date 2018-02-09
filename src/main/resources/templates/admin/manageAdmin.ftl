@@ -48,7 +48,7 @@
           <!-- 个人信息-->
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs"><i class="glyphicon glyphicon-user"></i>   Alexander Pierce</span>
+              <span class="hidden-xs"><i class="glyphicon glyphicon-user"></i>   ${Session.admin.name!}</span>
             </a>
               <ul class="dropdown-menu">
                   <li><a href="#updateinfo" data-toggle="modal">个人资料</a></li>
@@ -175,22 +175,28 @@
                                   <th>账号操作</th>
                                   <th>权限操作</th>
                               </tr>
-                              <#list pageInfo.list as admin>
-                                  <tr>
-                                      <td>${admin.adminId!}</td>
-                                      <td>${admin.adminName!}</td>
-                                      <td>${admin.name!}</td>
-                                      <td>${admin.phone!}</td>
-                                      <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${admin.adminId!})"><i class="fa fa-fw fa-trash"></i></button></td>
-                                      <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
-                                  </tr>
-                              </#list>
+                              <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
+                                  <#list pageInfo.list as admin>
+                                      <tr>
+                                          <td>${admin.adminId!}</td>
+                                          <td>${admin.adminName!}</td>
+                                          <td>${admin.name!}</td>
+                                          <td>${admin.phone!}</td>
+                                          <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${admin.adminId!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                          <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
+                                      </tr>
+                                  </#list>
+                                    <#else >
+                                     <tr>
+                                         <td colspan="6" align="center">暂无数据</td>
+                                     <tr>
+                              </#if>
                           </table>
                       </div>
                       <!-- /.box-body -->
-
-                      <div class="box-footer clearfix">
-                          <ul class="pagination pagination-sm no-margin pull-right">
+                        <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
+                             <div class="box-footer clearfix">
+                                   <ul class="pagination pagination-sm no-margin pull-right">
                               <li class="disabled"><a href="#">第${pageInfo.pageNum}页/共${pageInfo.pages}页</a></li>
                               <#if pageInfo.pageNum == 1>
                                   <li class="disabled"><a>&laquo;</a></li>
@@ -210,7 +216,8 @@
                                     <li><a href="${pageInfo.url}page=${pageInfo.pageNum + 1}">&raquo;</a></li>
                                 </#if>
                           </ul>
-                      </div>
+                              </div>
+                        </#if>
                   </div>
                   <!-- /.box -->
               </div>
@@ -321,7 +328,7 @@
                         <label for="firstname" class="col-sm-3 control-label">用户名</label>
                         <div class="col-sm-7">
                             <input type="hidden" id="updateId">
-                            <input type="text" class="form-control" id="updateUsername" placeholder="请输入管理员用户名">
+                            <input type="text" class="form-control" id="updateUsername" placeholder="请输入管理员用户名" readonly="readonly">
                             <label class="control-label" for="updateUsername" style="display:none;"></label>
                         </div>
                     </div>
@@ -363,6 +370,131 @@
 
 
 
+<!-------------------------个人资料模糊框------------------------------------->
+
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="updateinfo" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="ModalLabel">
+                        个人资料
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <!--正文-->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">用户名</label>
+                        <div class="col-sm-7">
+                            <input type="hidden" id="adminId" value="${Session.admin.adminId!}">
+                            <input type="text" class="form-control" id="username"  value="${Session.admin.adminName!}" readonly="readonly">
+                            <label class="control-label" for="username" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="name"  placeholder="请输入您的真实姓名" value="${Session.admin.name!}">
+                            <label class="control-label" for="name" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">联系号码</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="phone"  placeholder="请输入您的联系号码" value="${Session.admin.phone!}">
+                            <label class="control-label" for="phone" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <!--正文-->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="admin_updateInfo" >
+                        修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!-------------------------------------------------------------->
+
+
+<!------------------------------修改密码模糊框-------------------------------->
+
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="updatepwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改密码
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <!--正文-->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">原密码</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="oldPwd"  placeholder="请输入原密码">
+                            <label class="control-label" for="oldPwd" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">新密码</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="newPwd"  placeholder="请输入新密码">
+                            <label class="control-label" for="newPwd" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">确认密码</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="confirmPwd"  placeholder="请输入确认密码">
+                            <label class="control-label" for="confirmPwd" style="display:none;"></label>
+                        </div>
+                    </div>
+                    <!--正文-->
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="update_adminPwd">
+                        修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!-------------------------------------------------------------->
+
+
+
+
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -396,6 +528,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
+<script src="${base}/static/js/admin/adminUpdatePwd.js"></script>
+<script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/addAdmin.js"></script>
 <script src="${base}/static/js/admin/updateAdmin.js"></script>
 <script src="${base}/static/js/admin/deleteAdmin.js"></script>

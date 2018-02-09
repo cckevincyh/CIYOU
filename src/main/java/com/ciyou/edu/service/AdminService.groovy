@@ -28,4 +28,6 @@ interface AdminService {
     int deleteAdmin(Integer adminId)
 
     Page<Admin> queryAdminByPage(String value,int pageNo, int pageSize)
+
+    int updatePassword(Integer adminId, String password)
 }

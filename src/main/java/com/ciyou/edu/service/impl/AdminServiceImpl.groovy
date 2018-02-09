@@ -116,4 +116,9 @@ class AdminServiceImpl implements AdminService{
         //查询非当前的所有Admin
         return adminMapper?.queryAdmin(admin?.getAdminId(),value)
     }
+
+    @Override
+    int updatePassword(Integer adminId, String password) {
+        return adminMapper?.updatePassword(adminId,password)
+    }
 }

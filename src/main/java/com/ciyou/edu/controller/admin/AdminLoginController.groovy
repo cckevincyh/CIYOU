@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 
-import javax.servlet.http.HttpServletRequest
 
 /**
  * @Author C.
@@ -33,7 +32,7 @@ class AdminLoginController {
      */
     @RequestMapping(value="/adminLogin",method=RequestMethod.POST)
     @ResponseBody
-    public String loginAdmin(HttpServletRequest request, Admin admin){
+    public String loginAdmin(Admin admin){
         logger.info("登录Admin: " + admin)
         //后台校验提交的用户名和密码
         if(!admin?.getAdminName() || admin?.adminName?.trim() == ""){
@@ -59,7 +58,7 @@ class AdminLoginController {
             // 传到ModularRealmAuthenticator类中，然后根据ADMIN_LOGIN_TYPE传到AdminShiroRealm的方法进行认证
             subject?.login(userToken)
             //Admin存入session
-            request?.getSession()?.setAttribute("admin",(Admin)subject?.getPrincipal())
+            SecurityUtils.getSubject()?.getSession()?.setAttribute("admin",(Admin)subject?.getPrincipal())
             return "success"
         } catch (AuthenticationException e) {
             //认证失败就会抛出AuthenticationException这个异常，就对异常进行相应的操作，这里的处理是抛出一个自定义异常ResultException
