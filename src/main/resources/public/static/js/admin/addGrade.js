@@ -40,8 +40,8 @@ $(function () {
 function validAddGrade() {
     var flag = true;
 
-    var username = $.trim($("#addGradeName").val());
-    if (username == "") {
+    var gradeName = $.trim($("#addGradeName").val());
+    if (gradeName == "") {
         $('#addGradeName').parent().addClass("has-error");
         $('#addGradeName').next().html("<i class='fa fa-times-circle-o'></i>    请输入年级");
         $("#addGradeName").next().show();

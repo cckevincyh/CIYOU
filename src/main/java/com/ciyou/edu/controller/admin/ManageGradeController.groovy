@@ -36,7 +36,7 @@ class ManageGradeController {
     @ResponseBody
     String addGrade(Grade grade){
         //校验数据
-        if(!grade?.gradeName || grade?.getGradeName()?.trim() == ""){
+        if(!grade?.getGradeName() || grade?.getGradeName()?.trim() == ""){
             return "年级不能为空"
         }else{
             try{
@@ -56,7 +56,7 @@ class ManageGradeController {
     @ResponseBody
     String updateGrade(Grade grade){
         //校验数据
-        if(!grade?.gradeName || grade?.getGradeName()?.trim() == ""){
+        if(!grade?.getGradeName() || grade?.getGradeName()?.trim() == ""){
             return "年级不能为空"
         }else{
             try{

@@ -68,8 +68,8 @@ function updateGrade(id){
 function validUpdateGrade() {
     var flag = true;
 
-    var username = $.trim($("#updateGradeName").val());
-    if (username == "") {
+    var gradeName = $.trim($("#updateGradeName").val());
+    if (gradeName == "") {
         $('#updateGradeName').parent().addClass("has-error");
         $('#updateGradeName').next().html("<i class='fa fa-times-circle-o'></i>    请输入年级");
         $("#updateGradeName").next().show();
