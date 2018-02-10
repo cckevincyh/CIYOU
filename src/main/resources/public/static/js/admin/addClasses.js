@@ -1,5 +1,5 @@
 /**
- * ajax 添加年级
+ * ajax 添加班级
  */
 $(function () {
 

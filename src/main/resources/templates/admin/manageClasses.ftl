@@ -181,7 +181,7 @@
                                           <td>${classes.grade.gradeName!}</td>
                                           <td>${classes.classes!}</td>
                                           <td>*</td>
-                                          <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${admin.adminId!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                          <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateClasses(${classes.classesId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteClasses(${classes.classesId!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                       </tr>
                                   </#list>
                                     <#else >
@@ -514,5 +514,6 @@
 <script src="${base}/static/js/admin/adminUpdatePwd.js"></script>
 <script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/addClasses.js"></script>
+<script src="${base}/static/js/admin/updateClasses.js"></script>
 </body>
 </html>

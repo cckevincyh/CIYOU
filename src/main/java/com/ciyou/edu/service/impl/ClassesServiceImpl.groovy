@@ -28,4 +28,14 @@ class ClassesServiceImpl implements ClassesService{
     int addClasses(Integer gradeId, Integer classes) {
         return classesMapper?.addClasses(gradeId,classes)
     }
+
+    @Override
+    Classes getClasses(Integer classesId) {
+        return classesMapper?.getClasses(classesId)
+    }
+
+    @Override
+    int updateClasses(Integer classesId, Integer gradeId, Integer classes) {
+        return classesMapper?.updateClasses(classesId,gradeId,classes)
+    }
 }

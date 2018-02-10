@@ -4,6 +4,7 @@ import com.ciyou.edu.entity.Classes
 import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.service.ClassesService
 import com.github.pagehelper.Page
+import net.sf.json.JSONObject
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -68,4 +69,43 @@ class ManageClassesController {
             }
         }
     }
+
+
+    @RequestMapping(value="/admin/getClasses",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getClasses(Integer classesId){
+        Classes classes = classesService?.getClasses(classesId)
+        logger.info("获得指定的Classes：" + classes)
+        //这里要转为json对象，前端ajax才解析的了
+        JSONObject jsonObject = JSONObject.fromObject(classes)
+        return jsonObject.toString()
+    }
+
+    @RequestMapping(value="/admin/updateClasses",method=RequestMethod.POST)
+    @ResponseBody
+    String updateClasses(Integer classesId,Integer gradeId, Integer classes){
+        //校验数据
+        if(classesId == null){
+            return "ID不能为空"
+        }else if(gradeId == null || gradeId == 0){
+            return "请选择年级"
+        }else if(classes == null){
+            return "请输入班级"
+        }else if(!Pattern.compile( '^[1-9]+\\d*$')?.matcher(classes?.toString())?.matches()){
+            return "班级必须为正整数"
+        }
+        else{
+            try{
+                if(classesService?.updateClasses(classesId,gradeId,classes)){
+                    return "修改成功"
+                }else{
+                    return "修改失败"
+                }
+            }catch (Exception e){
+                logger.info("添加Classes错误：" + e.getMessage())
+                return "修改失败，请重试"
+            }
+        }
+    }
+
 }

@@ -18,7 +18,7 @@ $(function () {
 			cache: false,
 			data: {
 				gradeId : $.trim($("#updateGradeId").val()),
-				gradeName :$.trim($("#updateGradeName").val()),
+				gradeName :$.trim($("#updateGradeName").val())
 			},
 			success: function (data) {
 				$("#updateModal").modal("hide");//关闭模糊框

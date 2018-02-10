@@ -11,4 +11,8 @@ interface ClassesService {
     Page<Classes> findByPage(int pageNo, int pageSize)
 
     int addClasses(Integer gradeId, Integer classes)
+
+    Classes getClasses(Integer classesId)
+
+    int updateClasses(Integer classesId, Integer gradeId, Integer classes)
 }
