@@ -38,7 +38,7 @@ class ManageAdminController {
         ModelAndView mv = new ModelAndView("admin/manageAdmin")
         logger.info("findAdminByPage : 查询第${page}页")
         //不赋值pageSize，默认为10
-        Page<Admin> admins = adminService.findByPage(page)
+        Page<Admin> admins = adminService?.findByPage(page)
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
         PageInfo<Admin> pageInfo = new PageInfo<Admin>(admins)
         pageInfo?.setUrl("/admin/manageAdmin?")
