@@ -108,4 +108,20 @@ class ManageClassesController {
         }
     }
 
+
+    @RequestMapping(value="/admin/deleteClasses",method=RequestMethod.POST)
+    @ResponseBody
+    String deleteClasses(Integer classesId){
+        try{
+            if(classesService?.deleteClasses(classesId)){
+                return "删除成功"
+            }else{
+                return "删除失败"
+            }
+        }catch (Exception e){
+            logger.info("删除Classes错误：" + e.getMessage())
+            return "删除失败，请重试"
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * @Author C.
@@ -24,6 +25,7 @@ class ClassesServiceImpl implements ClassesService{
         return classesMapper?.findByPage()
     }
 
+    @Transactional
     @Override
     int addClasses(Integer gradeId, Integer classes) {
         return classesMapper?.addClasses(gradeId,classes)
@@ -34,8 +36,15 @@ class ClassesServiceImpl implements ClassesService{
         return classesMapper?.getClasses(classesId)
     }
 
+    @Transactional
     @Override
     int updateClasses(Integer classesId, Integer gradeId, Integer classes) {
         return classesMapper?.updateClasses(classesId,gradeId,classes)
+    }
+
+    @Transactional
+    @Override
+    int deleteClasses(Integer classesId) {
+        return classesMapper?.deleteClasses(classesId)
     }
 }

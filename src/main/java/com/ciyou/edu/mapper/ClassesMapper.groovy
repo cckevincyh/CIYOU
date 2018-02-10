@@ -2,6 +2,7 @@ package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Classes
 import com.github.pagehelper.Page
+import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.One
 import org.apache.ibatis.annotations.Param
@@ -37,4 +38,7 @@ interface ClassesMapper {
 
     @Update("update Classes set gradeId = #{gradeId}, classes = #{classes} where classesId = #{classesId}")
     int updateClasses(@Param("classesId")Integer classesId, @Param("gradeId")Integer gradeId,@Param("classes")Integer classes)
+
+    @Delete("delete from Classes where classesId = #{classesId}")
+    int deleteClasses(@Param("classesId")Integer classesId)
 }

@@ -515,5 +515,6 @@
 <script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/addClasses.js"></script>
 <script src="${base}/static/js/admin/updateClasses.js"></script>
+<script src="${base}/static/js/admin/deleteClasses.js"></script>
 </body>
 </html>

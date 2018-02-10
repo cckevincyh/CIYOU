@@ -15,4 +15,6 @@ interface ClassesService {
     Classes getClasses(Integer classesId)
 
     int updateClasses(Integer classesId, Integer gradeId, Integer classes)
+
+    int deleteClasses(Integer classesId)
 }
