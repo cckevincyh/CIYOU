@@ -145,7 +145,20 @@
 			clearSearch: $.proxy(this.clearSearch, this),
 
 			// extend by billjiang
-			findNodes: $.proxy(this.findNodes, this)
+			findNodes: $.proxy(this.findNodes, this),
+
+			/**
+			 * 自己添加的方法
+			 * 实现 添加和删除 及批量删除
+			 * 参考链接：http://blog.csdn.net/haizixf/article/details/53912852
+			 * 具体操作：http://www.jb51.net/article/128720.htm
+			 */
+			//添加结点
+			addNode: $.proxy(this.addNode, this),
+			//编辑结点
+			editNode: $.proxy(this.editNode, this),
+			//删除结点
+			deleteNode: $.proxy(this.deleteNode, this)
 		};
 	};
 
@@ -725,14 +738,114 @@
 		@param {Object|Number} identifier - A valid node or node id
 		@returns {Array} nodes - Sibling nodes
 	*/
-	Tree.prototype.getSiblings = function (identifier) {
+	// Tree.prototype.getSiblings = function (identifier) {
+	// 	var node = this.identifyNode(identifier);
+	// 	var parent = this.getParent(node);
+	// 	var nodes = parent ? parent.nodes : this.tree;
+	// 	return nodes.filter(function (obj) {
+	// 			return obj.nodeId !== node.nodeId;
+	// 		});
+	// };
+
+	/**
+	 * 方法具体实现,在获取兄弟节点时 稍微改动了原方法 默认不返回当前节点
+	 如下 覆盖原来的就可以了
+	 Returns an array of sibling nodes for a given node, if valid otherwise returns undefined.
+	 @param {Object|Number} identifier - A valid node or node id
+	 @returns {Array} nodes - Sibling nodes
+	 isAll 是否包括本身节点
+	 */
+	Tree.prototype.getSiblings = function (identifier,isAll) {
 		var node = this.identifyNode(identifier);
 		var parent = this.getParent(node);
 		var nodes = parent ? parent.nodes : this.tree;
 		return nodes.filter(function (obj) {
-				return obj.nodeId !== node.nodeId;
-			});
+			return isAll?true:obj.nodeId !== node.nodeId;
+		});
 	};
+
+
+	/**
+	 *添加节点 如果 nodeId 查不到 就添加根节点
+	 */
+	Tree.prototype.addNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setAddNode(node, options);
+		}, this));
+		this.setInitialStates({ nodes: this.tree }, 0);
+		this.render();
+	};
+
+	/**
+	 *添加节点
+	 */
+	Tree.prototype.setAddNode = function (node, options) {
+		if(node){
+			if (node.nodes == null) node.nodes = [];
+			if (options.node) {
+				node.nodes.push(options.node);
+			}
+		}else{
+			//添加根节点
+			this.tree.push(options.node);
+		}
+	};
+
+	/**
+	 编辑节点
+	 */
+	Tree.prototype.editNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setEditNode(node, options);
+		}, this));
+		this.setInitialStates({ nodes: this.tree }, 0);
+		this.render();
+	};
+
+	/**
+	 * 编辑节点
+	 */
+	Tree.prototype.setEditNode = function (node, options) {
+		if (options) {
+			$.extend(node, options);
+		}
+	};
+
+	/**
+	 *删除节点
+	 */
+	Tree.prototype.deleteNode = function (identifiers, options) {
+		this.forEachIdentifier(identifiers, options, $.proxy(function (node, options) {
+			this.setDeleteNode( node, options);
+		}, this));
+	};
+
+	Tree.prototype.setDeleteNode = function (node, options) {
+		var parentNode = this.getParent(node);
+		//如果不是根节点
+		if(parentNode){
+			for(var i =0; i < parentNode.nodes.length; i++){
+				if(parentNode.nodes[i].nodeId == node.nodeId){
+					parentNode.nodes.splice(i, 1);
+				}
+			}
+		}else{
+			//获取兄弟节点数组
+			var sibNodes = this.getSiblings(node,true);
+			if (sibNodes != null){
+				for(var i=0;i<sibNodes.length; i ++){
+					if(node.nodeId == sibNodes[i].nodeId){
+						this.tree.splice(i, 1);
+					}
+				}
+			}
+		}
+
+		this.setInitialStates({ nodes: this.tree }, 0);
+		this.render();
+
+	};
+
 
 	/**
 		Returns an array of selected nodes.
