@@ -39,5 +39,10 @@ class IndexController {
         return "/admin/admin"
     }
 
+    @RequestMapping("/admin/managePermission")
+    String test(){
+        return "/admin/managePermission"
+    }
+
 
 }
