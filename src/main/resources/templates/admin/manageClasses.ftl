@@ -280,10 +280,10 @@
                     <!---------------------表单-------------------->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="addClass">
-                        添加
+                    <button type="button" class="btn btn-primary" id="addClass"><i class="fa fa-save"></i>
+                        保存
                     </button>
                 </div>
             </div><!-- /.modal-content -->
@@ -342,10 +342,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="updateClass">
-                        修改
+                    <button type="button" class="btn btn-primary" id="updateClass"><i class="fa fa-save"></i>
+                        保存
                     </button>
                 </div>
             </div><!-- /.modal-content -->
@@ -404,10 +404,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="admin_updateInfo" >
-                        修改
+                    <button type="button" class="btn btn-primary" id="admin_updateInfo" ><i class="fa fa-save"></i>
+                        保存
                     </button>
                 </div>
             </div><!-- /.modal-content -->
@@ -464,10 +464,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="update_adminPwd">
-                        修改
+                    <button type="button" class="btn btn-primary" id="update_adminPwd"><i class="fa fa-save"></i>
+                        保存
                     </button>
                 </div>
             </div><!-- /.modal-content -->
@@ -491,7 +491,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="btn_info_close" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="btn_info_close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
             </div>
         </div>
     </div>

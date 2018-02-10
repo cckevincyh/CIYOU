@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="btn_info_close" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="btn_info_close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
             </div>
         </div>
     </div>
