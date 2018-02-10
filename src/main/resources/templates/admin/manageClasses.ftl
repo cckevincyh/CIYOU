@@ -152,7 +152,7 @@
                   <div class="box">
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-user-plus"></i></button> 添加管理员</div>
+                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 添加班级</div>
                           <div class="box-tools">
                               <form class="form-horizontal" action="${base}/admin/queryAdmin" method="get">
                               <div class="input-group input-group-sm" style="width: 150px;">
@@ -253,35 +253,28 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                        添加新管理员
+                        添加新班级
                     </h4>
                 </div>
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">用户名</label>
+                        <label for="firstname" class="col-sm-3 control-label">年级</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addUsername"  placeholder="请输入管理员用户名">
-                            <label class="control-label" for="addUsername" style="display:none;"></label>
+                            <select class="form-control" id="addGradeName">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="addGradeName" style="display:none;"></label>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <label for="firstname" class="col-sm-3 control-label">班级</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addName"  placeholder="请输入管理员真实姓名">
-                            <label class="control-label" for="addName" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">联系电话</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addPhone"  placeholder="请输入管理员联系电话">
-                            <label class="control-label" for="addPhone" style="display:none;"></label>
+                            <input type="text" class="form-control" id="addClasses"  placeholder="请输入班级">
+                            <label class="control-label" for="addClasses" style="display:none;"></label>
                         </div>
                     </div>
                     <!---------------------表单-------------------->
@@ -289,7 +282,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="addAdmin">
+                    <button type="button" class="btn btn-primary" id="addClass">
                         添加
                     </button>
                 </div>
@@ -319,28 +312,28 @@
                     <!---------------------表单-------------------->
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">用户名</label>
+                        <label for="firstname" class="col-sm-3 control-label">ID</label>
                         <div class="col-sm-7">
-                            <input type="hidden" id="updateId">
-                            <input type="text" class="form-control" id="updateUsername" placeholder="请输入管理员用户名" readonly="readonly">
-                            <label class="control-label" for="updateUsername" style="display:none;"></label>
+                            <input type="text" class="form-control" id="updateClassesId"  readonly="readonly">
+                            <label class="control-label" for="updateClassesId" style="display:none;"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <label for="firstname" class="col-sm-3 control-label">年级</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
-                            <label class="control-label" for="updateName" style="display:none;"></label>
+                            <select class="form-control" id="updateGradeName">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateGradeName" style="display:none;"></label>
                         </div>
                     </div>
 
-
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">联系电话</label>
+                        <label for="firstname" class="col-sm-3 control-label">班级</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
-                            <label class="control-label" for="updatePhone" style="display:none;"></label>
+                            <input type="text" class="form-control" id="updateClasses"  placeholder="请输入班级">
+                            <label class="control-label" for="updateClasses" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -351,7 +344,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="updateAdmin">
+                    <button type="button" class="btn btn-primary" id="updateClass">
                         修改
                     </button>
                 </div>
@@ -520,9 +513,6 @@
 
 <script src="${base}/static/js/admin/adminUpdatePwd.js"></script>
 <script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
-<script src="${base}/static/js/admin/addAdmin.js"></script>
-<script src="${base}/static/js/admin/updateAdmin.js"></script>
-<script src="${base}/static/js/admin/deleteAdmin.js"></script>
-
+<script src="${base}/static/js/admin/addClasses.js"></script>
 </body>
 </html>

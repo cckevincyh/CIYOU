@@ -16,4 +16,5 @@ interface GradeService {
     Grade getGrade(Integer gradeId)
 
     int deleteGrade(Integer gradeId)
+
 }

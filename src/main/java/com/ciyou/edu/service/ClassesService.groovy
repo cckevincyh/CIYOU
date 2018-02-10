@@ -9,4 +9,6 @@ import com.github.pagehelper.Page
  */
 interface ClassesService {
     Page<Classes> findByPage(int pageNo, int pageSize)
+
+    int addClasses(Integer gradeId, Integer classes)
 }

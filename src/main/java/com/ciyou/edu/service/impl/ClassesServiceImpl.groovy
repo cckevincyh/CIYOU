@@ -23,4 +23,9 @@ class ClassesServiceImpl implements ClassesService{
         PageHelper.startPage(pageNo, pageSize)
         return classesMapper?.findByPage()
     }
+
+    @Override
+    int addClasses(Integer gradeId, Integer classes) {
+        return classesMapper?.addClasses(gradeId,classes)
+    }
 }

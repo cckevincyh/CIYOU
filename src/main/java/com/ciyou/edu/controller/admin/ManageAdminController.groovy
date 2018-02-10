@@ -32,7 +32,7 @@ class ManageAdminController {
 
     @RequestMapping("/admin/manageAdmin")
     ModelAndView findAdminByPage(Integer page){
-        if(!page){
+        if(page == null){
             page = 1
         }
         ModelAndView mv = new ModelAndView("admin/manageAdmin")
@@ -180,7 +180,7 @@ class ManageAdminController {
 
     @RequestMapping(value="/admin/queryAdmin")
     ModelAndView queryAdmin(String searchContent,Integer page){
-        if(!page){
+        if(page == null){
             page = 1
         }
         if(!searchContent || searchContent?.trim() == ""){

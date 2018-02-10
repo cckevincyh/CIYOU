@@ -26,4 +26,5 @@ interface GradeMapper {
 
     @Delete("delete from Grade where gradeId = #{gradeId}")
     int deleteGrade(@Param("gradeId")Integer gradeId)
+
 }

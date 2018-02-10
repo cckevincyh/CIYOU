@@ -2,6 +2,7 @@ package com.ciyou.edu.controller.admin
 
 import com.ciyou.edu.entity.Grade
 import com.ciyou.edu.service.GradeService
+import net.sf.json.JSONArray
 import net.sf.json.JSONObject
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -95,6 +96,13 @@ class ManageGradeController {
             logger.info("删除Grade错误：" + e.getMessage())
             return "删除失败，请重试"
         }
+    }
+
+    @RequestMapping(value="/admin/getAllGrade",method=RequestMethod.POST)
+    @ResponseBody
+    String getAllGrade(){
+        List<Grade> gradeList = gradeService?.findAllGrade()
+        return JSONArray.fromObject(gradeList).toString()
     }
 
 }
