@@ -41,4 +41,12 @@ interface ClassesMapper {
 
     @Delete("delete from Classes where classesId = #{classesId}")
     int deleteClasses(@Param("classesId")Integer classesId)
+
+    @Select("select Classes.* from Classes, Grade where Classes.gradeId = Grade.gradeId and ( Classes.classesId like '%\${value}%' or Classes.classes like '%\${value}%' or  Grade.gradeName like '%\${value}%' ) order by Classes.classesId")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade"))])
+    Page<Classes> queryClassesByPage(@Param("value")String value)
 }

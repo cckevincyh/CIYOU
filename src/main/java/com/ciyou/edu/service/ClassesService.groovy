@@ -17,4 +17,6 @@ interface ClassesService {
     int updateClasses(Integer classesId, Integer gradeId, Integer classes)
 
     int deleteClasses(Integer classesId)
+
+    Page<Classes> queryClassesByPage(String value,int pageNo, int pageSize)
 }

@@ -47,4 +47,10 @@ class ClassesServiceImpl implements ClassesService{
     int deleteClasses(Integer classesId) {
         return classesMapper?.deleteClasses(classesId)
     }
+
+    @Override
+    Page<Classes> queryClassesByPage(String value, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return classesMapper?.queryClassesByPage(value)
+    }
 }

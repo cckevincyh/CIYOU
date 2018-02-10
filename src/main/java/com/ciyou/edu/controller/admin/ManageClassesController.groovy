@@ -124,4 +124,26 @@ class ManageClassesController {
         }
     }
 
+    @RequestMapping("/admin/queryClasses")
+    ModelAndView queryClasses(String searchContent,Integer page){
+        if(page == null){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            //重定向到findAdminByPage Controller
+            ModelAndView mv = new ModelAndView("redirect:manageClasses")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/admin/manageClasses")
+            logger.info("queryClasses : 查询第${page}页，携带查询参数=${searchContent}")
+            //不赋值pageSize，默认为10
+            Page<Classes> classess = classesService?.queryClassesByPage(searchContent?.trim(),page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Classes> pageInfo = new PageInfo<Classes>(classess)
+            pageInfo?.setUrl("/admin/queryClasses?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
+    }
+
 }
