@@ -2,6 +2,7 @@ package com.ciyou.edu.config.shiro.common
 
 import com.ciyou.edu.config.shiro.admin.AdminShiroRealm
 import com.ciyou.edu.entity.Permission
+import com.ciyou.edu.filter.ShiroPermissionsFilter
 import com.ciyou.edu.service.PermissionService
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.apache.shiro.mgt.SecurityManager
+import javax.servlet.Filter
 /**
  * @Author C.
  * @Date 2018-02-03 9:54
@@ -61,6 +63,12 @@ class ShiroConfiguration {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean()
+
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters()//获取filters
+        //将自定义 的权限验证失败的过滤器ShiroFilterFactoryBean注入shiroFilter
+        filters.put("perms", new ShiroPermissionsFilter())
+
+        // 必须设置SecuritManager
         shiroFilterFactoryBean.setSecurityManager(securityManager)
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
