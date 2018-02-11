@@ -18,4 +18,10 @@ interface PermissionMapper {
 
     @Select("select * from Permission")
     List<Permission> findAllPermission()
+
+    @Select("select * from Permission where type = #{type} order by permissionId")
+    List<Permission> findPermissionByType(@Param("type")Integer type)
+
+    @Select("select * from Permission where parentId = #{permissionId} order by permissionId")
+    List<Permission> findChildPermission(@Param("permissionId")Integer id)
 }

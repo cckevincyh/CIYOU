@@ -1,6 +1,7 @@
 package com.ciyou.edu.service
 
 import com.ciyou.edu.entity.Permission
+import com.ciyou.edu.entity.TreeNode
 
 /**
  * @Author C.
@@ -8,4 +9,8 @@ import com.ciyou.edu.entity.Permission
  */
 interface PermissionService {
     List<Permission> findAllPermission()
+
+    List<TreeNode> getPermissionTree()
+
+    Permission findPermissionById(Integer permissionId)
 }
