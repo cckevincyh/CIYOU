@@ -40,6 +40,10 @@ $(function () {
     });
 
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        //获取当前选中的结点，getSelected出来的可能是多个，所以我们选第一个
+        //alert($('#tree').treeview('getSelected')[0].text);
+        //下面这种方式也可以获取到选中的结点
+        //alert($("#tree").data("treeview").getSelected()[0].text);
         $('#tree').on('nodeSelected',function(event, data) {
             ajaxLoad(e,data);
         });
@@ -58,6 +62,10 @@ function ajaxLoad(e,data){
     //如果尾部以#view结尾的
     if(tartgetStr.lastIndexOf("#view") != -1){
         // showInfo1(data.parentId);
+        //这种方式也可以获取到父结点，但是当没有父结点的时候会有问题，最好用data.parentId在判断一下
+        // if(data.parentId != undefined){
+        //     alert( $("#tree").data("treeview").getParent(data).text);
+        // }
         //异步查询权限，显示在权限详情tab页面
         $.ajax({
             type: 'POST',
