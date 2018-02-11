@@ -1,0 +1,30 @@
+{
+    "name": "bootstrapValidator",
+    "version": "0.4.5",
+    "description": "The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3",
+    "keywords": ["jQuery", "plugin", "validate", "validator", "form", "Bootstrap"],
+    "author": {
+        "name": "Nguyen Huu Phuoc",
+        "email": "phuoc@huuphuoc.me",
+        "url": "https://twitter.com/nghuuphuoc"
+    },
+    "homepage": "http://bootstrapvalidator.com",
+    "bugs": {
+        "url": "https://github.com/nghuuphuoc/bootstrapvalidator/issues",
+        "email": "phuoc@huuphuoc.me"
+    },
+    "license": "MIT",
+    "main": "./dist/js/bootstrapValidator.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nghuuphuoc/bootstrapvalidator.git"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-copy": "~0.5.0",
+        "grunt-contrib-cssmin": "~0.9.0",
+        "grunt-contrib-uglify": "~0.4.0",
+        "grunt-contrib-watch": "~0.5.3"
+    }
+}
