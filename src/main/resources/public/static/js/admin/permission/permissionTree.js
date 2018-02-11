@@ -1,43 +1,97 @@
 /**
  * Created by c on 2018/2/11.
  */
-function getTree() {
+$(function () {
 
-    var tree = [
-        {
-            text: "Parent 1",
-            nodes: [
-                {
-                    text: "Child 1",
-                    nodes: [
-                        {
-                            text: "Grandchild 1"
-                        },
-                        {
-                            text: "Grandchild 2"
-                        }
-                    ]
+    $.ajax({
+        type: "POST",
+        url: "getAllPermission",
+        dataType: "json",
+        //async: false,
+        success: function (result) {
+            $('#tree').treeview({
+                data: result,         // 数据源
+                //showCheckbox: true,   //是否显示复选框
+                //highlightSelected: true,    //是否高亮选中
+                //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
+                //nodeIcon: 'glyphicon glyphicon-globe',
+                //emptyIcon: '',    //没有子节点的节点图标
+                //multiSelect: false,    //多选
+                onNodeChecked: function (event,data) {
+
                 },
-                {
-                    text: "Child 2"
+                onNodeSelected: function (event, data) {
+                    //获取当前Tab标签所选
+                    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                        ajaxLoad(e,data);
+                    });
+
                 }
-            ]
+            });
+            //通过这两段代码才可以分别触发到事件，silent要设置为false，Tab标签页面不要设置active
+            //设置选中
+            $('#tree').treeview('selectNode', [0, { silent: false }]);
+            // 通过名称选取标签页
+            $('#myTab a[href="#view"]').tab('show');
         },
-        {
-            text: "Parent 2"
-        },
-        {
-            text: "Parent 3"
-        },
-        {
-            text: "Parent 4"
-        },
-        {
-            text: "Parent 5"
+        error: function () {
+            showInfo1("树形权限结构加载失败！")
         }
-    ];
-    // Some logic to retrieve, or generate tree structure
-    return tree;
+    });
+
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+        $('#tree').on('nodeSelected',function(event, data) {
+            ajaxLoad(e,data);
+        });
+    });
+
+});
+
+/**
+ *  异步加载权限的公用方法
+ * @param e 标签页触发的事件
+ * @param data TreeView选中结点
+ */
+function ajaxLoad(e,data){
+    //得到当前激活的Tab标签页
+    var tartgetStr = e.target.toString();
+    //如果尾部以#view结尾的
+    if(tartgetStr.lastIndexOf("#view") != -1){
+        // showInfo1(data.parentId);
+        //异步查询权限，显示在权限详情tab页面
+        $.ajax({
+            type: 'POST',
+            url: 'getPermission',
+            cache: false,
+            //async: false,
+            dataType:'json',
+            data: {
+                permissionId: data.id
+            },
+            success: function (result) {
+                if(""+data.parentId != "undefined"){
+                    $("#viewParentId").val($('#tree').treeview('getNode', ""+data.parentId).text);
+                }else{
+                    $("#viewParentId").val("系统权限");
+                }
+                $("#viewName").val(result.permissionName);
+                $("#viewPermission").val(result.permission);
+                $("#viewURL").val(result.url);
+            }
+        });
+    }
+    //如果尾部以#edit结尾的
+    if(tartgetStr.lastIndexOf("#edit") != -1){
+        //showInfo1("edit")
+    }
+    //如果尾部以#add结尾的
+    if(tartgetStr.lastIndexOf("#add") != -1){
+        //showInfo1("add")
+    }
 }
 
-$('#tree').treeview({data: getTree()});
+
+function showInfo1(msg) {
+    $("#div_info1").text(msg);
+    $("#modal_info1").modal('show');
+}

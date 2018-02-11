@@ -165,34 +165,34 @@
               <!-- /.col -->
               <div class="col-md-9">
                   <div class="nav-tabs-custom">
-                      <ul class="nav nav-tabs">
-                          <li class="active"><a href="#view" data-toggle="tab" aria-expanded="true">查看权限详情</a></li>
-                          <li class=""><a href="#addRoot" data-toggle="tab" aria-expanded="false">添加根权限</a></li>
+                      <ul class="nav nav-tabs" id="myTab">
+                          <li class=""><a href="#view" data-toggle="tab" aria-expanded="true">查看权限详情</a></li>
+                          <li class=""><a href="#root" data-toggle="tab" aria-expanded="false">添加根权限</a></li>
                           <li class=""><a href="#add" data-toggle="tab" aria-expanded="false">添加子权限</a></li>
                           <li class=""><a href="#edit" data-toggle="tab" aria-expanded="false">编辑权限</a></li>
                           <li class=""><a href="#" data-toggle="tab" aria-expanded="false">删除权限</a></li>
                       </ul>
                       <div class="tab-content">
-                          <div class="tab-pane active" id="view">
+                          <div class="tab-pane fade " id="view">
                               <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="viewParentId" class="col-sm-2 control-label">根权限</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" disabled="disabled" id="viewParentId" name="viewParentId" placeholder="父权限" readonly="readonly">
+                                          <input type="text" class="form-control" disabled="disabled" id="viewParentId" name="viewParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
                                   </div>
 
                                   <div class="form-group has-feedback">
                                       <label for="viewName" class="col-sm-2 control-label">权限名</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" id="viewName" name="viewName" placeholder="权限名" data-bv-field="viewName">
+                                          <input type="text" class="form-control" id="viewName" name="viewName" placeholder="权限名" data-bv-field="viewName" readonly="readonly">
                                           <i class="form-control-feedback" data-bv-icon-for="viewName" style="display: none;"></i>
                                           <small data-bv-validator="notEmpty" data-bv-validator-for="viewName" class="help-block" style="display: none;">请输入权限名</small></div>
                                   </div>
                                   <div class="form-group has-feedback">
                                       <label for="viewPermission" class="col-sm-2 control-label">权限字符串</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" id="viewPermission" name="viewPermission" placeholder="权限字符串" data-bv-field="viewPermission">
+                                          <input type="text" class="form-control" id="viewPermission" name="viewPermission" placeholder="权限字符串" data-bv-field="viewPermission" readonly="readonly">
                                           <i class="form-control-feedback" data-bv-icon-for="viewPermission" style="display: none;"></i>
                                           <small data-bv-validator="notEmpty" data-bv-validator-for="viewPermission" class="help-block" style="display: none;">请输入权限字符串</small>
                                       </div>
@@ -201,14 +201,14 @@
                                   <div class="form-group has-feedback">
                                       <label for="viewURL" class="col-sm-2 control-label">资源路径</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" id="viewURL" name="viewURL" placeholder="资源路径" data-bv-field="viewURL">
+                                          <input type="text" class="form-control" id="viewURL" name="viewURL" placeholder="资源路径" data-bv-field="viewURL" readonly="readonly">
                                           <i class="form-control-feedback" data-bv-icon-for="viewURL" style="display: none;"></i>
                                           <small data-bv-validator="notEmpty" data-bv-validator-for="viewURL" class="help-block" style="display: none;">请输入资源路径</small></div>
                                   </div>
                               </form>
                           </div>
 
-                          <div class="tab-pane" id="addRoot">
+                          <div class="tab-pane fade in active" id="root">
                               <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="addRootParentId" class="col-sm-2 control-label">根权限</label>
@@ -253,12 +253,12 @@
                               </form>
                           </div>
                           <!-- /.tab-pane -->
-                          <div class="tab-pane" id="add">
+                          <div class="tab-pane fade " id="add">
                               <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="addParentId" class="col-sm-2 control-label">根权限</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" disabled="disabled" id="addParentId" name="addParentId" placeholder="父权限" readonly="readonly">
+                                          <input type="text" class="form-control" disabled="disabled" id="addParentId" name="addParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
                                   </div>
 
@@ -298,12 +298,12 @@
                               </form>
                           </div>
                           <!-- /.tab-pane -->
-                          <div class="tab-pane" id="edit">
+                          <div class="tab-pane fade " id="edit">
                               <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="editParentId" class="col-sm-2 control-label">根权限</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" disabled="disabled" id="editParentId" name="editParentId" placeholder="父权限" readonly="readonly">
+                                          <input type="text" class="form-control" disabled="disabled" id="editParentId" name="editParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
                                   </div>
 
@@ -619,6 +619,27 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12" id="div_info"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="btn_info_close" data-dismiss="modal"><i class="fa fa-close"></i>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 提示 -->
+<div class="modal fade" id="modal_info1" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="infoModalLabel">提示</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12" id="div_info1"></div>
                 </div>
             </div>
             <div class="modal-footer">
