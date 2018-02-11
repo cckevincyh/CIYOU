@@ -482,10 +482,10 @@
     })
 </script>
 
-<script src="${base}/static/js/admin/adminUpdatePwd.js"></script>
-<script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
-<script src="${base}/static/js/admin/addSubject.js"></script>
-<script src="${base}/static/js/admin/updateSubject.js"></script>
-<script src="${base}/static/js/admin/deleteSubject.js"></script>
+<script src="${base}/static/js/admin/admin/adminUpdatePwd.js"></script>
+<script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
+<script src="${base}/static/js/admin/subject/addSubject.js"></script>
+<script src="${base}/static/js/admin/subject/updateSubject.js"></script>
+<script src="${base}/static/js/admin/subject/deleteSubject.js"></script>
 </body>
 </html>

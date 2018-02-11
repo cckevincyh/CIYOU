@@ -96,6 +96,6 @@
     });
   });
 </script>
-<script src="${base}/static/js/adminLogin.js"></script>
+<script src="${base}/static/js/admin/admin/adminLogin.js"></script>
 </body>
 </html>

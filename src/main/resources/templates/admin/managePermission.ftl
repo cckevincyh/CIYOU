@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CIYOU | 班级管理</title>
+  <title>CIYOU | 权限管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="${base}/static/bower_components/Ionicons/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="${base}/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- treeview -->
+    <link rel="stylesheet" href="${base}/static/bower_components/bootstrap-treeview/bootstrap-treeview.min.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="${base}/static/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -134,92 +136,221 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        班级管理
+        权限管理
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="${base}/admin/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">班级管理</li>
+        <li class="active">权限管理</li>
       </ol>
     </section>
 
 
       <!-- Main content -->
       <section class="content">
-          <!-- /.row -->
+
           <div class="row">
-              <div class="col-xs-12">
+              <div class="col-md-3">
+
+                  <!-- Profile Image -->
                   <div class="box">
-                      <div class="box-header with-border">
-                          <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 添加班级</div>
-                          <div class="box-tools">
-                              <form class="form-horizontal" action="${base}/admin/queryClasses" method="get">
-                              <div class="input-group input-group-sm" style="width: 150px;">
-                                      <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
-                                      <div class="input-group-btn">
-                                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                      </div>
-                              </div>
-                              </form>
+                      <div class="box-body box-profile">
+                          <div id="tree" class="treeview">
                           </div>
                       </div>
-                      <!-- /.box-header -->
-                      <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover">
-                              <tr>
-                                  <th>ID</th>
-                                  <th>年级</th>
-                                  <th>班级</th>
-                                  <th>任课老师</th>
-                                  <th>操作</th>
-                              </tr>
-                              <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
-                                  <#list pageInfo.list as classes>
-                                      <tr>
-                                          <td>${classes.classesId!}</td>
-                                          <td>${classes.grade.gradeName!}</td>
-                                          <td>${classes.classes!}</td>
-                                          <td>*</td>
-                                          <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateClasses(${classes.classesId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteClasses(${classes.classesId!})"><i class="fa fa-fw fa-trash"></i></button></td>
-                                      </tr>
-                                  </#list>
-                                    <#else >
-                                     <tr>
-                                         <td colspan="5" align="center">暂无数据</td>
-                                     <tr>
-                              </#if>
-                          </table>
-                      </div>
                       <!-- /.box-body -->
-                        <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
-                             <div class="box-footer clearfix">
-                                   <ul class="pagination no-margin pull-right">
-                              <li class="disabled"><a href="#">第${pageInfo.pageNum}页/共${pageInfo.pages}页</a></li>
-                              <#if pageInfo.pageNum == 1>
-                                  <li class="disabled"><a>&laquo;</a></li>
-                              <#else>
-                                  <li><a href="${pageInfo.url}page=${pageInfo.pageNum - 1}">&laquo;</a></li>
-                              </#if>
-                                <#list pageInfo.navigatepageNums as num>
-                                    <#if pageInfo.pageNum == num>
-                                         <li class="active"><a>${num}</a></li>
-                                    <#else>
-                                        <li><a href="${pageInfo.url}page=${num}">${num}</a></li>
-                                    </#if>
-                                </#list>
-                                <#if pageInfo.pageNum == pageInfo.pages>
-                                    <li class="disabled"><a>&raquo;</a></li>
-                                <#else>
-                                    <li><a href="${pageInfo.url}page=${pageInfo.pageNum + 1}">&raquo;</a></li>
-                                </#if>
-                          </ul>
-                              </div>
-                        </#if>
                   </div>
                   <!-- /.box -->
               </div>
+              <!-- /.col -->
+              <div class="col-md-9">
+                  <div class="nav-tabs-custom">
+                      <ul class="nav nav-tabs">
+                          <li class="active"><a href="#view" data-toggle="tab" aria-expanded="true">查看权限详情</a></li>
+                          <li class=""><a href="#addRoot" data-toggle="tab" aria-expanded="false">添加根权限</a></li>
+                          <li class=""><a href="#add" data-toggle="tab" aria-expanded="false">添加子权限</a></li>
+                          <li class=""><a href="#edit" data-toggle="tab" aria-expanded="false">编辑权限</a></li>
+                          <li class=""><a href="#" data-toggle="tab" aria-expanded="false">删除权限</a></li>
+                      </ul>
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="view">
+                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                                  <div class="form-group">
+                                      <label for="viewParentId" class="col-sm-2 control-label">根权限</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" disabled="disabled" id="viewParentId" name="viewParentId" placeholder="父权限" readonly="readonly">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="viewName" class="col-sm-2 control-label">权限名</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="viewName" name="viewName" placeholder="权限名" data-bv-field="viewName">
+                                          <i class="form-control-feedback" data-bv-icon-for="viewName" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                  </div>
+                                  <div class="form-group has-feedback">
+                                      <label for="viewPermission" class="col-sm-2 control-label">权限字符串</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="viewPermission" name="viewPermission" placeholder="权限字符串" data-bv-field="viewPermission">
+                                          <i class="form-control-feedback" data-bv-icon-for="viewPermission" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="viewURL" class="col-sm-2 control-label">资源路径</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="viewURL" name="viewURL" placeholder="资源路径" data-bv-field="viewURL">
+                                          <i class="form-control-feedback" data-bv-icon-for="viewURL" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                  </div>
+                              </form>
+                          </div>
+
+                          <div class="tab-pane" id="addRoot">
+                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                                  <div class="form-group">
+                                      <label for="addRootParentId" class="col-sm-2 control-label">根权限</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" disabled="disabled" id="addRootParentId" name="addRootParentId" placeholder="父权限" readonly="readonly">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="addRootName" class="col-sm-2 control-label">权限名</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="addRootName" name="addRootName" placeholder="权限名" data-bv-field="addRootName">
+                                          <i class="form-control-feedback" data-bv-icon-for="addRootName" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                  </div>
+                                  <div class="form-group has-feedback">
+                                      <label for="addRootPermission" class="col-sm-2 control-label">权限字符串</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="addRootPermission" name="addRootPermission" placeholder="权限字符串" data-bv-field="addRootPermission">
+                                          <i class="form-control-feedback" data-bv-icon-for="addRootPermission" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="addRootURL" class="col-sm-2 control-label">资源路径</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="addRootURL" name="addRootURL" placeholder="资源路径" data-bv-field="addRootURL">
+                                          <i class="form-control-feedback" data-bv-icon-for="addRootURL" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                  </div>
+                                  <div class="box-footer">
+                                      <div class="text-center">
+                                          <button type="button" class="btn btn-default" data-btn-type="cancel">
+                                              <i class="fa fa-reply">&nbsp;取消</i>
+                                          </button>
+                                          <button type="submit" class="btn btn-primary">
+                                              <i class="fa fa-save">&nbsp;保存</i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <!-- /.tab-pane -->
+                          <div class="tab-pane" id="add">
+                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                                  <div class="form-group">
+                                      <label for="addParentId" class="col-sm-2 control-label">根权限</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" disabled="disabled" id="addParentId" name="addParentId" placeholder="父权限" readonly="readonly">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="addName" class="col-sm-2 control-label">权限名</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="addName" name="addName" placeholder="权限名" data-bv-field="addName">
+                                          <i class="form-control-feedback" data-bv-icon-for="addName" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                  </div>
+                                  <div class="form-group has-feedback">
+                                      <label for="addPermission" class="col-sm-2 control-label">权限字符串</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="addPermission" name="addPermission" placeholder="权限字符串" data-bv-field="addPermission">
+                                          <i class="form-control-feedback" data-bv-icon-for="addPermission" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="addURL" class="col-sm-2 control-label">资源路径</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="addURL" name="addURL" placeholder="资源路径" data-bv-field="addURL">
+                                          <i class="form-control-feedback" data-bv-icon-for="addURL" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                  </div>
+                                  <div class="box-footer">
+                                      <div class="text-center">
+                                          <button type="button" class="btn btn-default" data-btn-type="cancel">
+                                              <i class="fa fa-reply">&nbsp;取消</i>
+                                          </button>
+                                          <button type="submit" class="btn btn-primary">
+                                              <i class="fa fa-save">&nbsp;保存</i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <!-- /.tab-pane -->
+                          <div class="tab-pane" id="edit">
+                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                                  <div class="form-group">
+                                      <label for="editParentId" class="col-sm-2 control-label">根权限</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" disabled="disabled" id="editParentId" name="editParentId" placeholder="父权限" readonly="readonly">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="editName" class="col-sm-2 control-label">权限名</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="editName" name="editName" placeholder="权限名" data-bv-field="editName">
+                                          <i class="form-control-feedback" data-bv-icon-for="editName" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                  </div>
+                                  <div class="form-group has-feedback">
+                                      <label for="editPermission" class="col-sm-2 control-label">权限字符串</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="editPermission" name="editPermission" placeholder="权限字符串" data-bv-field="editPermission">
+                                          <i class="form-control-feedback" data-bv-icon-for="editPermission" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group has-feedback">
+                                      <label for="editURL" class="col-sm-2 control-label">资源路径</label>
+                                      <div class="col-sm-9">
+                                          <input type="text" class="form-control" id="editURL" name="editURL" placeholder="资源路径" data-bv-field="editURL">
+                                          <i class="form-control-feedback" data-bv-icon-for="editURL" style="display: none;"></i>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                  </div>
+                                  <div class="box-footer">
+                                      <div class="text-center">
+                                          <button type="button" class="btn btn-default" data-btn-type="cancel">
+                                              <i class="fa fa-reply">&nbsp;取消</i>
+                                          </button>
+                                          <button type="submit" class="btn btn-primary">
+                                              <i class="fa fa-save">&nbsp;保存</i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <!-- /.tab-pane -->
+                      </div>
+                      <!-- /.tab-content -->
+                  </div>
+                  <!-- /.nav-tabs-custom -->
+              </div>
           </div>
+          <!-- /.row -->
+
       </section>
       
    
@@ -506,6 +637,8 @@
 <script src="${base}/static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="${base}/static/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- treeview -->
+<script src="${base}/static/bower_components/bootstrap-treeview/bootstrap-treeview.js"></script>
 <!-- AdminLTE App -->
 <script src="${base}/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -513,8 +646,8 @@
 
 <script src="${base}/static/js/admin/admin/adminUpdatePwd.js"></script>
 <script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
-<script src="${base}/static/js/admin/classes/addClasses.js"></script>
-<script src="${base}/static/js/admin/classes/updateClasses.js"></script>
-<script src="${base}/static/js/admin/classes/deleteClasses.js"></script>
+<script src="${base}/static/js/admin/permission/permissionTree.js"></script>
+
+
 </body>
 </html>

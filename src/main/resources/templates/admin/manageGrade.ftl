@@ -482,10 +482,10 @@
     })
 </script>
 
-<script src="${base}/static/js/admin/adminUpdatePwd.js"></script>
-<script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
-<script src="${base}/static/js/admin/addGrade.js"></script>
-<script src="${base}/static/js/admin/updateGrade.js"></script>
-<script src="${base}/static/js/admin/deleteGrade.js"></script>
+<script src="${base}/static/js/admin/admin/adminUpdatePwd.js"></script>
+<script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
+<script src="${base}/static/js/admin/grade/addGrade.js"></script>
+<script src="${base}/static/js/admin/grade/updateGrade.js"></script>
+<script src="${base}/static/js/admin/grade/deleteGrade.js"></script>
 </body>
 </html>

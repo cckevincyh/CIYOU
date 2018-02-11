@@ -520,11 +520,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
-<script src="${base}/static/js/admin/adminUpdatePwd.js"></script>
-<script src="${base}/static/js/admin/adminUpdateInfo.js"></script>
-<script src="${base}/static/js/admin/addAdmin.js"></script>
-<script src="${base}/static/js/admin/updateAdmin.js"></script>
-<script src="${base}/static/js/admin/deleteAdmin.js"></script>
+<script src="${base}/static/js/admin/admin/adminUpdatePwd.js"></script>
+<script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
+<script src="${base}/static/js/admin/admin/addAdmin.js"></script>
+<script src="${base}/static/js/admin/admin/updateAdmin.js"></script>
+<script src="${base}/static/js/admin/admin/deleteAdmin.js"></script>
 
 </body>
 </html>

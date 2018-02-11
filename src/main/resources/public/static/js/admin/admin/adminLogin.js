@@ -18,7 +18,7 @@ $(function () {
             success: function (data) {
                 $("#modal_info").modal("hide");//关闭模糊框
                 if(data == "success"){
-                    window.location.href = "admin/admin";
+                    window.location.href = "/admin/admin";
                 }else{
                     showInfo(data);
                 }
