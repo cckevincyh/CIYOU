@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="${base}/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- treeview -->
     <link rel="stylesheet" href="${base}/static/bower_components/bootstrap-treeview/bootstrap-treeview.min.css" />
+    <!-- bootstrap-validator -->
+    <link rel="stylesheet" href="${base}/static/bower_components/bootstrap-validator/dist/css/bootstrap-validator.css"/>
+
     <!-- Theme style -->
     <link rel="stylesheet" href="${base}/static/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -173,8 +176,8 @@
                           <li class=""><a href="#" data-toggle="tab" aria-expanded="false">删除权限</a></li>
                       </ul>
                       <div class="tab-content">
-                          <div class="tab-pane fade " id="view">
-                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                          <div class="tab-pane fade in active" id="view">
+                              <form class="form-horizontal bv-form" id="dict-form-view" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="viewParentId" class="col-sm-2 control-label">根权限</label>
                                       <div class="col-sm-9">
@@ -187,14 +190,14 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="viewName" name="viewName" placeholder="权限名" data-bv-field="viewName" readonly="readonly">
                                           <i class="form-control-feedback" data-bv-icon-for="viewName" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewName" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="form-group has-feedback">
                                       <label for="viewPermission" class="col-sm-2 control-label">权限字符串</label>
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="viewPermission" name="viewPermission" placeholder="权限字符串" data-bv-field="viewPermission" readonly="readonly">
                                           <i class="form-control-feedback" data-bv-icon-for="viewPermission" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewPermission" class="help-block" style="display: none;"></small>
                                       </div>
                                   </div>
 
@@ -203,17 +206,17 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="viewURL" name="viewURL" placeholder="资源路径" data-bv-field="viewURL" readonly="readonly">
                                           <i class="form-control-feedback" data-bv-icon-for="viewURL" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="viewURL" class="help-block" style="display: none;"></small></div>
                                   </div>
                               </form>
                           </div>
 
-                          <div class="tab-pane fade in active" id="root">
+                          <div class="tab-pane fade" id="root">
                               <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="addRootParentId" class="col-sm-2 control-label">根权限</label>
                                       <div class="col-sm-9">
-                                          <input type="text" class="form-control" disabled="disabled" id="addRootParentId" name="addRootParentId" placeholder="父权限" readonly="readonly">
+                                          <input type="text" class="form-control" disabled="disabled" id="addRootParentId" name="addRootParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
                                   </div>
 
@@ -222,14 +225,14 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="addRootName" name="addRootName" placeholder="权限名" data-bv-field="addRootName">
                                           <i class="form-control-feedback" data-bv-icon-for="addRootName" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootName" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="form-group has-feedback">
                                       <label for="addRootPermission" class="col-sm-2 control-label">权限字符串</label>
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="addRootPermission" name="addRootPermission" placeholder="权限字符串" data-bv-field="addRootPermission">
                                           <i class="form-control-feedback" data-bv-icon-for="addRootPermission" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootPermission" class="help-block" style="display: none;"></small>
                                       </div>
                                   </div>
 
@@ -238,7 +241,7 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="addRootURL" name="addRootURL" placeholder="资源路径" data-bv-field="addRootURL">
                                           <i class="form-control-feedback" data-bv-icon-for="addRootURL" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addRootURL" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="box-footer">
                                       <div class="text-center">
@@ -254,7 +257,7 @@
                           </div>
                           <!-- /.tab-pane -->
                           <div class="tab-pane fade " id="add">
-                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                              <form class="form-horizontal bv-form" id="dict-form-add" novalidate="novalidate">
                                   <div class="form-group">
                                       <label for="addParentId" class="col-sm-2 control-label">根权限</label>
                                       <div class="col-sm-9">
@@ -267,14 +270,14 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="addName" name="addName" placeholder="权限名" data-bv-field="addName">
                                           <i class="form-control-feedback" data-bv-icon-for="addName" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addName" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="form-group has-feedback">
                                       <label for="addPermission" class="col-sm-2 control-label">权限字符串</label>
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="addPermission" name="addPermission" placeholder="权限字符串" data-bv-field="addPermission">
                                           <i class="form-control-feedback" data-bv-icon-for="addPermission" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addPermission" class="help-block" style="display: none;"></small>
                                       </div>
                                   </div>
 
@@ -283,7 +286,7 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="addURL" name="addURL" placeholder="资源路径" data-bv-field="addURL">
                                           <i class="form-control-feedback" data-bv-icon-for="addURL" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="addURL" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="box-footer">
                                       <div class="text-center">
@@ -312,14 +315,14 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="editName" name="editName" placeholder="权限名" data-bv-field="editName">
                                           <i class="form-control-feedback" data-bv-icon-for="editName" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editName" class="help-block" style="display: none;">请输入权限名</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editName" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="form-group has-feedback">
                                       <label for="editPermission" class="col-sm-2 control-label">权限字符串</label>
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="editPermission" name="editPermission" placeholder="权限字符串" data-bv-field="editPermission">
                                           <i class="form-control-feedback" data-bv-icon-for="editPermission" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editPermission" class="help-block" style="display: none;">请输入权限字符串</small>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editPermission" class="help-block" style="display: none;"></small>
                                       </div>
                                   </div>
 
@@ -328,7 +331,7 @@
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" id="editURL" name="editURL" placeholder="资源路径" data-bv-field="editURL">
                                           <i class="form-control-feedback" data-bv-icon-for="editURL" style="display: none;"></i>
-                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editURL" class="help-block" style="display: none;">请输入资源路径</small></div>
+                                          <small data-bv-validator="notEmpty" data-bv-validator-for="editURL" class="help-block" style="display: none;"></small></div>
                                   </div>
                                   <div class="box-footer">
                                       <div class="text-center">
@@ -371,119 +374,6 @@
 
 </div>
 <!-- ./wrapper -->
-
-
-<!-------添加的模糊框----->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        添加新班级
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">年级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="addGradeName">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="addGradeName" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">班级</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addClasses"  placeholder="请输入班级">
-                            <label class="control-label" for="addClasses" style="display:none;"></label>
-                        </div>
-                    </div>
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="addClass"><i class="fa fa-save"></i>
-                        保存
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-
-
-
-<!-- 修改模态框（Modal） -->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="updateModalLabel">
-                        修改管理员信息
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">ID</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateClassesId"  readonly="readonly">
-                            <label class="control-label" for="updateClassesId" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">年级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="updateGradeName">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="updateGradeName" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">班级</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateClasses"  placeholder="请输入班级">
-                            <label class="control-label" for="updateClasses" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <!---------------------表单-------------------->
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="updateClass"><i class="fa fa-save"></i>
-                        保存
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
 
 
 
@@ -660,6 +550,8 @@
 <script src="${base}/static/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- treeview -->
 <script src="${base}/static/bower_components/bootstrap-treeview/bootstrap-treeview.js"></script>
+<!-- bootstrap-validator -->
+<script src="${base}/static/bower_components/bootstrap-validator/dist/js/bootstrap-validator.js"></script>
 <!-- AdminLTE App -->
 <script src="${base}/static/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -668,7 +560,7 @@
 <script src="${base}/static/js/admin/admin/adminUpdatePwd.js"></script>
 <script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/permission/permissionTree.js"></script>
-
+<script src="${base}/static/js/admin/permission/permissionValidator.js"></script>
 
 </body>
 </html>

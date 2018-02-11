@@ -54,4 +54,10 @@ class ManagePermissionController {
         logger.info("获得的Permission：" + permission)
         return JSONObject.fromObject(permission)?.toString()
     }
+
+    @RequestMapping(value="/admin/validatePermissionName", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String validatePermissionName(String permissionName){
+        logger.info("校验权限名..")
+    }
 }
