@@ -24,4 +24,10 @@ interface PermissionMapper {
 
     @Select("select * from Permission where parentId = #{permissionId} order by permissionId")
     List<Permission> findChildPermission(@Param("permissionId")Integer id)
+
+    @Select("select * from Permission where permissionName = #{permissionName}")
+    Permission findPermissionByName(@Param("permissionName")String name)
+
+    @Select("select * from Permission where permissionName = #{permissionName} and permissionId <> #{permissionId}")
+    Permission findOtherPermissionByName(@Param("permissionId")Integer id,@Param("permissionName")String name)
 }

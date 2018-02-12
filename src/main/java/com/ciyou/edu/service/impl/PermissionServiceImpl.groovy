@@ -50,4 +50,14 @@ class PermissionServiceImpl implements PermissionService{
     Permission findPermissionById(Integer permissionId) {
         return permissionMapper?.findPermissionById(permissionId)
     }
+
+    @Override
+    Permission findPermissionByName(String permissionName) {
+        return permissionMapper?.findPermissionByName(permissionName)
+    }
+
+    @Override
+    Permission findOtherPermissionByName(Integer permissionId, String permissionName) {
+        return permissionMapper?.findOtherPermissionByName(permissionId, permissionName)
+    }
 }

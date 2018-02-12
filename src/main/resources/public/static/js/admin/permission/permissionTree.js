@@ -21,11 +21,17 @@ $(function () {
 
                 },
                 onNodeSelected: function (event, data) {
+                    //清除验证状态
+                    $("#dict-form-root").data("bootstrapValidator").resetForm();
+                    $("#dict-form-add").data("bootstrapValidator").resetForm();
+                    $("#dict-form-edit").data("bootstrapValidator").resetForm();
+                    //清空数据
+                    $('#dict-form-root')[0].reset();
+                    $('#dict-form-add')[0].reset();
                     //获取当前Tab标签所选
                     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
                         ajaxLoad(e,data);
                     });
-
                 }
             });
             //通过这两段代码才可以分别触发到事件，silent要设置为false，Tab标签页面不要设置active
@@ -44,6 +50,13 @@ $(function () {
         //alert($('#tree').treeview('getSelected')[0].text);
         //下面这种方式也可以获取到选中的结点
         //alert($("#tree").data("treeview").getSelected()[0].text);
+        //清除验证状态
+        $("#dict-form-root").data("bootstrapValidator").resetForm();
+        $("#dict-form-add").data("bootstrapValidator").resetForm();
+        $("#dict-form-edit").data("bootstrapValidator").resetForm();
+        //清空数据
+        $('#dict-form-root')[0].reset();
+        $('#dict-form-add')[0].reset();
         $('#tree').on('nodeSelected',function(event, data) {
             ajaxLoad(e,data);
         });
@@ -66,35 +79,77 @@ function ajaxLoad(e,data){
         // if(data.parentId != undefined){
         //     alert( $("#tree").data("treeview").getParent(data).text);
         // }
-        //异步查询权限，显示在权限详情tab页面
-        $.ajax({
-            type: 'POST',
-            url: 'getPermission',
-            cache: false,
-            //async: false,
-            dataType:'json',
-            data: {
-                permissionId: data.id
-            },
-            success: function (result) {
-                if(""+data.parentId != "undefined"){
-                    $("#viewParentId").val($('#tree').treeview('getNode', ""+data.parentId).text);
-                }else{
-                    $("#viewParentId").val("系统权限");
+        if($("#tree").data("treeview").getSelected()[0] != undefined){
+            //异步查询权限，显示在权限详情tab页面
+            $.ajax({
+                type: 'POST',
+                url: 'getPermission',
+                cache: false,
+                //async: false,
+                dataType:'json',
+                data: {
+                    permissionId: data.id
+                },
+                success: function (result) {
+                    if(""+data.parentId != "undefined"){
+                        $("#viewParentId").val($('#tree').treeview('getNode', ""+data.parentId).text);
+                    }else{
+                        $("#viewParentId").val("系统权限");
+                    }
+                    $("#viewName").val(result.permissionName);
+                    $("#viewPermission").val(result.permission);
+                    $("#viewURL").val(result.url);
                 }
-                $("#viewName").val(result.permissionName);
-                $("#viewPermission").val(result.permission);
-                $("#viewURL").val(result.url);
-            }
-        });
+            });
+        }else{
+            showInfo1("请选择权限");
+        }
     }
     //如果尾部以#edit结尾的
     if(tartgetStr.lastIndexOf("#edit") != -1){
         //showInfo1("edit")
+        if($("#tree").data("treeview").getSelected()[0] != undefined) {
+            $.ajax({
+                type: 'POST',
+                url: 'getPermission',
+                cache: false,
+                //async: false,
+                dataType: 'json',
+                data: {
+                    permissionId: data.id
+                },
+                success: function (result) {
+                    if ("" + data.parentId != "undefined") {
+                        var editNode = $('#tree').treeview('getNode', "" + data.parentId);
+                        $("#editParentId").val(editNode.text);
+                        $("#editPid").val(editNode.id);
+                    } else {
+                        $("#editParentId").val("系统权限");
+                    }
+                    $("#editId").val(data.id);
+                    $("#editName").val(result.permissionName);
+                    $("#editPermission").val(result.permission);
+                    $("#editURL").val(result.url);
+                }
+            });
+        }else{
+            showInfo1("请选择权限");
+        }
     }
     //如果尾部以#add结尾的
     if(tartgetStr.lastIndexOf("#add") != -1){
         //showInfo1("add")
+        if($("#tree").data("treeview").getSelected()[0] != undefined) {
+            if ("" + data.parentId != "undefined") {
+                var addNode = $('#tree').treeview('getNode', "" + data.parentId);
+                $("#addParentId").val(addNode.text);
+                $("#addPid").val(addNode.id);
+            } else {
+                $("#addParentId").val("系统权限");
+            }
+        }else{
+            showInfo1("请选择权限");
+        }
     }
 }
 

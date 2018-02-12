@@ -13,4 +13,8 @@ interface PermissionService {
     List<TreeNode> getPermissionTree()
 
     Permission findPermissionById(Integer permissionId)
+
+    Permission findPermissionByName(String permissionName)
+
+    Permission findOtherPermissionByName(Integer permissionId, String permissionName)
 }

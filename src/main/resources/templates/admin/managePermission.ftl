@@ -179,7 +179,7 @@
                           <div class="tab-pane fade in active" id="view">
                               <form class="form-horizontal bv-form" id="dict-form-view" novalidate="novalidate">
                                   <div class="form-group">
-                                      <label for="viewParentId" class="col-sm-2 control-label">根权限</label>
+                                      <label for="viewParentId" class="col-sm-2 control-label">父权限</label>
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" disabled="disabled" id="viewParentId" name="viewParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
@@ -212,9 +212,9 @@
                           </div>
 
                           <div class="tab-pane fade" id="root">
-                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                              <form class="form-horizontal bv-form" id="dict-form-root" novalidate="novalidate">
                                   <div class="form-group">
-                                      <label for="addRootParentId" class="col-sm-2 control-label">根权限</label>
+                                      <label for="addRootParentId" class="col-sm-2 control-label">父权限</label>
                                       <div class="col-sm-9">
                                           <input type="text" class="form-control" disabled="disabled" id="addRootParentId" name="addRootParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
@@ -259,8 +259,9 @@
                           <div class="tab-pane fade " id="add">
                               <form class="form-horizontal bv-form" id="dict-form-add" novalidate="novalidate">
                                   <div class="form-group">
-                                      <label for="addParentId" class="col-sm-2 control-label">根权限</label>
+                                      <label for="addParentId" class="col-sm-2 control-label">父权限</label>
                                       <div class="col-sm-9">
+                                          <input type="hidden" name="addPid" id="addPid">
                                           <input type="text" class="form-control" disabled="disabled" id="addParentId" name="addParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
                                   </div>
@@ -302,10 +303,12 @@
                           </div>
                           <!-- /.tab-pane -->
                           <div class="tab-pane fade " id="edit">
-                              <form class="form-horizontal bv-form" id="dict-form" novalidate="novalidate">
+                              <form class="form-horizontal bv-form" id="dict-form-edit" novalidate="novalidate">
                                   <div class="form-group">
-                                      <label for="editParentId" class="col-sm-2 control-label">根权限</label>
+                                      <label for="editParentId" class="col-sm-2 control-label">父权限</label>
                                       <div class="col-sm-9">
+                                          <input type="hidden" name="editPid" id="editPid">
+                                          <input type="hidden" name="editId" id="editId">
                                           <input type="text" class="form-control" disabled="disabled" id="editParentId" name="editParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
                                   </div>

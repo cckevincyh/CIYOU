@@ -59,5 +59,27 @@ class ManagePermissionController {
     @ResponseBody
     String validatePermissionName(String permissionName){
         logger.info("校验权限名..")
+        Permission permission = permissionService?.findPermissionByName(permissionName)
+        Map<String, Boolean> map = new HashMap<>()
+        if(permission){
+            map.put("valid", false)
+        }else{
+            map.put("valid", true)
+        }
+        return JSONObject.fromObject(map)?.toString()
+    }
+
+    @RequestMapping(value="/admin/validatePNameByUpdate", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String validatePNameByUpdate(Integer permissionId,String permissionName){
+        logger.info("校验修改权限名..")
+        Permission permission = permissionService?.findOtherPermissionByName(permissionId,permissionName)
+        Map<String, Boolean> map = new HashMap<>()
+        if(permission){
+            map.put("valid", false)
+        }else{
+            map.put("valid", true)
+        }
+        return JSONObject.fromObject(map)?.toString()
     }
 }
