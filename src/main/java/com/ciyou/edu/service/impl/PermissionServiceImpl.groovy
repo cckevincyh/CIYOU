@@ -6,6 +6,7 @@ import com.ciyou.edu.mapper.PermissionMapper
 import com.ciyou.edu.service.PermissionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * @Author C.
@@ -59,5 +60,11 @@ class PermissionServiceImpl implements PermissionService{
     @Override
     Permission findOtherPermissionByName(Integer permissionId, String permissionName) {
         return permissionMapper?.findOtherPermissionByName(permissionId, permissionName)
+    }
+
+    @Transactional
+    @Override
+    int addPermission(Permission permission) {
+        return permissionMapper?.addPermission(permission)
     }
 }

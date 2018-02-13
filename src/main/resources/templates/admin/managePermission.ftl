@@ -245,10 +245,10 @@
                                   </div>
                                   <div class="box-footer">
                                       <div class="text-center">
-                                          <button type="button" class="btn btn-default" data-btn-type="cancel">
+                                          <button type="reset" class="btn btn-default" data-btn-type="cancel" id="rootCancel">
                                               <i class="fa fa-reply">&nbsp;取消</i>
                                           </button>
-                                          <button type="submit" class="btn btn-primary">
+                                          <button type="button" class="btn btn-primary" id="rootButton">
                                               <i class="fa fa-save">&nbsp;保存</i>
                                           </button>
                                       </div>
@@ -291,10 +291,10 @@
                                   </div>
                                   <div class="box-footer">
                                       <div class="text-center">
-                                          <button type="button" class="btn btn-default" data-btn-type="cancel">
+                                          <button type="reset" class="btn btn-default" data-btn-type="cancel" id="addCancel">
                                               <i class="fa fa-reply">&nbsp;取消</i>
                                           </button>
-                                          <button type="submit" class="btn btn-primary">
+                                          <button type="button" class="btn btn-primary" id="addButton">
                                               <i class="fa fa-save">&nbsp;保存</i>
                                           </button>
                                       </div>
@@ -564,6 +564,7 @@
 <script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/permission/permissionTree.js"></script>
 <script src="${base}/static/js/admin/permission/permissionValidator.js"></script>
-
+<script src="${base}/static/js/admin/permission/addRootPermission.js"></script>
+<script src="${base}/static/js/admin/permission/addPermission.js"></script>
 </body>
 </html>

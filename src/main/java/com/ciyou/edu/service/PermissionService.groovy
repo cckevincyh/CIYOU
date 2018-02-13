@@ -17,4 +17,7 @@ interface PermissionService {
     Permission findPermissionByName(String permissionName)
 
     Permission findOtherPermissionByName(Integer permissionId, String permissionName)
+
+    int addPermission(Permission permission)
+
 }

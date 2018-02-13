@@ -1,6 +1,7 @@
 package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Permission
+import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
 
@@ -30,4 +31,8 @@ interface PermissionMapper {
 
     @Select("select * from Permission where permissionName = #{permissionName} and permissionId <> #{permissionId}")
     Permission findOtherPermissionByName(@Param("permissionId")Integer id,@Param("permissionName")String name)
+
+    @Insert("insert into Permission(permissionName,permission,url,type,parentId) values(#{permissionName},#{permission},#{url},#{type},#{parentId})")
+    int addPermission(Permission permission)
+
 }

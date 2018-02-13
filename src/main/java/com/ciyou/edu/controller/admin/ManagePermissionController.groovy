@@ -82,4 +82,60 @@ class ManagePermissionController {
         }
         return JSONObject.fromObject(map)?.toString()
     }
+
+    @RequestMapping(value="/admin/addRootPermission", method=RequestMethod.POST)
+    @ResponseBody
+    String addRootPermission(Permission permission){
+        logger.info("新增根权限..")
+        //校验数据
+        if(!permission?.getPermissionName() || permission?.getPermissionName()?.trim() == ""){
+            return "权限名不能为空"
+        }else if(!permission?.getPermission() || permission?.getPermission()?.trim() == ""){
+            return "权限字符串不能为空"
+        }else if(!permission?.getUrl() || permission?.getUrl()?.trim() == ""){
+            return "权限资源URL不能为空"
+        }
+        //添加根权限
+        permission?.setType(1)
+        try{
+            if(permissionService?.addPermission(permission)){
+                return "添加成功"
+            }else{
+                return "添加失败"
+            }
+        }catch (Exception e){
+            logger.info("添加根权限异常：" + e.getMessage())
+            return "添加失败，请重试"
+        }
+
+    }
+    @RequestMapping(value="/admin/addPermission", method=RequestMethod.POST)
+    @ResponseBody
+    String addPermission(Permission permission){
+        logger.info("新增子权限..")
+        //校验数据
+        //查看是否是根权限下添加子权限
+        if(permission?.getParentId() == null){
+            return "只能在根权限下添加子权限"
+        }else if(!permission?.getPermissionName() || permission?.getPermissionName()?.trim() == ""){
+            return "权限名不能为空"
+        }else if(!permission?.getPermission() || permission?.getPermission()?.trim() == ""){
+            return "权限字符串不能为空"
+        }else if(!permission?.getUrl() || permission?.getUrl()?.trim() == ""){
+            return "权限资源URL不能为空"
+        }
+        //标识为子权限
+        permission?.setType(2)
+        try{
+            if(permissionService?.addPermission(permission)){
+                return "添加成功"
+            }else{
+                return "添加失败"
+            }
+        }catch (Exception e){
+            logger.info("添加根权限异常：" + e.getMessage())
+            return "添加失败，请重试"
+        }
+
+    }
 }

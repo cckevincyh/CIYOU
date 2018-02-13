@@ -15,7 +15,7 @@ class Permission implements Serializable{
     //父编号
     private Integer parentId
     //资源类型
-    private String type
+    private Integer type
     //资源路径
     private String url
 
@@ -51,20 +51,20 @@ class Permission implements Serializable{
         this.parentId = parentId
     }
 
-    String getType() {
-        return type
-    }
-
-    void setType(String type) {
-        this.type = type
-    }
-
     String getUrl() {
         return url
     }
 
     void setUrl(String url) {
         this.url = url
+    }
+
+    Integer getType() {
+        return type
+    }
+
+    void setType(Integer type) {
+        this.type = type
     }
 
 
@@ -75,7 +75,7 @@ class Permission implements Serializable{
                 ", permissionName='" + permissionName + '\'' +
                 ", permission='" + permission + '\'' +
                 ", parentId=" + parentId +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", url='" + url + '\'' +
                 '}';
     }

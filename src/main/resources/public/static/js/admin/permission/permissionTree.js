@@ -28,6 +28,9 @@ $(function () {
                     //清空数据
                     $('#dict-form-root')[0].reset();
                     $('#dict-form-add')[0].reset();
+                    // $('a[data-toggle="tab"]').off('show.bs.tab').on('show.bs.tab',function(){
+                    //     alert("show.bs.tab");
+                    // });
                     //获取当前Tab标签所选
                     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
                         ajaxLoad(e,data);
@@ -57,6 +60,10 @@ $(function () {
         //清空数据
         $('#dict-form-root')[0].reset();
         $('#dict-form-add')[0].reset();
+        //解绑事件，解决jquery嵌套多次绑定事件造成多次请求的问题
+        // $('#tree').off('nodeSelected').on('nodeSelected',function(){
+        //     alert("我是nodeSelected");
+        // });
         $('#tree').on('nodeSelected',function(event, data) {
             ajaxLoad(e,data);
         });
@@ -143,9 +150,12 @@ function ajaxLoad(e,data){
             if ("" + data.parentId != "undefined") {
                 var addNode = $('#tree').treeview('getNode', "" + data.parentId);
                 $("#addParentId").val(addNode.text);
-                $("#addPid").val(addNode.id);
+                //只进行两层权限的添加
+                $("#addPid").val("");
+                showInfo1("无法对子权限进行添加，请选择根权限");
             } else {
                 $("#addParentId").val("系统权限");
+                $("#addPid").val(data.id);
             }
         }else{
             showInfo1("请选择权限");
