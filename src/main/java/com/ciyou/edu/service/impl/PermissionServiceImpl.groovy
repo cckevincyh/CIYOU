@@ -47,6 +47,7 @@ class PermissionServiceImpl implements PermissionService{
         return parentNodes
     }
 
+
     @Override
     Permission findPermissionById(Integer permissionId) {
         return permissionMapper?.findPermissionById(permissionId)
@@ -66,5 +67,30 @@ class PermissionServiceImpl implements PermissionService{
     @Override
     int addPermission(Permission permission) {
         return permissionMapper?.addPermission(permission)
+    }
+
+    @Override
+    Permission findPermissionByPermission(String permission) {
+        return permissionMapper?.findPermissionByPermission(permission)
+    }
+
+    @Override
+    Permission findOtherPermission(Integer permissionId, String permission) {
+        return permissionMapper?.findOtherPermission(permissionId,permission)
+    }
+
+    @Override
+    int updatePermission(Permission permission) {
+        return permissionMapper?.updatePermission(permission)
+    }
+
+    @Override
+    int deletePermission(Integer permissionId) {
+        return permissionMapper?.deletePermission(permissionId)
+    }
+
+    @Override
+    List<Permission> findChildPermission(Integer permissionId) {
+        return permissionMapper?.findChildPermission(permissionId)
     }
 }

@@ -1,9 +1,11 @@
 package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Permission
+import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.Update
 
 /**
  * @Author C.
@@ -35,4 +37,15 @@ interface PermissionMapper {
     @Insert("insert into Permission(permissionName,permission,url,type,parentId) values(#{permissionName},#{permission},#{url},#{type},#{parentId})")
     int addPermission(Permission permission)
 
+    @Select("select * from Permission where permission = #{permission}")
+    Permission findPermissionByPermission(@Param("permission")String name)
+
+    @Select("select * from Permission where permission = #{permission} and permissionId <> #{permissionId}")
+    Permission findOtherPermission(@Param("permissionId")Integer id,@Param("permission")String name)
+
+    @Update("Update Permission set permissionName = #{permissionName}, permission = #{permission}, url = #{url} where permissionId = #{permissionId}")
+    int updatePermission(Permission permission)
+
+    @Delete("Delete from Permission where permissionId = #{permissionId}")
+    int deletePermission(@Param("permissionId")Integer id)
 }

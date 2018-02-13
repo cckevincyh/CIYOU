@@ -34,6 +34,17 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '请输入权限字符串'
+                    },
+                    remote: {//将内容发送至指定页面验证，返回验证结果，比如查询用户名是否存在
+                        url: "validatePermission",
+                        data: function (validator) {
+                            return {
+                                permission:$.trim($('#addPermission').val())
+                            };
+                        },
+                        delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                        type: 'POST',//请求方式
+                        message: '该权限字符串已被使用'
                     }
                 }
             },
@@ -82,6 +93,17 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '请输入权限字符串'
+                    },
+                    remote: {//将内容发送至指定页面验证，返回验证结果，比如查询用户名是否存在
+                        url: "validatePermission",
+                        data: function (validator) {
+                            return {
+                                permission:$.trim($('#addRootPermission').val())
+                            };
+                        },
+                        delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                        type: 'POST',//请求方式
+                        message: '该权限字符串已被使用'
                     }
                 }
             },
@@ -131,6 +153,18 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '请输入权限字符串'
+                    },
+                    remote: {//将内容发送至指定页面验证，返回验证结果，比如查询用户名是否存在
+                        url: "validatePermissionByUpdate",
+                        data: function (validator) {
+                            return {
+                                permissionId: $.trim($("#editId").val()),
+                                permission:$.trim($('#editPermission').val())
+                            };
+                        },
+                        delay: 2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
+                        type: 'POST',//请求方式
+                        message: '该权限字符串已被使用'
                     }
                 }
             },

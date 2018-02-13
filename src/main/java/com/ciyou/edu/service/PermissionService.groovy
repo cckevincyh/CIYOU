@@ -20,4 +20,13 @@ interface PermissionService {
 
     int addPermission(Permission permission)
 
+    Permission findPermissionByPermission(String permission)
+
+    Permission findOtherPermission(Integer permissionId, String permission)
+
+    int updatePermission(Permission permission)
+
+    int deletePermission(Integer permissionId)
+
+    List<Permission> findChildPermission(Integer permissionId)
 }

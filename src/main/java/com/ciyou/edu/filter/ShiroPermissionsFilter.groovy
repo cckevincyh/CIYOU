@@ -37,7 +37,7 @@ class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
         if (isAjax) {//如果是ajax返回指定格式数据
             logger.info("----------AJAX请求拒绝-------------")
             Map<String, Object> result = new HashMap<String, Object>()
-            result.put("flag", false)
+            result.put("state", "403")
             result.put("message", "权限不足！")
             httpServletResponse.setCharacterEncoding("UTF-8")
             httpServletResponse.setContentType("application/json")

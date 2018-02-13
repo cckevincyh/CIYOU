@@ -3,6 +3,10 @@
  */
 $(function () {
     $('#addButton').click(function () {
+        if($("#tree").data("treeview").getSelected()[0] == undefined) {
+            showInfo1("请选择权限");
+            return ;
+        }
         //首先校验是否是根权限下添加子权限，获取当前的根权限是否为空，为空则说明是子权限，不能添加
         if($.trim($("#addPid").val()) == ""){
             showInfo1("不能对子权限进行添加，请选择根权限");

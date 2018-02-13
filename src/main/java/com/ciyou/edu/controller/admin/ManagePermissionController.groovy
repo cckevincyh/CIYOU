@@ -3,6 +3,7 @@ package com.ciyou.edu.controller.admin
 import com.ciyou.edu.entity.Permission
 import com.ciyou.edu.entity.TreeNode
 import com.ciyou.edu.service.PermissionService
+import com.ciyou.edu.service.ShiroService
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
 import net.sf.json.JsonConfig
@@ -25,6 +26,8 @@ class ManagePermissionController {
 
     @Autowired
     private PermissionService permissionService
+    @Autowired
+    private ShiroService shiroService
 
     @RequestMapping(value="/admin/getAllPermission", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
     @ResponseBody
@@ -60,7 +63,7 @@ class ManagePermissionController {
     String validatePermissionName(String permissionName){
         logger.info("校验权限名..")
         Permission permission = permissionService?.findPermissionByName(permissionName)
-        Map<String, Boolean> map = new HashMap<>()
+        Map<String, Boolean> map = new HashMap<String, Boolean>()
         if(permission){
             map.put("valid", false)
         }else{
@@ -99,6 +102,8 @@ class ManagePermissionController {
         permission?.setType(1)
         try{
             if(permissionService?.addPermission(permission)){
+                //重新加载权限
+                shiroService?.updatePermission()
                 return "添加成功"
             }else{
                 return "添加失败"
@@ -128,14 +133,100 @@ class ManagePermissionController {
         permission?.setType(2)
         try{
             if(permissionService?.addPermission(permission)){
+                //重新加载权限
+                shiroService?.updatePermission()
                 return "添加成功"
             }else{
                 return "添加失败"
             }
         }catch (Exception e){
-            logger.info("添加根权限异常：" + e.getMessage())
+            logger.info("添加子权限异常：" + e.getMessage())
             return "添加失败，请重试"
         }
 
+    }
+
+    @RequestMapping(value="/admin/validatePermission", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String validatePermission(String permission){
+        logger.info("校验权限字符串..")
+        Permission p = permissionService?.findPermissionByPermission(permission)
+        Map<String, Boolean> map = new HashMap<String, Boolean>()
+        if(p){
+            map.put("valid", false)
+        }else{
+            map.put("valid", true)
+        }
+        return JSONObject.fromObject(map)?.toString()
+    }
+
+    @RequestMapping(value="/admin/validatePermissionByUpdate", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String validatePermissionByUpdate(Integer permissionId,String permission){
+        logger.info("校验修改权限字符串..")
+        Permission p = permissionService?.findOtherPermission(permissionId,permission)
+        Map<String, Boolean> map = new HashMap<String, Boolean>()
+        if(p){
+            map.put("valid", false)
+        }else{
+            map.put("valid", true)
+        }
+        return JSONObject.fromObject(map)?.toString()
+    }
+
+    @RequestMapping(value="/admin/updatePermission", method=RequestMethod.POST)
+    @ResponseBody
+    String updatePermission(Permission permission){
+        logger.info("校验修改权限..")
+        if(permission?.getPermissionId() == null){
+            return "请选择权限"
+        }else if(!permission?.getPermissionName() || permission?.getPermissionName()?.trim() == ""){
+            return "权限名不能为空"
+        }else if(!permission?.getPermission() || permission?.getPermission()?.trim() == ""){
+            return "权限字符串不能为空"
+        }else if(!permission?.getUrl() || permission?.getUrl()?.trim() == ""){
+            return "权限资源URL不能为空"
+        }
+        try{
+            if(permissionService?.updatePermission(permission)){
+                //重新加载权限
+                shiroService?.updatePermission()
+                return "修改成功"
+            }else{
+                return "修改失败"
+            }
+        }catch (Exception e){
+            logger.info("修改权限异常：" + e.getMessage())
+            return "修改失败，请重试"
+        }
+    }
+    @RequestMapping(value="/admin/deletePermission", method=RequestMethod.POST)
+    @ResponseBody
+    String deletePermission(Integer permissionId){
+        logger.info("删除权限..")
+        if(permissionId == null){
+            return "请选择权限"
+        }
+        Permission permission = permissionService?.findPermissionById(permissionId)
+        //是父结点
+        if(permission?.getType() == 1){
+            List<Permission> permissionList = permissionService?.findChildPermission(permissionId)
+            //有子权限
+            if(permissionList?.size()){
+                return "删除完子权限才能删除该父权限"
+            }
+        }
+        try{
+            if(permissionService?.deletePermission(permissionId)){
+                //重新加载权限
+                shiroService?.updatePermission()
+                return "删除成功"
+            }else{
+                return "删除失败"
+            }
+        }catch (Exception e){
+            logger.info("删除权限异常：" + e.getMessage())
+            return "删除失败，请重试"
+        }
     }
 }

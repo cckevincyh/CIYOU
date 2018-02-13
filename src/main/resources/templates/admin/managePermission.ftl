@@ -173,7 +173,7 @@
                           <li class=""><a href="#root" data-toggle="tab" aria-expanded="false">添加根权限</a></li>
                           <li class=""><a href="#add" data-toggle="tab" aria-expanded="false">添加子权限</a></li>
                           <li class=""><a href="#edit" data-toggle="tab" aria-expanded="false">编辑权限</a></li>
-                          <li class=""><a href="#" data-toggle="tab" aria-expanded="false">删除权限</a></li>
+                          <li class=""><a href="javascript:void(0)" onclick="deletePermission()" data-toggle="tab" aria-expanded="false">删除权限</a></li>
                       </ul>
                       <div class="tab-content">
                           <div class="tab-pane fade in active" id="view">
@@ -307,7 +307,6 @@
                                   <div class="form-group">
                                       <label for="editParentId" class="col-sm-2 control-label">父权限</label>
                                       <div class="col-sm-9">
-                                          <input type="hidden" name="editPid" id="editPid">
                                           <input type="hidden" name="editId" id="editId">
                                           <input type="text" class="form-control" disabled="disabled" id="editParentId" name="editParentId" placeholder="系统权限" readonly="readonly">
                                       </div>
@@ -338,10 +337,10 @@
                                   </div>
                                   <div class="box-footer">
                                       <div class="text-center">
-                                          <button type="button" class="btn btn-default" data-btn-type="cancel">
+                                          <button type="reset" class="btn btn-default" data-btn-type="cancel" id="editCancel">
                                               <i class="fa fa-reply">&nbsp;取消</i>
                                           </button>
-                                          <button type="submit" class="btn btn-primary">
+                                          <button type="button" class="btn btn-primary" id="editButton">
                                               <i class="fa fa-save">&nbsp;保存</i>
                                           </button>
                                       </div>
@@ -566,5 +565,7 @@
 <script src="${base}/static/js/admin/permission/permissionValidator.js"></script>
 <script src="${base}/static/js/admin/permission/addRootPermission.js"></script>
 <script src="${base}/static/js/admin/permission/addPermission.js"></script>
+<script src="${base}/static/js/admin/permission/editPermission.js"></script>
+<script src="${base}/static/js/admin/permission/deletePermission.js"></script>
 </body>
 </html>
