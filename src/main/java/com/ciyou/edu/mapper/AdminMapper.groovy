@@ -2,6 +2,7 @@ package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Admin
 import com.github.pagehelper.Page
+import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
@@ -39,4 +40,10 @@ interface AdminMapper {
 
     @Update("update Admin set password = #{password} where adminId = #{adminId}")
     int updatePassword(@Param("adminId")Integer id, @Param("password")String password)
+
+    @Insert("insert into Admin_Permission(adminId,permissionId) values(#{adminId},#{permissionId})")
+    int setAdminPermission(@Param("adminId")Integer adminId, @Param("permissionId")Integer permissionId)
+
+    @Delete("Delete from Admin_Permission where adminId = #{adminId}")
+    int deletePermissionByAdmin(@Param("adminId")Integer adminId)
 }

@@ -126,8 +126,8 @@ function ajaxLoad(e,data){
                     permissionId: data.id
                 },
                 success: function (result) {
-                    if ("" + data.parentId != "undefined") {
-                        var editNode = $('#tree').treeview('getNode', "" + data.parentId);
+                    if (data.parentId != undefined) {
+                        var editNode = $('#tree').treeview('getNode', data.parentId);
                         $("#editParentId").val(editNode.text);
                         $("#editPid").val(editNode.id);
                     } else {
@@ -147,14 +147,14 @@ function ajaxLoad(e,data){
     if(tartgetStr.lastIndexOf("#add") != -1){
         //showInfo1("add")
         if($("#tree").data("treeview").getSelected()[0] != undefined) {
-            if ("" + data.parentId != "undefined") {
-                var addNode = $('#tree').treeview('getNode', "" + data.parentId);
-                $("#addParentId").val(addNode.text);
+            var currentSelected = $("#tree").data("treeview").getSelected()[0].text
+            if (data.parentId != undefined) {
+                $("#addParentId").val(currentSelected);
                 //只进行两层权限的添加
                 $("#addPid").val("");
                 showInfo1("无法对子权限进行添加，请选择根权限");
             } else {
-                $("#addParentId").val("系统权限");
+                $("#addParentId").val(currentSelected);
                 $("#addPid").val(data.id);
             }
         }else{

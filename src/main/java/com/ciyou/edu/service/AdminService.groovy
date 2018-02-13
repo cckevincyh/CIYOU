@@ -30,4 +30,7 @@ interface AdminService {
     Page<Admin> queryAdminByPage(String value,int pageNo, int pageSize)
 
     int updatePassword(Integer adminId, String password)
+
+    boolean setAdminPermission(Integer adminId, String allPermission)
+
 }

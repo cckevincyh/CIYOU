@@ -75,6 +75,7 @@ function uncheckAllSon(node){
 
 
 function updatePermission(adminId) {
+    $("#pAdminId").val(adminId);
     $.ajax({
         type: "POST",
         url: "getAdminPermission",

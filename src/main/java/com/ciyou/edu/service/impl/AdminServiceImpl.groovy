@@ -117,8 +117,25 @@ class AdminServiceImpl implements AdminService{
         return adminMapper?.queryAdmin(admin?.getAdminId(),value)
     }
 
+    @Transactional
     @Override
     int updatePassword(Integer adminId, String password) {
         return adminMapper?.updatePassword(adminId,password)
     }
+
+    @Transactional
+    @Override
+    boolean setAdminPermission(Integer adminId, String allPermission) {
+        boolean b = true
+        //先删除当前Admin的权限
+        adminMapper?.deletePermissionByAdmin(adminId)
+        //切割得到提交的权限，进行重新添加
+        allPermission?.split(",")?.each {permissionId ->
+            if(!adminMapper?.setAdminPermission(adminId, permissionId?.toInteger())){
+                b = false
+            }
+        }
+        return b
+    }
+
 }

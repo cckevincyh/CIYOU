@@ -516,9 +516,10 @@
 
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="pAdminId" name="pAdminId">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="update_adminPwd"><i class="fa fa-save"></i>
+                    <button type="button" class="btn btn-primary" id="setPermission"><i class="fa fa-save"></i>
                         保存
                     </button>
                 </div>
@@ -571,5 +572,6 @@
 <script src="${base}/static/js/admin/admin/updateAdmin.js"></script>
 <script src="${base}/static/js/admin/admin/deleteAdmin.js"></script>
 <script src="${base}/static/js/admin/admin/permissionTree.js"></script>
+<script src="${base}/static/js/admin/admin/setPermission.js"></script>
 </body>
 </html>

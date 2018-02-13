@@ -260,6 +260,12 @@ class ManageAdminController {
         List<Integer> permissionIds = permissionService?.findAdminPermission(adminId)
         permissionIds?.each {permissionId ->
             treeNodes?.each {parent ->
+                if(parent?.getNodes()?.find {it?.getId() == permissionId}){
+                    //如果该父节点的子节点有一个被选中，则设置选中
+                    Map<String,Boolean> parentMap = new HashMap<String,Boolean>()
+                    parentMap?.put("checked",true)
+                    parent?.setState(parentMap)
+                }
                 parent?.getNodes()?.each {child ->
                     if(child?.getId() == permissionId){
                         Map<String,Boolean> childMap = new HashMap<String,Boolean>()
@@ -284,5 +290,21 @@ class ManageAdminController {
         //这里要转为json对象，前端ajax才解析的了
         logger.info("获得的treeJson：" + treeJson)
         return treeJson
+    }
+
+    @RequestMapping(value="/admin/setAdminPermission", method=RequestMethod.POST )
+    @ResponseBody
+    String setAdminPermission(Integer adminId, String allPermission){
+        logger.info("接收到的子权限：" + allPermission?.split(","))
+        try{
+            if(adminService?.setAdminPermission(adminId,allPermission)){
+                return "设置成功"
+            }else{
+                return "设置失败"
+            }
+        }catch (Exception e){
+            logger.info("设置权限失败：" + e.getMessage())
+            return "设置失败，请重试"
+        }
     }
 }
