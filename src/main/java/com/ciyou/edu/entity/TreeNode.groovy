@@ -9,16 +9,8 @@ class TreeNode implements Serializable{
     private int id
     private String text
     private List<TreeNode> nodes
+    private Map<String,Boolean> state
 
-
-    @Override
-    public String toString() {
-        return "TreeNode{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", nodes=" + nodes +
-                '}';
-    }
     TreeNode() {
 
     }
@@ -51,5 +43,24 @@ class TreeNode implements Serializable{
         this.id = id
         this.text = text
         this.nodes = nodes
+    }
+
+    Map<String, Boolean> getState() {
+        return state
+    }
+
+    void setState(Map<String, Boolean> state) {
+        this.state = state
+    }
+
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", nodes=" + nodes +
+                ", state=" + state +
+                '}';
     }
 }

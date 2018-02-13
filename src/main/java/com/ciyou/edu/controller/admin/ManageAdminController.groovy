@@ -2,9 +2,14 @@ package com.ciyou.edu.controller.admin
 
 import com.ciyou.edu.entity.Admin
 import com.ciyou.edu.entity.PageInfo
+import com.ciyou.edu.entity.TreeNode
 import com.ciyou.edu.service.AdminService
+import com.ciyou.edu.service.PermissionService
 import com.github.pagehelper.Page
+import net.sf.json.JSONArray
 import net.sf.json.JSONObject
+import net.sf.json.JsonConfig
+import net.sf.json.util.PropertyFilter
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.crypto.hash.Md5Hash
 import org.slf4j.Logger
@@ -28,6 +33,8 @@ class ManageAdminController {
     private static final Logger logger = LoggerFactory.getLogger(ManageAdminController.class)
     @Autowired
     private AdminService adminService
+    @Autowired
+    private PermissionService permissionService
 
 
     @RequestMapping("/admin/manageAdmin")
@@ -244,5 +251,38 @@ class ManageAdminController {
         }
 
 
+    }
+
+    @RequestMapping(value="/admin/getAdminPermission", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getAdminPermission(Integer adminId){
+        List<TreeNode> treeNodes = permissionService?.getPermissionTree()
+        List<Integer> permissionIds = permissionService?.findAdminPermission(adminId)
+        permissionIds?.each {permissionId ->
+            treeNodes?.each {parent ->
+                parent?.getNodes()?.each {child ->
+                    if(child?.getId() == permissionId){
+                        Map<String,Boolean> childMap = new HashMap<String,Boolean>()
+                        childMap?.put("checked",true)
+                        child?.setState(childMap)
+                    }
+                }
+            }
+        }
+        logger.info("获得的permissionTree：" + treeNodes)
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
+            public boolean apply(Object obj, String name, Object value) {
+                if(value == null){
+                    return true
+                }else{
+                    return false
+                }
+            }
+        })
+        String treeJson = JSONArray.fromObject(treeNodes,jsonConfig)?.toString()
+        //这里要转为json对象，前端ajax才解析的了
+        logger.info("获得的treeJson：" + treeJson)
+        return treeJson
     }
 }

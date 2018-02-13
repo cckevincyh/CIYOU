@@ -48,4 +48,7 @@ interface PermissionMapper {
 
     @Delete("Delete from Permission where permissionId = #{permissionId}")
     int deletePermission(@Param("permissionId")Integer id)
+
+    @Select("select permissionId from Admin_Permission  where adminId = #{adminId}")
+    List<Integer> findAdminPermission(@Param("adminId")Integer id)
 }

@@ -29,4 +29,6 @@ interface PermissionService {
     int deletePermission(Integer permissionId)
 
     List<Permission> findChildPermission(Integer permissionId)
+
+    List<Integer> findAdminPermission(Integer adminId)
 }

@@ -25,7 +25,8 @@ class PermissionServiceImpl implements PermissionService{
 
     @Override
     List<TreeNode> getPermissionTree() {
-        //得到type为1的，权限类型:菜单,就是父权限
+        //得到type为1的，权限类型:菜单,就是父权限，超级管理员为0
+        //排除掉超级管理员
         List<Permission> parentList = permissionMapper?.findPermissionByType(1)
         List<TreeNode> parentNodes = new ArrayList<TreeNode>()
         //循环每个父亲权限
@@ -92,5 +93,10 @@ class PermissionServiceImpl implements PermissionService{
     @Override
     List<Permission> findChildPermission(Integer permissionId) {
         return permissionMapper?.findChildPermission(permissionId)
+    }
+
+    @Override
+    List<Integer> findAdminPermission(Integer adminId) {
+        return permissionMapper?.findAdminPermission(adminId)
     }
 }

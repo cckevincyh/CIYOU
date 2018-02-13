@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="${base}/static/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="${base}/static/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- treeview -->
+    <link rel="stylesheet" href="${base}/static/bower_components/bootstrap-treeview/bootstrap-treeview.min.css" />
     <!-- DataTables -->
     <link rel="stylesheet" href="${base}/static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- Theme style -->
@@ -183,7 +185,7 @@
                                           <td>${admin.name!}</td>
                                           <td>${admin.phone!}</td>
                                           <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${admin.adminId!})"><i class="fa fa-fw fa-trash"></i></button></td>
-                                          <td><button class="btn btn-warning btn-xs"><i class="fa fa-fw fa-edit"></i></button> </td>
+                                          <td><button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#permissionModal" onclick="updatePermission(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button> </td>
                                       </tr>
                                   </#list>
                                     <#else >
@@ -486,6 +488,47 @@
 </form>
 
 
+<!-- 修改权限 -->
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="permissionModal" tabindex="-1" role="dialog" aria-labelledby="pModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="pModalLabel">
+                        设置权限
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="box">
+                        <div class="box-body box-profile">
+                            <div id="tree" class="treeview">
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="update_adminPwd"><i class="fa fa-save"></i>
+                        保存
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+
+
 <!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
     <div class="modal-dialog" role="document">
@@ -513,6 +556,8 @@
 <script src="${base}/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
 <script src="${base}/static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- treeview -->
+<script src="${base}/static/bower_components/bootstrap-treeview/bootstrap-treeview.js"></script>
 <!-- FastClick -->
 <script src="${base}/static/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
@@ -525,6 +570,6 @@
 <script src="${base}/static/js/admin/admin/addAdmin.js"></script>
 <script src="${base}/static/js/admin/admin/updateAdmin.js"></script>
 <script src="${base}/static/js/admin/admin/deleteAdmin.js"></script>
-
+<script src="${base}/static/js/admin/admin/permissionTree.js"></script>
 </body>
 </html>
