@@ -1,10 +1,8 @@
 package com.ciyou.edu.service.impl
 
 import com.ciyou.edu.entity.Admin
-import com.ciyou.edu.entity.Permission
 
 import com.ciyou.edu.mapper.AdminMapper
-import com.ciyou.edu.mapper.PermissionMapper
 import com.ciyou.edu.service.AdminService
 import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
@@ -28,8 +26,6 @@ class AdminServiceImpl implements AdminService{
 
     @Autowired
     private AdminMapper adminMapper
-    @Autowired
-    private PermissionMapper permissionMapper
 
     @Transactional
     @Override
@@ -41,44 +37,12 @@ class AdminServiceImpl implements AdminService{
     //@Cacheable
     @Override
     Admin findAdminById(Integer adminId) {
-        Admin admin = adminMapper?.findAdminById(adminId)
-        //获取权限
-        List<Permission> permissionList =  permissionMapper?.findPermissionByAdmin(adminId)
-        //获取父权限,去掉重复的父权限
-        Set<Integer> parentSet = new HashSet<Integer>()
-        permissionList?.each {current_Permission ->
-            parentSet?.add(current_Permission?.getParentId())
-        }
-        //查询相关父权限，加入当前Admin的权限
-        parentSet?.each {current_Parent ->
-            Permission permission = permissionMapper?.findPermissionById(current_Parent)
-            if(permission){
-                permissionList?.add(permission)
-            }
-        }
-        admin?.setPermissionList(permissionList)
-        return admin
+        return adminMapper?.findAdminById(adminId)
     }
 
     @Override
     Admin findByAdminName(String adminName) {
-        Admin admin = adminMapper?.findAdminByName(adminName)
-        //获取权限
-        List<Permission> permissionList =  permissionMapper?.findPermissionByAdmin(admin?.getAdminId())
-        //获取父权限,去掉重复的父权限
-        Set<Integer> parentSet = new HashSet<Integer>()
-        permissionList?.each {current_Permission ->
-            parentSet?.add(current_Permission?.getParentId())
-        }
-        //查询相关父权限，加入当前Admin的权限
-        parentSet?.each {current_Parent ->
-            Permission permission = permissionMapper?.findPermissionById(current_Parent)
-            if(permission){
-                permissionList?.add(permission)
-            }
-        }
-        admin?.setPermissionList(permissionList)
-        return admin
+        return adminMapper?.findAdminByName(adminName)
     }
 
     /**
@@ -130,9 +94,13 @@ class AdminServiceImpl implements AdminService{
         //先删除当前Admin的权限
         adminMapper?.deletePermissionByAdmin(adminId)
         //切割得到提交的权限，进行重新添加
-        allPermission?.split(",")?.each {permissionId ->
-            if(!adminMapper?.setAdminPermission(adminId, permissionId?.toInteger())){
-                b = false
+        if(allPermission?.split(",")?.size()){
+            allPermission?.split(",")?.each {permissionId ->
+                if(permissionId != ""){
+                    if(!adminMapper?.setAdminPermission(adminId, permissionId?.toInteger())){
+                        b = false
+                    }
+                }
             }
         }
         return b

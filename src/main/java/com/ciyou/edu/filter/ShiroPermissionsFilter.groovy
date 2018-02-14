@@ -1,6 +1,6 @@
 package com.ciyou.edu.filter
 
-import net.sf.json.JSONObject
+import com.ciyou.edu.utils.JSONUtil
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -36,12 +36,10 @@ class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
         boolean isAjax = "XMLHttpRequest" == header
         if (isAjax) {//如果是ajax返回指定格式数据
             logger.info("----------AJAX请求拒绝-------------")
-            Map<String, Object> result = new HashMap<String, Object>()
-            result.put("state", "403")
-            result.put("message", "权限不足！")
             httpServletResponse.setCharacterEncoding("UTF-8")
             httpServletResponse.setContentType("application/json")
-            httpServletResponse.getWriter().write(JSONObject.fromObject(result).toString())
+            //返回禁止访问json字符串
+            httpServletResponse.getWriter().write(JSONUtil.returnForbiddenResult())
         } else {//如果是普通请求进行重定向
             logger.info("----------普通请求拒绝-------------")
             httpServletResponse.sendRedirect("/403")

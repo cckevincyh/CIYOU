@@ -36,7 +36,7 @@ class ShiroConfiguration {
     @Autowired(required = false)
     private PermissionService permissionService
 
-    private static final Logger logger = LoggerFactory.getLogger(AdminShiroRealm.class)
+    private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class)
 
     //获取application.properties参数
     @Value('${spring.redis.host}')
@@ -93,10 +93,11 @@ class ShiroConfiguration {
             logger.info("从数据库加载的拦截器规则：资源路径： " + current_Permission?.getUrl() + " ,需要权限：" +current_Permission?.getPermission())
         }
 
+        filterChainDefinitionMap.put("/admin/**","roles[Admin]")
         //   过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
         filterChainDefinitionMap.put("/**", "authc")
         //authc表示需要验证身份才能访问，还有一些比如anon表示不需要验证身份就能访问等。
-
+        logger.info("拦截器链：" + filterChainDefinitionMap)
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap)
         return shiroFilterFactoryBean

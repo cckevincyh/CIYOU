@@ -12,10 +12,8 @@ $(function () {
         var permission = "";
         for(var i in checkNode){
             var node = checkNode[i];
-            if(node.parentId != undefined){
-                //拼接所有的子权限
-                permission += node.id + ","
-            }
+            //设置的权限
+            permission += node.id + ","
         }
         $.ajax({
             type: 'POST',

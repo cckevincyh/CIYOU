@@ -147,12 +147,12 @@ function ajaxLoad(e,data){
     if(tartgetStr.lastIndexOf("#add") != -1){
         //showInfo1("add")
         if($("#tree").data("treeview").getSelected()[0] != undefined) {
-            var currentSelected = $("#tree").data("treeview").getSelected()[0].text
+            var currentSelected = $("#tree").data("treeview").getSelected()[0].text;
             if (data.parentId != undefined) {
                 $("#addParentId").val(currentSelected);
                 //只进行两层权限的添加
                 $("#addPid").val("");
-                showInfo1("无法对子权限进行添加，请选择根权限");
+                showInfo1("请选择根权限进行添加");
             } else {
                 $("#addParentId").val(currentSelected);
                 $("#addPid").val(data.id);

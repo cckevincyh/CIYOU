@@ -3,6 +3,7 @@ package com.ciyou.edu.mapper
 import com.ciyou.edu.entity.Permission
 import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
+import org.apache.ibatis.annotations.Options
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
 import org.apache.ibatis.annotations.Update
@@ -35,6 +36,8 @@ interface PermissionMapper {
     Permission findOtherPermissionByName(@Param("permissionId")Integer id,@Param("permissionName")String name)
 
     @Insert("insert into Permission(permissionName,permission,url,type,parentId) values(#{permissionName},#{permission},#{url},#{type},#{parentId})")
+    //插入的数据能够返回主键的id
+    @Options(useGeneratedKeys = true, keyProperty = "permissionId", keyColumn = "permissionId")
     int addPermission(Permission permission)
 
     @Select("select * from Permission where permission = #{permission}")
@@ -51,4 +54,8 @@ interface PermissionMapper {
 
     @Select("select permissionId from Admin_Permission  where adminId = #{adminId}")
     List<Integer> findAdminPermission(@Param("adminId")Integer id)
+
+
+    @Insert("insert into Admin_Permission(adminId,permissionId) values(#{adminId},#{permissionId})")
+    int setAdminPermission(@Param("adminId")Integer adminId, @Param("permissionId")Integer permissionId)
 }

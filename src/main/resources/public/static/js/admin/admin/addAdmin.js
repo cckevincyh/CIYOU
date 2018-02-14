@@ -15,14 +15,22 @@ $(function () {
             type: 'POST',
             url: 'addAdmin',
             cache: false,
+            dataType:'json',
             data: {
                 adminName: $.trim($("#addUsername").val()),
                 name:$.trim($("#addName").val()),
                 phone: $.trim($("#addPhone").val())
             },
             success: function (data) {
-                $("#addModal").modal("hide");//关闭模糊框
-                showInfo(data);
+                if(data.stateCode == "403"){
+                    showInfo(data.message);
+                    window.location.href = "/403";
+                }else if(data.isSuccess){
+                    $("#addModal").modal("hide");//关闭模糊框
+                    showInfo(data.message);
+                }else{
+                    showInfo(data.message);
+                }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {

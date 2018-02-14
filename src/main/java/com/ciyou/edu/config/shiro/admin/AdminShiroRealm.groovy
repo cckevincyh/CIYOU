@@ -3,6 +3,7 @@ package com.ciyou.edu.config.shiro.admin
 import com.ciyou.edu.config.shiro.common.UserToken
 import com.ciyou.edu.entity.Admin
 import com.ciyou.edu.service.AdminService
+import com.ciyou.edu.service.PermissionService
 import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.authc.AuthenticationInfo
 import org.apache.shiro.authc.AuthenticationToken
@@ -29,6 +30,11 @@ class AdminShiroRealm extends AuthorizingRealm {
      @Autowired
      @Lazy
      private AdminService adminService
+
+
+    @Autowired
+    @Lazy
+    private PermissionService permissionService
 
 
 
@@ -60,17 +66,23 @@ class AdminShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
-        logger.info("开始Admin权限授权")
+        logger.info("开始Admin权限授权(进行权限验证!!)")
         if (principals == null) {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.")
         }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
+        if(!principals?.getPrimaryPrincipal() instanceof Admin){
+            throw new AuthorizationException("is not a Administrator")
+        }
         Admin admin = (Admin) principals?.getPrimaryPrincipal()
         logger.info("当前Admin :" + admin )
+        authorizationInfo?.addRole("Admin")
+        //每次都从数据库重新查找，确保能及时更新权限
+        admin?.setPermissionList(permissionService?.findPermissionByAdmin(admin?.getAdminId()))
         admin?.getPermissionList()?.each {current_Permission ->
-            authorizationInfo?.addRole("Admin")
             authorizationInfo?.addStringPermission(current_Permission?.getPermission())
         }
+        logger.info("当前Admin授权角色：" +authorizationInfo?.getRoles() + "，权限：" + authorizationInfo?.getStringPermissions())
         return authorizationInfo
     }
 }

@@ -39,8 +39,12 @@ class IndexController {
         return "/admin/admin"
     }
 
+    /**
+     * 进入权限管理
+     * @return
+     */
     @RequestMapping("/admin/managePermission")
-    String test(){
+    String managePermission(){
         return "/admin/managePermission"
     }
 

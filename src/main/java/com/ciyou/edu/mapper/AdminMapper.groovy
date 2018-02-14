@@ -23,8 +23,8 @@ interface AdminMapper {
     @Select("select * from Admin where adminName = #{adminName} and isAvalible = 1")
     Admin findAdminByName(@Param("adminName")String name)
 
-
-    @Select("select * from Admin where adminId <> #{adminId} and isAvalible = 1 order by adminId")
+    //不允许查看到超级管理员
+    @Select("select * from Admin where adminId <> #{adminId} and adminId <> 1 and isAvalible = 1 order by adminId")
     Page<Admin> findAllAdmin(@Param("adminId")Integer id)
 
     @Update("update Admin set name = #{name} , phone = #{phone} where adminId = #{adminId}")

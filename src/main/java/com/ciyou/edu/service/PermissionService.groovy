@@ -18,7 +18,7 @@ interface PermissionService {
 
     Permission findOtherPermissionByName(Integer permissionId, String permissionName)
 
-    int addPermission(Permission permission)
+    boolean addPermission(Permission permission)
 
     Permission findPermissionByPermission(String permission)
 
@@ -31,4 +31,6 @@ interface PermissionService {
     List<Permission> findChildPermission(Integer permissionId)
 
     List<Integer> findAdminPermission(Integer adminId)
+
+    List<Permission> findPermissionByAdmin(Integer adminId)
 }

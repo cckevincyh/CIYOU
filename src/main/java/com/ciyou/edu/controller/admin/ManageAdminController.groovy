@@ -5,6 +5,7 @@ import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.entity.TreeNode
 import com.ciyou.edu.service.AdminService
 import com.ciyou.edu.service.PermissionService
+import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
@@ -28,7 +29,7 @@ import java.util.regex.Pattern
  * 管理员管理Controller
  */
 @Controller
-class ManageAdminController {
+class ManageAdminController{
 
     private static final Logger logger = LoggerFactory.getLogger(ManageAdminController.class)
     @Autowired
@@ -53,59 +54,64 @@ class ManageAdminController {
         return mv
     }
 
-    @RequestMapping(value="/admin/addAdmin", method=RequestMethod.POST)
+    /**
+     * 添加管理员
+     * @param admin
+     * @return JSON RESULT
+     */
+    @RequestMapping(value="/admin/addAdmin", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String addAdmin(Admin admin){
         logger.info("添加Admin...admin信息：" + admin)
         //校验提交的admin
         if(!admin?.getAdminName() || admin?.getAdminName()?.trim() == ""){
-            return "用户名不能为空"
+            return JSONUtil.returnFailReuslt("用户名不能为空")
         }else if(!admin?.getName() || admin?.getName()?.trim() == ""){
-            return "姓名不能为空"
+            return JSONUtil.returnFailReuslt("姓名不能为空")
         }else if(!admin?.getPhone() || admin?.getPhone()?.trim() == ""){
-            return "电话号码不能为空"
+            return JSONUtil.returnFailReuslt("电话号码不能为空")
         }else if(admin?.getAdminName()?.trim()?.length() < 3 || admin?.getAdminName()?.trim()?.length() > 15){
-            return "用户名长度必须在3~15之间"
+            return JSONUtil.returnFailReuslt("用户名长度必须在3~15之间")
         }else if(!Pattern.compile("[\\u4E00-\\u9FFF]+")?.matcher(admin?.getName())?.matches()){
-            return "姓名必须为中文"
+            return JSONUtil.returnFailReuslt("姓名必须为中文")
         }else if(!Pattern.compile('^1[34578]\\d{9}$')?.matcher(admin?.getPhone())?.matches()){
-            return "电话号码有误"
+            return JSONUtil.returnFailReuslt("电话号码有误")
         }
 
         //按照账号查找管理员，查看用户名是否已经存在
         Admin addAdmin = adminService?.findByAdminName(admin?.getAdminName())
         if(addAdmin){
             //如果已经存在
-            return "用户名已存在"
+            return JSONUtil.returnFailReuslt("用户名已存在")
         }else{
             try{
                 //密码默认:123456
                 String passwordMd5= new Md5Hash("123456",admin?.getAdminName(),2).toHex()
                 admin.setPassword(passwordMd5)
                 if(adminService?.addAdmin(admin)){
-                    return "添加成功"
+                    return JSONUtil.returnSuccessResult("添加成功")
                 }else{
-                    return "添加失败"
+                    return JSONUtil.returnFailReuslt("添加失败")
                 }
             }catch (Exception e){
                 logger.info("添加Admin错误：" + e.getMessage())
-                return "添加失败，请重试"
+                return JSONUtil.returnFailReuslt("添加失败，请重试")
             }
         }
 
     }
 
-    @RequestMapping(value="/admin/updateAdmin", method=RequestMethod.POST)
+    @RequestMapping(value="/admin/updateAdmin", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String updateAdmin(Admin admin){
         return adminUpdate(admin)
     }
 
-    @RequestMapping(value="/admin/updateInfo", method=RequestMethod.POST)
+    @RequestMapping(value="/admin/updateInfo", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String updateInfo(Admin admin){
         String message = adminUpdate(admin)
-        if(message == "修改成功"){
+        if(message?.contains("修改成功")){
             //重新存入session
             SecurityUtils.getSubject()?.getSession()?.setAttribute("admin",admin)
             //更新AuthenticationInfo
@@ -126,26 +132,26 @@ class ManageAdminController {
         logger.info("修改Admin...admin信息：" + admin)
         //校验提交的admin
         if(!admin?.getName() || admin?.getName()?.trim() == ""){
-            return "姓名不能为空"
+            return JSONUtil.returnFailReuslt("姓名不能为空")
         }else if(!admin?.getPhone() || admin?.getPhone()?.trim() == ""){
-            return "电话号码不能为空"
+            return JSONUtil.returnFailReuslt("电话号码不能为空")
         }else if(admin?.getAdminName()?.trim()?.length() < 3 || admin?.getAdminName()?.trim()?.length() > 15){
-            return "用户名长度必须在3~15之间"
+            return JSONUtil.returnFailReuslt("用户名长度必须在3~15之间")
         }else if(!Pattern.compile("[\\u4E00-\\u9FFF]+")?.matcher(admin?.getName())?.matches()){
-            return "姓名必须为中文"
+            return JSONUtil.returnFailReuslt("姓名必须为中文")
         }else if(!Pattern.compile('^1[34578]\\d{9}$')?.matcher(admin?.getPhone())?.matches()){
-            return "电话号码有误"
+            return JSONUtil.returnFailReuslt("电话号码有误")
         }
 
         try{
             if(adminService?.updateAdmin(admin)){
-                return "修改成功"
+                return JSONUtil.returnSuccessResult("修改成功")
             }else{
-                return "修改失败"
+                return JSONUtil.returnFailReuslt("修改失败")
             }
         }catch (Exception e){
             logger.info("修改Admin错误：" + e.getMessage())
-            return "修改失败，请重试"
+            return JSONUtil.returnFailReuslt("修改失败，请重试")
         }
     }
 
@@ -164,24 +170,23 @@ class ManageAdminController {
         Admin admin = adminService?.findAdminById(adminId)
         logger.info("获得指定的Admin：" + admin)
         //这里要转为json对象，前端ajax才解析的了
-        JSONObject jsonObject = JSONObject.fromObject(admin)
-        return jsonObject.toString()
+        return JSONUtil.returnEntityReuslt(admin)
     }
 
 
 
-    @RequestMapping(value="/admin/deleteAdmin", method=RequestMethod.POST)
+    @RequestMapping(value="/admin/deleteAdmin", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String deleteAdmin(Integer adminId){
         try{
             if(adminService?.deleteAdmin(adminId)){
-                return "删除成功"
+                return JSONUtil.returnSuccessResult("删除成功")
             }else{
-                return "删除失败"
+                return JSONUtil.returnFailReuslt("删除失败")
             }
         }catch (Exception e){
             logger.info("删除Admin错误：" + e.getMessage())
-            return "删除失败，请重试"
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
         }
     }
 
@@ -260,12 +265,13 @@ class ManageAdminController {
         List<Integer> permissionIds = permissionService?.findAdminPermission(adminId)
         permissionIds?.each {permissionId ->
             treeNodes?.each {parent ->
-                if(parent?.getNodes()?.find {it?.getId() == permissionId}){
-                    //如果该父节点的子节点有一个被选中，则设置选中
+                //设置父节点选中
+                if(parent?.getId() == permissionId){
                     Map<String,Boolean> parentMap = new HashMap<String,Boolean>()
                     parentMap?.put("checked",true)
                     parent?.setState(parentMap)
                 }
+                //设置子节点被选中
                 parent?.getNodes()?.each {child ->
                     if(child?.getId() == permissionId){
                         Map<String,Boolean> childMap = new HashMap<String,Boolean>()
@@ -295,16 +301,16 @@ class ManageAdminController {
     @RequestMapping(value="/admin/setAdminPermission", method=RequestMethod.POST )
     @ResponseBody
     String setAdminPermission(Integer adminId, String allPermission){
-        logger.info("接收到的子权限：" + allPermission?.split(","))
+        logger.info("接收到的权限：" + allPermission?.split(","))
         try{
             if(adminService?.setAdminPermission(adminId,allPermission)){
-                return "设置成功"
+                return JSONUtil.returnSuccessResult("设置成功")
             }else{
-                return "设置失败"
+                return JSONUtil.returnFailReuslt("设置失败")
             }
         }catch (Exception e){
             logger.info("设置权限失败：" + e.getMessage())
-            return "设置失败，请重试"
+            return JSONUtil.returnFailReuslt("设置失败，请重试")
         }
     }
 }

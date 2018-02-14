@@ -29,6 +29,10 @@ class ManagePermissionController {
     @Autowired
     private ShiroService shiroService
 
+    /**
+     * 获得权限树
+     * @return
+     */
     @RequestMapping(value="/admin/getAllPermission", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
     @ResponseBody
     String getAllPermission(){
@@ -58,6 +62,11 @@ class ManagePermissionController {
         return JSONObject.fromObject(permission)?.toString()
     }
 
+    /**
+     * 前端添加表单校验权限名
+     * @param permissionName
+     * @return
+     */
     @RequestMapping(value="/admin/validatePermissionName", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
     @ResponseBody
     String validatePermissionName(String permissionName){
@@ -72,6 +81,12 @@ class ManagePermissionController {
         return JSONObject.fromObject(map)?.toString()
     }
 
+    /**
+     * 前端修改表单校验权限名
+     * @param permissionId
+     * @param permissionName
+     * @return
+     */
     @RequestMapping(value="/admin/validatePNameByUpdate", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
     @ResponseBody
     String validatePNameByUpdate(Integer permissionId,String permissionName){
@@ -86,6 +101,11 @@ class ManagePermissionController {
         return JSONObject.fromObject(map)?.toString()
     }
 
+    /**
+     * 新增权限
+     * @param permission
+     * @return
+     */
     @RequestMapping(value="/admin/addRootPermission", method=RequestMethod.POST)
     @ResponseBody
     String addRootPermission(Permission permission){
