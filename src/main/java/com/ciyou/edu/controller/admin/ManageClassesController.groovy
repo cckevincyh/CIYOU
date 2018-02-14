@@ -5,7 +5,6 @@ import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.service.ClassesService
 import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
-import net.sf.json.JSONObject
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -78,7 +77,7 @@ class ManageClassesController {
         Classes classes = classesService?.getClasses(classesId)
         logger.info("获得指定的Classes：" + classes)
         //这里要转为json对象，前端ajax才解析的了
-        return JSONUtil.returnEntityReuslt(JSONObject.fromObject(classes))
+        return JSONUtil.returnEntityReuslt(classes)
     }
 
     @RequestMapping(value="/admin/updateClasses",method=RequestMethod.POST, produces="application/json;charset=UTF-8")

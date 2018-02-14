@@ -3,8 +3,6 @@ package com.ciyou.edu.controller.admin
 import com.ciyou.edu.entity.Grade
 import com.ciyou.edu.service.GradeService
 import com.ciyou.edu.utils.JSONUtil
-import net.sf.json.JSONArray
-import net.sf.json.JSONObject
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -80,7 +78,7 @@ class ManageGradeController {
         Grade grade = gradeService?.getGrade(gradeId)
         logger.info("获得指定的Grade：" + grade)
         //这里要转为json对象，前端ajax才解析的了
-        return JSONUtil.returnEntityReuslt(JSONObject.fromObject(grade))
+        return JSONUtil.returnEntityReuslt(grade)
     }
 
     @RequestMapping(value="/admin/deleteGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
@@ -102,7 +100,7 @@ class ManageGradeController {
     @ResponseBody
     String getAllGrade(){
         List<Grade> gradeList = gradeService?.findAllGrade()
-        return JSONUtil.returnEntityReuslt(JSONArray.fromObject(gradeList))
+        return JSONUtil.returnEntityReuslt(gradeList)
     }
 
 }

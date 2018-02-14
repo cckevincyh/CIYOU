@@ -7,11 +7,17 @@ function deleteSubject(id) {
 		type: 'POST',
 		url: 'deleteSubject',
 		cache: false,
+		dataType:'json',
 		data: {
 			subjectId: id
 		},
 		success: function (data) {
-			showInfo(data);
+			if(data.stateCode == "403"){
+				showInfo(data.message);
+				window.location.href = "/403";
+			}else{
+				showInfo(data.message);
+			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			showInfo("提交失败，请重试");
@@ -31,5 +37,8 @@ function showInfo(msg) {
     $("#div_info").text(msg);
     $("#modal_info").modal('show');
 }
-
+function showInfo1(msg) {
+	$("#div_info1").text(msg);
+	$("#modal_info1").modal('show');
+}
 

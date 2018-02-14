@@ -16,13 +16,21 @@ $(function () {
 			type: 'POST',
 			url: 'updateSubject',
 			cache: false,
+			dataType:'json',
 			data: {
 				subjectId : $.trim($("#updateSubjectId").val()),
-				subjectName :$.trim($("#updateSubjectName").val()),
+				subjectName :$.trim($("#updateSubjectName").val())
 			},
 			success: function (data) {
-				$("#updateModal").modal("hide");//关闭模糊框
-				showInfo(data);
+				if(data.stateCode == "403"){
+					showInfo(data.message);
+					window.location.href = "/403";
+				}else if(data.isSuccess){
+					$("#updateModal").modal("hide");//关闭模糊框
+					showInfo(data.message);
+				}else{
+					showInfo1(data.message);
+				}
 
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -56,8 +64,8 @@ function updateSubject(id){
 			subjectId: id
 		},
 		success: function (data) {
-			$("#updateSubjectId").val(data.subjectId);
-			$("#updateSubjectName").val(data.subjectName);
+			$("#updateSubjectId").val(data.entity.subjectId);
+			$("#updateSubjectName").val(data.entity.subjectName);
 		}
 	});
 			
@@ -91,3 +99,7 @@ function showInfo(msg) {
 }
 
 
+function showInfo1(msg) {
+	$("#div_info1").text(msg);
+	$("#modal_info1").modal('show');
+}

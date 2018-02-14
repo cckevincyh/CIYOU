@@ -9,39 +9,44 @@ $(function () {
         dataType: "json",
         //async: false,
         success: function (result) {
-            $('#tree').treeview({
-                data: result,         // 数据源
-                //showCheckbox: true,   //是否显示复选框
-                //highlightSelected: true,    //是否高亮选中
-                //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
-                //nodeIcon: 'glyphicon glyphicon-globe',
-                //emptyIcon: '',    //没有子节点的节点图标
-                //multiSelect: false,    //多选
-                onNodeChecked: function (event,data) {
+            if(result.stateCode == "403"){
+                showInfo(result.message);
+                window.location.href = "/403";
+            }else{
+                $('#tree').treeview({
+                    data: result.entity,         // 数据源
+                    //showCheckbox: true,   //是否显示复选框
+                    //highlightSelected: true,    //是否高亮选中
+                    //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
+                    //nodeIcon: 'glyphicon glyphicon-globe',
+                    //emptyIcon: '',    //没有子节点的节点图标
+                    //multiSelect: false,    //多选
+                    onNodeChecked: function (event,data) {
 
-                },
-                onNodeSelected: function (event, data) {
-                    //清除验证状态
-                    $("#dict-form-root").data("bootstrapValidator").resetForm();
-                    $("#dict-form-add").data("bootstrapValidator").resetForm();
-                    $("#dict-form-edit").data("bootstrapValidator").resetForm();
-                    //清空数据
-                    $('#dict-form-root')[0].reset();
-                    $('#dict-form-add')[0].reset();
-                    // $('a[data-toggle="tab"]').off('show.bs.tab').on('show.bs.tab',function(){
-                    //     alert("show.bs.tab");
-                    // });
-                    //获取当前Tab标签所选
-                    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-                        ajaxLoad(e,data);
-                    });
-                }
-            });
-            //通过这两段代码才可以分别触发到事件，silent要设置为false，Tab标签页面不要设置active
-            //设置选中
-            $('#tree').treeview('selectNode', [0, { silent: false }]);
-            // 通过名称选取标签页
-            $('#myTab a[href="#view"]').tab('show');
+                    },
+                    onNodeSelected: function (event, data) {
+                        //清除验证状态
+                        $("#dict-form-root").data("bootstrapValidator").resetForm();
+                        $("#dict-form-add").data("bootstrapValidator").resetForm();
+                        $("#dict-form-edit").data("bootstrapValidator").resetForm();
+                        //清空数据
+                        $('#dict-form-root')[0].reset();
+                        $('#dict-form-add')[0].reset();
+                        // $('a[data-toggle="tab"]').off('show.bs.tab').on('show.bs.tab',function(){
+                        //     alert("show.bs.tab");
+                        // });
+                        //获取当前Tab标签所选
+                        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                            ajaxLoad(e,data);
+                        });
+                    }
+                });
+                //通过这两段代码才可以分别触发到事件，silent要设置为false，Tab标签页面不要设置active
+                //设置选中
+                $('#tree').treeview('selectNode', [0, { silent: false }]);
+                // 通过名称选取标签页
+                $('#myTab a[href="#view"]').tab('show');
+            }
         },
         error: function () {
             showInfo1("树形权限结构加载失败！")
@@ -98,14 +103,19 @@ function ajaxLoad(e,data){
                     permissionId: data.id
                 },
                 success: function (result) {
-                    if(""+data.parentId != "undefined"){
-                        $("#viewParentId").val($('#tree').treeview('getNode', ""+data.parentId).text);
+                    if(result.stateCode == "403"){
+                        showInfo(result.message);
+                        window.location.href = "/403";
                     }else{
-                        $("#viewParentId").val("系统权限");
+                        if(""+data.parentId != "undefined"){
+                            $("#viewParentId").val($('#tree').treeview('getNode', ""+data.parentId).text);
+                        }else{
+                            $("#viewParentId").val("系统权限");
+                        }
+                        $("#viewName").val(result.entity.permissionName);
+                        $("#viewPermission").val(result.entity.permission);
+                        $("#viewURL").val(result.entity.url);
                     }
-                    $("#viewName").val(result.permissionName);
-                    $("#viewPermission").val(result.permission);
-                    $("#viewURL").val(result.url);
                 }
             });
         }else{
@@ -126,17 +136,22 @@ function ajaxLoad(e,data){
                     permissionId: data.id
                 },
                 success: function (result) {
-                    if (data.parentId != undefined) {
-                        var editNode = $('#tree').treeview('getNode', data.parentId);
-                        $("#editParentId").val(editNode.text);
-                        $("#editPid").val(editNode.id);
-                    } else {
-                        $("#editParentId").val("系统权限");
+                    if(result.stateCode == "403"){
+                        showInfo(result.message);
+                        window.location.href = "/403";
+                    }else{
+                        if (data.parentId != undefined) {
+                            var editNode = $('#tree').treeview('getNode', data.parentId);
+                            $("#editParentId").val(editNode.text);
+                            $("#editPid").val(editNode.id);
+                        } else {
+                            $("#editParentId").val("系统权限");
+                        }
+                        $("#editId").val(data.id);
+                        $("#editName").val(result.entity.permissionName);
+                        $("#editPermission").val(result.entity.permission);
+                        $("#editURL").val(result.entity.url);
                     }
-                    $("#editId").val(data.id);
-                    $("#editName").val(result.permissionName);
-                    $("#editPermission").val(result.permission);
-                    $("#editURL").val(result.url);
                 }
             });
         }else{
@@ -167,4 +182,8 @@ function ajaxLoad(e,data){
 function showInfo1(msg) {
     $("#div_info1").text(msg);
     $("#modal_info1").modal('show');
+}
+function showInfo(msg) {
+    $("#div_info").text(msg);
+    $("#modal_info").modal('show');
 }

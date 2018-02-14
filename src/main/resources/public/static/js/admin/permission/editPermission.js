@@ -15,6 +15,7 @@ $(function () {
                 url: 'updatePermission',
                 cache: false,
                 //async: false,
+                dataType:'json',
                 data: {
                     permissionId:$.trim($("#editId").val()),
                     permissionName :  $.trim($("#editName").val()),
@@ -22,7 +23,14 @@ $(function () {
                     url : $.trim($("#editURL").val())
                 },
                 success: function (result) {
-                    showInfo(result)
+                    if(result.stateCode == "403"){
+                        showInfo(result.message);
+                        window.location.href = "/403";
+                    }else if(result.isSuccess){
+                        showInfo(result.message)
+                    }else{
+                        showInfo1(result.message)
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showInfo("提交失败，请重试");
@@ -35,3 +43,13 @@ $(function () {
         $("#dict-form-edit").data("bootstrapValidator").resetForm();
     });
 });
+
+function showInfo(msg) {
+    $("#div_info").text(msg);
+    $("#modal_info").modal('show');
+}
+
+function showInfo1(msg) {
+    $("#div_info1").text(msg);
+    $("#modal_info1").modal('show');
+}
