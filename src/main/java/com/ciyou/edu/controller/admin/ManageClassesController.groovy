@@ -3,6 +3,7 @@ package com.ciyou.edu.controller.admin
 import com.ciyou.edu.entity.Classes
 import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.service.ClassesService
+import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
 import net.sf.json.JSONObject
 import org.slf4j.Logger
@@ -45,27 +46,27 @@ class ManageClassesController {
     }
 
 
-    @RequestMapping(value="/admin/addClasses",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/addClasses",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String addClasses(Integer gradeId,Integer classes){
         //校验数据
         if(gradeId == null || gradeId == 0){
-            return "请选择年级"
+            return JSONUtil.returnFailReuslt("请选择年级")
         }else if(classes == null){
-            return "请输入班级"
+            return JSONUtil.returnFailReuslt("请输入班级")
         }else if(!Pattern.compile( '^[1-9]+\\d*$')?.matcher(classes?.toString())?.matches()){
-            return "班级必须为正整数"
+            return JSONUtil.returnFailReuslt("班级必须为正整数")
         }
         else{
             try{
                 if(classesService?.addClasses(gradeId,classes)){
-                    return "添加成功"
+                    return JSONUtil.returnSuccessResult("添加成功")
                 }else{
-                    return "添加失败"
+                    return JSONUtil.returnFailReuslt("添加失败")
                 }
             }catch (Exception e){
                 logger.info("添加Classes错误：" + e.getMessage())
-                return "添加失败，请重试"
+                return JSONUtil.returnFailReuslt("添加失败，请重试")
             }
         }
     }
@@ -77,50 +78,49 @@ class ManageClassesController {
         Classes classes = classesService?.getClasses(classesId)
         logger.info("获得指定的Classes：" + classes)
         //这里要转为json对象，前端ajax才解析的了
-        JSONObject jsonObject = JSONObject.fromObject(classes)
-        return jsonObject.toString()
+        return JSONUtil.returnEntityReuslt(JSONObject.fromObject(classes))
     }
 
-    @RequestMapping(value="/admin/updateClasses",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/updateClasses",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String updateClasses(Integer classesId,Integer gradeId, Integer classes){
         //校验数据
         if(classesId == null){
-            return "ID不能为空"
+            return JSONUtil.returnFailReuslt("ID不能为空")
         }else if(gradeId == null || gradeId == 0){
-            return "请选择年级"
+            return JSONUtil.returnFailReuslt("请选择年级")
         }else if(classes == null){
-            return "请输入班级"
+            return JSONUtil.returnFailReuslt("请输入班级")
         }else if(!Pattern.compile( '^[1-9]+\\d*$')?.matcher(classes?.toString())?.matches()){
-            return "班级必须为正整数"
+            return JSONUtil.returnFailReuslt("班级必须为正整数")
         }
         else{
             try{
                 if(classesService?.updateClasses(classesId,gradeId,classes)){
-                    return "修改成功"
+                    return JSONUtil.returnSuccessResult("修改成功")
                 }else{
-                    return "修改失败"
+                    return JSONUtil.returnFailReuslt("修改失败")
                 }
             }catch (Exception e){
                 logger.info("添加Classes错误：" + e.getMessage())
-                return "修改失败，请重试"
+                return JSONUtil.returnFailReuslt("修改失败，请重试")
             }
         }
     }
 
 
-    @RequestMapping(value="/admin/deleteClasses",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/deleteClasses",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String deleteClasses(Integer classesId){
         try{
             if(classesService?.deleteClasses(classesId)){
-                return "删除成功"
+                return JSONUtil.returnSuccessResult("删除成功")
             }else{
-                return "删除失败"
+                return JSONUtil.returnFailReuslt("删除失败")
             }
         }catch (Exception e){
             logger.info("删除Classes错误：" + e.getMessage())
-            return "删除失败，请重试"
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
         }
     }
 

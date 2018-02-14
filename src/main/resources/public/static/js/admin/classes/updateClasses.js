@@ -16,14 +16,22 @@ $(function () {
 			type: 'POST',
 			url: 'updateClasses',
 			cache: false,
+			dataType:'json',
 			data: {
 				classesId: $.trim($("#updateClassesId").val()),
 				classes: $.trim($("#updateClasses").val()),
 				gradeId :$.trim($("#updateGradeName").val())
 			},
 			success: function (data) {
-				$("#updateModal").modal("hide");//关闭模糊框
-				showInfo(data);
+				if(data.stateCode == "403"){
+					showInfo(data.message);
+					window.location.href = "/403";
+				}else if(data.isSuccess){
+					$("#updateModal").modal("hide");//关闭模糊框
+					showInfo(data.message);
+				}else{
+					showInfo1(data.message);
+				}
 
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -55,31 +63,42 @@ function updateClasses(id){
 		url: 'getAllGrade',
 		cache: false,
 		dataType:'json',
-		success: function (data) {
-			// 循环遍历每个年级，每个名称生成一个option对象，添加到<select>中
-			for(var index in data) {
-				var op = document.createElement("option");//创建一个指名名称元素
-				op.value = data[index].gradeId;//设置op的实际值为当前的年级ID
-				var textNode = document.createTextNode(data[index].gradeName);//创建文本节点
-				op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
+		success: function (result) {
+			if(result.stateCode == "403"){
+				showInfo(result.message);
+				window.location.href = "/403";
+			}else{
+				var data = result.entity;
+				// 循环遍历每个年级，每个名称生成一个option对象，添加到<select>中
+				for(var index in data) {
+					var op = document.createElement("option");//创建一个指名名称元素
+					op.value = data[index].gradeId;//设置op的实际值为当前的年级ID
+					var textNode = document.createTextNode(data[index].gradeName);//创建文本节点
+					op.appendChild(textNode);//把文本子节点添加到op元素中，指定其显示值
 
-				document.getElementById("updateGradeName").appendChild(op);
-			}
-			//获取年级列表完毕之后在获取详细的信息
-			$.ajax({
-				type: 'POST',
-				url: 'getClasses',
-				cache: false,
-				dataType:'json',
-				data: {
-					classesId: id
-				},
-				success: function (data) {
-					$("#updateClassesId").val(data.classesId);
-					$("#updateClasses").val(data.classes);
-					$("#updateGradeName").val(data.grade.gradeId);
+					document.getElementById("updateGradeName").appendChild(op);
 				}
-			});
+				//获取年级列表完毕之后在获取详细的信息
+				$.ajax({
+					type: 'POST',
+					url: 'getClasses',
+					cache: false,
+					dataType:'json',
+					data: {
+						classesId: id
+					},
+					success: function (data) {
+						if(data.stateCode == "403"){
+							showInfo(data.message);
+							window.location.href = "/403";
+						}else{
+							$("#updateClassesId").val(data.entity.classesId);
+							$("#updateClasses").val(data.entity.classes);
+							$("#updateGradeName").val(data.entity.grade.gradeId);
+						}
+					}
+				});
+			}
 
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -132,4 +151,7 @@ function showInfo(msg) {
     $("#modal_info").modal('show');
 }
 
-
+function showInfo1(msg) {
+	$("#div_info1").text(msg);
+	$("#modal_info1").modal('show');
+}

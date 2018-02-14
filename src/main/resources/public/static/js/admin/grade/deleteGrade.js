@@ -7,11 +7,17 @@ function deleteGrade(id) {
 		type: 'POST',
 		url: 'deleteGrade',
 		cache: false,
+		dataType:'json',
 		data: {
 			gradeId: id
 		},
 		success: function (data) {
-			showInfo(data);
+			if(data.stateCode == "403"){
+				showInfo(data.message);
+				window.location.href = "/403";
+			}else{
+				showInfo(data.message);
+			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			showInfo("提交失败，请重试");

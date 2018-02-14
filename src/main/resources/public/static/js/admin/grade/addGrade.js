@@ -11,12 +11,20 @@ $(function () {
             type: 'POST',
             url: 'addGrade',
             cache: false,
+            dataType:'json',
             data: {
                 gradeName: $.trim($("#addGradeName").val())
             },
             success: function (data) {
-                $("#addModal").modal("hide");//关闭模糊框
-                showInfo(data);
+                if(data.stateCode == "403"){
+                    showInfo(data.message);
+                    window.location.href = "/403";
+                }else if(data.isSuccess){
+                    $("#addModal").modal("hide");//关闭模糊框
+                    showInfo(data.message);
+                }else{
+                    showInfo1(data.message);
+                }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -66,3 +74,7 @@ function showInfo(msg) {
 }
 
 
+function showInfo1(msg) {
+    $("#div_info1").text(msg);
+    $("#modal_info1").modal('show');
+}

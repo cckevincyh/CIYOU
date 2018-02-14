@@ -16,13 +16,21 @@ $(function () {
 			type: 'POST',
 			url: 'updateGrade',
 			cache: false,
+			dataType:'json',
 			data: {
 				gradeId : $.trim($("#updateGradeId").val()),
 				gradeName :$.trim($("#updateGradeName").val())
 			},
 			success: function (data) {
-				$("#updateModal").modal("hide");//关闭模糊框
-				showInfo(data);
+				if(data.stateCode == "403"){
+					showInfo(data.message);
+					window.location.href = "/403";
+				}else if(data.isSuccess){
+					$("#updateModal").modal("hide");//关闭模糊框
+					showInfo(data.message);
+				}else{
+					showInfo1(data.message);
+				}
 
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -56,8 +64,8 @@ function updateGrade(id){
 			gradeId: id
 		},
 		success: function (data) {
-			$("#updateGradeId").val(data.gradeId);
-			$("#updateGradeName").val(data.gradeName);
+			$("#updateGradeId").val(data.entity.gradeId);
+			$("#updateGradeName").val(data.entity.gradeName);
 		}
 	});
 			
@@ -91,3 +99,7 @@ function showInfo(msg) {
 }
 
 
+function showInfo1(msg) {
+	$("#div_info1").text(msg);
+	$("#modal_info1").modal('show');
+}

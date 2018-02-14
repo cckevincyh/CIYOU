@@ -8,7 +8,6 @@ import com.ciyou.edu.service.PermissionService
 import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
 import net.sf.json.JSONArray
-import net.sf.json.JSONObject
 import net.sf.json.JsonConfig
 import net.sf.json.util.PropertyFilter
 import org.apache.shiro.SecurityUtils

@@ -2,6 +2,7 @@ package com.ciyou.edu.controller.admin
 
 import com.ciyou.edu.entity.Grade
 import com.ciyou.edu.service.GradeService
+import com.ciyou.edu.utils.JSONUtil
 import net.sf.json.JSONArray
 import net.sf.json.JSONObject
 import org.slf4j.Logger
@@ -33,42 +34,42 @@ class ManageGradeController {
         return mv
     }
 
-    @RequestMapping(value="/admin/addGrade",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/addGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String addGrade(Grade grade){
         //校验数据
         if(!grade?.getGradeName() || grade?.getGradeName()?.trim() == ""){
-            return "年级不能为空"
+            return JSONUtil.returnFailReuslt("年级不能为空")
         }else{
             try{
                 if(gradeService?.addGrade(grade)){
-                    return "添加成功"
+                    return JSONUtil.returnSuccessResult("添加成功")
                 }else{
-                    return "添加失败"
+                    return JSONUtil.returnFailReuslt("添加失败")
                 }
             }catch (Exception e){
                 logger.info("添加Grade错误：" + e.getMessage())
-                return "添加失败，请重试"
+                return JSONUtil.returnFailReuslt("添加失败，请重试")
             }
         }
     }
 
-    @RequestMapping(value="/admin/updateGrade",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/updateGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String updateGrade(Grade grade){
         //校验数据
         if(!grade?.getGradeName() || grade?.getGradeName()?.trim() == ""){
-            return "年级不能为空"
+            return JSONUtil.returnFailReuslt("年级不能为空")
         }else{
             try{
                 if(gradeService?.updateGrade(grade)){
-                    return "修改成功"
+                    return JSONUtil.returnSuccessResult("修改成功")
                 }else{
-                    return "修改失败"
+                    return JSONUtil.returnFailReuslt("修改失败")
                 }
             }catch (Exception e){
                 logger.info("修改Grade错误：" + e.getMessage())
-                return "修改失败，请重试"
+                return JSONUtil.returnFailReuslt("修改失败，请重试")
             }
         }
     }
@@ -79,30 +80,29 @@ class ManageGradeController {
         Grade grade = gradeService?.getGrade(gradeId)
         logger.info("获得指定的Grade：" + grade)
         //这里要转为json对象，前端ajax才解析的了
-        JSONObject jsonObject = JSONObject.fromObject(grade)
-        return jsonObject.toString()
+        return JSONUtil.returnEntityReuslt(JSONObject.fromObject(grade))
     }
 
-    @RequestMapping(value="/admin/deleteGrade",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/deleteGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String deleteGrade(Integer gradeId){
         try{
             if(gradeService?.deleteGrade(gradeId)){
-                return "删除成功"
+                return JSONUtil.returnSuccessResult("删除成功")
             }else{
-                return "删除失败"
+                return JSONUtil.returnFailReuslt("删除失败")
             }
         }catch (Exception e){
             logger.info("删除Grade错误：" + e.getMessage())
-            return "删除失败，请重试"
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
         }
     }
 
-    @RequestMapping(value="/admin/getAllGrade",method=RequestMethod.POST)
+    @RequestMapping(value="/admin/getAllGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String getAllGrade(){
         List<Grade> gradeList = gradeService?.findAllGrade()
-        return JSONArray.fromObject(gradeList).toString()
+        return JSONUtil.returnEntityReuslt(JSONArray.fromObject(gradeList))
     }
 
 }
