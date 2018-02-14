@@ -85,17 +85,22 @@ function updatePermission(adminId) {
             adminId : adminId
         },
         success: function (result) {
-            $('#tree').treeview({
-                data: result,         // 数据源
-                showCheckbox: true,   //是否显示复选框
-                highlightSelected: true,    //是否高亮选中
-                //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
-                //nodeIcon: 'glyphicon glyphicon-globe',
-                //emptyIcon: '',    //没有子节点的节点图标
-                //multiSelect: false,    //多选
-                onNodeChecked:nodeChecked ,
-                onNodeUnchecked:nodeUnchecked
-            });
+            if(result.stateCode == "403"){
+                showInfo1(result.message);
+                window.location.href = "/403";
+            }else{
+                $('#tree').treeview({
+                    data: result.entity,         // 数据源
+                    showCheckbox: true,   //是否显示复选框
+                    highlightSelected: true,    //是否高亮选中
+                    //nodeIcon: 'glyphicon glyphicon-user',    //节点上的图标
+                    //nodeIcon: 'glyphicon glyphicon-globe',
+                    //emptyIcon: '',    //没有子节点的节点图标
+                    //multiSelect: false,    //多选
+                    onNodeChecked:nodeChecked ,
+                    onNodeUnchecked:nodeUnchecked
+                });
+            }
         },
         error: function () {
             showInfo1("树形权限结构加载失败！")
@@ -104,4 +109,9 @@ function updatePermission(adminId) {
 }
 
 
+
+function showInfo1(msg) {
+    $("#div_info1").text(msg);
+    $("#modal_info1").modal('show');
+}
 

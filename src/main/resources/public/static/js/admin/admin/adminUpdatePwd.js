@@ -17,14 +17,22 @@ $(function () {
             type: 'POST',
             url: 'updatePassword',
             cache: false,
+            dataType:'json',
             data: {
                 oldPwd: $.trim($("#oldPwd").val()),
                 newPwd:$.trim($("#newPwd").val()),
                 confirmPwd: $.trim($("#confirmPwd").val())
             },
             success: function (data) {
-                $("#updatepwd").modal("hide");//关闭模糊框
-                showInfo(data);
+                if(data.stateCode == "403"){
+                    showInfo(data.message);
+                    window.location.href = "/403";
+                }else if(data.isSuccess){
+                    $("#updatepwd").modal("hide");//关闭模糊框
+                    showInfo(data.message);
+                }else{
+                    showInfo1(data.message);
+                }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -115,3 +123,9 @@ function showInfo(msg) {
     $("#div_info").text(msg);
     $("#modal_info").modal('show');
 }
+
+function showInfo1(msg) {
+    $("#div_info1").text(msg);
+    $("#modal_info1").modal('show');
+}
+

@@ -20,12 +20,18 @@ $(function () {
             url: 'setAdminPermission',
             cache: false,
             //async: false,
+            dataType: "json",
             data: {
                 adminId :$.trim($("#pAdminId").val()),
                 allPermission: permission
             },
             success: function (result) {
-                showInfo(result);
+                if(result.stateCode == "403"){
+                    showInfo(result.message);
+                    window.location.href = "/403";
+                }else {
+                    showInfo(result.message);
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 showInfo("提交失败，请重试");
@@ -34,3 +40,9 @@ $(function () {
     });
 
 });
+
+
+function showInfo(msg) {
+    $("#div_info").text(msg);
+    $("#modal_info").modal('show');
+}

@@ -8,11 +8,17 @@ function deleteAdmin(id) {
 		type: 'POST',
 		url: 'deleteAdmin',
 		cache: false,
+		dataType:'json',
 		data: {
 			adminId: id
 		},
 		success: function (data) {
-			showInfo(data);
+			if(data.stateCode == "403"){
+				showInfo(data.message);
+				window.location.href = "/403";
+			}else {
+				showInfo(data.message);
+			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			showInfo("提交失败，请重试");

@@ -3,6 +3,7 @@ package com.ciyou.edu.controller.admin
 import com.ciyou.edu.config.shiro.common.LoginType
 import com.ciyou.edu.config.shiro.common.UserToken
 import com.ciyou.edu.entity.Admin
+import com.ciyou.edu.utils.JSONUtil
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.subject.Subject
@@ -30,19 +31,19 @@ class AdminLoginController {
      * @param admin
      * @return 登录结果
      */
-    @RequestMapping(value="/adminLogin",method=RequestMethod.POST)
+    @RequestMapping(value="/adminLogin",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String loginAdmin(Admin admin){
         logger.info("登录Admin: " + admin)
         //后台校验提交的用户名和密码
         if(!admin?.getAdminName() || admin?.adminName?.trim() == ""){
-            return "账号不能为空"
+            return JSONUtil.returnFailReuslt("账号不能为空")
         }else if(!admin?.getPassword() || admin?.getPassword()?.trim() == ""){
-            return "密码不能为空"
+            return JSONUtil.returnFailReuslt("密码不能为空")
         }else if(admin?.getAdminName()?.length() < 3 || admin?.getAdminName()?.length() >15){
-            return "账号长度必须在3~15之间"
+            return JSONUtil.returnFailReuslt("账号长度必须在3~15之间")
         }else if(admin?.getPassword()?.length() < 3 || admin?.getPassword()?.length() >15){
-            return "密码长度必须在3~15之间"
+            return JSONUtil.returnFailReuslt("密码长度必须在3~15之间")
         }
 
         //获取Subject实例对象
@@ -59,12 +60,12 @@ class AdminLoginController {
             subject?.login(userToken)
             //Admin存入session
             SecurityUtils.getSubject()?.getSession()?.setAttribute("admin",(Admin)subject?.getPrincipal())
-            return "success"
+            return JSONUtil.returnSuccessResult("登录成功")
         } catch (AuthenticationException e) {
             //认证失败就会抛出AuthenticationException这个异常，就对异常进行相应的操作，这里的处理是抛出一个自定义异常ResultException
             //到时候我们抛出自定义异常ResultException，用户名或者密码错误
             logger.info("认证错误：" + e.getMessage())
-            return "账号或者密码错误"
+            return JSONUtil.returnFailReuslt("账号或者密码错误")
         }
     }
 

@@ -29,7 +29,7 @@ $(function () {
                     $("#addModal").modal("hide");//关闭模糊框
                     showInfo(data.message);
                 }else{
-                    showInfo(data.message);
+                    showInfo1(data.message);
                 }
 
             },
@@ -117,10 +117,15 @@ function validAddAdmin() {
 
 
 
-
 function showInfo(msg) {
     $("#div_info").text(msg);
     $("#modal_info").modal('show');
+}
+
+
+function showInfo1(msg) {
+    $("#div_info1").text(msg);
+    $("#modal_info1").modal('show');
 }
 
 

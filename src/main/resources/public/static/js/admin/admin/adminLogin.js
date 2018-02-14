@@ -10,6 +10,7 @@ $(function () {
             type: 'POST',
             url: 'adminLogin',
             cache: false,
+            dataType:'json',
             data: {
                 adminName: $.trim($("#adminName").val()),
                 password:$.trim($("#password").val())
@@ -17,10 +18,10 @@ $(function () {
             },
             success: function (data) {
                 $("#modal_info").modal("hide");//关闭模糊框
-                if(data == "success"){
+                if(data.isSuccess){
                     window.location.href = "/admin/admin";
                 }else{
-                    showInfo(data);
+                    showInfo(data.message);
                 }
 
             },

@@ -18,6 +18,7 @@ $(function () {
 			type: 'POST',
 			url: 'updateAdmin',
 			cache: false,
+			dataType:'json',
 			data: {
 				adminId : $.trim($("#updateId").val()),
 				adminName :$.trim($("#updateUsername").val()),
@@ -25,8 +26,15 @@ $(function () {
 				phone : $.trim($("#updatePhone").val())
 			},
 			success: function (data) {
-				$("#updateModal").modal("hide");//关闭模糊框
-				showInfo(data);
+				if(data.stateCode == "403"){
+					showInfo(data.message);
+					window.location.href = "/403";
+				}else if(data.isSuccess){
+					$("#updateModal").modal("hide");//关闭模糊框
+					showInfo(data.message);
+				}else{
+					showInfo1(data.message);
+				}
 
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
@@ -60,10 +68,10 @@ function updateAdmin(id){
 			adminId: id
 		},
 		success: function (data) {
-			$("#updateId").val(data.adminId);
-			$("#updateUsername").val(data.adminName);
-			$("#updateName").val(data.name);
-			$("#updatePhone").val(data.phone);
+			$("#updateId").val(data.entity.adminId);
+			$("#updateUsername").val(data.entity.adminName);
+			$("#updateName").val(data.entity.name);
+			$("#updatePhone").val(data.entity.phone);
 		}
 	});
 			
@@ -140,3 +148,7 @@ function showInfo(msg) {
 }
 
 
+function showInfo1(msg) {
+	$("#div_info1").text(msg);
+	$("#modal_info1").modal('show');
+}

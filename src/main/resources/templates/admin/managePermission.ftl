@@ -501,7 +501,7 @@
 
 
 <!-- 提示 -->
-<div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+<div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -522,7 +522,7 @@
 
 
 <!-- 提示 -->
-<div class="modal fade" id="modal_info1" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+<div class="modal fade" id="modal_info1" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

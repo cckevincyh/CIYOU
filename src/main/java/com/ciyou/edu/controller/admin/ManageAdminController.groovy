@@ -213,22 +213,22 @@ class ManageAdminController{
 
     }
 
-    @RequestMapping(value="/admin/updatePassword", method=RequestMethod.POST )
+    @RequestMapping(value="/admin/updatePassword", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String updatePassword(String oldPwd, String newPwd, String confirmPwd){
         //校验数据
         if(!oldPwd || oldPwd?.trim() == ""){
-            return "原密码不能为空"
+            return JSONUtil.returnFailReuslt("原密码不能为空")
         }else if(!newPwd || newPwd?.trim() == ""){
-            return "新密码不能为空"
+            return JSONUtil.returnFailReuslt("新密码不能为空")
         }else if(!confirmPwd || confirmPwd?.trim() == ""){
-            return "确认密码不能为空"
+            return JSONUtil.returnFailReuslt("确认密码不能为空")
         }else if(oldPwd?.trim()?.length() < 3 || oldPwd?.trim()?.length() > 15){
-            return "原密码长度必须在3~15之间"
+            return JSONUtil.returnFailReuslt("原密码长度必须在3~15之间")
         }else if(newPwd?.trim()?.length() < 3 || newPwd?.trim()?.length() > 15){
-            return "新密码长度必须在3~15之间"
+            return JSONUtil.returnFailReuslt("新密码长度必须在3~15之间")
         }else if(newPwd != confirmPwd){
-            return "确认密码不一致"
+            return JSONUtil.returnFailReuslt("确认密码不一致")
         }
         //获取当前Admin
         Admin admin = (Admin)SecurityUtils.getSubject()?.getPrincipal()
@@ -236,7 +236,7 @@ class ManageAdminController{
         String oldPasswordMd5= new Md5Hash(oldPwd,admin?.getAdminName(),2).toHex()
         //比对原密码是否正确
         if(oldPasswordMd5 != admin?.getPassword()){
-            return "原密码错误"
+            return JSONUtil.returnFailReuslt("原密码错误")
         }else{
             //新密码加密
             String passwordMd5 = new Md5Hash(newPwd,admin?.getAdminName(),2).toHex()
@@ -244,18 +244,15 @@ class ManageAdminController{
                 if(adminService?.updatePassword(admin?.getAdminId(),passwordMd5)){
                     //登出
                     SecurityUtils.getSubject()?.logout()
-                    return "修改密码成功"
+                    return JSONUtil.returnSuccessResult("修改密码成功")
                 }else{
-                    return "修改密码失败"
+                    return JSONUtil.returnFailReuslt("修改密码失败")
                 }
             }catch (Exception e){
                 logger.info("修改Admin密码错误：" + e.getMessage())
-                return "修改密码失败，请重试"
+                return JSONUtil.returnFailReuslt("修改密码失败，请重试")
             }
-
         }
-
-
     }
 
     @RequestMapping(value="/admin/getAdminPermission", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
@@ -282,23 +279,19 @@ class ManageAdminController{
             }
         }
         logger.info("获得的permissionTree：" + treeNodes)
-        JsonConfig jsonConfig = new JsonConfig();
+        JsonConfig jsonConfig = new JsonConfig()
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
-                if(value == null){
-                    return true
-                }else{
-                    return false
-                }
+                return value == null
             }
         })
         String treeJson = JSONArray.fromObject(treeNodes,jsonConfig)?.toString()
         //这里要转为json对象，前端ajax才解析的了
         logger.info("获得的treeJson：" + treeJson)
-        return treeJson
+        return JSONUtil.returnEntityReuslt(JSONArray.fromObject(treeNodes,jsonConfig))
     }
 
-    @RequestMapping(value="/admin/setAdminPermission", method=RequestMethod.POST )
+    @RequestMapping(value="/admin/setAdminPermission", method=RequestMethod.POST , produces="application/json;charset=UTF-8")
     @ResponseBody
     String setAdminPermission(Integer adminId, String allPermission){
         logger.info("接收到的权限：" + allPermission?.split(","))
