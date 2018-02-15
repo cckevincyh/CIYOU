@@ -49,4 +49,7 @@ interface ClassesMapper {
                     column = "gradeId",
                     one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade"))])
     Page<Classes> queryClassesByPage(@Param("value")String value)
+
+    @Select("select * from Classes where gradeId = #{gradeId}")
+    List<Classes> getClassesByGrade(@Param("gradeId")Integer gradeId)
 }

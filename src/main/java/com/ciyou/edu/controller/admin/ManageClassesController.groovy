@@ -145,4 +145,16 @@ class ManageClassesController {
         }
     }
 
+    @RequestMapping(value="/admin/getClassesByGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getClassesByGrade(Integer gradeId){
+        if(gradeId == null){
+            return JSONUtil.returnFailReuslt("请选择年级")
+        }
+        List<Classes> classess = classesService?.getClassesByGrade(gradeId)
+        logger.info("获得指定的Classes列表：" + classess)
+        //这里要转为json对象，前端ajax才解析的了
+        return JSONUtil.returnEntityReuslt(classess)
+    }
+
 }
