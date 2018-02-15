@@ -29,7 +29,7 @@ class Student implements Serializable{
     //个人email
     private String email
     //学生头像
-    private int picImg
+    private String picImg
     //对应班级表
     private Classes classes
     //对应消息表 => <消息状态（未读，已读)，消息>
@@ -125,14 +125,6 @@ class Student implements Serializable{
         this.email = email
     }
 
-    int getPicImg() {
-        return picImg
-    }
-
-    void setPicImg(int picImg) {
-        this.picImg = picImg
-    }
-
     Classes getClasses() {
         return classes
     }
@@ -157,6 +149,14 @@ class Student implements Serializable{
         this.isAvalible = isAvalible
     }
 
+    String getPicImg() {
+        return picImg
+    }
+
+    void setPicImg(String picImg) {
+        this.picImg = picImg
+    }
+
 
     @Override
     public String toString() {
@@ -172,7 +172,7 @@ class Student implements Serializable{
                 ", parentEmail='" + parentEmail + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
-                ", picImg=" + picImg +
+                ", picImg='" + picImg + '\'' +
                 ", classes=" + classes +
                 ", messages=" + messages +
                 ", isAvalible=" + isAvalible +

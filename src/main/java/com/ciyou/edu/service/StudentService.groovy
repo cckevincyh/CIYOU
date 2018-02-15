@@ -18,4 +18,6 @@ interface StudentService {
      * @return
      */
     Page<Student> findByPage(int pageNo, int pageSize)
+
+    int addStudent(Student student)
 }

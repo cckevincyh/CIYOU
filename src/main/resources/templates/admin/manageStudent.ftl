@@ -206,7 +206,7 @@
                                           <td>${student.email!}</td>
                                           <td>${student.parentMobile!}</td>
                                           <td>${student.parentEmail!}</td>
-                                          <td>${student.createTime?string("yyyy-MM-dd")!}</td>
+                                          <td>${student.createTime?string("yyyy-MM-dd HH:mm")!}</td>
                                           <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateStudent(${student.sid!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteStudent(${student.sid!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                       </tr>
                                   </#list>
@@ -288,8 +288,16 @@
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">学号</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addSid"  placeholder="请输入学生学号">
-                            <label class="control-label" for="addSid" style="display:none;"></label>
+                            <input type="text" class="form-control" id="addStudentId"  placeholder="请输入学生学号">
+                            <label class="control-label" for="addStudentId" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">姓名</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addName"  placeholder="请输入学生姓名">
+                            <label class="control-label" for="addName" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -368,7 +376,7 @@
                     <!---------------------表单-------------------->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
+                    <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
                     <button type="button" class="btn btn-primary" id="addStudent"><i class="fa fa-save"></i>
                         保存

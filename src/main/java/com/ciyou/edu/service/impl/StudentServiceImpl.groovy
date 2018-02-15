@@ -20,7 +20,7 @@ class StudentServiceImpl implements StudentService{
 
     @Override
     Student findByStudentId(String studentId) {
-        return null
+        return studentMapper?.findByStudentId(studentId)
     }
 
     /**
@@ -33,5 +33,10 @@ class StudentServiceImpl implements StudentService{
     Page<Student> findByPage(int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
         return studentMapper?.findAllStudent()
+    }
+
+    @Override
+    int addStudent(Student student) {
+        return studentMapper?.addStudent(student)
     }
 }
