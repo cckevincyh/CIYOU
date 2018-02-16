@@ -40,4 +40,7 @@ interface StudentMapper {
 
     @Update("update Student set isAvalible = 0 where sid = #{sid}")
     int deleteStudent(@Param("sid")String sid)
+
+    @Select("select * from Student where (studentId like '%\${value}%' or name like '%\${value}%') and isAvalible = 1 ")
+    Page<Student> queryStudentByPage(@Param("value")String value)
 }

@@ -140,4 +140,29 @@ class ManageStudentController {
             return JSONUtil.returnFailReuslt("删除失败，请重试")
         }
     }
+
+
+
+    @RequestMapping(value="/admin/queryStudent")
+    ModelAndView queryStudent(String searchContent,Integer page){
+        if(page == null){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            //重定向到findAdminByPage Controller
+            ModelAndView mv = new ModelAndView("redirect:manageStudent")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/admin/manageStudent")
+            logger.info("queryStudent : 查询第${page}页，携带查询参数=${searchContent}")
+            //不赋值pageSize，默认为10
+            Page<Student> students = studentService?.queryStudentByPage(searchContent?.trim(),page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Student> pageInfo = new PageInfo<Student>(students)
+            pageInfo?.setUrl("/admin/queryStudent?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
+
+    }
 }

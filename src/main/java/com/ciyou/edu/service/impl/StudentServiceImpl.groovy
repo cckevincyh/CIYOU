@@ -49,4 +49,10 @@ class StudentServiceImpl implements StudentService{
     int deleteStudent(String sid) {
         return studentMapper?.deleteStudent(sid)
     }
+
+    @Override
+    Page<Student> queryStudentByPage(String search ,int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return studentMapper?.queryStudentByPage(search)
+    }
 }
