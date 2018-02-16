@@ -44,4 +44,9 @@ class StudentServiceImpl implements StudentService{
     Student getStudentById(String sid) {
         return studentMapper?.getStudentById(sid)
     }
+
+    @Override
+    int deleteStudent(String sid) {
+        return studentMapper?.deleteStudent(sid)
+    }
 }

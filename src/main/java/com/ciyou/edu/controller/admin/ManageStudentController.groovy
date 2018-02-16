@@ -125,4 +125,19 @@ class ManageStudentController {
         return JSONUtil.returnEntityReuslt(JSONObject.fromObject(studentService?.getStudentById(sid),jsonConfig))
     }
 
+
+    @RequestMapping(value="/admin/deleteStudent", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String deleteStudent(String sid){
+        try{
+            if(studentService?.deleteStudent(sid)){
+                return JSONUtil.returnSuccessResult("删除成功")
+            }else{
+                return JSONUtil.returnFailReuslt("删除失败")
+            }
+        }catch (Exception e){
+            logger.info("删除Student错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
+        }
+    }
 }

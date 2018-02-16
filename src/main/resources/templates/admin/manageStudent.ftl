@@ -701,5 +701,6 @@
 <script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/student/addStudent.js"></script>
 <script src="${base}/static/js/admin/student/updateStudent.js"></script>
+<script src="${base}/static/js/admin/student/deleteStudent.js"></script>
 </body>
 </html>

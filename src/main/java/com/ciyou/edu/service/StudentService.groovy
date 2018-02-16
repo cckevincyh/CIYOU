@@ -22,4 +22,6 @@ interface StudentService {
     int addStudent(Student student)
 
     Student getStudentById(String sid)
+
+    int deleteStudent(String sid)
 }

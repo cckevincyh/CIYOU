@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Result
 import org.apache.ibatis.annotations.Results
 import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.Update
 
 /**
  * @Author C.
@@ -36,4 +37,7 @@ interface StudentMapper {
                     column = "classesId",
                     one = @One(select = "com.ciyou.edu.mapper.ClassesMapper.getClasses"))])
     Student getStudentById(@Param("sid")String sid)
+
+    @Update("update Student set isAvalible = 0 where sid = #{sid}")
+    int deleteStudent(@Param("sid")String sid)
 }
