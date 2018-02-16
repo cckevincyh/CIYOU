@@ -32,8 +32,6 @@ class Student implements Serializable{
     private String picImg
     //对应班级表
     private Classes classes
-    //对应消息表 => <消息状态（未读，已读)，消息>
-    private Map<String ,Message> messages
     //状态 1：正常 2：冻结
     private Integer isAvalible
 
@@ -133,13 +131,6 @@ class Student implements Serializable{
         this.classes = classes
     }
 
-    Map<String, Message> getMessages() {
-        return messages
-    }
-
-    void setMessages(Map<String, Message> messages) {
-        this.messages = messages
-    }
 
     Integer getIsAvalible() {
         return isAvalible
@@ -174,7 +165,6 @@ class Student implements Serializable{
                 ", email='" + email + '\'' +
                 ", picImg='" + picImg + '\'' +
                 ", classes=" + classes +
-                ", messages=" + messages +
                 ", isAvalible=" + isAvalible +
                 '}';
     }

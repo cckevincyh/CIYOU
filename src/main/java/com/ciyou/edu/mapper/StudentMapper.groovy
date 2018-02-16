@@ -25,6 +25,11 @@ interface StudentMapper {
     Page<Student> findAllStudent()
 
     @Select("select * from Student where  isAvalible = 1 and studentId = #{studentId}")
+    @Results([
+            //查询关联对象
+            @Result(property = "classes",
+                    column = "classesId",
+                    one = @One(select = "com.ciyou.edu.mapper.ClassesMapper.getClasses"))])
     Student findByStudentId(@Param("studentId")String studentId)
 
     @Insert("insert into Student(studentId,name,password,sex,age,createTime,mobile,parentMobile,email,parentEmail,picImg,classesId) values(#{studentId},#{name},#{password},#{sex},#{age},#{createTime},#{mobile},#{parentMobile},#{email},#{parentEmail},#{picImg},#{classes.classesId})")

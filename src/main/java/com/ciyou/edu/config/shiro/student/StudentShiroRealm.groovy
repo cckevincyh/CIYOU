@@ -62,7 +62,9 @@ class StudentShiroRealm extends AuthorizingRealm {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.")
         }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
-        authorizationInfo?.addRole("Student")
-        return authorizationInfo
+        if(principals?.getPrimaryPrincipal() instanceof Student){
+            authorizationInfo?.addRole("Student")
+            return authorizationInfo
+        }
     }
 }

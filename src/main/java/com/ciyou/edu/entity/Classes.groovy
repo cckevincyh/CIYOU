@@ -13,8 +13,6 @@ class Classes implements Serializable{
     private Grade grade
     //几班
     private Integer classes
-    //任课老师
-    private List<Teacher> teacher
 
     Integer getClassesId() {
         return classesId
@@ -40,14 +38,6 @@ class Classes implements Serializable{
         this.classes = classes
     }
 
-    List<Teacher> getTeacher() {
-        return teacher
-    }
-
-    void setTeacher(List<Teacher> teacher) {
-        this.teacher = teacher
-    }
-
 
     @Override
     public String toString() {
@@ -55,7 +45,6 @@ class Classes implements Serializable{
                 "classesId=" + classesId +
                 ", grade=" + grade +
                 ", classes=" + classes +
-                ", teacher=" + teacher +
                 '}';
     }
 }

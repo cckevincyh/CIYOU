@@ -48,5 +48,19 @@ class IndexController {
         return "/admin/managePermission"
     }
 
+    /***
+     * 学生登录
+     * @return
+     */
+    @RequestMapping("/login")
+    public String login(){
+        return "/login"
+    }
+
+    @RequestMapping("/student/index")
+    public String index(){
+        return "/student/index"
+    }
+
 
 }

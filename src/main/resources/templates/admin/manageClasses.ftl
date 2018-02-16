@@ -171,7 +171,6 @@
                                   <th>ID</th>
                                   <th>年级</th>
                                   <th>班级</th>
-                                  <th>任课老师</th>
                                   <th>操作</th>
                               </tr>
                               <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
@@ -180,13 +179,12 @@
                                           <td>${classes.classesId!}</td>
                                           <td>${classes.grade.gradeName!}</td>
                                           <td>${classes.classes!}</td>
-                                          <td>*</td>
                                           <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateClasses(${classes.classesId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteClasses(${classes.classesId!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                       </tr>
                                   </#list>
                                     <#else >
                                      <tr>
-                                         <td colspan="5" align="center">暂无数据</td>
+                                         <td colspan="4" align="center">暂无数据</td>
                                      <tr>
                               </#if>
                           </table>

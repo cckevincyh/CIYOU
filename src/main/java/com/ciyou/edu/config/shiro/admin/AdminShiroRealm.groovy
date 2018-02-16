@@ -71,18 +71,17 @@ class AdminShiroRealm extends AuthorizingRealm {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.")
         }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo()
-        if(!principals?.getPrimaryPrincipal() instanceof Admin){
-            throw new AuthorizationException("is not a Administrator")
+        if(principals?.getPrimaryPrincipal() instanceof Admin){
+            Admin admin = (Admin) principals?.getPrimaryPrincipal()
+            logger.info("当前Admin :" + admin )
+            authorizationInfo?.addRole("Admin")
+            //每次都从数据库重新查找，确保能及时更新权限
+            admin?.setPermissionList(permissionService?.findPermissionByAdmin(admin?.getAdminId()))
+            admin?.getPermissionList()?.each {current_Permission ->
+                authorizationInfo?.addStringPermission(current_Permission?.getPermission())
+            }
+            logger.info("当前Admin授权角色：" +authorizationInfo?.getRoles() + "，权限：" + authorizationInfo?.getStringPermissions())
+            return authorizationInfo
         }
-        Admin admin = (Admin) principals?.getPrimaryPrincipal()
-        logger.info("当前Admin :" + admin )
-        authorizationInfo?.addRole("Admin")
-        //每次都从数据库重新查找，确保能及时更新权限
-        admin?.setPermissionList(permissionService?.findPermissionByAdmin(admin?.getAdminId()))
-        admin?.getPermissionList()?.each {current_Permission ->
-            authorizationInfo?.addStringPermission(current_Permission?.getPermission())
-        }
-        logger.info("当前Admin授权角色：" +authorizationInfo?.getRoles() + "，权限：" + authorizationInfo?.getStringPermissions())
-        return authorizationInfo
     }
 }
