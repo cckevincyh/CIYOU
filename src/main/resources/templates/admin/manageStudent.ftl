@@ -154,7 +154,7 @@
                   <div class="box">
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal" onclick="addStudent()"><i class="fa fa-fw fa-user-plus"></i></button> 添加学生</div>
+                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-user-plus"></i></button> 添加学生</div>
                           <div class="box-tools">
                               <form class="form-horizontal" action="${base}/admin/queryStudent" method="get">
                               <div class="input-group input-group-sm" style="width: 150px;">
@@ -207,7 +207,8 @@
                                           <td>${student.parentMobile!}</td>
                                           <td>${student.parentEmail!}</td>
                                           <td>${student.createTime?string("yyyy-MM-dd HH:mm")!}</td>
-                                          <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateStudent(${student.sid!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteStudent(${student.sid!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                          <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateStudent(${student.sid!})"><i class="fa fa-fw fa-edit"></i></button>
+                                              <button class="btn btn-danger btn-xs" onclick="deleteStudent(${student.sid!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                       </tr>
                                   </#list>
                                     <#else >
@@ -400,36 +401,100 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="updateModalLabel">
-                        修改管理员信息
+                        修改学生信息
                     </h4>
                 </div>
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
 
+                    <!---------------------表单-------------------->
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">用户名</label>
+                        <label for="firstname" class="col-sm-3 control-label">学号</label>
                         <div class="col-sm-7">
-                            <input type="hidden" id="updateId">
-                            <input type="text" class="form-control" id="updateUsername" placeholder="请输入管理员用户名" readonly="readonly">
-                            <label class="control-label" for="updateUsername" style="display:none;"></label>
+                            <input type="text" class="form-control" id="updateStudentId"  placeholder="请输入学生学号">
+                            <label class="control-label" for="updateStudentId" style="display:none;"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <label for="firstname" class="col-sm-3 control-label">姓名</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateName"  placeholder="请输入管理员真实姓名">
+                            <input type="text" class="form-control" id="updateName"  placeholder="请输入学生姓名">
                             <label class="control-label" for="updateName" style="display:none;"></label>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">联系电话</label>
+                        <label for="firstname" class="col-sm-3 control-label">年级</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updatePhone"  placeholder="请输入管理员联系电话">
+                            <select class="form-control" id="updateGrade">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateGrade" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">班级</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateClasses">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateClasses" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">性别</label>
+                        <div class="col-sm-7">
+                            <label style="margin-top: 5px;">
+                                <input type="radio" name="updateSex" id="updateSex1" value="1" checked> 男
+                                <input type="radio" name="updateSex" id="updateSex2" value="2" style="margin-left: 10px;">女
+                            </label>
+                            <label class="control-label" for="updateSex" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">年龄</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateAge"  placeholder="请输入年龄">
+                            <label class="control-label" for="updateAge" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">电话</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updatePhone"  placeholder="请输入学生电话号码">
                             <label class="control-label" for="updatePhone" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">邮箱</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateEmail"  placeholder="请输入学生邮箱">
+                            <label class="control-label" for="updateEmail" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">家长电话</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateParentPhone"  placeholder="请输入家长电话号码">
+                            <label class="control-label" for="updateParentPhone" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">家长邮箱</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateParentEmail"  placeholder="请输入家长邮箱">
+                            <label class="control-label" for="updateParentEmail" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -438,9 +503,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
+                    <button type="reset" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="updateAdmin"><i class="fa fa-save"></i>
+                    <button type="button" class="btn btn-primary" id="updateStudent"><i class="fa fa-save"></i>
                         保存
                     </button>
                 </div>
@@ -635,5 +700,6 @@
 <script src="${base}/static/js/admin/admin/adminUpdatePwd.js"></script>
 <script src="${base}/static/js/admin/admin/adminUpdateInfo.js"></script>
 <script src="${base}/static/js/admin/student/addStudent.js"></script>
+<script src="${base}/static/js/admin/student/updateStudent.js"></script>
 </body>
 </html>

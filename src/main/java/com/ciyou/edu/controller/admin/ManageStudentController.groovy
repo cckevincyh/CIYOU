@@ -6,6 +6,9 @@ import com.ciyou.edu.entity.Student
 import com.ciyou.edu.service.StudentService
 import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
+import net.sf.json.JSONObject
+import net.sf.json.JsonConfig
+import net.sf.json.processors.DefaultDefaultValueProcessor
 import org.apache.shiro.crypto.hash.Md5Hash
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -47,6 +50,12 @@ class ManageStudentController {
         return mv
     }
 
+    /**
+     * 添加学生
+     * @param student 学生
+     * @param classesId 班级ID
+     * @return
+     */
     @RequestMapping(value="/admin/addStudent", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     String addStudent(Student student,Integer classesId){
@@ -101,6 +110,19 @@ class ManageStudentController {
             }
         }
 
+    }
+
+    @RequestMapping(value="/admin/getStudentById", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getStudentById(String sid){
+        //解决JSONObject.fromObject数字为null时被转换为0
+        JsonConfig jsonConfig = new JsonConfig()
+        jsonConfig.registerDefaultValueProcessor(Integer.class, new DefaultDefaultValueProcessor() {
+            public Object getDefaultValue(Class type) {
+                return ""
+            }
+        })
+        return JSONUtil.returnEntityReuslt(JSONObject.fromObject(studentService?.getStudentById(sid),jsonConfig))
     }
 
 }

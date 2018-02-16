@@ -20,4 +20,6 @@ interface StudentService {
     Page<Student> findByPage(int pageNo, int pageSize)
 
     int addStudent(Student student)
+
+    Student getStudentById(String sid)
 }

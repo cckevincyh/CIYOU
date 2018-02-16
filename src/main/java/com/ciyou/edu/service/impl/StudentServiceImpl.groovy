@@ -39,4 +39,9 @@ class StudentServiceImpl implements StudentService{
     int addStudent(Student student) {
         return studentMapper?.addStudent(student)
     }
+
+    @Override
+    Student getStudentById(String sid) {
+        return studentMapper?.getStudentById(sid)
+    }
 }

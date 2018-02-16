@@ -5,6 +5,41 @@ $(function () {
 
 
     /**
+     * 获取所有的年级
+     */
+    $.ajax({
+        type: 'POST',
+        url: 'getAllGrade',
+        cache: false,
+        dataType:'json',
+        success: function (result) {
+            if(result.stateCode == "403"){
+                showInfo(result.message);
+                window.location.href = "/403";
+            }else{
+                //清空之前的
+                $("#addGrade option[value!='0']").remove();
+                //设置年级下拉菜单
+                /*
+                 * <select id="addGrade" name="addGrade">
+                 <option value="">请选择....</option>
+                 </select>
+                 */
+                var data = result.entity;
+                for(var index in data) {
+                    var $option = $("<option></option>");
+                    $option.attr("value",data[index].gradeId);
+                    $option.text(data[index].gradeName);
+                    var $gradeElement = $("#addGrade");
+                    $gradeElement.append($option);
+                }
+            }
+
+        }
+    });
+
+
+    /**
      * 保存
      */
     $('#addStudent').click(function () {
@@ -96,46 +131,6 @@ $(function () {
 
 });
 
-/**
- * 点击添加学生的时候，调用该方法获取所有的年级
- */
-function addStudent() {
-
-    $.ajax({
-        type: 'POST',
-        url: 'getAllGrade',
-        cache: false,
-        dataType:'json',
-        success: function (result) {
-            if(result.stateCode == "403"){
-                showInfo(result.message);
-                window.location.href = "/403";
-            }else{
-                //清空之前的
-                $("#addGrade option[value!='0']").remove();
-                //设置年级下拉菜单
-                /*
-                 * <select id="addGrade" name="addGrade">
-                 <option value="">请选择....</option>
-                 </select>
-                 */
-                var data = result.entity;
-                for(var index in data) {
-                    var $option = $("<option></option>");
-                    $option.attr("value",data[index].gradeId);
-                    $option.text(data[index].gradeName);
-                    var $gradeElement = $("#addGrade");
-                    $gradeElement.append($option);
-                }
-            }
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            showInfo("抱歉系统繁忙..");
-        }
-    });
-
-}
 
 
 function showInfo(msg) {
