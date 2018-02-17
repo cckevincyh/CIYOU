@@ -26,4 +26,7 @@ interface SubjectMapper {
 
     @Delete("delete from Subject where subjectId = #{subjectId}")
     int deleteSubject(Integer subjectId)
+
+    @Select("select * from Subject order by subjectId")
+    List<Subject> getAllSubject()
 }

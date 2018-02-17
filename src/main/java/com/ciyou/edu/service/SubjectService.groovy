@@ -16,4 +16,6 @@ interface SubjectService {
     Subject getSubject(Integer subjectId)
 
     int deleteSubject(Integer subjectId)
+
+    List<Subject> getAllSubject()
 }

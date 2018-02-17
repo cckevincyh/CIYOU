@@ -44,4 +44,9 @@ class SubjectServiceImpl implements SubjectService{
     int deleteSubject(Integer subjectId) {
         return subjectMapper?.deleteSubject(subjectId)
     }
+
+    @Override
+    List<Subject> getAllSubject() {
+        return subjectMapper?.getAllSubject()
+    }
 }

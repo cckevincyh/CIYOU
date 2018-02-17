@@ -98,4 +98,12 @@ class ManageSubjectController {
         }
     }
 
+
+    @RequestMapping(value="/admin/getAllSubject",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getAllSubject(){
+        List<Subject> subjectList = subjectService?.getAllSubject()
+        return JSONUtil.returnEntityReuslt(subjectList)
+    }
+
 }
