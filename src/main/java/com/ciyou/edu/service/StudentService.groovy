@@ -26,4 +26,6 @@ interface StudentService {
     int deleteStudent(String sid)
 
     Page<Student> queryStudentByPage(String search,int pageNo, int pageSize)
+
+    int updateStudent(Student student)
 }

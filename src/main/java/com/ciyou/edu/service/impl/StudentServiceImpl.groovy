@@ -55,4 +55,9 @@ class StudentServiceImpl implements StudentService{
         PageHelper.startPage(pageNo, pageSize)
         return studentMapper?.queryStudentByPage(search)
     }
+
+    @Override
+    int updateStudent(Student student) {
+        return studentMapper?.updateStudent(student)
+    }
 }

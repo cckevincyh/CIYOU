@@ -165,4 +165,42 @@ class ManageStudentController {
         }
 
     }
+
+
+    @RequestMapping(value="/admin/updateStudent", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updateStudent(Student student, Integer classesId){
+        logger.info("修改Student信息：" + student + "班级：" + classesId)
+        //校验提交的Student
+        if(!student?.getName() || student?.getName()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("学生姓名不能为空")
+        }else if(!Pattern.compile("[\\u4E00-\\u9FFF]+")?.matcher(student?.getName())?.matches()){
+            return JSONUtil.returnFailReuslt("学生姓名必须为中文")
+        }else if(classesId == null || classesId == 0){
+            return JSONUtil.returnFailReuslt("班级不能为空")
+        }else if(student?.getAge() && !Pattern.compile( '^[1-9]+\\d*$')?.matcher(student?.getAge()?.toString())?.matches()){
+            return JSONUtil.returnFailReuslt("年龄必须为正整数")
+        }else if(student?.getMobile() && !Pattern.compile('^1[34578]\\d{9}$')?.matcher(student?.getMobile())?.matches()){
+            return JSONUtil.returnFailReuslt("电话号码有误")
+        }else if(student?.getEmail() && !Pattern.compile('^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+')?.matcher(student?.getEmail())?.matches()){
+            return JSONUtil.returnFailReuslt("邮箱有误")
+        }else if(student?.getParentMobile() && !Pattern.compile('^1[34578]\\d{9}$')?.matcher(student?.getParentMobile())?.matches()){
+            return JSONUtil.returnFailReuslt("家长电话号码有误")
+        }else if(student?.getParentEmail() && !Pattern.compile('^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+')?.matcher(student?.getParentEmail())?.matches()){
+            return JSONUtil.returnFailReuslt("家长邮箱有误")
+        }
+        Classes classes = new Classes()
+        classes.setClassesId(classesId)
+        student.setClasses(classes)
+        try{
+            if(studentService?.updateStudent(student)){
+                return JSONUtil.returnSuccessResult("修改成功")
+            }else{
+                return JSONUtil.returnFailReuslt("修改失败")
+            }
+        }catch (Exception e){
+            logger.info("修改Student错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("修改失败，请重试")
+        }
+    }
 }

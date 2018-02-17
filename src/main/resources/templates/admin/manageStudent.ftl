@@ -416,6 +416,7 @@
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">学号</label>
                         <div class="col-sm-7">
+                            <input type="hidden" id="updateSid" name="updateSid">
                             <input type="text" class="form-control" id="updateStudentId"  placeholder="请输入学生学号" readonly="readonly">
                             <label class="control-label" for="updateStudentId" style="display:none;"></label>
                         </div>

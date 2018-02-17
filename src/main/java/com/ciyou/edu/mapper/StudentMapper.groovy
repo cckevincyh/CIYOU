@@ -48,4 +48,7 @@ interface StudentMapper {
 
     @Select("select * from Student where (studentId like '%\${value}%' or name like '%\${value}%') and isAvalible = 1 ")
     Page<Student> queryStudentByPage(@Param("value")String value)
+
+    @Update("update Student set name = #{name}, sex = #{sex}, age = #{age} , mobile = #{mobile} , parentMobile = #{parentMobile} , email = #{email} , parentEmail = #{parentEmail} , classesId = #{classes.classesId} where sid = #{sid}")
+    int updateStudent(Student student)
 }
