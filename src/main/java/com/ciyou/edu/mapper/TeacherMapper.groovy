@@ -24,7 +24,7 @@ interface TeacherMapper {
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))])
     Page<Teacher> findAllTeacher()
 
-    @Select("select * from Teacher where  isAvalible = 1 and teacherId = #{teacherId} order by tid")
+    @Select("select * from Teacher where  isAvalible = 1 and teacherId = #{teacherId}")
     @Results([
             //查询关联对象
             @Result(property = "subject",

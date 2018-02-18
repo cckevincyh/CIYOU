@@ -8,18 +8,18 @@ $(function () {
 		
         $.ajax({
             type: 'POST',
-            url: 'login',
+            url: 'teacherLogin',
             cache: false,
             dataType:'json',
             data: {
-                studentId: $.trim($("#studentId").val()),
+                teacherId: $.trim($("#teacherId").val()),
                 password:$.trim($("#password").val())
 
             },
             success: function (data) {
                 $("#modal_info").modal("hide");//关闭模糊框
                 if(data.isSuccess){
-                    window.location.href = "/student/index";
+                    window.location.href = "/teacher/index";
                 }else{
                     showInfo(data.message);
                 }
@@ -37,16 +37,16 @@ $(function () {
 function validLogin() {
     var flag = true;
 
-    var studentId = $.trim($("#studentId").val());
-    if (studentId == "") {
-        $('#studentId').parent().addClass("has-error");
-        $('#studentId').next().next().html("<i class='fa fa-times-circle-o'></i>    请输入账号");
-        $("#studentId").next().next().show();
+    var teacherId = $.trim($("#teacherId").val());
+    if (teacherId == "") {
+        $('#teacherId').parent().addClass("has-error");
+        $('#teacherId').next().next().html("<i class='fa fa-times-circle-o'></i>    请输入账号");
+        $("#teacherId").next().next().show();
         flag = false;
     } else {
-        $('#studentId').parent().removeClass("has-error");
-        $('#studentId').next().next().html("");
-        $("#studentId").next().next().hide();
+        $('#teacherId').parent().removeClass("has-error");
+        $('#teacherId').next().next().html("");
+        $("#teacherId").next().next().hide();
     }
 
     var password = $.trim($("#password").val());

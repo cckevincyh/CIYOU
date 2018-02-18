@@ -34,6 +34,7 @@ class ShiroServiceImpl implements ShiroService{
         filterChainDefinitionMap.put("/logout", "logout")
         filterChainDefinitionMap.put("/favicon.ico", "anon")
         filterChainDefinitionMap.put("/adminLogin", "anon")
+        filterChainDefinitionMap.put("/teacherLogin", "anon")
         //允许访问静态资源
         filterChainDefinitionMap.put("/static/**", "anon")
         List<Permission> list = permissionMapper?.findAllPermission()
@@ -42,6 +43,7 @@ class ShiroServiceImpl implements ShiroService{
             filterChainDefinitionMap.put(permission?.getUrl(),"perms["+ permission?.getPermission() +"]")
         }
         filterChainDefinitionMap.put("/admin/**","roles[Admin]")
+        filterChainDefinitionMap.put("/teacher/**","roles[Teacher]")
         filterChainDefinitionMap.put("/student/**","roles[Student]")
         //   过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
         filterChainDefinitionMap.put("/**", "authc")

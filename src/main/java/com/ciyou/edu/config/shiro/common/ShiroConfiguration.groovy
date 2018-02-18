@@ -2,6 +2,7 @@ package com.ciyou.edu.config.shiro.common
 
 import com.ciyou.edu.config.shiro.admin.AdminShiroRealm
 import com.ciyou.edu.config.shiro.student.StudentShiroRealm
+import com.ciyou.edu.config.shiro.teacher.TeacherShiroRealm
 import com.ciyou.edu.entity.Permission
 import com.ciyou.edu.filter.ShiroPermissionsFilter
 import com.ciyou.edu.service.PermissionService
@@ -84,6 +85,7 @@ class ShiroConfiguration {
         filterChainDefinitionMap.put("/logout", "logout")
         filterChainDefinitionMap.put("/favicon.ico", "anon")
         filterChainDefinitionMap.put("/adminLogin", "anon")
+        filterChainDefinitionMap.put("/teacherLogin", "anon")
         //允许访问静态资源
         filterChainDefinitionMap.put("/static/**", "anon")
         // 从数据库获取所有的权限
@@ -95,6 +97,7 @@ class ShiroConfiguration {
         }
 
         filterChainDefinitionMap.put("/admin/**","roles[Admin]")
+        filterChainDefinitionMap.put("/teacher/**","roles[Teacher]")
         filterChainDefinitionMap.put("/student/**","roles[Student]")
         //   过滤链定义，从上向下顺序执行，一般将 /**放在最为下边
         filterChainDefinitionMap.put("/**", "authc")
@@ -115,6 +118,7 @@ class ShiroConfiguration {
         List<Realm> realms = new ArrayList<>()
         //添加多个Realm
         realms.add(adminShiroRealm())
+        realms.add(teacherShiroRealm())
         realms.add(studentShiroRealm())
         securityManager.setRealms(realms)
         // 自定义缓存实现 使用redis
@@ -223,6 +227,13 @@ class ShiroConfiguration {
         StudentShiroRealm studentShiroRealm = new StudentShiroRealm()
         studentShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher())//设置解密规则
         return studentShiroRealm
+    }
+
+    @Bean
+    public TeacherShiroRealm teacherShiroRealm() {
+        TeacherShiroRealm teacherShiroRealm = new TeacherShiroRealm()
+        teacherShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher())//设置解密规则
+        return teacherShiroRealm
     }
 
     //因为我们的密码是加过密的，所以，如果要Shiro验证用户身份的话，需要告诉它我们用的是md5加密的，并且是加密了两次。同时我们在自己的Realm中也通过SimpleAuthenticationInfo返回了加密时使用的盐。这样Shiro就能顺利的解密密码并验证用户名和密码是否正确了。

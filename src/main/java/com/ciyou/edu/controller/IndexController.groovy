@@ -56,6 +56,17 @@ class IndexController {
     public String login(){
         return "/login"
     }
+    @RequestMapping("/teacherLogin")
+    public String teacherLogin(){
+        return "/teacherLogin"
+    }
+
+
+    @RequestMapping("/teacher/index")
+    public String teacherIndex(){
+        return "/teacher/index"
+    }
+
 
     @RequestMapping("/student/index")
     public String index(){
