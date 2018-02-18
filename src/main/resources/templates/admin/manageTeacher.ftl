@@ -618,5 +618,6 @@
 
 <script src="${base}/static/js/admin/teacher/addTeacher.js"></script>
 <script src="${base}/static/js/admin/teacher/updateTeacher.js"></script>
+<script src="${base}/static/js/admin/teacher/deleteTeacher.js"></script>
 </body>
 </html>

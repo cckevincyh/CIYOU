@@ -41,9 +41,20 @@ interface TeacherMapper {
             @Result(property = "subject",
                     column = "subjectId",
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))])
-    Teacher getTeacherByTid(Integer tid)
+    Teacher getTeacherByTid(@Param("tid")Integer tid)
 
 
     @Update("update Teacher set name = #{name} , sex = #{sex} , mobile = #{mobile} , email = #{email} , picImg = #{picImg} , subjectId = #{subject.subjectId} where tid = #{tid}")
     int updateTeacher(Teacher teacher)
+
+    @Update("update Teacher set isAvalible = 0 where tid = #{tid}")
+    int deleteTeacher(@Param("tid")Integer tid)
+
+    @Select("select * from Teacher where (teacherId like '%\${value}%' or name like '%\${value}%') and isAvalible = 1 ")
+    @Results([
+            //查询关联对象
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))])
+    Page<Teacher> queryTeacherByPage(@Param("value")String value)
 }

@@ -43,4 +43,15 @@ class TeacherServiceImpl implements TeacherService{
     int updateTeacher(Teacher teacher) {
         return teacherMapper?.updateTeacher(teacher)
     }
+
+    @Override
+    int deleteTeacher(Integer tid) {
+        return teacherMapper?.deleteTeacher(tid)
+    }
+
+    @Override
+    Page<Teacher> queryTeacherByPage(String search, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return teacherMapper?.queryTeacherByPage(search)
+    }
 }

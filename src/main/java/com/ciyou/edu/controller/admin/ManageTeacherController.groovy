@@ -135,4 +135,44 @@ class ManageTeacherController {
             return JSONUtil.returnFailReuslt("修改失败，请重试")
         }
     }
+
+
+    @RequestMapping(value="/admin/deleteTeacher", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String deleteTeacher(Integer tid){
+        try{
+            if(teacherService?.deleteTeacher(tid)){
+                return JSONUtil.returnSuccessResult("删除成功")
+            }else{
+                return JSONUtil.returnFailReuslt("删除失败")
+            }
+        }catch (Exception e){
+            logger.info("删除Teacher错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
+        }
+    }
+
+
+    @RequestMapping(value="/admin/queryTeacher")
+    ModelAndView queryTeacher(String searchContent,Integer page){
+        if(page == null){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            //重定向到findAdminByPage Controller
+            ModelAndView mv = new ModelAndView("redirect:manageTeacher")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/admin/manageTeacher")
+            logger.info("queryTeacher : 查询第${page}页，携带查询参数=${searchContent}")
+            //不赋值pageSize，默认为10
+            Page<Teacher> teachers = teacherService?.queryTeacherByPage(searchContent?.trim(),page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Teacher> pageInfo = new PageInfo<Teacher>(teachers)
+            pageInfo?.setUrl("/admin/queryTeacher?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
+
+    }
 }

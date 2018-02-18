@@ -47,6 +47,11 @@ interface StudentMapper {
     int deleteStudent(@Param("sid")String sid)
 
     @Select("select * from Student where (studentId like '%\${value}%' or name like '%\${value}%') and isAvalible = 1 ")
+    @Results([
+            //查询关联对象
+            @Result(property = "classes",
+                    column = "classesId",
+                    one = @One(select = "com.ciyou.edu.mapper.ClassesMapper.getClasses"))])
     Page<Student> queryStudentByPage(@Param("value")String value)
 
     @Update("update Student set name = #{name}, sex = #{sex}, age = #{age} , mobile = #{mobile} , parentMobile = #{parentMobile} , email = #{email} , parentEmail = #{parentEmail} , classesId = #{classes.classesId} where sid = #{sid}")

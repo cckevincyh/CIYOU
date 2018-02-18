@@ -18,4 +18,8 @@ interface TeacherService {
     Teacher getTeacherByTid(Integer tid)
 
     int updateTeacher(Teacher teacher)
+
+    int deleteTeacher(Integer tid)
+
+    Page<Teacher> queryTeacherByPage(String search,int pageNo, int pageSize)
 }
