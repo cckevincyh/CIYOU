@@ -31,7 +31,13 @@ $(function () {
                     $("#email").val(data.entity.email);
                 }
             });
+        }else if(tartgetStr.lastIndexOf("#password") != -1){
+            //清除验证状态
+            $("#dict-form-password").data("bootstrapValidator").resetForm();
+            //清空数据
+            $('#dict-form-password')[0].reset();
         }
+
     });
     // 通过名称选取标签页
     $('#myTab a[href="#profile"]').tab('show');

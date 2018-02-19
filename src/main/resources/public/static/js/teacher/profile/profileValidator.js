@@ -98,8 +98,11 @@ $(function () {
                             }
                         }
                     }
+                    // emailAddress: {
+                    //     message: '邮箱格式正确'
+                    // },
                 }
-            },
+            }
         }
     });
 

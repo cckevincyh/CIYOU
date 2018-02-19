@@ -57,4 +57,10 @@ interface TeacherMapper {
                     column = "subjectId",
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))])
     Page<Teacher> queryTeacherByPage(@Param("value")String value)
+
+    @Update("update Teacher set name = #{name} , sex = #{sex} , mobile = #{mobile} , email = #{email} , subjectId = #{subject.subjectId} where tid = #{tid}")
+    int updateProfile(Teacher teacher)
+
+    @Update("update Teacher set password = #{password} where tid = #{tid}")
+    int updatePassword(@Param("tid")Integer tid, @Param("password")String password)
 }

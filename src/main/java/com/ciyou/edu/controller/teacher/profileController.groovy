@@ -5,6 +5,8 @@ import com.ciyou.edu.entity.Teacher
 import com.ciyou.edu.service.SubjectService
 import com.ciyou.edu.service.TeacherService
 import com.ciyou.edu.utils.JSONUtil
+import org.apache.shiro.SecurityUtils
+import org.apache.shiro.crypto.hash.Md5Hash
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -69,7 +71,7 @@ class profileController {
         teacher.setSubject(subject)
 
         try{
-            if(teacherService?.updateTeacher(teacher)){
+            if(teacherService?.updateProfile(teacher)){
                 return JSONUtil.returnSuccessResult("修改成功")
             }else{
                 return JSONUtil.returnFailReuslt("修改失败")
@@ -77,6 +79,48 @@ class profileController {
         }catch (Exception e){
             logger.info("修改Teacher错误：" + e.getMessage())
             return JSONUtil.returnFailReuslt("修改失败，请重试")
+        }
+    }
+
+
+    @RequestMapping(value="/teacher/updatePassword", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updatePassword(String oldPwd, String newPwd, String confirmPwd){
+        //校验数据
+        if(!oldPwd || oldPwd?.trim() == ""){
+            return JSONUtil.returnFailReuslt("原密码不能为空")
+        }else if(!newPwd || newPwd?.trim() == ""){
+            return JSONUtil.returnFailReuslt("新密码不能为空")
+        }else if(!confirmPwd || confirmPwd?.trim() == ""){
+            return JSONUtil.returnFailReuslt("确认密码不能为空")
+        }else if(oldPwd?.trim()?.length() < 3 || oldPwd?.trim()?.length() > 15){
+            return JSONUtil.returnFailReuslt("原密码长度必须在3~15之间")
+        }else if(newPwd?.trim()?.length() < 3 || newPwd?.trim()?.length() > 15){
+            return JSONUtil.returnFailReuslt("新密码长度必须在3~15之间")
+        }else if(newPwd != confirmPwd){
+            return JSONUtil.returnFailReuslt("确认密码不一致")
+        }
+        Teacher teacher = (Teacher)SecurityUtils.getSubject()?.getPrincipal()
+        //旧密码加密
+        String oldPasswordMd5= new Md5Hash(oldPwd,teacher?.getTeacherId(),2).toHex()
+        //比对原密码是否正确
+        if(oldPasswordMd5 != teacher?.getPassword()){
+            return JSONUtil.returnFailReuslt("原密码错误")
+        }else{
+            //新密码加密
+            String passwordMd5 = new Md5Hash(newPwd,teacher?.getTeacherId(),2).toHex()
+            try{
+                if(teacherService?.updatePassword(teacher?.getTid(),passwordMd5)){
+                    //登出
+                    SecurityUtils.getSubject()?.logout()
+                    return JSONUtil.returnSuccessResult("修改密码成功")
+                }else{
+                    return JSONUtil.returnFailReuslt("修改密码失败")
+                }
+            }catch (Exception e){
+                logger.info("修改Teacher密码错误：" + e.getMessage())
+                return JSONUtil.returnFailReuslt("修改密码失败，请重试")
+            }
         }
     }
 

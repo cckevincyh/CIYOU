@@ -54,4 +54,14 @@ class TeacherServiceImpl implements TeacherService{
         PageHelper.startPage(pageNo, pageSize)
         return teacherMapper?.queryTeacherByPage(search)
     }
+
+    @Override
+    int updateProfile(Teacher teacher) {
+        return teacherMapper?.updateProfile(teacher)
+    }
+
+    @Override
+    int updatePassword(Integer tid, String password) {
+        return teacherMapper?.updatePassword(tid,password)
+    }
 }

@@ -235,44 +235,36 @@
                                         </form>
                                     </div>
 
-                                    <div class="tab-pane fade" id="root">
-                                        <form class="form-horizontal bv-form" id="dict-form-root" novalidate="novalidate">
-                                            <div class="form-group">
-                                                <label for="addRootParentId" class="col-sm-2 control-label">父权限</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" disabled="disabled" id="addRootParentId" name="addRootParentId" placeholder="系统权限" readonly="readonly">
+                                    <div class="tab-pane fade" id="password">
+                                        <form class="form-horizontal bv-form" id="dict-form-password">
+                                            <div class="form-group has-feedback">
+                                                <label for="password" class="col-sm-2 control-label">原密码</label>
+                                                <div class="col-sm-4">
+                                                    <input type="password" class="form-control" id="oldPwd" name="oldPwd" placeholder="原密码" data-bv-field="oldPwd">
+                                                    <i class="form-control-feedback" data-bv-icon-for="oldPwd" style="display: none;"></i>
+                                                    <small data-bv-validator="notEmpty" data-bv-validator-for="oldPwd" class="help-block" style="display: none;"></small>
                                                 </div>
                                             </div>
 
                                             <div class="form-group has-feedback">
-                                                <label for="addRootName" class="col-sm-2 control-label">权限名</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="addRootName" name="addRootName" placeholder="权限名" data-bv-field="addRootName">
-                                                    <i class="form-control-feedback" data-bv-icon-for="addRootName" style="display: none;"></i>
-                                                    <small data-bv-validator="notEmpty" data-bv-validator-for="addRootName" class="help-block" style="display: none;"></small></div>
+                                                <label for="newPwd" class="col-sm-2 control-label">新密码</label>
+                                                <div class="col-sm-4">
+                                                    <input type="password" class="form-control" id="newPwd" name="newPwd" placeholder="新密码" data-bv-field="newPwd">
+                                                    <i class="form-control-feedback" data-bv-icon-for="newPwd" style="display: none;"></i>
+                                                    <small data-bv-validator="notEmpty" data-bv-validator-for="newPwd" class="help-block" style="display: none;"></small></div>
                                             </div>
                                             <div class="form-group has-feedback">
-                                                <label for="addRootPermission" class="col-sm-2 control-label">权限字符串</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="addRootPermission" name="addRootPermission" placeholder="权限字符串" data-bv-field="addRootPermission">
-                                                    <i class="form-control-feedback" data-bv-icon-for="addRootPermission" style="display: none;"></i>
-                                                    <small data-bv-validator="notEmpty" data-bv-validator-for="addRootPermission" class="help-block" style="display: none;"></small>
-                                                </div>
+                                                <label for="confirmPwd" class="col-sm-2 control-label">确认密码</label>
+                                                <div class="col-sm-4">
+                                                    <input type="password" class="form-control" id="confirmPwd" name="confirmPwd" placeholder="确认密码" data-bv-field="confirmPwd">
+                                                    <i class="form-control-feedback" data-bv-icon-for="confirmPwd" style="display: none;"></i>
+                                                    <small data-bv-validator="notEmpty" data-bv-validator-for="confirmPwd" class="help-block" style="display: none;"></small></div>
                                             </div>
 
-                                            <div class="form-group has-feedback">
-                                                <label for="addRootURL" class="col-sm-2 control-label">资源路径</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="addRootURL" name="addRootURL" placeholder="资源路径" data-bv-field="addRootURL">
-                                                    <i class="form-control-feedback" data-bv-icon-for="addRootURL" style="display: none;"></i>
-                                                    <small data-bv-validator="notEmpty" data-bv-validator-for="addRootURL" class="help-block" style="display: none;"></small></div>
-                                            </div>
                                             <div class="box-footer">
-                                                <div class="text-center">
-                                                    <button type="reset" class="btn btn-default" data-btn-type="cancel" id="rootCancel">
-                                                        <i class="fa fa-reply">&nbsp;取消</i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary" id="rootButton">
+                                                <div class="col-sm-5"></div>
+                                                <div class="col-sm-6">
+                                                    <button type="button" class="btn btn-primary" id="passwordButton">
                                                         <i class="fa fa-save">&nbsp;保存</i>
                                                     </button>
                                                 </div>
@@ -393,5 +385,7 @@
 
 <script src="${base}/static/js/teacher/profile/profileValidator.js"></script>
 <script src="${base}/static/js/teacher/profile/updateProfile.js"></script>
+<script src="${base}/static/js/teacher/profile/passwordValidator.js"></script>
+<script src="${base}/static/js/teacher/profile/updatePassword.js"></script>
 </body>
 </html>

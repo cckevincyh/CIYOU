@@ -22,4 +22,8 @@ interface TeacherService {
     int deleteTeacher(Integer tid)
 
     Page<Teacher> queryTeacherByPage(String search,int pageNo, int pageSize)
+
+    int updateProfile(Teacher teacher)
+
+    int updatePassword(Integer tid, String password)
 }
