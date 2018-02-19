@@ -177,119 +177,120 @@
             <div class="col-xs-12">
                 <div class="box">
                    <div class="container clearfix">
-            <div class="course-nav-box">
-                <div class="nav-container">
-                    <div class="title"><span class="title-allCourse-yang">全部课程:</span></div>
-                    <div class="direction">
-                        <div class="head">年级：</div>
-                        <div class="choice">
-                            <span name = "all" class = "all current">一年级</span>
-                            <span name = "fe" class = "fe">二年级</span>
-                            <span name = "be" class = "be">三年级</span>
-                            <span name = "mobile" class = "mobile">四年级</span>
-                            <span name = "data" class = "data">五年级</span>
-                            <span name = "photo" class = "photo">六年级</span>
-                        </div>
-                    </div>
-                    <div class="level">
-                        <div class="head">科目：</div>
-                        <div class="choice">
-                            <span name = "all" class="current">语文</span>
-                            <span name = "fe">数学</span>
-                            <span name = "be">英语</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-3 col-xs-6">
-                          <!-- small box -->
-                          <div class="small-box bg-aqua">
-                              <div class="inner">
-                                  <h3>150</h3>
+                            <div class="course-nav-box">
+                                 <div class="nav-container">
+                                    <div class="title"><span class="title-allCourse-yang">全部课程:</span></div>
+                                    <div class="direction">
+                                        <div class="head">年级：</div>
+                                        <div class="choice">
+                                            <span name = "all" class = "all current">一年级</span>
+                                            <span name = "fe" class = "fe">二年级</span>
+                                            <span name = "be" class = "be">三年级</span>
+                                            <span name = "mobile" class = "mobile">四年级</span>
+                                            <span name = "data" class = "data">五年级</span>
+                                            <span name = "photo" class = "photo">六年级</span>
+                                        </div>
+                                    </div>
+                                    <div class="level">
+                                        <div class="head">科目：</div>
+                                        <div class="choice">
+                                            <span name = "all" class="current">语文</span>
+                                            <span name = "fe">数学</span>
+                                            <span name = "be">英语</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-lg-3 col-xs-6">
+                                          <!-- small box -->
+                                          <div class="small-box bg-aqua">
+                                              <div class="inner">
+                                                  <h3>150</h3>
 
-                                  <p>New Orders</p>
-                              </div>
-                              <div class="icon">
-                                  <i class="fa fa-shopping-cart"></i>
-                              </div>
-                              <a href="#" class="small-box-footer">
-                                  More info <i class="fa fa-arrow-circle-right"></i>
-                              </a>
-                          </div>
-                      </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>150</h3>
+                                                  <p>New Orders</p>
+                                              </div>
+                                              <div class="icon">
+                                                  <i class="fa fa-shopping-cart"></i>
+                                              </div>
+                                              <a href="#" class="small-box-footer">
+                                                  More info <i class="fa fa-arrow-circle-right"></i>
+                                              </a>
+                                          </div>
+                                      </div>
+                                        <div class="col-lg-3 col-xs-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-aqua">
+                                                <div class="inner">
+                                                    <h3>150</h3>
 
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
+                                                    <p>New Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">
+                                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-xs-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-aqua">
+                                                <div class="inner">
+                                                    <h3>150</h3>
+
+                                                    <p>New Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">
+                                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-xs-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-aqua">
+                                                <div class="inner">
+                                                    <h3>150</h3>
+
+                                                    <p>New Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">
+                                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-xs-6">
+                                            <!-- small box -->
+                                            <div class="small-box bg-aqua">
+                                                <div class="inner">
+                                                    <h3>150</h3>
+
+                                                    <p>New Orders</p>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </div>
+                                                <a href="#" class="small-box-footer">
+                                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+
                             </div>
-                        </div>
-
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>150</h3>
-
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>150</h3>
-
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-aqua">
-                                <div class="inner">
-                                    <h3>150</h3>
-
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fa fa-shopping-cart"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                     </div>
+                </div>
             </div>
-
         </div>
-                </div>
-                </div>
-            </div>
 	</section>
       
    
