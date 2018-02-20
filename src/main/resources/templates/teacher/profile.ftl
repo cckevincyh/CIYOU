@@ -28,6 +28,11 @@
     <!-- bootstrap-validator -->
     <link rel="stylesheet" href="${base}/static/bower_components/bootstrap-validator/dist/css/bootstrap-validator.css"/>
 
+    <!--引入CSS-->
+    <link rel="stylesheet" type="text/css" href="${base}/static/webuploader/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="${base}/static/webuploader/cropper.css" />
+    <link rel="stylesheet" type="text/css" href="${base}/static/webuploader/style.css" />
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -175,9 +180,10 @@
                                 <ul class="nav nav-tabs" id="myTab">
                                     <li class=""><a href="#profile" data-toggle="tab" aria-expanded="true">个人资料</a></li>
                                     <li class=""><a href="#password" data-toggle="tab" aria-expanded="false">修改密码</a></li>
+                                    <li class=""><a href="#picImg" data-toggle="tab" aria-expanded="false">上传头像</a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane fade in active" id="profile">
+                                    <div class="tab-pane fade" id="profile">
                                         <form class="form-horizontal bv-form" id="dict-form-profile">
                                             <div class="form-group has-feedback">
                                                 <label for="name" class="col-sm-2 control-label">姓名</label>
@@ -224,6 +230,7 @@
                                                     <i class="form-control-feedback" data-bv-icon-for="email" style="display: none;"></i>
                                                     <small data-bv-validator="callback" data-bv-validator-for="email" class="help-block" style="display: none;"></small></div>
                                             </div>
+
                                             <div class="box-footer">
                                                 <div class="col-sm-5"></div>
                                                 <div class="col-sm-6">
@@ -271,6 +278,43 @@
                                             </div>
                                         </form>
                                     </div>
+
+                                    <div class="tab-pane fade in active" id="picImg">
+                                        <form class="form-horizontal bv-form" id="dict-form-profile">
+                                            <div class="form-group">
+                                                <label for="email" class="col-sm-2 control-label" style="margin-top: 15px;">上传头像</label>
+                                                <div class="col-sm-4">
+                                                    <div id="wrapper">
+                                                        <div class="uploader-container">
+                                                            <div id="filePicker">选择文件</div>
+                                                        </div>
+
+                                                        <!-- Croper container -->
+                                                        <div class="cropper-wraper webuploader-element-invisible">
+                                                            <div class="img-container">
+                                                                <img src="" alt="" />
+                                                            </div>
+
+                                                            <div class="upload-btn">上传所选区域</div>
+
+                                                            <div class="img-preview"></div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-footer">
+                                                <div class="col-sm-5"></div>
+                                                <div class="col-sm-6">
+                                                    <button type="button" class="btn btn-primary" id="profileButton">
+                                                        <i class="fa fa-save">&nbsp;保存</i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                 </div>
                                 <!-- /.tab-content -->
                             </div>
@@ -383,9 +427,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
+<!--引入JS-->
+<script type="text/javascript" src="${base}/static/webuploader/webuploader.js"></script>
+<script type="text/javascript" src="${base}/static/webuploader/cropper.js"></script>
+
 <script src="${base}/static/js/teacher/profile/profileValidator.js"></script>
 <script src="${base}/static/js/teacher/profile/updateProfile.js"></script>
 <script src="${base}/static/js/teacher/profile/passwordValidator.js"></script>
 <script src="${base}/static/js/teacher/profile/updatePassword.js"></script>
+<script src="${base}/static/js/teacher/profile/ImgUploader.js"></script>
 </body>
 </html>

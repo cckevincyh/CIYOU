@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.multipart.MultipartFile
 
+import javax.servlet.http.HttpServletRequest
 import java.util.regex.Pattern
 
 /**
@@ -72,6 +75,15 @@ class profileController {
 
         try{
             if(teacherService?.updateProfile(teacher)){
+                //重新存入session
+                SecurityUtils.getSubject()?.getSession()?.setAttribute("teacher",teacher)
+                //更新AuthenticationInfo
+                Teacher authenticationInfo = (Teacher)SecurityUtils?.getSubject()?.getPrincipal()
+                authenticationInfo?.setName(teacher?.getName())
+                authenticationInfo?.setSubject(teacher?.getSubject())
+                authenticationInfo?.setSex(teacher?.getSex())
+                authenticationInfo?.setMobile(teacher?.getMobile())
+                authenticationInfo?.setEmail(teacher?.getEmail())
                 return JSONUtil.returnSuccessResult("修改成功")
             }else{
                 return JSONUtil.returnFailReuslt("修改失败")
@@ -120,6 +132,47 @@ class profileController {
             }catch (Exception e){
                 logger.info("修改Teacher密码错误：" + e.getMessage())
                 return JSONUtil.returnFailReuslt("修改密码失败，请重试")
+            }
+        }
+    }
+
+    @RequestMapping(value="/teacher/ImgFileUpload", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String ImgFileUpload(@RequestParam MultipartFile file, HttpServletRequest request){
+        logger.info("头像上传....")
+        //获取文件名
+        String originalFilename = file.getOriginalFilename()
+        logger.info("上传文件名：" + originalFilename)
+        String realPath = request.getServletContext().getRealPath("/static/upload/teacher/")
+        String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename
+        logger.info("获取上传路径：" + realPath + ", 上传的真实文件名：" + uploadFileName)
+
+        //合并文件
+        RandomAccessFile raFile = null
+        BufferedInputStream inputStream = null
+        try{
+            File dirFile = new File(realPath, uploadFileName)
+            //以读写的方式打开目标文件
+            raFile = new RandomAccessFile(dirFile, "rw")
+            raFile.seek(raFile.length())
+            inputStream = new BufferedInputStream(file.getInputStream())
+            byte[] buf = new byte[1024]
+            int length = 0
+            while ((length = inputStream.read(buf)) != -1) {
+                raFile.write(buf, 0, length)
+            }
+        }catch(Exception e){
+            throw new IOException(e.getMessage())
+        }finally{
+            try {
+                if (inputStream != null) {
+                    inputStream.close()
+                }
+                if (raFile != null) {
+                    raFile.close()
+                }
+            }catch(Exception e){
+                throw new IOException(e.getMessage())
             }
         }
     }
