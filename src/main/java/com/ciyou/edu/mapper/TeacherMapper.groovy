@@ -63,4 +63,7 @@ interface TeacherMapper {
 
     @Update("update Teacher set password = #{password} where tid = #{tid}")
     int updatePassword(@Param("tid")Integer tid, @Param("password")String password)
+
+    @Update("update Teacher set picImg = #{picImg} where tid = #{tid}")
+    int updatePicImg(@Param("tid")Integer tid, @Param("picImg")String path)
 }

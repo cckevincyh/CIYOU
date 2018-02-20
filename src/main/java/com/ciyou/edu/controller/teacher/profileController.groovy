@@ -136,7 +136,7 @@ class profileController {
         }
     }
 
-    @RequestMapping(value="/teacher/ImgFileUpload", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @RequestMapping(value="/teacher/ImgFileUpload", method=RequestMethod.POST)
     @ResponseBody
     String ImgFileUpload(@RequestParam MultipartFile file, HttpServletRequest request){
         logger.info("头像上传....")
@@ -146,6 +146,7 @@ class profileController {
         String realPath = request.getServletContext().getRealPath("/static/upload/teacher/")
         String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename
         logger.info("获取上传路径：" + realPath + ", 上传的真实文件名：" + uploadFileName)
+        boolean flag = true
 
         //合并文件
         RandomAccessFile raFile = null
@@ -162,6 +163,8 @@ class profileController {
                 raFile.write(buf, 0, length)
             }
         }catch(Exception e){
+            flag = false
+            logger.info("上传出错:" + e.getMessage())
             throw new IOException(e.getMessage())
         }finally{
             try {
@@ -172,10 +175,27 @@ class profileController {
                     raFile.close()
                 }
             }catch(Exception e){
+                flag = false
+                logger.info("上传出错:" + e.getMessage())
                 throw new IOException(e.getMessage())
             }
         }
-    }
+        if(flag){
+            Teacher teacher = (Teacher)SecurityUtils.getSubject()?.getSession()?.getAttribute("teacher")
+            teacher?.setPicImg("/static/upload/teacher/" + uploadFileName)
+            //成功->修改教师头像
+            if(teacherService?.updatePicImg(teacher?.getTid(),teacher?.getPicImg())){
+                //重新存入session
+                SecurityUtils.getSubject()?.getSession()?.setAttribute("teacher",teacher)
+                //更新AuthenticationInfo
+                Teacher authenticationInfo = (Teacher)SecurityUtils?.getSubject()?.getPrincipal()
+                authenticationInfo?.setPicImg(teacher?.getPicImg())
+            }
+            return "success"
+        }else{
+            return "fail"
+        }
 
+    }
 
 }

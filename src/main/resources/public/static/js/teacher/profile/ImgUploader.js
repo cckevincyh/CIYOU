@@ -107,7 +107,7 @@
                     },
 
                     // 禁掉分块传输，默认是开起的。
-                    //chunked: false,
+                    chunked: false,
 
                     // 禁掉上传前压缩功能，因为会手动裁剪。
                     compress: false,
@@ -125,12 +125,12 @@
                         extensions: 'jpg,jpeg,png',
                         //解决WebUploader chrome 点击上传文件选择框会延迟几秒才会显示 反应很慢
                         mimeTypes: 'image/jpg,image/jpeg,image/png'   //修改这行
-                    },
+                    }
                     //formData: {"Authorization": localStorage.token}, //额外参数传递，可以没有
-                    chunked: true, //分片
-                    chunkSize: 10 * 1024 * 1024, //分片大小指定
-                    threads:1, //线程数量
-                    disableGlobalDnd: true //禁用拖拽
+                    // chunked: true, //分片
+                    // chunkSize: 10 * 1024 * 1024, //分片大小指定
+                    // threads:1, //线程数量
+                    // disableGlobalDnd: true //禁用拖拽
 
                     // onError: function() {
                     //     var args = [].slice.call(arguments, 0);
@@ -162,31 +162,14 @@
                     }
                 });
 
-                //开进度条
-                uploader.on( 'uploadProgress', function( file, percentage ) {
-                    var $li = $( '#'+file.id ),
-                        $percent = $li.find('.progress .progress-bar');
-                    if ( !$percent.length ) {
-                        $percent = $('<div class="progress progress-striped active">' +
-                            '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-                            '</div>' +
-                            '</div>').appendTo( $li ).find('.progress-bar');
-                    }
-                    $li.find('p.state').text('上传中');
-                    $percent.css( 'width', percentage * 100 + '%' );
+                // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                uploader.on( 'uploadSuccess', function( file ) {
+                    showInfo("上传成功");
                 });
 
-                //上传成功
-                uploader.on( "uploadSuccess", function( file ) {
-                    $( "#"+file.id ).find("p.state").text("已上传");
-                    $('#' + file.id).find('.progress').fadeOut();
-                });
-
-                //上传失败
-                uploader.on( "uploadError", function( file ) {
-                    $( "#"+file.id ).find("p.state").text("上传出错");
-                    uploader.cancelFile(file);
-                    uploader.removeFile(file,true);
+                // 文件上传失败，显示上传出错。
+                uploader.on( 'uploadError', function( file ) {
+                    showInfo("上传失败");
                 });
             },
 

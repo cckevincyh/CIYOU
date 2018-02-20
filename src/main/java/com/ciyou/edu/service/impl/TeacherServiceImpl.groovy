@@ -64,4 +64,9 @@ class TeacherServiceImpl implements TeacherService{
     int updatePassword(Integer tid, String password) {
         return teacherMapper?.updatePassword(tid,password)
     }
+
+    @Override
+    int updatePicImg(Integer tid,String path) {
+        return teacherMapper?.updatePicImg(tid,path)
+    }
 }
