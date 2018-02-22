@@ -1,10 +1,14 @@
 package com.ciyou.edu.controller.teacher
 
+import com.ciyou.edu.entity.Grade
 import com.ciyou.edu.entity.PageInfo
+import com.ciyou.edu.entity.Teacher
 import com.ciyou.edu.entity.Video
+import com.ciyou.edu.service.GradeService
 import com.ciyou.edu.service.VideoService
 import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
+import org.apache.shiro.SecurityUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -27,6 +31,9 @@ class ManageVideoController {
     private static final Logger logger = LoggerFactory.getLogger(ManageVideoController.class)
     @Autowired
     private VideoService videoService
+
+    @Autowired
+    private GradeService gradeService
 
     @RequestMapping("/teacher/manageVideo")
     ModelAndView findVideoByPage(Integer page){
@@ -149,5 +156,42 @@ class ManageVideoController {
             return JSONUtil.returnFailReuslt("fail")
         }
 
+    }
+
+
+    @RequestMapping(value="/teacher/getAllGrade",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getAllGrade(){
+        List<Grade> gradeList = gradeService?.findAllGrade()
+        return JSONUtil.returnEntityReuslt(gradeList)
+    }
+
+    @RequestMapping(value="/teacher/addVideo",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String addVideo(Video video){
+        logger.info("添加的video信息：" + video)
+        if(!video?.getVideoName() || video?.getVideoName()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("视频名称不能为空")
+        }else if(!video?.getVideoUrl() || video?.getVideoUrl()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请上传视频")
+        }else if(!video?.getImgUrl() || video?.getImgUrl()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请上传视频封面图片")
+        }else if(!video?.getGrade() || video?.getGrade()?.getGradeId() == 0){
+            return JSONUtil.returnFailReuslt("请选择年级")
+        }else if(!video?.getSubject() || video?.getSubject()?.getSubjectId() == 0){
+            return JSONUtil.returnFailReuslt("请选择科目")
+        }
+        video?.setCreateTime(new Date(System.currentTimeMillis()))
+        video?.setTeacher((Teacher)SecurityUtils?.getSubject()?.getPrincipal())
+        try{
+            if(videoService?.addVideo(video)){
+                return JSONUtil.returnSuccessResult("添加成功")
+            }else{
+                return JSONUtil.returnSuccessResult("添加失败")
+            }
+        }catch (Exception e){
+            logger.info("添加视频失败信息：" + e.getMessage())
+            return JSONUtil.returnSuccessResult("添加失败")
+        }
     }
 }

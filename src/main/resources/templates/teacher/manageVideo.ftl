@@ -223,7 +223,7 @@
                                       <td></td>
                                   </#if>
                                     <td>${video.createTime?string("yyyy-MM-dd HH:mm")!}</td>
-                                    <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${admin.adminId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${admin.adminId!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                    <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${video.videoId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${video.videoId!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                 </tr>
                             </#list>
                           <#else >
@@ -321,7 +321,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="addVideo" id="addVideo">
-                            <label class="control-label" for="addClasses" style="display:none;"></label>
+                            <label class="control-label" for="addVideo" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -336,7 +336,7 @@
                                 <div id="filePicker">选择图片</div>
                             </div>
                             <input type="hidden" name="addVideoImg" id="addVideoImg">
-                            <label class="control-label" for="addClasses" style="display:none;"></label>
+                            <label class="control-label" for="addVideoImg" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -366,7 +366,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="addVideo"><i class="fa fa-save"></i>
+                    <button type="button" class="btn btn-primary" id="addVideoButton"><i class="fa fa-save"></i>
                         保存
                     </button>
                 </div>
@@ -458,5 +458,6 @@
 
 <script type="text/javascript" src="${base}/static/js/teacher/video/imgWebUploader.js"></script>
 <script type="text/javascript" src="${base}/static/js/teacher/video/videoWebUploader.js"></script>
+<script type="text/javascript" src="${base}/static/js/teacher/video/addVideo.js"></script>
 </body>
 </html>

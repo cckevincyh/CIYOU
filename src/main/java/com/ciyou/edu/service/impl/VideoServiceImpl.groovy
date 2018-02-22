@@ -7,6 +7,7 @@ import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * @Author C.
@@ -22,5 +23,11 @@ class VideoServiceImpl implements VideoService{
     Page<Video> findByPage(int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
         return videoMapper?.findAllVideo()
+    }
+
+    @Transactional
+    @Override
+    int addVideo(Video video) {
+        return videoMapper?.addVideo(video)
     }
 }

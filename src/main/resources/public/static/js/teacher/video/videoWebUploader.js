@@ -45,6 +45,7 @@ jQuery(function() {
 
 // 当有文件被添加进队列的时候
     videoUploader.on('fileQueued', function (file) {
+        //清空之前append的
         $list1.empty();
         $list1.append('<div id="' + file.id + '" class="item">' +
             '<h4 class="info">' + file.name + '</h4>' +
@@ -72,7 +73,7 @@ jQuery(function() {
 
     videoUploader.on('uploadSuccess', function (file,response) {
         $('#' + file.id).find('p.state').text('已上传');
-            alert(response.message)
+        $("#addVideo").val(response.message);
     });
 
     videoUploader.on('uploadError', function (file,response) {

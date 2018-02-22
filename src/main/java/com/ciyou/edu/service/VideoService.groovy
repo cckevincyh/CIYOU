@@ -9,4 +9,6 @@ import com.github.pagehelper.Page
  */
 interface VideoService {
     Page<Video> findByPage(int pageNo, int pageSize)
+
+    int addVideo(Video video)
 }
