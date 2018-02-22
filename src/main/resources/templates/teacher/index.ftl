@@ -41,46 +41,46 @@
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <!-- 顶部菜单栏 -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
+      <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+              <span class="sr-only">Toggle navigation</span>
+          </a>
 
-     <!-- 顶部菜单栏 Message，Notifications：消息提示信息菜单栏-->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- 个人信息-->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="${base}${Session.teacher.picImg!}" class="user-image" alt="User Image">
-              <span class="hidden-xs">${Session.teacher.name!}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="${base}${Session.teacher.picImg!}" class="img-circle" alt="User Image">
+          <!-- 顶部菜单栏 Message，Notifications：消息提示信息菜单栏-->
+          <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                  <!-- 个人信息-->
+                  <li class="dropdown user user-menu">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <img src="${base}${Session.teacher.picImg!}" class="user-image" alt="User Image">
+                          <span class="hidden-xs">${Session.teacher.name!}</span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <!-- User image -->
+                          <li class="user-header">
+                              <img src="${base}${Session.teacher.picImg!}" class="img-circle" alt="User Image">
 
-                <p>
-                       ${Session.teacher.name!}
-                </p>
-              </li>
-              <!-- Menu Body -->
-        	<!-- 个人信息-->
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">登出</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
+                              <p>
+                              ${Session.teacher.name!}
+                              </p>
+                          </li>
+                          <!-- Menu Body -->
+                          <!-- 个人信息-->
+                          <!-- Menu Footer-->
+                          <li class="user-footer">
+                              <div class="pull-left">
+                                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                              </div>
+                              <div class="pull-right">
+                                  <a href="#" class="btn btn-default btn-flat">登出</a>
+                              </div>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+      </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <!-- 左部菜单栏 -->

@@ -115,7 +115,7 @@
                     // fileSingleSizeLimit: 2 * 1024 * 1024,
 
                     server: 'ImgFileUpload',
-                    swf: $.trim($("#tid").val()) + '/static/webuploader/Uploader.swf',
+                    swf: $.trim($("#BASE_URL").val()) + '/static/webuploader/Uploader.swf',
                     fileNumLimit: 1,
                     // 只允许选择图片文件。
                     accept: {
@@ -203,7 +203,7 @@
         var isBase64Supported, callback;
 
         $image.cropper({
-            aspectRatio: 16 / 9,
+            aspectRatio: 4 / 4,
             preview: ".img-preview",
             done: function(data) {
                 // console.log(data);
