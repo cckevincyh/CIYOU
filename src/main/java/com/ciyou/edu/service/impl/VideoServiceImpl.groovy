@@ -45,4 +45,10 @@ class VideoServiceImpl implements VideoService{
     int deleteVideo(Integer videoId) {
         return videoMapper?.deleteVideo(videoId)
     }
+
+    @Override
+    Page<Video> queryVideoByPage(String value, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return videoMapper?.queryVideoByPage(value)
+    }
 }

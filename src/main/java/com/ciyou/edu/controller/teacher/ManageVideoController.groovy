@@ -244,4 +244,28 @@ class ManageVideoController {
             return JSONUtil.returnFailReuslt("删除失败，请重试")
         }
     }
+
+
+    @RequestMapping(value="/teacher/queryVideo")
+    ModelAndView queryVideo(String searchContent,Integer page){
+        if(page == null){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            //重定向到findAdminByPage Controller
+            ModelAndView mv = new ModelAndView("redirect:manageVideo")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/teacher/manageVideo")
+            logger.info("queryVideo : 查询第${page}页，携带查询参数=${searchContent}")
+            //不赋值pageSize，默认为10
+            Page<Video> videos = videoService?.queryVideoByPage(searchContent?.trim(),page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Video> pageInfo = new PageInfo<Video>(videos)
+            pageInfo?.setUrl("/admin/queryVideo?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
+
+    }
 }

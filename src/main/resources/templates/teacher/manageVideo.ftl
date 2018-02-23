@@ -192,7 +192,7 @@
                           <h3 class="box-title"></h3>
                           <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 添加视频</div>
                           <div class="box-tools">
-                              <form class="form-horizontal" action="${base}/admin/queryAdmin" method="get">
+                              <form class="form-horizontal" action="${base}/teacher/queryVideo" method="get">
                                   <div class="input-group input-group-sm" style="width: 150px;">
                                       <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
                                       <div class="input-group-btn">

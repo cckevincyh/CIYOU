@@ -17,4 +17,6 @@ interface VideoService {
     int updateVideo(Video video)
 
     int deleteVideo(Integer videoId)
+
+    Page<Video> queryVideoByPage(String value,int pageNo, int pageSize)
 }

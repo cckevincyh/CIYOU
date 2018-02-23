@@ -54,4 +54,19 @@ interface VideoMapper {
 
     @Update("update Video set videoType = 0 where videoId = #{videoId}")
     int deleteVideo(@Param("videoId")Integer videoId)
+
+    @Select("select Video.* from Video,Grade,Subject,Teacher where (Video.videoId like '%\${value}%' or Video.videoName like '%\${value}%' or Teacher.name like '%\${value}%' or Grade.gradeName like '%\${value}%' or Subject.subjectName like '%\${value}%') and videoType <> 0 and Video.gradeId = Grade.gradeId and Video.subjectId = Subject.subjectId and Video.teacherId = Teacher.tid order by Video.videoId")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "teacherId",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Page<Video> queryVideoByPage(@Param("value")String value)
 }
