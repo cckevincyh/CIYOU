@@ -229,4 +229,19 @@ class ManageVideoController {
             return JSONUtil.returnSuccessResult("修改失败")
         }
     }
+
+    @RequestMapping(value="/teacher/deleteVideo",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String deleteVideo(Integer videoId){
+        try{
+            if(videoService?.deleteVideo(videoId)){
+                return JSONUtil.returnSuccessResult("删除成功")
+            }else{
+                return JSONUtil.returnFailReuslt("删除失败")
+            }
+        }catch (Exception e){
+            logger.info("删除Video错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
+        }
+    }
 }

@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Update
  */
 interface VideoMapper {
 
-    @Select("select * from Video order by videoId")
+    @Select("select * from Video where videoType <> 0 order by videoId ")
     @Results([
             //查询关联对象
             @Result(property = "grade",
@@ -34,7 +34,7 @@ interface VideoMapper {
     @Insert("insert into Video(videoName,videoUrl,imgUrl,teacherId,subjectId,gradeId,createTime) values(#{videoName},#{videoUrl},#{imgUrl},#{teacher.tid},#{subject.subjectId},#{grade.gradeId},#{createTime})")
     int addVideo(Video video)
 
-    @Select("select * from Video where videoId = #{videoId}")
+    @Select("select * from Video where videoId = #{videoId} and videoType <> 0")
     @Results([
             //查询关联对象
             @Result(property = "grade",
@@ -51,4 +51,7 @@ interface VideoMapper {
 
     @Update("update Video set videoName = #{videoName}, videoUrl = #{videoUrl}, imgUrl = #{imgUrl}, subjectId = #{subject.subjectId}, gradeId = #{grade.gradeId} where videoId = #{videoId}")
     int updateVideo(Video video)
+
+    @Update("update Video set videoType = 0 where videoId = #{videoId}")
+    int deleteVideo(@Param("videoId")Integer videoId)
 }

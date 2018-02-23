@@ -213,6 +213,7 @@
                                   <th>科目</th>
                                   <th>教师</th>
                                   <th>创建时间</th>
+                                  <th>状态</th>
                                   <th>操作</th>
                               </tr>
                           <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
@@ -241,12 +242,17 @@
                                       <td></td>
                                   </#if>
                                     <td>${video.createTime?string("yyyy-MM-dd HH:mm")!}</td>
-                                    <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="update_Video(${video.videoId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${video.videoId!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                    <#if video.videoType == 1>
+                                        <td>未审核</td>
+                                    <#elseif video.videoType == 2>
+                                        <td>通过审核</td>
+                                    </#if>
+                                    <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="update_Video(${video.videoId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteVideo(${video.videoId!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                 </tr>
                             </#list>
                           <#else >
                               <tr>
-                                  <td colspan="8" align="center">暂无数据</td>
+                                  <td colspan="9" align="center">暂无数据</td>
                           <tr>
                           </#if>
                           </table>
@@ -576,6 +582,7 @@
 <script type="text/javascript" src="${base}/static/js/teacher/video/updateImgWebUploader.js"></script>
 <script type="text/javascript" src="${base}/static/js/teacher/video/updateVideoWebUploader.js"></script>
 <script type="text/javascript" src="${base}/static/js/teacher/video/updateVideo.js"></script>
+<script type="text/javascript" src="${base}/static/js/teacher/video/deleteVideo.js"></script>
 <script type="text/javascript" src="${base}/static/video/js/video.min.js"></script>
 <script>
 //去除右键事件

@@ -15,4 +15,6 @@ interface VideoService {
     Video getVideoById(Integer videoId)
 
     int updateVideo(Video video)
+
+    int deleteVideo(Integer videoId)
 }

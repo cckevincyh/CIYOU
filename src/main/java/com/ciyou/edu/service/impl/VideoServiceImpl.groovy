@@ -40,4 +40,9 @@ class VideoServiceImpl implements VideoService{
     int updateVideo(Video video) {
         return videoMapper?.updateVideo(video)
     }
+
+    @Override
+    int deleteVideo(Integer videoId) {
+        return videoMapper?.deleteVideo(videoId)
+    }
 }
