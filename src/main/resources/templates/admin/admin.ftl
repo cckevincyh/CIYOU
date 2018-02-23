@@ -110,7 +110,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${base}/admin/checkVideo">
                         <i class="fa fa-video-camera"></i> <span>视频管理</span>
                     </a>
                 </li>
