@@ -88,12 +88,6 @@ jQuery(function() {
             }
 
             $error.text('上传失败');
-            if (response.stateCode == "403") {
-                showInfo(response.message);
-                window.location.href = "/403";
-            } else {
-                alert(response.message)
-            }
         });
     });
 

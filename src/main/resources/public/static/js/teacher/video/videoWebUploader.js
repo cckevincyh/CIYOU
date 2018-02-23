@@ -23,8 +23,8 @@ jQuery(function() {
         resize: false,
         accept: {
             title: '视频文件上传',  //文字描述
-            extensions: 'mp4,rmvb,avi,flv',     //允许的文件后缀，不带点，多个用逗号分割。,jpg,png,
-            mimeTypes: 'video/x-msvideo,video/vnd.rn-realvideo,video/mp4,video/x-flv'      //多个用逗号分割。,
+            extensions: 'mp4',     //允许的文件后缀，不带点，多个用逗号分割。,jpg,png,
+            mimeTypes: 'video/mp4'      //多个用逗号分割。,
         },
          duplicate : true,// 是否可重复选择同一文件
         compress: null,
@@ -39,7 +39,7 @@ jQuery(function() {
      */
     videoUploader.on("error", function (type) {
         if (type == "Q_TYPE_DENIED") {
-            showInfo1("请上传mp4,rmvb,avi,flv格式文件");
+            showInfo1("请上传mp4格式文件");
         }
     });
 

@@ -43,28 +43,6 @@ $.ajax({
     }
 });
 
-/**
- * 获取年级
- */
-$.ajax({
-    type: 'POST',
-    url: 'getAllSubject',
-    cache: false,
-    dataType: 'json',
-    success: function (result) {
-        //清空之前的
-        $("#addSubjectId option[value!='0']").remove();
-        //设置年级下拉菜单
-        var data = result.entity;
-        for(var index in data) {
-            var $option = $("<option></option>");
-            $option.attr("value",data[index].subjectId);
-            $option.text(data[index].subjectName);
-            var $subjectElement = $("#addSubjectId");
-            $subjectElement.append($option);
-        }
-    }
-});
 
 
 $(function () {
