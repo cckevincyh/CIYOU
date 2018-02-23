@@ -69,4 +69,7 @@ interface VideoMapper {
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
     ])
     Page<Video> queryVideoByPage(@Param("value")String value)
+
+    @Update("update Video set videoType = #{videoType} where videoId = #{videoId}")
+    int updateVideoType(@Param("videoId")Integer videoId, @Param("videoType")Integer videoType)
 }

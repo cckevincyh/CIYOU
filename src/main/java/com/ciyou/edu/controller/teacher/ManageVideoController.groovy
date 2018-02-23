@@ -41,7 +41,7 @@ class ManageVideoController {
             page = 1
         }
         ModelAndView mv = new ModelAndView("teacher/manageVideo")
-        logger.info("findAdminByPage : 查询第${page}页")
+        logger.info("findVideoByPage : 查询第${page}页")
         //不赋值pageSize，默认为10
         Page<Video> videos = videoService?.findByPage(page)
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
@@ -252,7 +252,6 @@ class ManageVideoController {
             page = 1
         }
         if(!searchContent || searchContent?.trim() == ""){
-            //重定向到findAdminByPage Controller
             ModelAndView mv = new ModelAndView("redirect:manageVideo")
             return mv
         }else{

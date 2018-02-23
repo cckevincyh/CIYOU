@@ -149,7 +149,6 @@ class ManageStudentController {
             page = 1
         }
         if(!searchContent || searchContent?.trim() == ""){
-            //重定向到findAdminByPage Controller
             ModelAndView mv = new ModelAndView("redirect:manageStudent")
             return mv
         }else{

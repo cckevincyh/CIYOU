@@ -51,4 +51,9 @@ class VideoServiceImpl implements VideoService{
         PageHelper.startPage(pageNo, pageSize)
         return videoMapper?.queryVideoByPage(value)
     }
+
+    @Override
+    int updateVideoType(Integer videoId, Integer videoType) {
+        return videoMapper?.updateVideoType(videoId,videoType)
+    }
 }
