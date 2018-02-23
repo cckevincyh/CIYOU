@@ -63,71 +63,65 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <!-- 左部菜单栏 -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <!-- 左部菜单栏 -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
 
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">菜单导航</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>用户管理</span>
-            <span class="pull-right-container">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">菜单导航</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-group"></i> <span>用户管理</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> 管理员管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 教师管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 学生管理</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>权限管理</span>
-          </a>
-        </li>
-        <li class="active">
-          <a href="#">
-            <i class="fa fa-th"></i> <span>年级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>班级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>课程管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>视频管理</span>
-          </a>
-		  </li>
-		  <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>系统消息</span>
-          </a>
-		  </li>
-		   <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>正在开发</span>
-          </a>
-		  </li>
-		  
-		  
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="${base}/admin/manageAdmin"><i class="fa fa-user"></i> 管理员管理</a></li>
+                        <li><a href="${base}/admin/manageTeacher"><i class="fa fa-user"></i> 教师管理</a></li>
+                        <li><a href="${base}/admin/manageStudent"><i class="fa fa-user"></i> 学生管理</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="${base}/admin/managePermission">
+                        <i class="fa  fa-unlock-alt"></i>
+                        <span>权限管理</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="${base}/admin/manageGrade">
+                        <i class="fa fa-graduation-cap"></i> <span>年级管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${base}/admin/manageClasses">
+                        <i class="fa fa-graduation-cap"></i> <span>班级管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${base}/admin/manageSubject">
+                        <i class="fa  fa-book"></i> <span>课程管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-video-camera"></i> <span>视频管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-spinner"></i> <span>正在开发</span>
+                    </a>
+                </li>
 
- 
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
 
+
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
   <!-- 中间部分 -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="min-height: 200px;">
