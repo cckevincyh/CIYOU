@@ -28,6 +28,20 @@
     <!--引入CSS-->
     <link rel="stylesheet" type="text/css" href="${base}/static/webuploader/webuploader.css">
     <link rel="stylesheet" type="text/css" href="${base}/static/css/videoImg.css">
+    <link rel="stylesheet" href="${base}/static/video/css/video-js.css" type="text/css">
+    <style type="text/css">
+        video::-internal-media-controls-download-button {
+            display:none;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            overflow:hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -194,7 +208,7 @@
                               <tr>
                                   <th>ID</th>
                                   <th>视频名称</th>
-                                  <th>视频地址</th>
+                                  <th>视频</th>
                                   <th>年级</th>
                                   <th>科目</th>
                                   <th>教师</th>
@@ -206,7 +220,11 @@
                                 <tr>
                                     <td>${video.videoId!}</td>
                                     <td>${video.videoName!}</td>
-                                    <td>${video.videoUrl!}</td>
+                                    <td>
+                                        <video class="video-js vjs-default-skin vjs-big-play-centered" controls  preload="auto" poster="${video.imgUrl!}" width="250" height="150" data-setup="{}">
+                                             <source src="${base}${video.videoUrl!}" type="video/mp4"/>
+                                        </video>
+                                    </td>
                                   <#if video.grade??>
                                       <td>${video.grade.gradeName!}</td>
                                   <#else >
@@ -223,7 +241,7 @@
                                       <td></td>
                                   </#if>
                                     <td>${video.createTime?string("yyyy-MM-dd HH:mm")!}</td>
-                                    <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateAdmin(${video.videoId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${video.videoId!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                    <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="update_Video(${video.videoId!})"><i class="fa fa-fw fa-edit"></i></button>  <button class="btn btn-danger btn-xs" onclick="deleteAdmin(${video.videoId!})"><i class="fa fa-fw fa-trash"></i></button></td>
                                 </tr>
                             </#list>
                           <#else >
@@ -376,6 +394,101 @@
 
 </form>
 
+
+<!-- 修改模态框（Modal） -->
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="updateModalLabel">
+                        修改视频信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">视频名称</label>
+                        <div class="col-sm-7">
+                            <input type="hidden" id="updateVideoId">
+                            <input type="text" class="form-control" id="updateVideoName"  placeholder="请输入视频名称">
+                            <label class="control-label" for="updateVideoName" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">视频</label>
+                        <div class="col-sm-7">
+                            <!--dom结构部分-->
+                            <div id="uploader" class="wu-example">
+                                <!--用来存放文件信息-->
+                                <div id="updateThelist" class="uploader-list"></div>
+                                <div class="btns">
+                                    <div id="updatePicker">选择文件</div>
+                                    <button id="updateCtlBtn" class="btn btn-default" type="button">开始上传</button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="updateVideo" id="updateVideo">
+                            <label class="control-label" for="updateVideo" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">视频封面</label>
+                        <div class="col-sm-7">
+                            <!--dom结构部分-->
+                            <div id="uploader-demo">
+                                <!--用来存放item-->
+                                <div id="updateFileList" class="uploader-list"></div>
+                                <div id="updateFilePicker">选择图片</div>
+                            </div>
+                            <input type="hidden" name="updateVideoImg" id="updateVideoImg">
+                            <label class="control-label" for="updateVideoImg" style="display:none;"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">年级</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateGradeId">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateGradeId" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">科目</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateSubjectId">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateSubjectId" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <!---------------------表单-------------------->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="updateVideoButton"><i class="fa fa-save"></i>
+                        保存
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+
 <!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
     <div class="modal-dialog" role="document">
@@ -459,5 +572,16 @@
 <script type="text/javascript" src="${base}/static/js/teacher/video/imgWebUploader.js"></script>
 <script type="text/javascript" src="${base}/static/js/teacher/video/videoWebUploader.js"></script>
 <script type="text/javascript" src="${base}/static/js/teacher/video/addVideo.js"></script>
+
+<script type="text/javascript" src="${base}/static/js/teacher/video/updateImgWebUploader.js"></script>
+<script type="text/javascript" src="${base}/static/js/teacher/video/updateVideoWebUploader.js"></script>
+<script type="text/javascript" src="${base}/static/js/teacher/video/updateVideo.js"></script>
+<script type="text/javascript" src="${base}/static/video/js/video.min.js"></script>
+<script>
+//去除右键事件
+$("video").bind("contextmenu",function(){//取消右键事件
+    return false;
+});
+</script>
 </body>
 </html>

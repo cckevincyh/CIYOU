@@ -59,7 +59,7 @@ class ManageVideoController {
         //获取文件名
         String originalFilename = file.getOriginalFilename()
         logger.info("上传文件名：" + originalFilename)
-        String realPath = request.getServletContext().getRealPath("/static/upload/videoImg/")
+        String realPath = request.getServletContext().getRealPath("/public/videoImg/")
         String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename
         logger.info("获取上传路径：" + realPath + ", 上传的真实文件名：" + uploadFileName)
         boolean flag = true
@@ -97,7 +97,7 @@ class ManageVideoController {
             }
         }
         if(flag){
-            return JSONUtil.returnSuccessResult("/static/upload/videoImg/" + uploadFileName)
+            return JSONUtil.returnSuccessResult("/public/videoImg/" + uploadFileName)
         }else{
             return JSONUtil.returnFailReuslt("fail")
         }
@@ -113,7 +113,7 @@ class ManageVideoController {
         //获取文件名
         String originalFilename = file.getOriginalFilename()
         logger.info("上传文件名：" + originalFilename)
-        String realPath = request.getServletContext().getRealPath("/static/upload/video/")
+        String realPath = request.getServletContext().getRealPath("/public/video/")
         String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename
         logger.info("获取上传路径：" + realPath + ", 上传的真实文件名：" + uploadFileName)
         boolean flag = true
@@ -151,7 +151,7 @@ class ManageVideoController {
             }
         }
         if(flag){
-            return JSONUtil.returnSuccessResult("/static/upload/video/" + uploadFileName)
+            return JSONUtil.returnSuccessResult("/public/video/" + uploadFileName)
         }else{
             return JSONUtil.returnFailReuslt("fail")
         }
@@ -192,6 +192,41 @@ class ManageVideoController {
         }catch (Exception e){
             logger.info("添加视频失败信息：" + e.getMessage())
             return JSONUtil.returnSuccessResult("添加失败")
+        }
+    }
+
+
+    @RequestMapping(value="/teacher/getVideoById",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getVideoById(Integer videoId){
+        logger.info("获取的视频VideoId = " + videoId)
+        return JSONUtil.returnEntityReuslt(videoService?.getVideoById(videoId))
+    }
+
+    @RequestMapping(value="/teacher/updateVideo",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updateVideo(Video video){
+        logger.info("修改的video信息：" + video)
+        if(!video?.getVideoName() || video?.getVideoName()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("视频名称不能为空")
+        }else if(!video?.getVideoUrl() || video?.getVideoUrl()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请上传视频")
+        }else if(!video?.getImgUrl() || video?.getImgUrl()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请上传视频封面图片")
+        }else if(!video?.getGrade() || video?.getGrade()?.getGradeId() == 0){
+            return JSONUtil.returnFailReuslt("请选择年级")
+        }else if(!video?.getSubject() || video?.getSubject()?.getSubjectId() == 0){
+            return JSONUtil.returnFailReuslt("请选择科目")
+        }
+        try{
+            if(videoService?.updateVideo(video)){
+                return JSONUtil.returnSuccessResult("修改成功")
+            }else{
+                return JSONUtil.returnSuccessResult("修改失败")
+            }
+        }catch (Exception e){
+            logger.info("修改视频失败信息：" + e.getMessage())
+            return JSONUtil.returnSuccessResult("修改失败")
         }
     }
 }
