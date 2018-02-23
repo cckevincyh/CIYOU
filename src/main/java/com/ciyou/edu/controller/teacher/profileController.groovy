@@ -143,7 +143,7 @@ class profileController {
         //获取文件名
         String originalFilename = file.getOriginalFilename()
         logger.info("上传文件名：" + originalFilename)
-        String realPath = request.getServletContext().getRealPath("/static/upload/teacher/")
+        String realPath = request.getServletContext().getRealPath("/public/teacher/")
         String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename
         logger.info("获取上传路径：" + realPath + ", 上传的真实文件名：" + uploadFileName)
         boolean flag = true
@@ -182,7 +182,7 @@ class profileController {
         }
         if(flag){
             Teacher teacher = (Teacher)SecurityUtils.getSubject()?.getSession()?.getAttribute("teacher")
-            teacher?.setPicImg("/static/upload/teacher/" + uploadFileName)
+            teacher?.setPicImg("/public/teacher/" + uploadFileName)
             //成功->修改教师头像
             if(teacherService?.updatePicImg(teacher?.getTid(),teacher?.getPicImg())){
                 //重新存入session
