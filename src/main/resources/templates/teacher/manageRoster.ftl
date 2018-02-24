@@ -467,5 +467,6 @@
 
 <script src="${base}/static/js/teacher/roster/addRoster.js"></script>
 <script src="${base}/static/js/teacher/roster/updateRoster.js"></script>
+<script src="${base}/static/js/teacher/roster/deleteRoster.js"></script>
 </body>
 </html>

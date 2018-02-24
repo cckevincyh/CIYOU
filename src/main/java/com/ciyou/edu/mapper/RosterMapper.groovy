@@ -52,4 +52,7 @@ interface RosterMapper {
 
     @Update("Update Roster set classesId = #{classesId}")
     int updateRoster(@Param("classesId")Integer classesId)
+
+    @Update("Delete from Roster where rid = #{rid}")
+    int deleteRoster(@Param("rid")Integer rid)
 }

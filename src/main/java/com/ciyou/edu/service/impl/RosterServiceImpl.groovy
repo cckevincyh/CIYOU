@@ -50,4 +50,9 @@ class RosterServiceImpl implements RosterService{
     int updateRoster(Integer classesId) {
         return rosterMapper?.updateRoster(classesId)
     }
+
+    @Override
+    int deleteRoster(Integer rid) {
+        return rosterMapper?.deleteRoster(rid)
+    }
 }

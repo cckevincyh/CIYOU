@@ -15,4 +15,6 @@ interface RosterService {
     int addRoster(Integer classesId)
 
     int updateRoster(Integer classesId)
+
+    int deleteRoster(Integer rid)
 }
