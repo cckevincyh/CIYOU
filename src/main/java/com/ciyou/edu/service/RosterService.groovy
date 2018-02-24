@@ -13,4 +13,6 @@ interface RosterService {
     Roster getRosterById(Integer rid)
 
     int addRoster(Integer classesId)
+
+    int updateRoster(Integer classesId)
 }

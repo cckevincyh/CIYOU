@@ -93,4 +93,31 @@ class ManageRosterController {
             }
         }
     }
+
+
+    @RequestMapping(value="/teacher/updateRoster",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updateRoster(Integer classesId){
+        //校验数据
+        if(classesId == null || classesId == 0){
+            return JSONUtil.returnFailReuslt("请选择班级")
+        }
+        else{
+            try{
+                //一个班只能有一个科目的老师
+                if(rosterService?.updateRoster(classesId)){
+                    return JSONUtil.returnSuccessResult("修改成功")
+                }else{
+                    return JSONUtil.returnFailReuslt("修改失败")
+                }
+            }catch (Exception e){
+                logger.info("修改Roster错误：" + e.getMessage())
+                if(e.getMessage()?.contains("Duplicate entry")){
+                    return JSONUtil.returnFailReuslt("一个班只能有一个科目的老师")
+                }else{
+                    return JSONUtil.returnFailReuslt("修改失败，请重试")
+                }
+            }
+        }
+    }
 }

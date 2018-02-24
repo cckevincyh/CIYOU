@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Result
 import org.apache.ibatis.annotations.Results
 import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.Update
 
 /**
  * @Author C.
@@ -48,4 +49,7 @@ interface RosterMapper {
 
     @Insert("insert into Roster(tid,classesId,subjectId) values(#{tid},#{classesId},#{subjectId})")
     int addRoster(@Param("tid")Integer tid,@Param("classesId")Integer classesId,@Param("subjectId")Integer subjectId)
+
+    @Update("Update Roster set classesId = #{classesId}")
+    int updateRoster(@Param("classesId")Integer classesId)
 }

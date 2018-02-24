@@ -343,7 +343,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="updateModalLabel">
-                        修改管理员信息
+                        修改班级分配
                     </h4>
                 </div>
                 <div class="modal-body">

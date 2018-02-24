@@ -45,4 +45,9 @@ class RosterServiceImpl implements RosterService{
             return 0
         }
     }
+
+    @Override
+    int updateRoster(Integer classesId) {
+        return rosterMapper?.updateRoster(classesId)
+    }
 }
