@@ -135,7 +135,7 @@
     <section class="content-header">
       <h1>
           首页
-        <small>系统描述</small>
+        <small>功能描述</small>
       </h1>
       <ol class="breadcrumb">
         <li class="active"><a href="${base}/admin/admin"><i class="fa fa-dashboard"></i> 首页</a></li>

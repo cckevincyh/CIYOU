@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CIYOU | 首页</title>
+  <title>CIYOU | 个人设置</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -39,7 +39,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="${base}/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>.</span>
       <!-- logo for regular state and mobile devices -->
@@ -76,7 +76,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                  <a href="${base}/teacher/profile" class="btn btn-default btn-flat">个人资料</a>
                 </div>
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">登出</a>
@@ -89,74 +89,69 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <!-- 左部菜单栏 -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="${base}${Session.teacher.picImg!}" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>${Session.teacher.name!}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-     
-     
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">菜单导航</li>
-          <li class="active">
-              <a href="#">
-                  <i class="fa fa-files-o"></i>
-                  <span>观看视频</span>
-              </a>
-          </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>权限管理</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>年级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>班级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>课程管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>视频管理</span>
-          </a>
-		  </li>
-		  <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>系统消息</span>
-          </a>
-		  </li>
-		   <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>正在开发</span>
-          </a>
-		  </li>
-		  
-		  
+    <!-- 左部菜单栏 -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="${base}${Session.teacher.picImg!}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>${Session.teacher.name!}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
 
- 
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">菜单导航</li>
+                <li>
+                    <a href="${base}/teacher/manageVideo">
+                        <i class="fa fa-video-camera"></i>
+                        <span>视频管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${base}/teacher/manageRoster">
+                        <i class="fa fa-sitemap"></i>
+                        <span>班级分配</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-mortar-board"></i> <span>学生管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>小测管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-search"></i> <span>成绩查询</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="${base}/teacher/profile">
+                        <i class="fa fa-cogs"></i> <span>个人设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-spinner"></i> <span>正在开发</span>
+                    </a>
+                </li>
+
+
+
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
   <!-- 中间部分 -->
   <!-- Content Wrapper. Contains page content -->
@@ -164,11 +159,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          个人资料
+          个人设置
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> 个人资料</a></li>
+          <li><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active"><i class="fa fa-cogs"></i> 个人设置</a></li>
       </ol>
     </section>
 
@@ -332,14 +328,14 @@
    
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.0
-    </div>
-    <strong>Copyright &copy; 2017-2018 CIYOU Education.</strong> All rights
-    reserved.
-  </footer>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2017-2018 CIYOU Education.</strong> All rights
+        reserved.
+    </footer>
 
 
 </div>

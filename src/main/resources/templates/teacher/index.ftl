@@ -33,7 +33,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="${base}/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>.</span>
       <!-- logo for regular state and mobile devices -->
@@ -70,7 +70,7 @@
                           <!-- Menu Footer-->
                           <li class="user-footer">
                               <div class="pull-left">
-                                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                                  <a href="${base}/teacher/profile" class="btn btn-default btn-flat">个人资料</a>
                               </div>
                               <div class="pull-right">
                                   <a href="#" class="btn btn-default btn-flat">登出</a>
@@ -101,46 +101,41 @@
      
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">菜单导航</li>
-          <li class="active">
-              <a href="#">
-                  <i class="fa fa-files-o"></i>
-                  <span>观看视频</span>
+          <li>
+              <a href="${base}/teacher/manageVideo">
+                  <i class="fa fa-video-camera"></i>
+                  <span>视频管理</span>
               </a>
           </li>
         <li>
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>权限管理</span>
+          <a href="${base}/teacher/manageRoster">
+            <i class="fa fa-sitemap"></i>
+            <span>班级分配</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class="fa fa-th"></i> <span>年级管理</span>
+            <i class="fa fa-mortar-board"></i> <span>学生管理</span>
           </a>
         </li>
          <li>
           <a href="#">
-            <i class="fa fa-th"></i> <span>班级管理</span>
+            <i class="fa fa-book"></i> <span>小测管理</span>
           </a>
         </li>
          <li>
           <a href="#">
-            <i class="fa fa-th"></i> <span>课程管理</span>
+            <i class="fa fa-search"></i> <span>成绩查询</span>
           </a>
         </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>视频管理</span>
-          </a>
-		  </li>
-		  <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>系统消息</span>
-          </a>
-		  </li>
+          <li>
+              <a href="${base}/teacher/profile">
+                  <i class="fa fa-cogs"></i> <span>个人设置</span>
+              </a>
+          </li>
 		   <li>
           <a href="#">
-            <i class="fa fa-th"></i> <span>正在开发</span>
+            <i class="fa fa-spinner"></i> <span>正在开发</span>
           </a>
 		  </li>
 		  
@@ -158,11 +153,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          观看视频
-        <small>搜索</small>
+          首页
+        <small>功能描述</small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> 视频</a></li>
+        <li class="active"><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
       </ol>
     </section>
     

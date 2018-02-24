@@ -31,7 +31,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="${base}/teacher/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>.</span>
       <!-- logo for regular state and mobile devices -->
@@ -68,7 +68,7 @@
                           <!-- Menu Footer-->
                           <li class="user-footer">
                               <div class="pull-left">
-                                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                                  <a href="${base}/teacher/profile" class="btn btn-default btn-flat">个人资料</a>
                               </div>
                               <div class="pull-right">
                                   <a href="#" class="btn btn-default btn-flat">登出</a>
@@ -81,74 +81,69 @@
       </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-  <!-- 左部菜单栏 -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="${base}${Session.teacher.picImg!}" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>${Session.teacher.name!}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-     
-     
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">菜单导航</li>
-          <li class="active">
-              <a href="#">
-                  <i class="fa fa-files-o"></i>
-                  <span>观看视频</span>
-              </a>
-          </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>权限管理</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>年级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>班级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>课程管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>视频管理</span>
-          </a>
-		  </li>
-		  <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>系统消息</span>
-          </a>
-		  </li>
-		   <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>正在开发</span>
-          </a>
-		  </li>
-		  
-		  
+    <!-- 左部菜单栏 -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="${base}${Session.teacher.picImg!}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>${Session.teacher.name!}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
 
- 
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">菜单导航</li>
+                <li>
+                    <a href="${base}/teacher/manageVideo">
+                        <i class="fa fa-video-camera"></i>
+                        <span>视频管理</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="${base}/teacher/manageRoster">
+                        <i class="fa fa-sitemap"></i>
+                        <span>班级分配</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-mortar-board"></i> <span>学生管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>小测管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-search"></i> <span>成绩查询</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${base}/teacher/profile">
+                        <i class="fa fa-cogs"></i> <span>个人设置</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-spinner"></i> <span>正在开发</span>
+                    </a>
+                </li>
+
+
+
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
   <!-- 中间部分 -->
   <!-- Content Wrapper. Contains page content -->
@@ -160,7 +155,8 @@
           <small>分配班级</small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-dashboard"></i>  班级管理</a></li>
+          <li><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
+          <li class="active"><i class="fa fa-sitemap"></i> 班级管理</a></li>
       </ol>
     </section>
 
@@ -175,16 +171,6 @@
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
                           <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 分配班级</div>
-                          <div class="box-tools">
-                              <form class="form-horizontal" action="${base}/admin/queryAdmin" method="get">
-                                  <div class="input-group input-group-sm" style="width: 150px;">
-                                      <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
-                                      <div class="input-group-btn">
-                                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
