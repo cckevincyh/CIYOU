@@ -101,7 +101,7 @@
                 </li>
                 <li>
                     <a href="${base}/admin/manageSubject">
-                        <i class="fa  fa-book"></i> <span>课程管理</span>
+                        <i class="fa  fa-book"></i> <span>科目管理</span>
                     </a>
                 </li>
                 <li>
@@ -132,8 +132,8 @@
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="${base}/admin/admin"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">年级管理</li>
+        <li><a href="${base}/admin/admin"><i class="fa fa-home"></i> 首页</a></li>
+        <li class="active"><i class="fa fa-graduation-cap"></i> 年级管理</li>
       </ol>
     </section>
 
