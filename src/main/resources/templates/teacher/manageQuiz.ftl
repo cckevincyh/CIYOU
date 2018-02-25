@@ -171,6 +171,16 @@
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
                           <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 分配班级</div>
+                          <div class="box-tools">
+                              <form class="form-horizontal" action="${base}/teacher/queryQuiz" method="get">
+                                  <div class="input-group input-group-sm" style="width: 150px;">
+                                      <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
+                                      <div class="input-group-btn">
+                                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
@@ -274,30 +284,62 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                        分配新班级
+                        添加新小测
                     </h4>
                 </div>
                 <div class="modal-body">
 
                     <!---------------------表单-------------------->
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addQuizName"  placeholder="请输入小测名称">
+                            <label class="control-label" for="addQuizName" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">年级</label>
                         <div class="col-sm-7">
                             <select class="form-control" id="addGrade">
                                 <option value="0">请选择</option>
                             </select>
-                            <label class="control-label" for="addGrade" style="display:none;"></label>
+                            <label class="control-label" for="addGrade" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">课程</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="addSubject">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="addSubject" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">小测时间</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addQuizTime"  placeholder="请输入小测时间">
+                            <label class="control-label" for="addQuizTime" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">选择题分数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="addChoiceScore"  placeholder="请输入选择题的分值">
+                            <label class="control-label" for="addChoiceScore" style="display:none;"></label>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">班级</label>
+                        <label for="firstname" class="col-sm-3 control-label">判断题分数</label>
                         <div class="col-sm-7">
-                            <select class="form-control" id="addClasses">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="addClasses" style="display:none;"></label>
+                            <input type="text" class="form-control" id="addJudgeScore"  placeholder="请输入判断题的分值">
+                            <label class="control-label" for="addJudgeScore" style="display:none;"></label>
                         </div>
                     </div>
                     <!---------------------表单-------------------->
@@ -305,7 +347,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="addRoster"><i class="fa fa-save"></i>
+                    <button type="button" class="btn btn-primary" id="addQuiz"><i class="fa fa-save"></i>
                         保存
                     </button>
                 </div>
@@ -449,8 +491,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
-<script src="${base}/static/js/teacher/roster/addRoster.js"></script>
-<script src="${base}/static/js/teacher/roster/updateRoster.js"></script>
-<script src="${base}/static/js/teacher/roster/deleteRoster.js"></script>
+<script src="${base}/static/js/teacher/quiz/addQuiz.js"></script>
 </body>
 </html>
