@@ -119,7 +119,7 @@
           </a>
         </li>
          <li>
-          <a href="#">
+          <a href="${base}/teacher/manageQuiz">
             <i class="fa fa-book"></i> <span>小测管理</span>
           </a>
         </li>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CIYOU | 班级管理</title>
+  <title>CIYOU | 小测管理</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -105,7 +105,7 @@
                         <span>视频管理</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${base}/teacher/manageRoster">
                         <i class="fa fa-sitemap"></i>
                         <span>班级分配</span>
@@ -116,7 +116,7 @@
                         <i class="fa fa-mortar-board"></i> <span>学生管理</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${base}/teacher/manageQuiz">
                         <i class="fa fa-book"></i> <span>小测管理</span>
                     </a>
@@ -151,12 +151,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          班级管理
-          <small>分配班级</small>
+          小测管理
+          <small>练习小测</small>
       </h1>
       <ol class="breadcrumb">
           <li><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
-          <li class="active"><i class="fa fa-sitemap"></i> 班级管理</a></li>
+          <li class="active"><i class="fa fa-book"></i> 小测管理</a></li>
       </ol>
     </section>
 
@@ -176,37 +176,35 @@
                       <div class="box-body table-responsive no-padding">
                           <table class="table table-hover">
                               <tr>
+                                  <th>试卷名称</th>
+                                  <th>课程</th>
                                   <th>年级</th>
-                                  <th>班级</th>
-                                  <th>教师</th>
-                                  <th>科目</th>
+                                  <th>考试时间</th>
                                   <th>操作</th>
                               </tr>
                           <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
-                              <#list pageInfo.list as roster>
+                              <#list pageInfo.list as quiz>
                                   <tr>
-                                      <#if roster.classes?? && roster.classes.grade??>
-                                      <td>${roster.classes.grade.gradeName!}</td>
+                                      <td>${quiz.quizName!}</td>
+                                      <#if quiz.subject??>
+                                          <td>${quiz.subject.subjectName!}</td>
+                                      <#else >
+                                            <td></td>
+                                      </#if>
+                                      <#if quiz.grade??>
+                                          <td>${quiz.grade.gradeName!}</td>
                                       <#else >
                                           <td></td>
                                       </#if>
-                                      <#if roster.classes??>
-                                      <td>${roster.classes.classes!}</td>
-                                      <#else >
-                                          <td></td>
-                                      </#if>
-                                      <#if roster.teacher??>
-                                      <td>${roster.teacher.name!}</td>
-                                      <#else >
-                                          <td></td>
-                                      </#if>
-                                       <#if roster.subject??>
-                                       <td>${roster.subject.subjectName!}</td>
-                                       <#else >
-                                           <td></td>
-                                       </#if>
-                                      <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateRoster(${roster.rid!})"><i class="fa fa-fw fa-edit"></i></button>
-                                          <button class="btn btn-danger btn-xs" onclick="deleteRoster(${roster.rid!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                      <td>${quiz.quizTime!}分钟</td>
+                                      <td>
+
+                                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz()" >查看</button>
+                                          <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz()"><i class="fa fa-fw fa-edit"></i>修改</button>
+                                          <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz()">删除</button>
+                                          <input type="hidden" id="question_action" value="">
+                                          <button type="button" class="btn btn-success btn-xs" onclick="question()">试题</button>
+                                      </td>
                                   </tr>
                               </#list>
                           <#else >
