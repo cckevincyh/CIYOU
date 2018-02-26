@@ -23,16 +23,15 @@ class Quiz implements Serializable{
     //总得分
     private Integer allScore
     //选择题
-    private Set<Choice> choices
+    private List<Choice> choices
     //判断题
-    private Set<Judge> judges
+    private List<Judge> judges
     //科目
     private Subject subject
     //年级
     private Grade grade
     //出题教师
     private Teacher teacher
-
 
     Integer getQuizId() {
         return quizId
@@ -98,19 +97,19 @@ class Quiz implements Serializable{
         this.allScore = allScore
     }
 
-    Set<Choice> getChoices() {
+    List<Choice> getChoices() {
         return choices
     }
 
-    void setChoices(Set<Choice> choices) {
+    void setChoices(List<Choice> choices) {
         this.choices = choices
     }
 
-    Set<Judge> getJudges() {
+    List<Judge> getJudges() {
         return judges
     }
 
-    void setJudges(Set<Judge> judges) {
+    void setJudges(List<Judge> judges) {
         this.judges = judges
     }
 

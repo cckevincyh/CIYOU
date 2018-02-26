@@ -218,7 +218,7 @@
                                           <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz(${quiz.quizId!})" ><i class="fa fa-fw fa-eye"></i></button>
                                           <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz(${quiz.quizId!})"><i class="fa fa-fw fa-edit"></i></button>
                                           <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz(${quiz.quizId!})"><i class="fa fa-fw fa-trash"></i></button>
-                                          <input type="hidden" id="question_action" value="">
+                                          <input type="hidden" id="question" value="${base}/teacher/manageExam">
                                           <button type="button" class="btn btn-success btn-xs" onclick="question(${quiz.quizId!})"><i class="fa fa-fw fa-paint-brush"></i></button>
                                       </td>
                                   </tr>
@@ -646,5 +646,6 @@
 <script src="${base}/static/js/teacher/quiz/addQuiz.js"></script>
 <script src="${base}/static/js/teacher/quiz/updateQuiz.js"></script>
 <script src="${base}/static/js/teacher/quiz/deleteQuiz.js"></script>
+<script src="${base}/static/js/teacher/quiz/question.js"></script>
 </body>
 </html>

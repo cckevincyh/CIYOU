@@ -1,6 +1,9 @@
 package com.ciyou.edu.service.impl
 
+import com.ciyou.edu.entity.Judge
 import com.ciyou.edu.entity.Quiz
+import com.ciyou.edu.mapper.ChoiceMapper
+import com.ciyou.edu.mapper.JudgeMapper
 import com.ciyou.edu.mapper.QuizMapper
 import com.ciyou.edu.service.QuizService
 import com.github.pagehelper.Page
@@ -18,6 +21,12 @@ class QuizServiceImpl implements QuizService{
     @Autowired
     private QuizMapper quizMapper
 
+    @Autowired
+    private ChoiceMapper choiceMapper
+
+    @Autowired
+    private JudgeMapper judgeMapper
+
     @Override
     Page<Quiz> findByPage(int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
@@ -31,7 +40,10 @@ class QuizServiceImpl implements QuizService{
 
     @Override
     Quiz getQuizById(Integer quizId) {
-        return quizMapper?.getQuizById(quizId)
+        Quiz quiz = quizMapper?.getQuizById(quizId)
+        quiz?.setChoices(choiceMapper?.getChoicesByQuiz(quizId))
+        quiz?.setJudges(judgeMapper?.getJudgesByQuiz(quizId))
+        return quiz
     }
 
     @Override
