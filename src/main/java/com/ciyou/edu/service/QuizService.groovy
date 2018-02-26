@@ -18,4 +18,6 @@ interface QuizService {
     int updateQuiz(Quiz quiz)
 
     int deleteQuiz(Integer quizId)
+
+    Page<Quiz> queryQuizByPage(String value,int pageNo, int pageSize)
 }

@@ -54,4 +54,19 @@ interface QuizMapper {
 
     @Delete("Delete from Quiz where quizId = #{quizId}")
     int deleteQuiz(@Param("quizId")Integer quizId)
+
+    @Select("select * from Quiz,Teacher,Grade,Subject where Quiz.tid = Teacher.tid and Quiz.gradeId = Grade.gradeId and Quiz.subjectId = Subject.subjectId and (Quiz.quizName like '%\${value}%' or Teacher.name like '%\${value}%' or Subject.subjectName like '%\${value}%' or Grade.gradeName like '%\${value}%' or Quiz.quizTime like '%\${value}%')")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "tid",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Page<Quiz> queryQuizByPage(@Param("value")String value)
 }

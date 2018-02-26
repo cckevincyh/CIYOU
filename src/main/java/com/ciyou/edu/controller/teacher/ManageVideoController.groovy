@@ -261,7 +261,7 @@ class ManageVideoController {
             Page<Video> videos = videoService?.queryVideoByPage(searchContent?.trim(),page)
             // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
             PageInfo<Video> pageInfo = new PageInfo<Video>(videos)
-            pageInfo?.setUrl("/admin/queryVideo?searchContent=${searchContent}&")
+            pageInfo?.setUrl("/teacher/queryVideo?searchContent=${searchContent}&")
             mv?.addObject("pageInfo",pageInfo)
             return mv
         }

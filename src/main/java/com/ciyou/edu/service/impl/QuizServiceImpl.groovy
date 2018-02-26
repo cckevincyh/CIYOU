@@ -43,4 +43,10 @@ class QuizServiceImpl implements QuizService{
     int deleteQuiz(Integer quizId) {
         return quizMapper?.deleteQuiz(quizId)
     }
+
+    @Override
+    Page<Quiz> queryQuizByPage(String value, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return quizMapper?.queryQuizByPage(value)
+    }
 }
