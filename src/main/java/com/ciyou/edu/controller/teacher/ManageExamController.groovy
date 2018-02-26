@@ -97,4 +97,20 @@ class ManageExamController {
         }
     }
 
+
+    @RequestMapping(value="/teacher/getChoice",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getChoice(Integer choiceId){
+        Choice choice = choiceService?.getChoice(choiceId)
+        logger.info("获得指定的Choice：" + choice)
+        return JSONUtil.returnEntityReuslt(choice)
+    }
+
+    @RequestMapping(value="/teacher/getJudge",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getJudge(Integer judgeId){
+        Judge judge = judgeService?.getJudge(judgeId)
+        logger.info("获得指定的Judge：" + judge)
+        return JSONUtil.returnEntityReuslt(judge)
+    }
 }

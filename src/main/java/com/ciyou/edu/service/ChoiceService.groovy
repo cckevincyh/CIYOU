@@ -8,4 +8,6 @@ import com.ciyou.edu.entity.Choice
  */
 interface ChoiceService {
     int addChoice(Choice choice)
+
+    Choice getChoice(Integer choiceId)
 }

@@ -8,4 +8,6 @@ import com.ciyou.edu.entity.Judge
  */
 interface JudgeService {
     int addJudge(Judge judge)
+
+    Judge getJudge(Integer judgeId)
 }

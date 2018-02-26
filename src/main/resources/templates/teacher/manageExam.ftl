@@ -192,9 +192,9 @@
                                   <td>单选题</td>
                                   <td>${quiz.choiceScore!}分</td>
                                   <td>
-                                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findChoiceModal" onclick="getChoice()" >查看</button>
-                                      <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateChoiceModal" onclick="updateChoice()">修改</button>
-                                      <button type="button" class="btn btn-danger btn-xs" onclick="deleteChoice()">删除</button>
+                                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findChoiceModal" onclick="getChoice(${choices.choiceId!})" ><i class="fa fa-fw fa-eye"></i></button>
+                                      <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateChoiceModal" onclick="updateChoice(${choices.choiceId!})"><i class="fa fa-fw fa-edit"></i></button>
+                                      <button type="button" class="btn btn-danger btn-xs" onclick="deleteChoice(${choices.choiceId!})"><i class="fa fa-fw fa-trash"></i></button>
                                   </td>
                               </tr>
                               </#list>
@@ -204,9 +204,9 @@
                                   <td>判断题</td>
                                   <td>${quiz.judgeScore!}分</td>
                                   <td>
-                                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findJudgeModal" onclick="getJudge()" >查看</button>
-                                      <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateJudgeModal" onclick="updateJudge()">修改</button>
-                                      <button type="button" class="btn btn-danger btn-xs" onclick="deleteJudge()">删除</button>
+                                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findJudgeModal" onclick="getJudge(${judges.judgeId!})" ><i class="fa fa-fw fa-eye"></i></button>
+                                      <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateJudgeModal" onclick="updateJudge(${judges.judgeId!})"><i class="fa fa-fw fa-edit"></i></button>
+                                      <button type="button" class="btn btn-danger btn-xs" onclick="deleteJudge(${judges.judgeId!})"><i class="fa fa-fw fa-trash"></i></button>
                                   </td>
                               </tr>
                               </#list>
@@ -563,18 +563,26 @@
 
                     <!---------------------表单-------------------->
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">所属年级</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findChoice_grade" readonly="readonly">
+                            <label class="control-label" for="findChoice_grade" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">所属课程</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findChoice_course" readonly="readonly">
-                            <label class="control-label" for="findChoice_course" style="display:none;"></label>
+                            <input type="text" class="form-control" id="findChoice_subject" readonly="readonly">
+                            <label class="control-label" for="findChoice_subject" style="display:none;"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">所属试卷</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findChoice_subject" readonly="readonly">
-                            <label class="control-label" for="findChoice_subject" style="display:none;"></label>
+                            <input type="text" class="form-control" id="findChoice_quiz" readonly="readonly">
+                            <label class="control-label" for="findChoice_quiz" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -671,18 +679,26 @@
 
                     <!---------------------表单-------------------->
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">所属年级</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findJudge_grade" readonly="readonly">
+                            <label class="control-label" for="findJudge_grade" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">所属课程</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findJudge_course" readonly="readonly">
-                            <label class="control-label" for="findJudge_course" style="display:none;"></label>
+                            <input type="text" class="form-control" id="findJudge_subject" readonly="readonly">
+                            <label class="control-label" for="findJudge_subject" style="display:none;"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">所属试卷</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findJudge_subject" readonly="readonly">
-                            <label class="control-label" for="findJudge_subject" style="display:none;"></label>
+                            <input type="text" class="form-control" id="findJudge_quiz" readonly="readonly">
+                            <label class="control-label" for="findJudge_quiz" style="display:none;"></label>
                         </div>
                     </div>
 
@@ -693,8 +709,6 @@
                             <label class="control-label" for="findJudge_question" style="display:none;"></label>
                         </div>
                     </div>
-
-
 
 
                     <div class="form-group">
@@ -811,6 +825,8 @@
 <script src="${base}/static/dist/js/demo.js"></script>
 <script src="${base}/static/js/teacher/quiz/addChoice.js"></script>
 <script src="${base}/static/js/teacher/quiz/addJudge.js"></script>
+<script src="${base}/static/js/teacher/quiz/getChoice.js"></script>
+<script src="${base}/static/js/teacher/quiz/getJudge.js"></script>
 <script>
     $(function () {
         $('#example2').DataTable({
