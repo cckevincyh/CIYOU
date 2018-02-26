@@ -33,4 +33,9 @@ class QuizServiceImpl implements QuizService{
     Quiz getQuizById(Integer quizId) {
         return quizMapper?.getQuizById(quizId)
     }
+
+    @Override
+    int updateQuiz(Quiz quiz) {
+        return quizMapper?.updateQuiz(quiz)
+    }
 }

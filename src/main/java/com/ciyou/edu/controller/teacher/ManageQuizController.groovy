@@ -87,4 +87,35 @@ class ManageQuizController {
         logger.info("获得指定的Quiz：" + quiz)
         return JSONUtil.returnEntityReuslt(quiz)
     }
+
+    @RequestMapping(value="/teacher/updateQuiz",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updateQuiz(Quiz quiz){
+        logger.info("修改的小测Quiz：" + quiz)
+        //校验数据
+        if(!quiz?.getQuizName() || quiz?.getQuizName()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("小测名称不能为空")
+        }else if(quiz?.getGrade() == null || quiz?.getGrade()?.getGradeId() == 0){
+            return JSONUtil.returnFailReuslt("请选择年级")
+        }else if(quiz?.getSubject() == null || quiz?.getSubject()?.getSubjectId() == 0){
+            return JSONUtil.returnFailReuslt("请选择科目")
+        }else if(quiz?.getQuizTime() == null){
+            return JSONUtil.returnFailReuslt("请输入小测时间")
+        }else if(quiz?.getChoiceScore() == null){
+            return JSONUtil.returnFailReuslt("请输入选择题分数")
+        }else if(quiz?.getJudgeScore() == null){
+            return JSONUtil.returnFailReuslt("请输入判断题分数")
+        }else{
+            try{
+                if(quizService?.updateQuiz(quiz)){
+                    return JSONUtil.returnSuccessResult("修改成功")
+                }else{
+                    return JSONUtil.returnFailReuslt("修改失败")
+                }
+            }catch (Exception e){
+                logger.info("修改Quiz错误：" + e.getMessage())
+                return JSONUtil.returnFailReuslt("修改失败，请重试")
+            }
+        }
+    }
 }

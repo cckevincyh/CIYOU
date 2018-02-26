@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Result
 import org.apache.ibatis.annotations.Results
 import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.Update
 
 /**
  * @Author C.
@@ -46,4 +47,7 @@ interface QuizMapper {
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
     ])
     Quiz getQuizById(@Param("quizId")Integer quizId)
+
+    @Update("Update Quiz set quizName = #{quizName},subjectId = #{subject.subjectId},gradeId = #{grade.gradeId},quizTime = #{quizTime},choiceScore = #{choiceScore},judgeScore = #{judgeScore} where quizId = #{quizId}")
+    int updateQuiz(Quiz quiz)
 }

@@ -14,4 +14,6 @@ interface QuizService {
     int addQuiz(Quiz quiz)
 
     Quiz getQuizById(Integer quizId)
+
+    int updateQuiz(Quiz quiz)
 }

@@ -215,11 +215,11 @@
                                       </#if>
                                       <td>
 
-                                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz(${quiz.quizName!})" ><i class="fa fa-fw fa-eye"></i></button>
-                                          <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz(${quiz.quizName!})"><i class="fa fa-fw fa-edit"></i></button>
-                                          <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz(${quiz.quizName!})"><i class="fa fa-fw fa-trash"></i></button>
+                                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz(${quiz.quizId!})" ><i class="fa fa-fw fa-eye"></i></button>
+                                          <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz(${quiz.quizId!})"><i class="fa fa-fw fa-edit"></i></button>
+                                          <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz(${quiz.quizId!})"><i class="fa fa-fw fa-trash"></i></button>
                                           <input type="hidden" id="question_action" value="">
-                                          <button type="button" class="btn btn-success btn-xs" onclick="question(${quiz.quizName!})"><i class="fa fa-fw fa-paint-brush"></i></button>
+                                          <button type="button" class="btn btn-success btn-xs" onclick="question(${quiz.quizId!})"><i class="fa fa-fw fa-paint-brush"></i></button>
                                       </td>
                                   </tr>
                               </#list>
@@ -385,6 +385,7 @@
                     <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">小测名称</label>
                         <div class="col-sm-7">
+                            <input type="hidden" id="updateQuizId">
                             <input type="text" class="form-control" id="updateQuizName"  placeholder="请输入小测名称">
                             <label class="control-label" for="updateQuizName" style="display:none;"></label>
                         </div>
