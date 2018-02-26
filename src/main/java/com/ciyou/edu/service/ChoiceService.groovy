@@ -10,4 +10,6 @@ interface ChoiceService {
     int addChoice(Choice choice)
 
     Choice getChoice(Integer choiceId)
+
+    int updateChoice(Choice choice)
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Result
 import org.apache.ibatis.annotations.Results
 import org.apache.ibatis.annotations.Select
+import org.apache.ibatis.annotations.Update
 
 /**
  * @Author C.
@@ -28,4 +29,7 @@ interface ChoiceMapper {
                     one = @One(select = "com.ciyou.edu.mapper.QuizMapper.getQuizById"))
     ])
     Choice getChoice(Integer choiceId)
+
+    @Update("Update Choice set question = #{question},optionA = #{optionA},optionB = #{optionB},optionC = #{optionC}, optionD = #{optionD},answer = #{answer} where choiceId = #{choiceId}")
+    int updateChoice(Choice choice)
 }

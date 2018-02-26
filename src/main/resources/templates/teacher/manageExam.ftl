@@ -827,6 +827,8 @@
 <script src="${base}/static/js/teacher/quiz/addJudge.js"></script>
 <script src="${base}/static/js/teacher/quiz/getChoice.js"></script>
 <script src="${base}/static/js/teacher/quiz/getJudge.js"></script>
+<script src="${base}/static/js/teacher/quiz/updateChoice.js"></script>
+<script src="${base}/static/js/teacher/quiz/updateJudge.js"></script>
 <script>
     $(function () {
         $('#example2').DataTable({

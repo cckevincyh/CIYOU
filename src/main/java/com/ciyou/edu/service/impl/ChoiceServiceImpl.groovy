@@ -25,4 +25,9 @@ class ChoiceServiceImpl implements ChoiceService{
     Choice getChoice(Integer choiceId) {
         return choiceMapper?.getChoice(choiceId)
     }
+
+    @Override
+    int updateChoice(Choice choice) {
+        return choiceMapper?.updateChoice(choice)
+    }
 }

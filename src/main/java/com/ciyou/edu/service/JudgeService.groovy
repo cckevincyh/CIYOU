@@ -10,4 +10,6 @@ interface JudgeService {
     int addJudge(Judge judge)
 
     Judge getJudge(Integer judgeId)
+
+    int updateJudge(Judge judge)
 }

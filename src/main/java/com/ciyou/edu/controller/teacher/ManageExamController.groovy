@@ -113,4 +113,59 @@ class ManageExamController {
         logger.info("获得指定的Judge：" + judge)
         return JSONUtil.returnEntityReuslt(judge)
     }
+
+    @RequestMapping(value="/teacher/updateChoice",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updateChoice(Choice choice){
+        logger.info("修改的选择题：" + choice)
+        //校验数据
+        if(!choice?.getQuestion() || choice?.getQuestion()?.trim() == "") {
+            return JSONUtil.returnFailReuslt("请输入选择题问题")
+        }else if(!choice?.getOptionA() || choice?.getOptionA()?.trim() == "") {
+            return JSONUtil.returnFailReuslt("请输入选项A")
+        }else if(!choice?.getOptionB() || choice?.getOptionB()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请输入选项B")
+        }else if(!choice?.getOptionC() || choice?.getOptionC()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请输入选项C")
+        }else if(!choice?.getOptionD() || choice?.getOptionD()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请输入选项D")
+        }else if(!choice?.getAnswer() || choice?.getAnswer()?.trim() == "0"){
+            return JSONUtil.returnFailReuslt("请输入答案")
+        }else{
+            try{
+                if(choiceService?.updateChoice(choice)){
+                    return JSONUtil.returnSuccessResult("修改成功")
+                }else{
+                    return JSONUtil.returnFailReuslt("修改失败")
+                }
+            }catch (Exception e){
+                logger.info("修改Choice错误：" + e.getMessage())
+                return JSONUtil.returnFailReuslt("修改失败，请重试")
+            }
+        }
+    }
+
+
+    @RequestMapping(value="/teacher/updateJudge",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String updateJudge(Judge judge){
+        logger.info("修改的判断题：" + judge)
+        //校验数据
+        if(!judge?.getQuestion() || judge?.getQuestion()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请输入判断题问题")
+        }else if(!judge?.getAnswer() || judge?.getAnswer()?.trim() == ""){
+            return JSONUtil.returnFailReuslt("请输入判断题答案")
+        }else{
+            try{
+                if(judgeService?.updateJudge(judge)){
+                    return JSONUtil.returnSuccessResult("修改成功")
+                }else{
+                    return JSONUtil.returnFailReuslt("修改失败")
+                }
+            }catch (Exception e){
+                logger.info("修改Judge错误：" + e.getMessage())
+                return JSONUtil.returnFailReuslt("修改失败，请重试")
+            }
+        }
+    }
 }

@@ -25,4 +25,9 @@ class JudgeServiceImpl implements JudgeService{
     Judge getJudge(Integer judgeId) {
         return judgeMapper?.getJudge(judgeId)
     }
+
+    @Override
+    int updateJudge(Judge judge) {
+        return judgeMapper?.updateJudge(judge)
+    }
 }
