@@ -12,4 +12,6 @@ interface QuizService {
     Page<Quiz> findByPage(int pageNo, int pageSize)
 
     int addQuiz(Quiz quiz)
+
+    Quiz getQuizById(Integer quizId)
 }

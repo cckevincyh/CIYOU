@@ -4,6 +4,7 @@ import com.ciyou.edu.entity.Quiz
 import com.github.pagehelper.Page
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.One
+import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Result
 import org.apache.ibatis.annotations.Results
 import org.apache.ibatis.annotations.Select
@@ -19,12 +20,30 @@ interface QuizMapper {
             @Result(property = "grade",
                     column = "gradeId",
                     one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "tid",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
             @Result(property = "subject",
                     column = "subjectId",
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
     ])
     Page<Quiz> findAllQuiz()
 
-    @Insert("Insert into Quiz(quizName,subjectId,gradeId,quizTime,choiceScore,judgeScore) values(#{quizName},#{subject.subjectId},#{grade.gradeId},#{quizTime},#{choiceScore},#{judgeScore})")
+    @Insert("Insert into Quiz(quizName,subjectId,gradeId,quizTime,choiceScore,judgeScore,tid) values(#{quizName},#{subject.subjectId},#{grade.gradeId},#{quizTime},#{choiceScore},#{judgeScore},#{teacher.tid})")
     int addQuiz(Quiz quiz)
+
+    @Select("select * from Quiz where quizId = #{quizId}")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "tid",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Quiz getQuizById(@Param("quizId")Integer quizId)
 }

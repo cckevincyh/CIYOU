@@ -2,9 +2,11 @@ package com.ciyou.edu.controller.teacher
 
 import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.entity.Quiz
+import com.ciyou.edu.entity.Teacher
 import com.ciyou.edu.service.QuizService
 import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
+import org.apache.shiro.SecurityUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -62,7 +64,9 @@ class ManageQuizController {
             return JSONUtil.returnFailReuslt("请输入判断题分数")
         }else{
             try{
-                //一个班只能有一个科目的老师
+                //获得当前教师
+                Teacher teacher = (Teacher)SecurityUtils.getSubject()?.getPrincipal()
+                quiz.setTeacher(teacher)
                 if(quizService?.addQuiz(quiz)){
                     return JSONUtil.returnSuccessResult("添加成功")
                 }else{
@@ -73,5 +77,14 @@ class ManageQuizController {
                 return JSONUtil.returnFailReuslt("添加失败，请重试")
             }
         }
+    }
+
+
+    @RequestMapping(value="/teacher/getQuizById",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getQuizById(Integer quizId){
+        Quiz quiz = quizService?.getQuizById(quizId)
+        logger.info("获得指定的Quiz：" + quiz)
+        return JSONUtil.returnEntityReuslt(quiz)
     }
 }

@@ -30,6 +30,9 @@ class Quiz implements Serializable{
     private Subject subject
     //年级
     private Grade grade
+    //出题教师
+    private Teacher teacher
+
 
     Integer getQuizId() {
         return quizId
@@ -127,6 +130,14 @@ class Quiz implements Serializable{
         this.grade = grade
     }
 
+    Teacher getTeacher() {
+        return teacher
+    }
+
+    void setTeacher(Teacher teacher) {
+        this.teacher = teacher
+    }
+
 
     @Override
     public String toString() {
@@ -143,6 +154,7 @@ class Quiz implements Serializable{
                 ", judges=" + judges +
                 ", subject=" + subject +
                 ", grade=" + grade +
+                ", teacher=" + teacher +
                 '}';
     }
 }

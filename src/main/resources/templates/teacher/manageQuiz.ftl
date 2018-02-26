@@ -190,6 +190,7 @@
                                   <th>课程</th>
                                   <th>年级</th>
                                   <th>考试时间</th>
+                                  <th>出题教师</th>
                                   <th>操作</th>
                               </tr>
                           <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
@@ -207,13 +208,18 @@
                                           <td></td>
                                       </#if>
                                       <td>${quiz.quizTime!}分钟</td>
+                                      <#if quiz.teacher??>
+                                      <td>${quiz.teacher.name!}</td>
+                                      <#else >
+                                          <td></td>
+                                      </#if>
                                       <td>
 
-                                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz()" >查看</button>
-                                          <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz()"><i class="fa fa-fw fa-edit"></i>修改</button>
-                                          <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz()">删除</button>
+                                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz(${quiz.quizName!})" ><i class="fa fa-fw fa-eye"></i></button>
+                                          <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz(${quiz.quizName!})"><i class="fa fa-fw fa-edit"></i></button>
+                                          <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz(${quiz.quizName!})"><i class="fa fa-fw fa-trash"></i></button>
                                           <input type="hidden" id="question_action" value="">
-                                          <button type="button" class="btn btn-success btn-xs" onclick="question()">试题</button>
+                                          <button type="button" class="btn btn-success btn-xs" onclick="question(${quiz.quizName!})"><i class="fa fa-fw fa-paint-brush"></i></button>
                                       </td>
                                   </tr>
                               </#list>
@@ -369,7 +375,7 @@
                         &times;
                     </button>
                     <h4 class="modal-title" id="updateModalLabel">
-                        修改班级分配
+                        修改小测信息
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -377,33 +383,64 @@
                     <!---------------------表单-------------------->
 
                     <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateQuizName"  placeholder="请输入小测名称">
+                            <label class="control-label" for="updateQuizName" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">年级</label>
                         <div class="col-sm-7">
                             <select class="form-control" id="updateGrade">
                                 <option value="0">请选择</option>
                             </select>
-                            <label class="control-label" for="updateGrade" style="display:none;"></label>
+                            <label class="control-label" for="updateGrade" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">课程</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="updateSubject">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="control-label" for="updateSubject" style="display: none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">小测时间</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateQuizTime"  placeholder="请输入小测时间">
+                            <label class="control-label" for="updateQuizTime" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">选择题分数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="updateChoiceScore"  placeholder="请输入选择题的分值">
+                            <label class="control-label" for="updateChoiceScore" style="display:none;"></label>
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">班级</label>
+                        <label for="firstname" class="col-sm-3 control-label">判断题分数</label>
                         <div class="col-sm-7">
-                            <select class="form-control" id="updateClasses">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="updateClasses" style="display:none;"></label>
+                            <input type="text" class="form-control" id="updateJudgeScore"  placeholder="请输入判断题的分值">
+                            <label class="control-label" for="updateJudgeScore" style="display:none;"></label>
                         </div>
                     </div>
-
                     <!---------------------表单-------------------->
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
                     </button>
-                    <button type="button" class="btn btn-primary" id="updateRoster"><i class="fa fa-save"></i>
+                    <button type="button" class="btn btn-primary" id="updateQuiz"><i class="fa fa-save"></i>
                         保存
                     </button>
                 </div>
@@ -412,6 +449,119 @@
     </div>
 
 </form>
+
+
+<!--------------------------------------查看的模糊框------------------------>
+<form class="form-horizontal">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="findModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="findModalLabel">
+                        查看小测信息
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!---------------------表单-------------------->
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findQuizName" readonly="readonly">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">所属年级</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findGrade"  readonly="readonly">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">所属科目</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findSubject"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">考试时间</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findQuizTime"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">出题教师</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findTeacher"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">选择题个数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findChoiceNum"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">判断题个数</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findJudgeNum"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">选择题分值</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findChoiceScore"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">判断题分值</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findJudgeScore"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">总分</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="findAllScore"  readonly="readonly">
+
+                        </div>
+                    </div>
+
+
+                    <!---------------------表单-------------------->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> 关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!--------------------------------------查看的模糊框------------------------>
 
 <!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
@@ -491,6 +641,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
+<script src="${base}/static/js/teacher/quiz/getQuiz.js"></script>
 <script src="${base}/static/js/teacher/quiz/addQuiz.js"></script>
+<script src="${base}/static/js/teacher/quiz/updateQuiz.js"></script>
 </body>
 </html>
