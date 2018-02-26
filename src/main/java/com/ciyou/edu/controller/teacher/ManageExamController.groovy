@@ -168,4 +168,37 @@ class ManageExamController {
             }
         }
     }
+
+
+
+    @RequestMapping(value="/teacher/deleteChoice",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String deleteChoice(Integer choiceId){
+        try{
+            if(choiceService?.deleteChoice(choiceId)){
+                return JSONUtil.returnSuccessResult("删除成功")
+            }else{
+                return JSONUtil.returnFailReuslt("删除失败")
+            }
+        }catch (Exception e){
+            logger.info("删除Choice错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
+        }
+    }
+
+
+    @RequestMapping(value="/teacher/deleteJudge",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String deleteJudge(Integer judgeId){
+        try{
+            if(judgeService?.deleteJudge(judgeId)){
+                return JSONUtil.returnSuccessResult("删除成功")
+            }else{
+                return JSONUtil.returnFailReuslt("删除失败")
+            }
+        }catch (Exception e){
+            logger.info("删除Judge错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
+        }
+    }
 }

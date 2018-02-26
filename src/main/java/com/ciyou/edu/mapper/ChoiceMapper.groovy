@@ -1,6 +1,7 @@
 package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Choice
+import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.One
 import org.apache.ibatis.annotations.Param
@@ -32,4 +33,7 @@ interface ChoiceMapper {
 
     @Update("Update Choice set question = #{question},optionA = #{optionA},optionB = #{optionB},optionC = #{optionC}, optionD = #{optionD},answer = #{answer} where choiceId = #{choiceId}")
     int updateChoice(Choice choice)
+
+    @Delete("Delete from Choice where choiceId = #{choiceId}")
+    int deleteChoice(@Param("choiceId")Integer choiceId)
 }

@@ -30,4 +30,9 @@ class JudgeServiceImpl implements JudgeService{
     int updateJudge(Judge judge) {
         return judgeMapper?.updateJudge(judge)
     }
+
+    @Override
+    int deleteJudge(Integer judgeId) {
+        return judgeMapper?.deleteJudge(judgeId)
+    }
 }

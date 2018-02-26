@@ -1,6 +1,7 @@
 package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Judge
+import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.One
 import org.apache.ibatis.annotations.Param
@@ -32,4 +33,7 @@ interface JudgeMapper {
 
     @Update("Update Judge set question = #{question},answer = #{answer} where judgeId = #{judgeId}")
     int updateJudge(Judge judge)
+
+    @Delete("Delete from Judge where judgeId = #{judgeId}")
+    int deleteJudge(@Param("judgeId")Integer judgeId)
 }

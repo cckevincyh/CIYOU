@@ -30,4 +30,9 @@ class ChoiceServiceImpl implements ChoiceService{
     int updateChoice(Choice choice) {
         return choiceMapper?.updateChoice(choice)
     }
+
+    @Override
+    int deleteChoice(Integer choiceId) {
+        return choiceMapper?.deleteChoice(choiceId)
+    }
 }

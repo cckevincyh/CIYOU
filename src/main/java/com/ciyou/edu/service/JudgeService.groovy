@@ -12,4 +12,6 @@ interface JudgeService {
     Judge getJudge(Integer judgeId)
 
     int updateJudge(Judge judge)
+
+    int deleteJudge(Integer judgeId)
 }
