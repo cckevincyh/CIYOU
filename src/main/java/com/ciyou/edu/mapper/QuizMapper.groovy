@@ -2,6 +2,7 @@ package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Quiz
 import com.github.pagehelper.Page
+import org.apache.ibatis.annotations.Delete
 import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.One
 import org.apache.ibatis.annotations.Param
@@ -50,4 +51,7 @@ interface QuizMapper {
 
     @Update("Update Quiz set quizName = #{quizName},subjectId = #{subject.subjectId},gradeId = #{grade.gradeId},quizTime = #{quizTime},choiceScore = #{choiceScore},judgeScore = #{judgeScore} where quizId = #{quizId}")
     int updateQuiz(Quiz quiz)
+
+    @Delete("Delete from Quiz where quizId = #{quizId}")
+    int deleteQuiz(@Param("quizId")Integer quizId)
 }

@@ -118,4 +118,20 @@ class ManageQuizController {
             }
         }
     }
+
+
+    @RequestMapping(value="/teacher/deleteQuiz", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String deleteQuiz(Integer quizId){
+        try{
+            if(quizService?.deleteQuiz(quizId)){
+                return JSONUtil.returnSuccessResult("删除成功")
+            }else{
+                return JSONUtil.returnFailReuslt("删除失败")
+            }
+        }catch (Exception e){
+            logger.info("删除Quiz错误：" + e.getMessage())
+            return JSONUtil.returnFailReuslt("删除失败，请重试")
+        }
+    }
 }

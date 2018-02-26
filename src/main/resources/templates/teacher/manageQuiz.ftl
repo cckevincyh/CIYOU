@@ -170,7 +170,7 @@
                   <div class="box">
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 分配班级</div>
+                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 添加小测试题</div>
                           <div class="box-tools">
                               <form class="form-horizontal" action="${base}/teacher/queryQuiz" method="get">
                                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -645,5 +645,6 @@
 <script src="${base}/static/js/teacher/quiz/getQuiz.js"></script>
 <script src="${base}/static/js/teacher/quiz/addQuiz.js"></script>
 <script src="${base}/static/js/teacher/quiz/updateQuiz.js"></script>
+<script src="${base}/static/js/teacher/quiz/deleteQuiz.js"></script>
 </body>
 </html>

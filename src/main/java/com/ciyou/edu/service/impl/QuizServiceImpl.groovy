@@ -38,4 +38,9 @@ class QuizServiceImpl implements QuizService{
     int updateQuiz(Quiz quiz) {
         return quizMapper?.updateQuiz(quiz)
     }
+
+    @Override
+    int deleteQuiz(Integer quizId) {
+        return quizMapper?.deleteQuiz(quizId)
+    }
 }

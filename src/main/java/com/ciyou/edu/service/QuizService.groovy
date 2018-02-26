@@ -16,4 +16,6 @@ interface QuizService {
     Quiz getQuizById(Integer quizId)
 
     int updateQuiz(Quiz quiz)
+
+    int deleteQuiz(Integer quizId)
 }
