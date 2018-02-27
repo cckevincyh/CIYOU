@@ -56,4 +56,20 @@ interface StudentMapper {
 
     @Update("update Student set name = #{name}, sex = #{sex}, age = #{age} , mobile = #{mobile} , parentMobile = #{parentMobile} , email = #{email} , parentEmail = #{parentEmail} , classesId = #{classes.classesId} where sid = #{sid}")
     int updateStudent(Student student)
+
+    @Select("Select Student.* from Student,Roster where Student.classesId = Roster.classesId and Roster.tid = #{tid} and Student.isAvalible = 1")
+    @Results([
+            //查询关联对象
+            @Result(property = "classes",
+                    column = "classesId",
+                    one = @One(select = "com.ciyou.edu.mapper.ClassesMapper.getClasses"))])
+    Page<Student> findByTeacherAndPage(@Param("tid")Integer tid)
+
+    @Select("select Student.* from Student,Roster where (Student.studentId like '%\${value}%' or Student.name like '%\${value}%') and Student.isAvalible = 1 and Student.classesId = Roster.classesId and Roster.tid = #{tid}")
+    @Results([
+            //查询关联对象
+            @Result(property = "classes",
+                    column = "classesId",
+                    one = @One(select = "com.ciyou.edu.mapper.ClassesMapper.getClasses"))])
+    Page<Student> queryStudentByTeacherAndPage(@Param("tid")Integer tid, @Param("value")String value)
 }

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CIYOU | 班级管理</title>
+  <title>CIYOU | 学生管理</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -105,13 +105,13 @@
                         <span>视频管理</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${base}/teacher/manageRoster">
                         <i class="fa fa-sitemap"></i>
                         <span>班级分配</span>
                     </a>
                 </li>
-                <li>
+                <li  class="active">
                     <a href="${base}/teacher/manageStudent">
                         <i class="fa fa-mortar-board"></i> <span>学生管理</span>
                     </a>
@@ -151,12 +151,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          班级管理
-          <small>分配班级</small>
+          学生管理
+          <small>查看学生</small>
       </h1>
       <ol class="breadcrumb">
           <li><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
-          <li class="active"><i class="fa fa-sitemap"></i> 班级管理</a></li>
+          <li class="active"><i class="fa fa-mortar-board"></i> 学生管理</a></li>
       </ol>
     </section>
 
@@ -170,48 +170,68 @@
                   <div class="box">
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 分配班级</div>
+                          <div class="box-tools">
+                              <form class="form-horizontal" action="${base}/teacher/queryStudent" method="get">
+                                  <div class="input-group input-group-sm" style="width: 150px;">
+                                      <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
+                                      <div class="input-group-btn">
+                                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
                           <table class="table table-hover">
                               <tr>
+                                  <th>ID</th>
+                                  <th>学生头像</th>
+                                  <th>学号</th>
+                                  <th>姓名</th>
                                   <th>年级</th>
                                   <th>班级</th>
-                                  <th>教师</th>
-                                  <th>科目</th>
-                                  <th>操作</th>
+                                  <th>性别</th>
+                                  <th>年龄</th>
+                                  <th>电话</th>
+                                  <th>邮箱</th>
+                                  <th>家长电话</th>
+                                  <th>家长邮箱</th>
+                                  <th>创建时间</th>
                               </tr>
                           <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
-                              <#list pageInfo.list as roster>
+                              <#list pageInfo.list as student>
                                   <tr>
-                                      <#if roster.classes?? && roster.classes.grade??>
-                                      <td>${roster.classes.grade.gradeName!}</td>
+                                      <td>${student.sid!}</td>
+                                      <td><img src="${student.picImg!}" width="100" height="100"/></td>
+                                      <td>${student.studentId!}</td>
+                                      <td>${student.name!}</td>
+                                      <#if (student.classes)?? && (student.classes.grade)??>
+                                          <td>${student.classes.grade.gradeName!}</td>
                                       <#else >
                                           <td></td>
                                       </#if>
-                                      <#if roster.classes??>
-                                      <td>${roster.classes.classes!}</td>
+                                      <#if (student.classes)??>
+                                          <td>${student.classes.classes!}</td>
                                       <#else >
                                           <td></td>
                                       </#if>
-                                      <#if roster.teacher??>
-                                      <td>${roster.teacher.name!}</td>
+                                      <#if student.sex == 1>
+                                          <td>男</td>
                                       <#else >
-                                          <td></td>
+                                          <td>女</td>
                                       </#if>
-                                       <#if roster.subject??>
-                                       <td>${roster.subject.subjectName!}</td>
-                                       <#else >
-                                           <td></td>
-                                       </#if>
-                                      <td><button class="btn btn-warning btn-xs"  data-toggle="modal" data-target="#updateModal" onclick="updateRoster(${roster.rid!})"><i class="fa fa-fw fa-edit"></i></button>
-                                          <button class="btn btn-danger btn-xs" onclick="deleteRoster(${roster.rid!})"><i class="fa fa-fw fa-trash"></i></button></td>
+                                      <td>${student.age!}</td>
+                                      <td>${student.mobile!}</td>
+                                      <td>${student.email!}</td>
+                                      <td>${student.parentMobile!}</td>
+                                      <td>${student.parentEmail!}</td>
+                                      <td>${student.createTime?string("yyyy-MM-dd HH:mm")!}</td>
                                   </tr>
                               </#list>
                           <#else >
                               <tr>
-                                  <td colspan="5" align="center">暂无数据</td>
+                                  <td colspan="13" align="center">暂无数据</td>
                           <tr>
                           </#if>
                           </table>
@@ -265,113 +285,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-------添加的模糊框----->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        分配新班级
-                    </h4>
-                </div>
-                <div class="modal-body">
 
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">年级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="addGrade">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="addGrade" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">班级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="addClasses">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="addClasses" style="display:none;"></label>
-                        </div>
-                    </div>
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="addRoster"><i class="fa fa-save"></i>
-                        保存
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-
-
-
-<!-- 修改模态框（Modal） -->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="updateModalLabel">
-                        修改班级分配
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">年级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="updateGrade">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="updateGrade" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">班级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="updateClasses">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="updateClasses" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <!---------------------表单-------------------->
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="updateRoster"><i class="fa fa-save"></i>
-                        保存
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
 
 <!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
@@ -451,8 +365,5 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
-<script src="${base}/static/js/teacher/roster/addRoster.js"></script>
-<script src="${base}/static/js/teacher/roster/updateRoster.js"></script>
-<script src="${base}/static/js/teacher/roster/deleteRoster.js"></script>
 </body>
 </html>

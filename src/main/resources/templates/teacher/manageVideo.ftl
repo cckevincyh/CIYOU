@@ -129,7 +129,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${base}/teacher/manageStudent">
                         <i class="fa fa-mortar-board"></i> <span>学生管理</span>
                     </a>
                 </li>

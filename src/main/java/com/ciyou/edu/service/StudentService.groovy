@@ -28,4 +28,8 @@ interface StudentService {
     Page<Student> queryStudentByPage(String search,int pageNo, int pageSize)
 
     int updateStudent(Student student)
+
+    Page<Student> findByTeacherAndPage(Integer tid, int pageNo, int pageSize)
+
+    Page<Student> queryStudentByTeacherAndPage(Integer tid,String search,int pageNo, int pageSize)
 }

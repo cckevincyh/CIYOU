@@ -60,4 +60,16 @@ class StudentServiceImpl implements StudentService{
     int updateStudent(Student student) {
         return studentMapper?.updateStudent(student)
     }
+
+    @Override
+    Page<Student> findByTeacherAndPage(Integer tid, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return studentMapper?.findByTeacherAndPage(tid)
+    }
+
+    @Override
+    Page<Student> queryStudentByTeacherAndPage(Integer tid, String search, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return studentMapper?.queryStudentByTeacherAndPage(tid,search)
+    }
 }
