@@ -62,10 +62,7 @@ $(function () {
                     subjectId: $.trim($("#subject").val())
                 },
                 success: function (data) {
-                    if(data.stateCode == "403"){
-                        showInfo(data.message);
-                        window.location.href = "/403";
-                    }else if(data.isSuccess){
+                    if(data.isSuccess){
                         showInfo(data.message);
                     }else{
                         showInfo1(data.message);

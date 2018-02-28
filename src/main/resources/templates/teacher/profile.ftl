@@ -184,7 +184,7 @@
                                             <div class="form-group has-feedback">
                                                 <label for="name" class="col-sm-2 control-label">姓名</label>
                                                 <div class="col-sm-4">
-                                                    <input type="hidden" name="BASE_URL" id="tid" value="${Session.teacher.tid!}">
+                                                    <input type="hidden" name="BASE_URL" id="BASE_URL" value="${base}">
                                                     <input type="hidden" name="tid" id="tid" value="${Session.teacher.tid!}">
                                                     <input type="text" class="form-control" id="name" name="name" placeholder="教师姓名"  data-bv-field="name">
                                                     <i class="form-control-feedback" data-bv-icon-for="name" style="display: none;"></i>

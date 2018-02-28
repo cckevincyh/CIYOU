@@ -75,8 +75,6 @@ class profileController {
 
         try{
             if(teacherService?.updateProfile(teacher)){
-                //重新存入session
-                SecurityUtils.getSubject()?.getSession()?.setAttribute("teacher",teacher)
                 //更新AuthenticationInfo
                 Teacher authenticationInfo = (Teacher)SecurityUtils?.getSubject()?.getPrincipal()
                 authenticationInfo?.setName(teacher?.getName())
@@ -84,6 +82,8 @@ class profileController {
                 authenticationInfo?.setSex(teacher?.getSex())
                 authenticationInfo?.setMobile(teacher?.getMobile())
                 authenticationInfo?.setEmail(teacher?.getEmail())
+                //重新存入session
+                SecurityUtils.getSubject()?.getSession()?.setAttribute("teacher",authenticationInfo)
                 return JSONUtil.returnSuccessResult("修改成功")
             }else{
                 return JSONUtil.returnFailReuslt("修改失败")
