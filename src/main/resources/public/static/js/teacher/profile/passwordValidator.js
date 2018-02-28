@@ -39,21 +39,8 @@ $(function () {
                         message: '两次密码不相同'
                     }
                 }
-            },
-            email: {
-                validators: {
-                    callback:{
-                        message: '邮箱格式不正确',
-                        callback: function(value, validator) {
-                            if($.trim(value) != "" && !(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(value))){
-                                return false;
-                            }else{
-                                return true;
-                            }
-                        }
-                    }
-                }
             }
+
         }
     });
 
