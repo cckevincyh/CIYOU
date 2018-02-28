@@ -21,4 +21,12 @@ interface VideoService {
     Page<Video> queryVideoByPage(String value,int pageNo, int pageSize)
 
     int updateVideoType(Integer videoId, Integer videoType)
+
+    Page<Video> findByGradeAndPage(Integer gradeId,int pageNo, int pageSize)
+
+    Page<Video> findVideoByPage(int pageNo, int pageSize)
+
+    Page<Video> findBySubjectAndPage(Integer subjectId,int pageNo, int pageSize)
+
+    Page<Video> findBySubjectGradePage(Integer gradeId, Integer subjectId,int pageNo, int pageSize)
 }

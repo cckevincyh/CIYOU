@@ -26,7 +26,20 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="${base}/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="${base}/static/css/zz.css" />
+    <link rel="stylesheet" href="${base}/static/video/css/video-js.css" type="text/css">
+    <style type="text/css">
+        video::-internal-media-controls-download-button {
+            display:none;
+        }
 
+        video::-webkit-media-controls-enclosure {
+            overflow:hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+    </style>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -183,109 +196,63 @@
                                     <div class="direction">
                                         <div class="head">年级：</div>
                                         <div class="choice">
-                                            <span name = "all" class = "all current">一年级</span>
-                                            <span name = "fe" class = "fe">二年级</span>
-                                            <span name = "be" class = "be">三年级</span>
-                                            <span name = "mobile" class = "mobile">四年级</span>
-                                            <span name = "data" class = "data">五年级</span>
-                                            <span name = "photo" class = "photo">六年级</span>
+                                            <span id = "grade_0" class = "current" onclick="setGrade(0)" name="grade">全部</span>
+                                            <#list grades as grade>
+                                                <span id = "grade_${grade.gradeId!}" onclick="setGrade(${grade.gradeId!})" name="grade">${grade.gradeName}</span>
+                                            </#list>
                                         </div>
                                     </div>
                                     <div class="level">
                                         <div class="head">科目：</div>
                                         <div class="choice">
-                                            <span name = "all" class="current">语文</span>
-                                            <span name = "fe">数学</span>
-                                            <span name = "be">英语</span>
+                                            <span id = "subject_0" class="current" onclick="setSubject(0)" name="subject">全部</span>
+                                        <#list subjects as subject>
+                                            <span id = "subject_${subject.subjectId!}" onclick="setSubject(${subject.subjectId!})" name="subject">${subject.subjectName}</span>
+                                        </#list>
                                         </div>
                                     </div>
                                     <div class="row">
+                                  <#list pageInfo.list as video>
                                       <div class="col-lg-3 col-xs-6">
                                           <!-- small box -->
-                                          <div class="small-box bg-aqua">
+                                          <div class="small-box">
                                               <div class="inner">
-                                                  <h3>150</h3>
-
-                                                  <p>New Orders</p>
-                                              </div>
-                                              <div class="icon">
-                                                  <i class="fa fa-shopping-cart"></i>
+                                                  <video class="video-js vjs-default-skin vjs-big-play-centered" controls  preload="auto" poster="${video.imgUrl!}" width="250" height="150" data-setup="{}">
+                                                      <source src="${base}${video.videoUrl!}" type="video/mp4"/>
+                                                  </video>
                                               </div>
                                               <a href="#" class="small-box-footer">
-                                                  More info <i class="fa fa-arrow-circle-right"></i>
+                                              ${video.videoName!} <i class="fa fa-video-camera"></i>
                                               </a>
                                           </div>
                                       </div>
-                                        <div class="col-lg-3 col-xs-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-aqua">
-                                                <div class="inner">
-                                                    <h3>150</h3>
-
-                                                    <p>New Orders</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                </div>
-                                                <a href="#" class="small-box-footer">
-                                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-xs-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-aqua">
-                                                <div class="inner">
-                                                    <h3>150</h3>
-
-                                                    <p>New Orders</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                </div>
-                                                <a href="#" class="small-box-footer">
-                                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-xs-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-aqua">
-                                                <div class="inner">
-                                                    <h3>150</h3>
-
-                                                    <p>New Orders</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                </div>
-                                                <a href="#" class="small-box-footer">
-                                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3 col-xs-6">
-                                            <!-- small box -->
-                                            <div class="small-box bg-aqua">
-                                                <div class="inner">
-                                                    <h3>150</h3>
-
-                                                    <p>New Orders</p>
-                                                </div>
-                                                <div class="icon">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                </div>
-                                                <a href="#" class="small-box-footer">
-                                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                                  </#list>
                                     </div>
+                                 <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
+                                     <div class="box-footer clearfix">
+                                         <ul class="pagination no-margin pull-right">
+                                             <li class="disabled"><a href="#">第${pageInfo.pageNum}页/共${pageInfo.pages}页</a></li>
+                                             <#if pageInfo.pageNum == 1>
+                                                 <li class="disabled"><a>&laquo;</a></li>
+                                             <#else>
+                                                 <li><a href="${pageInfo.url}page=${pageInfo.pageNum - 1}">&laquo;</a></li>
+                                             </#if>
+                                             <#list pageInfo.navigatepageNums as num>
+                                                 <#if pageInfo.pageNum == num>
+                                                     <li class="active"><a>${num}</a></li>
+                                                 <#else>
+                                                     <li><a href="${pageInfo.url}page=${num}">${num}</a></li>
+                                                 </#if>
+                                             </#list>
+                                             <#if pageInfo.pageNum == pageInfo.pages>
+                                                 <li class="disabled"><a>&raquo;</a></li>
+                                             <#else>
+                                                 <li><a href="${pageInfo.url}page=${pageInfo.pageNum + 1}">&raquo;</a></li>
+                                             </#if>
+                                         </ul>
+                                     </div>
+                                 </#if>
                                   </div>
-
                             </div>
                      </div>
                 </div>
@@ -349,5 +316,15 @@
 <script src="${base}/static/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
+
+<script src="${base}/static/js/student/video/setGrade.js"></script>
+<script src="${base}/static/js/student/video/setSubject.js"></script>
+<script type="text/javascript" src="${base}/static/video/js/video.min.js"></script>
+<script>
+    //去除右键事件
+    $("video").bind("contextmenu",function(){//取消右键事件
+        return false;
+    });
+</script>
 </body>
 </html>

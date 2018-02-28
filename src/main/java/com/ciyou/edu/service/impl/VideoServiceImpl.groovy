@@ -56,4 +56,28 @@ class VideoServiceImpl implements VideoService{
     int updateVideoType(Integer videoId, Integer videoType) {
         return videoMapper?.updateVideoType(videoId,videoType)
     }
+
+    @Override
+    Page<Video> findByGradeAndPage(Integer gradeId, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return videoMapper?.findByGradeAndPage(gradeId)
+    }
+
+    @Override
+    Page<Video> findVideoByPage(int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return videoMapper?.findVideoByPage()
+    }
+
+    @Override
+    Page<Video> findBySubjectAndPage(Integer subjectId, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return videoMapper?.findBySubjectAndPage(subjectId)
+    }
+
+    @Override
+    Page<Video> findBySubjectGradePage(Integer gradeId, Integer subjectId, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return videoMapper?.findBySubjectGradePage(gradeId,subjectId)
+    }
 }

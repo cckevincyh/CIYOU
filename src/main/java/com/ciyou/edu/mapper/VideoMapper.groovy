@@ -72,4 +72,65 @@ interface VideoMapper {
 
     @Update("update Video set videoType = #{videoType} where videoId = #{videoId}")
     int updateVideoType(@Param("videoId")Integer videoId, @Param("videoType")Integer videoType)
+
+
+    @Select("select * from Video where gradeId = #{gradeId} and videoType <> 0 and videoType <> 1")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "teacherId",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Page<Video> findByGradeAndPage(@Param("gradeId")Integer gradeId)
+
+    @Select("select * from Video where videoType <> 0 and videoType <> 1 order by videoId ")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "teacherId",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Page<Video> findVideoByPage()
+
+    @Select("select * from Video where subjectId = #{subjectId} and videoType <> 0 and videoType <> 1")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "teacherId",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Page<Video> findBySubjectAndPage(@Param("subjectId")Integer subjectId)
+
+    @Select("select * from Video where subjectId = #{subjectId} and gradeId = #{gradeId} and videoType <> 0 and videoType <> 1")
+    @Results([
+            //查询关联对象
+            @Result(property = "grade",
+                    column = "gradeId",
+                    one = @One(select = "com.ciyou.edu.mapper.GradeMapper.getGrade")),
+            @Result(property = "teacher",
+                    column = "teacherId",
+                    one = @One(select = "com.ciyou.edu.mapper.TeacherMapper.getTeacherByTid")),
+            @Result(property = "subject",
+                    column = "subjectId",
+                    one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
+    ])
+    Page<Video> findBySubjectGradePage(@Param("gradeId")Integer gradeId,@Param("subjectId")Integer subjectId)
 }

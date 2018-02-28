@@ -11,14 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody
 @Controller
 class IndexController {
 
-    /**
-     * 进入首页
-     * @return
-     */
-    @RequestMapping("/index")
-    public String hello(){
-        return "index"
-    }
 
     /**
      * 进入admin登录界面
@@ -68,10 +60,6 @@ class IndexController {
     }
 
 
-    @RequestMapping("/student/index")
-    public String index(){
-        return "/student/index"
-    }
 
 
 }
