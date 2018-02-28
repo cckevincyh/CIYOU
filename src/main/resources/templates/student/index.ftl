@@ -47,7 +47,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="${base}/student/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>.</span>
       <!-- logo for regular state and mobile devices -->
@@ -87,7 +87,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                  <a href="${base}/student/profile" class="btn btn-default btn-flat">个人资料</a>
                 </div>
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">登出</a>
@@ -119,45 +119,24 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">菜单导航</li>
           <li class="active">
-              <a href="#">
-                  <i class="fa fa-files-o"></i>
+              <a href="${base}/student/index">
+                  <i class="fa fa-video-camera"></i>
                   <span>观看视频</span>
               </a>
           </li>
         <li>
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>权限管理</span>
+            <i class="fa fa-book"></i> <span>小测练习</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>年级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>班级管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>课程管理</span>
-          </a>
-        </li>
-         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>视频管理</span>
-          </a>
-		  </li>
-		  <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>系统消息</span>
-          </a>
-		  </li>
+          <li>
+              <a href="${base}/student/profile">
+                  <i class="fa fa-cogs"></i> <span>个人设置</span>
+              </a>
+          </li>
 		   <li>
           <a href="#">
-            <i class="fa fa-th"></i> <span>正在开发</span>
+            <i class="fa fa-spinner"></i> <span>正在开发</span>
           </a>
 		  </li>
 		  
@@ -176,10 +155,9 @@
     <section class="content-header">
       <h1>
           观看视频
-        <small>搜索</small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> 视频</a></li>
+        <li class="active"><a href="#"><i class="fa fa-video-camera"></i> 观看视频</a></li>
       </ol>
     </section>
     
@@ -192,7 +170,9 @@
                    <div class="container clearfix">
                             <div class="course-nav-box">
                                  <div class="nav-container">
-                                    <div class="title"><span class="title-allCourse-yang">全部课程:</span></div>
+                                    <div class="title">
+                                        <span class="title-allCourse-yang">全部课程:</span>
+                                    </div>
                                     <div class="direction">
                                         <div class="head">年级：</div>
                                         <div class="choice">
