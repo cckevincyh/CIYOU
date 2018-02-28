@@ -72,4 +72,14 @@ interface StudentMapper {
                     column = "classesId",
                     one = @One(select = "com.ciyou.edu.mapper.ClassesMapper.getClasses"))])
     Page<Student> queryStudentByTeacherAndPage(@Param("tid")Integer tid, @Param("value")String value)
+
+    @Update("update Student set picImg = #{picImg} where sid = #{sid}")
+    int updatePicImg(@Param("sid")Integer sid, @Param("picImg")String path)
+
+
+    @Update("update Student set password = #{password} where sid = #{sid}")
+    int updatePassword(@Param("sid")Integer sid, @Param("password")String password)
+
+    @Update("update Student set name = #{name} , sex = #{sex} , mobile = #{mobile} , email = #{email} , age = #{age}, parentMobile = #{parentMobile} , parentEmail = #{parentEmail} where sid = #{sid}")
+    int updateProfile(Student student)
 }

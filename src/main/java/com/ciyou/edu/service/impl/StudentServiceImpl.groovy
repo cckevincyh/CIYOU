@@ -72,4 +72,19 @@ class StudentServiceImpl implements StudentService{
         PageHelper.startPage(pageNo, pageSize)
         return studentMapper?.queryStudentByTeacherAndPage(tid,search)
     }
+
+    @Override
+    int updatePicImg(Integer sid, String path) {
+        return studentMapper?.updatePicImg(sid,path)
+    }
+
+    @Override
+    int updatePassword(Integer sid, String password) {
+        return studentMapper?.updatePassword(sid,password)
+    }
+
+    @Override
+    int updateProfile(Student student) {
+        return studentMapper?.updateProfile(student)
+    }
 }

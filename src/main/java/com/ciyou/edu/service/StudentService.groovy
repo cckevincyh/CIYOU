@@ -32,4 +32,10 @@ interface StudentService {
     Page<Student> findByTeacherAndPage(Integer tid, int pageNo, int pageSize)
 
     Page<Student> queryStudentByTeacherAndPage(Integer tid,String search,int pageNo, int pageSize)
+
+    int updatePicImg(Integer sid,String path)
+
+    int updatePassword(Integer sid, String password)
+
+    int updateProfile(Student student)
 }
