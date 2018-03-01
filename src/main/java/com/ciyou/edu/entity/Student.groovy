@@ -35,6 +35,8 @@ class Student implements Serializable{
     //状态 1：正常 2：冻结
     private Integer isAvalible
 
+    private Integer lockState
+
     Integer getSid() {
         return sid
     }
@@ -148,6 +150,14 @@ class Student implements Serializable{
         this.picImg = picImg
     }
 
+    Integer getLockState() {
+        return lockState
+    }
+
+    void setLockState(Integer lockState) {
+        this.lockState = lockState
+    }
+
 
     @Override
     public String toString() {
@@ -166,6 +176,7 @@ class Student implements Serializable{
                 ", picImg='" + picImg + '\'' +
                 ", classes=" + classes +
                 ", isAvalible=" + isAvalible +
+                ", lockState=" + lockState +
                 '}';
     }
 }
