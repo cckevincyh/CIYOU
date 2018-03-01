@@ -87,4 +87,9 @@ class StudentServiceImpl implements StudentService{
     int updateProfile(Student student) {
         return studentMapper?.updateProfile(student)
     }
+
+    @Override
+    int updateStudentLockState(Integer sid,Integer quizId) {
+        return studentMapper?.updateStudentLockState(sid,quizId)
+    }
 }

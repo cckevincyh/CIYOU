@@ -2,9 +2,14 @@ package com.ciyou.edu.controller.student
 
 import com.ciyou.edu.entity.PageInfo
 import com.ciyou.edu.entity.Quiz
+import com.ciyou.edu.entity.Score
+import com.ciyou.edu.entity.Student
 import com.ciyou.edu.service.QuizService
+import com.ciyou.edu.service.ScoreService
+import com.ciyou.edu.service.StudentService
 import com.ciyou.edu.utils.JSONUtil
 import com.github.pagehelper.Page
+import org.apache.shiro.SecurityUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +29,12 @@ class QuizController {
 
     @Autowired
     private QuizService quizService
+
+    @Autowired
+    private StudentService studentService
+
+    @Autowired
+    private ScoreService scoreService
 
     @RequestMapping("/student/quiz")
     ModelAndView findQuizByPage(Integer page){
@@ -47,5 +58,55 @@ class QuizController {
         Quiz quiz = quizService?.getQuizById(quizId)
         logger.info("获得指定的Quiz：" + quiz)
         return JSONUtil.returnEntityReuslt(quiz)
+    }
+
+
+    @RequestMapping(value="/student/getLockState",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String getLockState(Integer quizId,Integer sid){
+        Student student = studentService?.getStudentById(sid?.toString())
+        Score score = scoreService.getScore(sid, quizId)
+        if(score != null){
+            //该试卷已经做过了
+            return JSONUtil.returnFailReuslt("该试卷已经做过了")
+        }else{
+            //该试卷没做过，或者正在做着试卷
+            //判断是否正在做试卷
+            //锁住的状态是否等于当前科目,除了当前科目可以继续考试，不能进行其他考试
+            if(!(student?.getLockState() == quizId || student?.getLockState() == 0)){
+                //正在考试
+                return JSONUtil.returnFailReuslt("正在考试,请继续考试")
+            }else{
+                //允许进入做试卷
+                //修改学生锁住状态,设置为当前考试科目
+                studentService.updateStudentLockState(sid,quizId)
+                return JSONUtil.returnSuccessResult("允许进入做试卷")
+            }
+        }
+    }
+
+    @RequestMapping(value="/student/exam")
+    @ResponseBody
+    ModelAndView getQuestions(Integer quizId){
+        Student stu = (Student)SecurityUtils?.getSubject()?.getPrincipal()
+        Student student = studentService?.getStudentById(stu?.getSid()?.toString())
+        Score score = scoreService.getScore(student?.getSid(), quizId)
+        if(score != null){
+            //该试卷已经做过了
+            return null
+        }else{
+            //该试卷没做过，或者正在做着试卷
+            //判断是否正在做试卷
+            //锁住的状态是否等于当前科目,除了当前科目可以继续考试，不能进行其他考试
+            if(!(student?.getLockState() == quizId || student?.getLockState() == 0)){
+                //正在考试
+                return null
+            }else{
+                Quiz quiz = quizService?.getQuizById(quizId)
+                ModelAndView mv = new ModelAndView("student/exam")
+                mv?.addObject("quiz",quiz)
+                return mv
+            }
+        }
     }
 }

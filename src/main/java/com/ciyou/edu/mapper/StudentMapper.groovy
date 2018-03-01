@@ -82,4 +82,7 @@ interface StudentMapper {
 
     @Update("update Student set name = #{name} , sex = #{sex} , mobile = #{mobile} , email = #{email} , age = #{age}, parentMobile = #{parentMobile} , parentEmail = #{parentEmail} where sid = #{sid}")
     int updateProfile(Student student)
+
+    @Update("update Student set lockState = #{quizId} where sid = #{sid}")
+    int updateStudentLockState(@Param("sid")Integer sid,@Param("quizId")Integer quizId)
 }

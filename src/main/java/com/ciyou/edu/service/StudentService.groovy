@@ -38,4 +38,6 @@ interface StudentService {
     int updatePassword(Integer sid, String password)
 
     int updateProfile(Student student)
+
+    int updateStudentLockState(Integer sid,Integer quizId)
 }
