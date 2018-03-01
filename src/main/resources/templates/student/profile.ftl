@@ -110,18 +110,18 @@
 
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">菜单导航</li>
-                <li class="active">
+                <li>
                     <a href="${base}/student/index">
                         <i class="fa fa-video-camera"></i>
                         <span>观看视频</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${base}/student/quiz">
                         <i class="fa fa-book"></i> <span>小测练习</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${base}/student/profile">
                         <i class="fa fa-cogs"></i> <span>个人设置</span>
                     </a>
@@ -299,14 +299,6 @@
 
 
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="box-footer">
-                                                <div class="col-sm-5"></div>
-                                                <div class="col-sm-6">
-                                                    <button type="button" class="btn btn-primary" id="profileButton">
-                                                        <i class="fa fa-save">&nbsp;保存</i>
-                                                    </button>
                                                 </div>
                                             </div>
                                         </form>

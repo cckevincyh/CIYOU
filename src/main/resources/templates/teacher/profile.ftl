@@ -301,14 +301,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="box-footer">
-                                                <div class="col-sm-5"></div>
-                                                <div class="col-sm-6">
-                                                    <button type="button" class="btn btn-primary" id="profileButton">
-                                                        <i class="fa fa-save">&nbsp;保存</i>
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </form>
                                     </div>
 

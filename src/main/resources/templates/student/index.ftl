@@ -125,7 +125,7 @@
               </a>
           </li>
         <li>
-          <a href="#">
+          <a href="${base}/student/quiz">
             <i class="fa fa-book"></i> <span>小测练习</span>
           </a>
         </li>
