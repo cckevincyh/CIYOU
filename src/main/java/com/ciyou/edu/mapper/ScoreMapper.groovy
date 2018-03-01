@@ -1,6 +1,7 @@
 package com.ciyou.edu.mapper
 
 import com.ciyou.edu.entity.Score
+import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.One
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Result
@@ -23,4 +24,7 @@ interface ScoreMapper {
                     one = @One(select = "com.ciyou.edu.mapper.QuizMapper.getQuizById"))
     ])
     Score getScore(@Param("sid")Integer sid, @Param("quizId")Integer quizId)
+
+    @Insert("insert into Score(sid,quizId,choiceScore,judgeScore,allScore) values(#{student.sid},#{quiz.quizId},#{choiceScore},#{judgeScore},#{allScore})")
+    int addScore(Score score)
 }

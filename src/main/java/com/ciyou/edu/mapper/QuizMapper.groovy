@@ -1,5 +1,6 @@
 package com.ciyou.edu.mapper
 
+import com.ciyou.edu.entity.Choice
 import com.ciyou.edu.entity.Quiz
 import com.github.pagehelper.Page
 import org.apache.ibatis.annotations.Delete
@@ -69,4 +70,14 @@ interface QuizMapper {
                     one = @One(select = "com.ciyou.edu.mapper.SubjectMapper.getSubject"))
     ])
     Page<Quiz> queryQuizByPage(@Param("value")String value)
+
+    @Update("Update Quiz set choiceNum = #{num} where quizId = #{quizId}")
+    int updateChoiceNum(@Param("num")Integer num,@Param("quizId")Integer quizId)
+
+    @Update("Update Quiz set judgeNum = #{num} where quizId = #{quizId}")
+    int updateJudgeNum(@Param("num")Integer num,@Param("quizId")Integer quizId)
+
+    @Update("Update Quiz set allScore = #{score} where quizId = #{quizId}")
+    int updateAllScore(@Param("score")Integer score,@Param("quizId")Integer quizId)
+
 }

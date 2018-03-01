@@ -67,20 +67,20 @@ class QuizController {
         Student student = studentService?.getStudentById(sid?.toString())
         Score score = scoreService.getScore(sid, quizId)
         if(score != null){
-            //该试卷已经做过了
-            return JSONUtil.returnFailReuslt("该试卷已经做过了")
+            //该小测练习已经做过了
+            return JSONUtil.returnFailReuslt("该小测练习已经做过了")
         }else{
-            //该试卷没做过，或者正在做着试卷
-            //判断是否正在做试卷
-            //锁住的状态是否等于当前科目,除了当前科目可以继续考试，不能进行其他考试
+            //该小测练习没做过，或者正在做着小测练习
+            //判断是否正在做小测
+            //锁住的状态是否等于当前科目,除了当前科目可以继续考试，不能进行其他小测练习
             if(!(student?.getLockState() == quizId || student?.getLockState() == 0)){
                 //正在考试
-                return JSONUtil.returnFailReuslt("正在考试,请继续考试")
+                return JSONUtil.returnFailReuslt("正在小测,请继续小测")
             }else{
-                //允许进入做试卷
-                //修改学生锁住状态,设置为当前考试科目
+                //允许进入做测练习
+                //修改学生锁住状态,设置为当前小测练习科目
                 studentService.updateStudentLockState(sid,quizId)
-                return JSONUtil.returnSuccessResult("允许进入做试卷")
+                return JSONUtil.returnSuccessResult("允许进入做小测练习")
             }
         }
     }
@@ -92,14 +92,14 @@ class QuizController {
         Student student = studentService?.getStudentById(stu?.getSid()?.toString())
         Score score = scoreService.getScore(student?.getSid(), quizId)
         if(score != null){
-            //该试卷已经做过了
+            //该小测练习已经做过了
             return null
         }else{
-            //该试卷没做过，或者正在做着试卷
-            //判断是否正在做试卷
-            //锁住的状态是否等于当前科目,除了当前科目可以继续考试，不能进行其他考试
+            //该小测练习没做过，或者正在做着小测练习
+            //判断是否正在做小测练习
+            //锁住的状态是否等于当前科目,除了当前科目可以继续考试，不能进行其他小测练习
             if(!(student?.getLockState() == quizId || student?.getLockState() == 0)){
-                //正在考试
+                //正在小测练习
                 return null
             }else{
                 Quiz quiz = quizService?.getQuizById(quizId)
@@ -107,6 +107,18 @@ class QuizController {
                 mv?.addObject("quiz",quiz)
                 return mv
             }
+        }
+    }
+
+    @RequestMapping(value="/student/quizExam",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    String quizExam(Integer quizId,Integer sid,String answer){
+        logger.info("学生ID：" + sid + ",小测ID：" + quizId + ",答案：" + answer)
+        boolean b = quizService.quizExam(sid,quizId,answer)
+        if(b){
+            return JSONUtil.returnSuccessResult("交卷成功")
+        }else{
+            return JSONUtil.returnFailReuslt("交卷失败")
         }
     }
 }

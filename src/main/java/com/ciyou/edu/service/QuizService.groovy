@@ -20,4 +20,6 @@ interface QuizService {
     int deleteQuiz(Integer quizId)
 
     Page<Quiz> queryQuizByPage(String value,int pageNo, int pageSize)
+
+    boolean quizExam(Integer sid,Integer quizId,String answer)
 }

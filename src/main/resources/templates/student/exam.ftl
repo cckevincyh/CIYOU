@@ -165,7 +165,7 @@
                               </div>
                               <div class="col-lg-3 form-group">
                                   <label class="col-lg-6 control-label" for="query_bno1"><i class="fa   fa-book"></i>  课程:</label>
-                                  <input type="hidden" id="test_subjectId" value="${quiz.subject.subjectId!}">
+                                  <input type="hidden" id="test_quizId" value="${quiz.quizId!}">
                                   <label class="col-lg-6 control-label" for="query_bno1"><i>${quiz.subject.subjectName!}</i></label>
                               </div>
 
@@ -474,5 +474,6 @@
 <script src="${base}/static/dist/js/demo.js"></script>
 <script src="${base}/static/js/student/quiz/getQuiz.js"></script>
 <script src="${base}/static/js/student/quiz/quiz.js"></script>
+<script src="${base}/static/js/student/quiz/exam.js"></script>
 </body>
 </html>
