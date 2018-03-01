@@ -200,7 +200,9 @@
                                       <td>
 
                                           <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz(${quiz.quizId!})" ><i class="fa fa-fw fa-eye"></i></button>
-                                          <button type="button" class="btn btn-success btn-xs" onclick="question(${quiz.quizId!})"><i class="fa fa-fw  fa-pencil"></i></button>
+                                          <input type="hidden" id="quiz_sid" value="${Session.student.sid!}"/>
+                                          <input type="hidden" id="quiz_action" value="${base}/student/exam"/>
+                                          <button type="button" class="btn btn-success btn-xs" onclick="quiz(${quiz.quizId!})"><i class="fa fa-fw  fa-pencil"></i></button>
                                       </td>
                                   </tr>
                               </#list>
@@ -454,5 +456,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 <script src="${base}/static/js/student/quiz/getQuiz.js"></script>
+<script src="${base}/static/js/student/quiz/quiz.js"></script>
 </body>
 </html>
