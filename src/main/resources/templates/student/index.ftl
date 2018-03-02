@@ -130,6 +130,11 @@
           </a>
         </li>
           <li>
+              <a href="${base}/student/score">
+                  <i class="fa fa-search"></i> <span>我的成绩</span>
+              </a>
+          </li>
+          <li>
               <a href="${base}/student/profile">
                   <i class="fa fa-cogs"></i> <span>个人设置</span>
               </a>

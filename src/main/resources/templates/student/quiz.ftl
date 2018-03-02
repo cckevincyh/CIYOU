@@ -114,6 +114,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="${base}/student/score">
+                        <i class="fa fa-search"></i> <span>我的成绩</span>
+                    </a>
+                </li>
+                <li>
                     <a href="${base}/student/profile">
                         <i class="fa fa-cogs"></i> <span>个人设置</span>
                     </a>
@@ -156,7 +161,7 @@
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
                           <div class="box-tools">
-                              <form class="form-horizontal" action="${base}/teacher/queryQuiz" method="get">
+                              <form class="form-horizontal" action="${base}/student/queryQuiz" method="get">
                                   <div class="input-group input-group-sm" style="width: 150px;">
                                       <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
                                       <div class="input-group-btn">
@@ -208,7 +213,7 @@
                               </#list>
                           <#else >
                               <tr>
-                                  <td colspan="5" align="center">暂无数据</td>
+                                  <td colspan="6" align="center">暂无数据</td>
                           <tr>
                           </#if>
                           </table>

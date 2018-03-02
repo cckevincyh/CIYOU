@@ -114,6 +114,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="${base}/student/score">
+                        <i class="fa fa-search"></i> <span>我的成绩</span>
+                    </a>
+                </li>
+                <li>
                     <a href="${base}/student/profile">
                         <i class="fa fa-cogs"></i> <span>个人设置</span>
                     </a>
@@ -280,120 +285,6 @@
 <!-- ./wrapper -->
 
 
-
-
-
-<!--------------------------------------查看的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="findModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="findModalLabel">
-                        查看小测信息
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findQuizName" readonly="readonly">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">所属年级</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findGrade"  readonly="readonly">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">所属科目</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findSubject"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">考试时间</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findQuizTime"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">出题教师</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findTeacher"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选择题个数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findChoiceNum"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">判断题个数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findJudgeNum"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选择题分值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findChoiceScore"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">判断题分值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findJudgeScore"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">总分</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findAllScore"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> 关闭
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-<!--------------------------------------查看的模糊框------------------------>
 
 <!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
