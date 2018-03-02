@@ -80,4 +80,16 @@ class ScoreServiceImpl implements ScoreService{
         logger.info("resultScore = " + resultScore)
         return resultScore
     }
+
+    @Override
+    Page<Score> queryScoreByPage(String value, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return scoreMapper?.queryScoreByPage(value)
+    }
+
+    @Override
+    Page<Score> queryMyScoreByPage(Integer sid, String value, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return scoreMapper?.queryMyScoreByPage(sid,value)
+    }
 }

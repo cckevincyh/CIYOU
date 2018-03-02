@@ -51,4 +51,28 @@ class ScoreController {
         mv?.addObject("resultScore",resultScore)
         return mv
     }
+
+    @RequestMapping(value="/student/queryScore")
+    ModelAndView studentQueryScore(String searchContent,Integer page){
+        if(page == null){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            ModelAndView mv = new ModelAndView("redirect:score")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/student/score")
+            logger.info("studentQueryScore : 查询第${page}页，携带查询参数=${searchContent}")
+            //获取当前学生
+            Student student = (Student)SecurityUtils.getSubject()?.getPrincipal()
+            //不赋值pageSize，默认为10
+            Page<Score> scores = scoreService?.queryMyScoreByPage(student?.getSid(),searchContent?.trim(),page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Score> pageInfo = new PageInfo<Score>(scores)
+            pageInfo?.setUrl("/student/queryScore?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
+
+    }
 }

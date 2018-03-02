@@ -52,4 +52,28 @@ interface ScoreMapper {
                     one = @One(select = "com.ciyou.edu.mapper.QuizMapper.getQuizById"))
     ])
     Score getScoreById(@Param("scoreId")Integer scoreId)
+
+    @Select("select * from Score,Quiz,Teacher,Grade,Subject,Student where Score.sid = Student.sid and  Quiz.tid = Teacher.tid and Quiz.gradeId = Grade.gradeId and Quiz.subjectId = Subject.subjectId and Score.quizId = Quiz.quizId and (Student.studentId like '%\${value}%' or Student.name like '%\${value}%' or Quiz.quizName like '%\${value}%' or Teacher.name like '%\${value}%' or Subject.subjectName like '%\${value}%' or Grade.gradeName like '%\${value}%' or Quiz.quizTime like '%\${value}%')")
+    @Results([
+            //查询关联对象
+            @Result(property = "student",
+                    column = "sid",
+                    one = @One(select = "com.ciyou.edu.mapper.StudentMapper.getStudentById")),
+            @Result(property = "quiz",
+                    column = "quizId",
+                    one = @One(select = "com.ciyou.edu.mapper.QuizMapper.getQuizById"))
+    ])
+    Page<Score> queryScoreByPage(@Param("value")String value)
+
+    @Select("select * from Score,Quiz,Teacher,Grade,Subject,Student where Score.sid = Student.sid and Quiz.tid = Teacher.tid and Quiz.gradeId = Grade.gradeId and Quiz.subjectId = Subject.subjectId and Score.quizId = Quiz.quizId and Student.sid = #{sid} and (Quiz.quizName like '%\${value}%' or Teacher.name like '%\${value}%' or Subject.subjectName like '%\${value}%' or Grade.gradeName like '%\${value}%' or Quiz.quizTime like '%\${value}%')")
+    @Results([
+            //查询关联对象
+            @Result(property = "student",
+                    column = "sid",
+                    one = @One(select = "com.ciyou.edu.mapper.StudentMapper.getStudentById")),
+            @Result(property = "quiz",
+                    column = "quizId",
+                    one = @One(select = "com.ciyou.edu.mapper.QuizMapper.getQuizById"))
+    ])
+    Page<Score> queryMyScoreByPage(@Param("sid")Integer sid, @Param("value")String value)
 }

@@ -14,4 +14,8 @@ interface ScoreService {
     Page<Score> findMyScoreByPage(Integer sid,int pageNo, int pageSize)
 
     ResultScore getResultScore(Integer scoreId)
+
+    Page<Score> queryScoreByPage(String value,int pageNo, int pageSize)
+
+    Page<Score> queryMyScoreByPage(Integer sid,String value,int pageNo, int pageSize)
 }
