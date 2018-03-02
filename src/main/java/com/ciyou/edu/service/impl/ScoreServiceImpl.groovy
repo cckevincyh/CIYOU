@@ -82,14 +82,20 @@ class ScoreServiceImpl implements ScoreService{
     }
 
     @Override
-    Page<Score> queryScoreByPage(String value, int pageNo, int pageSize = 10) {
+    Page<Score> queryScoreByPage(Integer tid,String value, int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
-        return scoreMapper?.queryScoreByPage(value)
+        return scoreMapper?.queryScoreByPage(tid,value)
     }
 
     @Override
     Page<Score> queryMyScoreByPage(Integer sid, String value, int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
         return scoreMapper?.queryMyScoreByPage(sid,value)
+    }
+
+    @Override
+    Page<Score> findScoreByPage(Integer tid, int pageNo, int pageSize = 10) {
+        PageHelper.startPage(pageNo, pageSize)
+        return scoreMapper?.findScoreByPage(tid)
     }
 }
