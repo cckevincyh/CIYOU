@@ -121,4 +121,26 @@ class QuizController {
             return JSONUtil.returnFailReuslt("交卷失败")
         }
     }
+
+    @RequestMapping(value="/student/queryQuiz")
+    ModelAndView studentQueryQuiz(String searchContent,Integer page){
+        if(page == null){
+            page = 1
+        }
+        if(!searchContent || searchContent?.trim() == ""){
+            ModelAndView mv = new ModelAndView("redirect:quiz")
+            return mv
+        }else{
+            ModelAndView mv = new ModelAndView("/student/quiz")
+            logger.info("queryQuiz : 查询第${page}页，携带查询参数=${searchContent}")
+            //不赋值pageSize，默认为10
+            Page<Quiz> quizs = quizService?.queryQuizByPage(searchContent?.trim(),page)
+            // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+            PageInfo<Quiz> pageInfo = new PageInfo<Quiz>(quizs)
+            pageInfo?.setUrl("/student/queryQuiz?searchContent=${searchContent}&")
+            mv?.addObject("pageInfo",pageInfo)
+            return mv
+        }
+
+    }
 }

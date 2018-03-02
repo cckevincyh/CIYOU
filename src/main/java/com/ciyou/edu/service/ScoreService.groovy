@@ -1,6 +1,8 @@
 package com.ciyou.edu.service
 
+import com.ciyou.edu.entity.ResultScore
 import com.ciyou.edu.entity.Score
+import com.github.pagehelper.Page
 
 /**
  * @Author C.
@@ -8,4 +10,8 @@ import com.ciyou.edu.entity.Score
  */
 interface ScoreService {
     Score getScore(Integer sid,Integer quizId)
+
+    Page<Score> findMyScoreByPage(Integer sid,int pageNo, int pageSize)
+
+    ResultScore getResultScore(Integer scoreId)
 }
