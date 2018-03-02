@@ -181,7 +181,7 @@
 
                               <div class="col-lg-3 form-group">
                                   <label class="col-lg-6 control-label" for="query_bno1"><i class="fa  fa-graduation-cap"></i>  姓名:</label>
-                              <label class="col-lg-6 control-label" for="query_bno1"><i>${Session.student.name!}</i> </label>
+                              <label class="col-lg-6 control-label" for="query_bno1"><i>${resultScore.score.student.name!}</i> </label>
                               </div>
 
                               <div class="col-lg-3  form-group">

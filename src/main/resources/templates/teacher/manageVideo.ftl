@@ -139,7 +139,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${base}/teacher/manageScore">
                         <i class="fa fa-search"></i> <span>成绩查询</span>
                     </a>
                 </li>
