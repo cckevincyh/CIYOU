@@ -4,7 +4,7 @@
 $(function () {
 
     $('#updateStudent').click(function () {
-        if (!validStudent()) {
+        if (!validUpdateStudent()) {
             return;
         }
         $.ajax({
@@ -206,7 +206,7 @@ function updateStudent(id){
 
 
 
-function validStudent() {
+function validUpdateStudent() {
     var flag = true;
 
     var studentId = $.trim($("#updateStudentId").val());
