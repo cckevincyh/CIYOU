@@ -144,6 +144,16 @@
                     </a>
                 </li>
                 <li>
+                    <a href="${base}/teacher/analyseClasses">
+                        <i class="fa fa-bar-chart"></i> <span>班级分析</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${base}/teacher/analyseQuiz">
+                        <i class="fa fa-bar-chart"></i> <span>小测分析</span>
+                    </a>
+                </li>
+                <li>
                     <a href="${base}/teacher/profile">
                         <i class="fa fa-cogs"></i> <span>个人设置</span>
                     </a>
