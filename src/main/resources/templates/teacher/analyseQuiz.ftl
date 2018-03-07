@@ -180,7 +180,6 @@
                   <div class="box">
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="col-md-3 col-sm-4"><button class="btn btn-default btn-xs" id="btn_add" data-toggle="modal" data-target="#addModal"><i class="fa fa-fw fa-plus"></i></button> 添加小测试题</div>
                           <div class="box-tools">
                               <form class="form-horizontal" action="${base}/teacher/queryQuiz" method="get">
                                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -224,18 +223,13 @@
                                           <td></td>
                                       </#if>
                                       <td>
-
-                                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getQuiz(${quiz.quizId!})" ><i class="fa fa-fw fa-eye"></i></button>
-                                          <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#updateModal" onclick="updateQuiz(${quiz.quizId!})"><i class="fa fa-fw fa-edit"></i></button>
-                                          <button type="button" class="btn btn-danger btn-xs" onclick="deleteQuiz(${quiz.quizId!})"><i class="fa fa-fw fa-trash"></i></button>
-                                          <input type="hidden" id="question" value="${base}/teacher/manageExam">
                                           <button type="button" class="btn btn-success btn-xs" onclick="question(${quiz.quizId!})"><i class="fa fa-fw fa-paint-brush"></i></button>
                                       </td>
                                   </tr>
                               </#list>
                           <#else >
                               <tr>
-                                  <td colspan="5" align="center">暂无数据</td>
+                                  <td colspan="6" align="center">暂无数据</td>
                           <tr>
                           </#if>
                           </table>
@@ -289,290 +283,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-------添加的模糊框----->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        添加新小测
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addQuizName"  placeholder="请输入小测名称">
-                            <label class="control-label" for="addQuizName" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">年级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="addGrade">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="addGrade" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">课程</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="addSubject">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="addSubject" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">小测时间</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addQuizTime"  placeholder="请输入小测时间">
-                            <label class="control-label" for="addQuizTime" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选择题分数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addChoiceScore"  placeholder="请输入选择题的分值">
-                            <label class="control-label" for="addChoiceScore" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">判断题分数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="addJudgeScore"  placeholder="请输入判断题的分值">
-                            <label class="control-label" for="addJudgeScore" style="display:none;"></label>
-                        </div>
-                    </div>
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="addQuiz"><i class="fa fa-save"></i>
-                        保存
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-
-
-
-<!-- 修改模态框（Modal） -->
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="updateModalLabel">
-                        修改小测信息
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
-                        <div class="col-sm-7">
-                            <input type="hidden" id="updateQuizId">
-                            <input type="text" class="form-control" id="updateQuizName"  placeholder="请输入小测名称">
-                            <label class="control-label" for="updateQuizName" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">年级</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="updateGrade">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="updateGrade" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">课程</label>
-                        <div class="col-sm-7">
-                            <select class="form-control" id="updateSubject">
-                                <option value="0">请选择</option>
-                            </select>
-                            <label class="control-label" for="updateSubject" style="display: none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">小测时间</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateQuizTime"  placeholder="请输入小测时间">
-                            <label class="control-label" for="updateQuizTime" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选择题分数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateChoiceScore"  placeholder="请输入选择题的分值">
-                            <label class="control-label" for="updateChoiceScore" style="display:none;"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">判断题分数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="updateJudgeScore"  placeholder="请输入判断题的分值">
-                            <label class="control-label" for="updateJudgeScore" style="display:none;"></label>
-                        </div>
-                    </div>
-                    <!---------------------表单-------------------->
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i>关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" id="updateQuiz"><i class="fa fa-save"></i>
-                        保存
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-
-
-<!--------------------------------------查看的模糊框------------------------>
-<form class="form-horizontal">   <!--保证样式水平不混乱-->
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="findModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="findModalLabel">
-                        查看小测信息
-                    </h4>
-                </div>
-                <div class="modal-body">
-
-                    <!---------------------表单-------------------->
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">小测名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findQuizName" readonly="readonly">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">所属年级</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findGrade"  readonly="readonly">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">所属科目</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findSubject"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">考试时间</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findQuizTime"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">出题教师</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findTeacher"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选择题个数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findChoiceNum"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">判断题个数</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findJudgeNum"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">选择题分值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findChoiceScore"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">判断题分值</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findJudgeScore"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">总分</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="findAllScore"  readonly="readonly">
-
-                        </div>
-                    </div>
-
-
-                    <!---------------------表单-------------------->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> 关闭
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-    </div>
-
-</form>
-<!--------------------------------------查看的模糊框------------------------>
 
 <!-- 提示 -->
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel">
@@ -652,10 +362,5 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
 
-<script src="${base}/static/js/teacher/quiz/getQuiz.js"></script>
-<script src="${base}/static/js/teacher/quiz/addQuiz.js"></script>
-<script src="${base}/static/js/teacher/quiz/updateQuiz.js"></script>
-<script src="${base}/static/js/teacher/quiz/deleteQuiz.js"></script>
-<script src="${base}/static/js/teacher/quiz/question.js"></script>
 </body>
 </html>

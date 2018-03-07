@@ -235,7 +235,7 @@
                               </#list>
                           <#else >
                               <tr>
-                                  <td colspan="5" align="center">暂无数据</td>
+                                  <td colspan="6" align="center">暂无数据</td>
                           <tr>
                           </#if>
                           </table>
