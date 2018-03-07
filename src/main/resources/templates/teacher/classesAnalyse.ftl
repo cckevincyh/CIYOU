@@ -162,6 +162,8 @@
     <section class="content-header">
       <h1>
         <#if roster.classes?? && roster.classes.grade??>
+            <input type="hidden" id="grade" value="${roster.classes.grade.gradeId!}">
+            <input type="hidden" id="classes" value="${roster.classes.classesId!}">
             ${roster.classes.grade.gradeName!}-${roster.classes.classes!}班成绩分析
             <small>${roster.classes.grade.gradeName!}-${roster.classes.classes!}班小测成绩分析</small>
         </#if>
@@ -186,6 +188,90 @@
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
+                          <div class="col-md-6">
+                              <!-- AREA CHART -->
+                              <div class="box box-primary">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Area Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body" style="">
+                                      <div class="chart">
+                                          <canvas id="areaChart" style="height: 234px; width: 558px;" width="697" height="292"></canvas>
+                                      </div>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                              <!-- Radar Chart -->
+                              <div class="box box-danger">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Radar Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body" style="">
+                                      <canvas id="radarChart" style="height: 289px; width: 579px;" width="723" height="361"></canvas>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                          </div>
+
+                          <div class="col-md-6">
+                              <!-- LINE CHART -->
+                              <div class="box box-info">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Line Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body">
+                                      <div class="chart">
+                                          <canvas id="lineChart" style="height: 249px; width: 684px;" width="855" height="311"></canvas>
+                                      </div>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                              <!-- BAR CHART -->
+                              <div class="box box-success">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Bar Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body">
+                                      <div class="chart">
+                                          <canvas id="barChart" style="height: 229px; width: 684px;" width="855" height="286"></canvas>
+                                      </div>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                          </div>
+
                       </div>
                   </div>
                   <!-- /.box -->
@@ -290,8 +376,8 @@
 <script src="${base}/static/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
+<script src="${base}/static/bower_components/Chart.js/Chart.js"></script>
 
-<script src="${base}/static/js/teacher/analyse/analyseClasses.js"></script>
-
+<script src="${base}/static/js/teacher/analyse/classesAnalyse.js"></script>
 </body>
 </html>

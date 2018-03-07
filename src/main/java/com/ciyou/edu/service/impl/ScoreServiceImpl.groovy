@@ -1,6 +1,7 @@
 package com.ciyou.edu.service.impl
 
 import com.ciyou.edu.entity.Answer
+import com.ciyou.edu.entity.AvgScore
 import com.ciyou.edu.entity.Choice
 import com.ciyou.edu.entity.ChoiceAnswer
 import com.ciyou.edu.entity.Judge
@@ -97,5 +98,15 @@ class ScoreServiceImpl implements ScoreService{
     Page<Score> findScoreByPage(Integer tid, int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
         return scoreMapper?.findScoreByPage(tid)
+    }
+
+    @Override
+    List<AvgScore> getSubjectAvgByClasses(Integer classesId) {
+        return scoreMapper?.getSubjectAvgByClasses(classesId)
+    }
+
+    @Override
+    List<AvgScore> getSubjectAvgByGrade(Integer gradeId) {
+        return scoreMapper?.getSubjectAvgByGrade(gradeId)
     }
 }

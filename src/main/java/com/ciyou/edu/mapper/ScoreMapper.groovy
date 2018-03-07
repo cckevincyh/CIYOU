@@ -1,5 +1,6 @@
 package com.ciyou.edu.mapper
 
+import com.ciyou.edu.entity.AvgScore
 import com.ciyou.edu.entity.Score
 import com.github.pagehelper.Page
 import org.apache.ibatis.annotations.Insert
@@ -88,4 +89,11 @@ interface ScoreMapper {
                     one = @One(select = "com.ciyou.edu.mapper.QuizMapper.getQuizById"))
     ])
     Page<Score> findScoreByPage(@Param("tid")Integer tid)
+
+    @Select("select avg(Score.allScore) as avg,Subject.subjectName FROM Score, Quiz, Subject, Grade, Student where Score.quizId = Quiz.quizId and Quiz.subjectId = Subject.subjectId and Grade.gradeId = Quiz.gradeId and Student.sid = Score.sid and Student.classesId = #{classesId} group by Subject.subjectId")
+    List<AvgScore> getSubjectAvgByClasses(@Param("classesId")Integer classesId)
+
+
+    @Select("select avg(Score.allScore) as avg,Subject.subjectName FROM Score, Quiz, Subject, Grade, Student where Score.quizId = Quiz.quizId and Quiz.subjectId = Subject.subjectId and Grade.gradeId = Quiz.gradeId and Student.sid = Score.sid and Grade.gradeId = #{gradeId} group by Subject.subjectId")
+    List<AvgScore> getSubjectAvgByGrade(@Param("gradeId")Integer gradeId)
 }

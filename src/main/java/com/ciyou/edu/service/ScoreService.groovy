@@ -1,5 +1,6 @@
 package com.ciyou.edu.service
 
+import com.ciyou.edu.entity.AvgScore
 import com.ciyou.edu.entity.ResultScore
 import com.ciyou.edu.entity.Score
 import com.github.pagehelper.Page
@@ -20,4 +21,8 @@ interface ScoreService {
     Page<Score> queryMyScoreByPage(Integer sid,String value,int pageNo, int pageSize)
 
     Page<Score> findScoreByPage(Integer tid,int pageNo, int pageSize)
+
+    List<AvgScore> getSubjectAvgByClasses(Integer classesId)
+
+    List<AvgScore> getSubjectAvgByGrade(Integer gradeId)
 }
