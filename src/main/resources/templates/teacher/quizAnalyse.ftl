@@ -161,12 +161,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          小测分析
-          <small>小测试题分析</small>
+          <input type="hidden" id="quiz" value=" ${quiz.quizId!}">
+         ${quiz.quizName!} 小测分析
+          <small> ${quiz.quizName!} 小测成绩分析</small>
       </h1>
       <ol class="breadcrumb">
           <li><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
-          <li class="active"><i class="fa fa-bar-chart"></i> 小测分析</a></li>
+          <li><a href="${base}/teacher/analyseQuiz"><i class="fa fa-bar-chart"></i> 小测分析</a></li>
+          <li class="active"><i class="fa fa-bar-chart"></i>  ${quiz.quizName!} 小测成绩分析</a></li>
       </ol>
     </section>
 
@@ -180,85 +182,94 @@
                   <div class="box">
                       <div class="box-header with-border">
                           <h3 class="box-title"></h3>
-                          <div class="box-tools">
-                              <form class="form-horizontal" action="${base}/teacher/queryAnalyseQuiz" method="get">
-                                  <div class="input-group input-group-sm" style="width: 150px;">
-                                      <input type="text" name="searchContent" class="form-control pull-right" placeholder="Search">
-                                      <div class="input-group-btn">
-                                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
                       </div>
                       <!-- /.box-header -->
                       <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover">
-                              <tr>
-                                  <th>试卷名称</th>
-                                  <th>课程</th>
-                                  <th>年级</th>
-                                  <th>考试时间</th>
-                                  <th>出题教师</th>
-                                  <th>操作</th>
-                              </tr>
-                          <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
-                              <#list pageInfo.list as quiz>
-                                  <tr>
-                                      <td>${quiz.quizName!}</td>
-                                      <#if quiz.subject??>
-                                          <td>${quiz.subject.subjectName!}</td>
-                                      <#else >
-                                            <td></td>
-                                      </#if>
-                                      <#if quiz.grade??>
-                                          <td>${quiz.grade.gradeName!}</td>
-                                      <#else >
-                                          <td></td>
-                                      </#if>
-                                      <td>${quiz.quizTime!}分钟</td>
-                                      <#if quiz.teacher??>
-                                      <td>${quiz.teacher.name!}</td>
-                                      <#else >
-                                          <td></td>
-                                      </#if>
-                                      <td>
-                                          <button type="button" class="btn btn-success btn-xs" onclick="analyseQuiz(${quiz.quizId!})"><i class="fa fa-bar-chart"></i></button>
-                                      </td>
-                                  </tr>
-                              </#list>
-                          <#else >
-                              <tr>
-                                  <td colspan="6" align="center">暂无数据</td>
-                          <tr>
-                          </#if>
-                          </table>
+                          <div class="col-md-6">
+                              <!-- AREA CHART -->
+                              <div class="box box-primary">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Area Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body" style="">
+                                      <div class="chart">
+                                          <canvas id="areaChart" style="height: 234px; width: 558px;" width="697" height="292"></canvas>
+                                      </div>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                              <!-- DONUT CHART -->
+                              <div class="box box-danger">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Donut Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body" style="">
+                                      <canvas id="pieChart" style="height: 260px; width: 520px;" width="650" height="325"></canvas>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                          </div>
+
+                          <div class="col-md-6">
+                              <!-- LINE CHART -->
+                              <div class="box box-info">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Line Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body">
+                                      <div class="chart">
+                                          <canvas id="lineChart" style="height: 249px; width: 684px;" width="855" height="311"></canvas>
+                                      </div>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                              <!-- BAR CHART -->
+                              <div class="box box-success">
+                                  <div class="box-header with-border">
+                                      <h3 class="box-title">Bar Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                          </button>
+                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="box-body">
+                                      <div class="chart">
+                                          <canvas id="barChart" style="height: 229px; width: 684px;" width="855" height="286"></canvas>
+                                      </div>
+                                  </div>
+                                  <!-- /.box-body -->
+                              </div>
+                              <!-- /.box -->
+
+                          </div>
+
                       </div>
-                      <!-- /.box-body -->
-                  <#if pageInfo?? && pageInfo.list?? && (pageInfo.list?size > 0) >
-                      <div class="box-footer clearfix">
-                          <ul class="pagination no-margin pull-right">
-                              <li class="disabled"><a href="#">第${pageInfo.pageNum}页/共${pageInfo.pages}页</a></li>
-                              <#if pageInfo.pageNum == 1>
-                                  <li class="disabled"><a>&laquo;</a></li>
-                              <#else>
-                                  <li><a href="${pageInfo.url}page=${pageInfo.pageNum - 1}">&laquo;</a></li>
-                              </#if>
-                              <#list pageInfo.navigatepageNums as num>
-                                  <#if pageInfo.pageNum == num>
-                                      <li class="active"><a>${num}</a></li>
-                                  <#else>
-                                      <li><a href="${pageInfo.url}page=${num}">${num}</a></li>
-                                  </#if>
-                              </#list>
-                              <#if pageInfo.pageNum == pageInfo.pages>
-                                  <li class="disabled"><a>&raquo;</a></li>
-                              <#else>
-                                  <li><a href="${pageInfo.url}page=${pageInfo.pageNum + 1}">&raquo;</a></li>
-                              </#if>
-                          </ul>
-                      </div>
-                  </#if>
                   </div>
                   <!-- /.box -->
               </div>
@@ -266,8 +277,8 @@
       </section>
 
 
- 
-   
+
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -282,6 +293,7 @@
 
 </div>
 <!-- ./wrapper -->
+
 
 
 <!-- 提示 -->
@@ -361,7 +373,8 @@
 <script src="${base}/static/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="${base}/static/dist/js/demo.js"></script>
+<script src="${base}/static/bower_components/Chart.js/Chart.js"></script>
 
-<script src="${base}/static/js/teacher/analyse/analyseQuiz.js"></script>
+<script src="${base}/static/js/teacher/analyse/quizAnalyse.js"></script>
 </body>
 </html>

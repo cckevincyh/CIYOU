@@ -60,6 +60,7 @@ class AdminServiceImpl implements AdminService{
         return adminMapper?.findAllAdmin(admin?.getAdminId())
     }
 
+    //使缓存失效@CacheEvict
     @Transactional
     @Override
     int updateAdmin(Admin admin) {
