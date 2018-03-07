@@ -65,8 +65,11 @@ class QuizController {
     @ResponseBody
     String getLockState(Integer quizId,Integer sid){
         Student student = studentService?.getStudentById(sid?.toString())
-        Score score = scoreService.getScore(sid, quizId)
-        if(score != null){
+        Quiz quiz = quizService?.getQuizById(quizId)
+        Score score = scoreService?.getScore(sid, quizId)
+        if(quiz?.getGrade()?.getGradeId() != student?.getClasses()?.getGrade()?.getGradeId()){
+            return JSONUtil.returnFailReuslt("你不是" + quiz?.getGrade()?.getGradeName() + "的学生,不能进行该小测")
+        }else if(score != null){
             //该小测练习已经做过了
             return JSONUtil.returnFailReuslt("该小测练习已经做过了")
         }else{
