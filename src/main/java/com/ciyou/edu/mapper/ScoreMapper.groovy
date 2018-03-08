@@ -96,4 +96,7 @@ interface ScoreMapper {
 
     @Select("select avg(Score.allScore) as avg,Subject.subjectName FROM Score, Quiz, Subject, Grade, Student where Score.quizId = Quiz.quizId and Quiz.subjectId = Subject.subjectId and Grade.gradeId = Quiz.gradeId and Student.sid = Score.sid and Grade.gradeId = #{gradeId} group by Subject.subjectId")
     List<AvgScore> getSubjectAvgByGrade(@Param("gradeId")Integer gradeId)
+
+    @Select("select avg(Score.allScore) as avg,Subject.subjectName FROM Score, Quiz, Subject, Grade, Student where Score.quizId = Quiz.quizId and Quiz.subjectId = Subject.subjectId and Grade.gradeId = Quiz.gradeId and Student.sid = Score.sid and Student.sid = #{sid} group by Subject.subjectId")
+    List<AvgScore> getSubjectAvgByStudent(@Param("sid")Integer sid)
 }

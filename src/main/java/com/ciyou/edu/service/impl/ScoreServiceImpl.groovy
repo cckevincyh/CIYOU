@@ -109,4 +109,9 @@ class ScoreServiceImpl implements ScoreService{
     List<AvgScore> getSubjectAvgByGrade(Integer gradeId) {
         return scoreMapper?.getSubjectAvgByGrade(gradeId)
     }
+
+    @Override
+    List<AvgScore> getSubjectAvgByStudent(Integer sid) {
+        return scoreMapper?.getSubjectAvgByStudent(sid)
+    }
 }

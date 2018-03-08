@@ -25,4 +25,6 @@ interface ScoreService {
     List<AvgScore> getSubjectAvgByClasses(Integer classesId)
 
     List<AvgScore> getSubjectAvgByGrade(Integer gradeId)
+
+    List<AvgScore> getSubjectAvgByStudent(Integer sid)
 }
