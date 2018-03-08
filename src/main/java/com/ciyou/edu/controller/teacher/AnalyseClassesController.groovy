@@ -7,6 +7,7 @@ import com.ciyou.edu.service.RosterService
 import com.ciyou.edu.service.ScoreService
 import com.ciyou.edu.utils.JSONUtil
 import com.ciyou.edu.utils.RGBAUtil
+import com.ciyou.edu.utils.Utils
 import com.github.pagehelper.Page
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -64,27 +65,14 @@ class AnalyseClassesController {
         List<AvgScore> classesInfo = scoreService?.getSubjectAvgByClasses(classesId)
         map?.put("labels",classesInfo?.subjectName)
         List<Map<String,Object>> datasets = new ArrayList<Map<String,Object>>()
-        datasets << getInfoMap(classesInfo,"该班级")
+        datasets << Utils.getInfoMap(classesInfo,"该班级")
         List<AvgScore> gradeInfo = scoreService?.getSubjectAvgByGrade(gradeId)
-        datasets << getInfoMap(gradeInfo,"全年级")
+        datasets << Utils.getInfoMap(gradeInfo,"全年级")
         map?.put("datasets",datasets)
         logger.info(JSONUtil.returnEntityReuslt(map))
         return JSONUtil.returnEntityReuslt(map)
     }
 
 
-    private static Map<String, Object> getInfoMap(List<AvgScore> info,String label){
-        Map<String,Object> infoMap = new HashMap<String,Object>()
-        String rgba = RGBAUtil.randomColor()
-        infoMap?.put("fillColor",rgba)
-        infoMap?.put("strokeColor",rgba)
-        infoMap?.put("pointColor",rgba)
-        infoMap?.put("pointStrokeColor",rgba)
-        infoMap?.put("pointHighlightFill",rgba)
-        infoMap?.put("pointHighlightStroke",rgba)
-        infoMap?.put("label",label)
-        infoMap?.put("data",info?.avg)
-        return infoMap
-    }
 
 }

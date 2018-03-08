@@ -9,6 +9,7 @@ import com.ciyou.edu.service.JudgeService
 import com.ciyou.edu.service.QuizService
 import com.ciyou.edu.utils.JSONUtil
 import com.ciyou.edu.utils.RGBAUtil
+import com.ciyou.edu.utils.Utils
 import com.github.pagehelper.Page
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -58,7 +59,7 @@ class AnalyseQuizController {
 
 
     @RequestMapping("/teacher/quizAnalyse")
-    ModelAndView classesQuiz(Integer quizId){
+    ModelAndView quizAnalyse(Integer quizId){
         ModelAndView mv = new ModelAndView("teacher/quizAnalyse")
         Quiz quiz = quizService?.getQuizById(quizId)
         mv?.addObject("quiz",quiz)
@@ -106,25 +107,13 @@ class AnalyseQuizController {
             }
         }
         map?.put("labels",incorrectLabels)
-        datasets << getIncorrectMap(incorrectAnswerList)
+        datasets << Utils.getIncorrectMap(incorrectAnswerList)
         map?.put("datasets",datasets)
         logger.info(JSONUtil.returnEntityReuslt(map))
         return JSONUtil.returnEntityReuslt(map)
 
     }
 
-    private static Map<String, Object> getIncorrectMap(List<IncorrectAnswer> incorrectAnswerList){
-        Map<String,Object> infoMap = new HashMap<String,Object>()
-        String rgba = RGBAUtil.randomColor()
-        infoMap?.put("fillColor",rgba)
-        infoMap?.put("strokeColor",rgba)
-        infoMap?.put("pointColor",rgba)
-        infoMap?.put("pointStrokeColor",rgba)
-        infoMap?.put("pointHighlightFill",rgba)
-        infoMap?.put("pointHighlightStroke",rgba)
-        infoMap?.put("data",incorrectAnswerList?.incorrectNum)
-        return infoMap
-    }
 
 
     @RequestMapping(value="/teacher/getDonutChartByQuiz",method=RequestMethod.POST, produces="application/json;charset=UTF-8")
