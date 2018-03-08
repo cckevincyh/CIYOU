@@ -30,7 +30,7 @@ class AdminTest {
     void addAdminTest(){
         Admin admin = new Admin()
         admin.setAdminName("admin")
-        admin.setName("菜肉")
+        admin.setName("超级管理员")
         admin.setIsAvalible(1)
         String passwordMd5= new Md5Hash("admin","admin",2).toHex()
         admin.setPassword(passwordMd5)
