@@ -82,7 +82,7 @@
                                 <a href="${base}/student/profile" class="btn btn-default btn-flat">个人资料</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">登出</a>
+                                <a href="${base}/logout" class="btn btn-default btn-flat">登出</a>
                             </div>
                         </li>
                     </ul>

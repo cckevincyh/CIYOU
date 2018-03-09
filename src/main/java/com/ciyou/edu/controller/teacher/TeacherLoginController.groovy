@@ -52,4 +52,11 @@ class TeacherLoginController {
             return JSONUtil.returnFailReuslt("账号或者密码错误")
         }
     }
+
+
+    @RequestMapping(value="/teacher/teacherLogout")
+    public String logoutTeacher(){
+        SecurityUtils.getSubject()?.logout()
+        return "redirect:/teacherLogin"
+    }
 }

@@ -71,4 +71,14 @@ class AdminLoginController {
 
 
 
+    @RequestMapping(value="/admin/adminLogout")
+    public String logoutAdmin(){
+        SecurityUtils.getSubject()?.logout()
+        return "redirect:/adminLogin"
+    }
+
+
+
+
+
 }

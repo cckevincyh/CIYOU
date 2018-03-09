@@ -55,7 +55,7 @@
                   <li role="presentation" class="divider"></li>
                   <li><a href="#updatepwd" data-toggle="modal">修改密码</a></li>
                   <li role="presentation" class="divider"></li>
-                  <li><a href="#">退出</a></li>
+                  <li><a href="${base}/admin/adminLogout">退出</a></li>
               </ul>
           </li>
         </ul>
