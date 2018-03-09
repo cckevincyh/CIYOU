@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper
 import org.apache.shiro.SecurityUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheConfig
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,12 +22,13 @@ import org.springframework.transaction.annotation.Transactional
  */
 //@CacheConfig：该注解是用来开启声明的类参与缓存,如果方法内的@Cacheable注解没有添加key值，那么会自动使用cahceNames配置参数并且追加方法名
 @Service
-//@CacheConfig(cacheNames = "admin")
+@CacheConfig(cacheNames = "admin")
 class AdminServiceImpl implements AdminService{
 
     @Autowired
     private AdminMapper adminMapper
 
+    @CacheEvict(allEntries=true)
     @Transactional
     @Override
     int addAdmin(Admin admin) {
@@ -34,7 +36,6 @@ class AdminServiceImpl implements AdminService{
     }
 
     //@Cacheable：配置方法的缓存参数，可自定义缓存的key以及value
-    //@Cacheable
     @Override
     Admin findAdminById(Integer adminId) {
         return adminMapper?.findAdminById(adminId)
@@ -51,6 +52,8 @@ class AdminServiceImpl implements AdminService{
      * @param pageSize 每页条数，默认为10
      * @return
      */
+    //@Cacheable：配置方法的缓存参数，可自定义缓存的key以及value
+    @Cacheable
     @Override
     Page<Admin> findByPage(int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
@@ -61,12 +64,15 @@ class AdminServiceImpl implements AdminService{
     }
 
     //使缓存失效@CacheEvict
+    //Entries = true: 清空admin里的所有缓存
+    @CacheEvict(allEntries=true)
     @Transactional
     @Override
     int updateAdmin(Admin admin) {
         return adminMapper?.updateAdmin(admin)
     }
 
+    @CacheEvict(allEntries=true)
     @Transactional
     @Override
     int deleteAdmin(Integer adminId) {
@@ -88,6 +94,7 @@ class AdminServiceImpl implements AdminService{
         return adminMapper?.updatePassword(adminId,password)
     }
 
+    @CacheEvict(cacheNames="permission", allEntries=true)
     @Transactional
     @Override
     boolean setAdminPermission(Integer adminId, String allPermission) {

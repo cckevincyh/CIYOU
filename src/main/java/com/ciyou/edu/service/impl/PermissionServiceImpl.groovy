@@ -5,6 +5,9 @@ import com.ciyou.edu.entity.TreeNode
 import com.ciyou.edu.mapper.PermissionMapper
 import com.ciyou.edu.service.PermissionService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheConfig
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -12,17 +15,20 @@ import org.springframework.transaction.annotation.Transactional
  * @Author C.
  * @Date 2018-02-04 17:02
  */
+@CacheConfig(cacheNames = "permission")
 @Service
 class PermissionServiceImpl implements PermissionService{
 
     @Autowired
     private PermissionMapper permissionMapper
 
+    @Cacheable
     @Override
     List<Permission> findAllPermission() {
         return permissionMapper?.findAllPermission()
     }
 
+    @Cacheable
     @Override
     List<TreeNode> getPermissionTree() {
         //得到type为1的，权限类型:菜单,就是父权限
@@ -48,21 +54,25 @@ class PermissionServiceImpl implements PermissionService{
     }
 
 
+    @Cacheable
     @Override
     Permission findPermissionById(Integer permissionId) {
         return permissionMapper?.findPermissionById(permissionId)
     }
 
+    @Cacheable
     @Override
     Permission findPermissionByName(String permissionName) {
         return permissionMapper?.findPermissionByName(permissionName)
     }
 
+    @Cacheable
     @Override
     Permission findOtherPermissionByName(Integer permissionId, String permissionName) {
         return permissionMapper?.findOtherPermissionByName(permissionId, permissionName)
     }
 
+    @CacheEvict(allEntries=true)
     @Transactional
     @Override
     boolean addPermission(Permission permission) {
@@ -72,36 +82,45 @@ class PermissionServiceImpl implements PermissionService{
         return  permissionMapper?.setAdminPermission(1,permission?.getPermissionId())
     }
 
+    @Cacheable
     @Override
     Permission findPermissionByPermission(String permission) {
         return permissionMapper?.findPermissionByPermission(permission)
     }
 
+    @Cacheable
     @Override
     Permission findOtherPermission(Integer permissionId, String permission) {
         return permissionMapper?.findOtherPermission(permissionId,permission)
     }
 
+    @CacheEvict(allEntries=true)
+    @Transactional
     @Override
     int updatePermission(Permission permission) {
         return permissionMapper?.updatePermission(permission)
     }
 
+    @CacheEvict(allEntries=true)
+    @Transactional
     @Override
     int deletePermission(Integer permissionId) {
         return permissionMapper?.deletePermission(permissionId)
     }
 
+    @Cacheable
     @Override
     List<Permission> findChildPermission(Integer permissionId) {
         return permissionMapper?.findChildPermission(permissionId)
     }
 
+    @Cacheable
     @Override
     List<Integer> findAdminPermission(Integer adminId) {
         return permissionMapper?.findAdminPermission(adminId)
     }
 
+    @Cacheable
     @Override
     List<Permission> findPermissionByAdmin(Integer adminId) {
         return permissionMapper?.findPermissionByAdmin(adminId)

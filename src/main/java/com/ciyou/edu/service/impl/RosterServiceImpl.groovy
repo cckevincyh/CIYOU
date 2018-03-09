@@ -8,17 +8,24 @@ import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
 import org.apache.shiro.SecurityUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheConfig
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * @Author C.
  * @Date 2018-02-23 21:37
  */
+@CacheConfig(cacheNames = "roster")
 @Service
 class RosterServiceImpl implements RosterService{
+
     @Autowired
     private RosterMapper rosterMapper
 
+    @Cacheable
     @Override
     Page<Roster> findByPage(int pageNo, int pageSize = 10) {
         PageHelper.startPage(pageNo, pageSize)
@@ -27,11 +34,14 @@ class RosterServiceImpl implements RosterService{
         return rosterMapper?.findByTeacher(teacher)
     }
 
+    @Cacheable
     @Override
     Roster getRosterById(Integer rid) {
         return rosterMapper?.getRosterById(rid)
     }
 
+    @Transactional
+    @CacheEvict(allEntries=true)
     @Override
     int addRoster(Integer classesId) {
         //获得当前教师
@@ -46,11 +56,15 @@ class RosterServiceImpl implements RosterService{
         }
     }
 
+    @Transactional
+    @CacheEvict(allEntries=true)
     @Override
     int updateRoster(Integer classesId) {
         return rosterMapper?.updateRoster(classesId)
     }
 
+    @Transactional
+    @CacheEvict(allEntries=true)
     @Override
     int deleteRoster(Integer rid) {
         return rosterMapper?.deleteRoster(rid)
