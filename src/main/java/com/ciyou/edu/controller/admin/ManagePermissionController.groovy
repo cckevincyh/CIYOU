@@ -39,7 +39,7 @@ class ManagePermissionController {
     String getAllPermission(){
         List<TreeNode> permissionTree = permissionService?.getPermissionTree()
         logger.info("获得的permissionTree：" + permissionTree)
-        JsonConfig jsonConfig = new JsonConfig();
+        JsonConfig jsonConfig = new JsonConfig()
         jsonConfig.setJsonPropertyFilter(new PropertyFilter() {
             public boolean apply(Object obj, String name, Object value) {
                 return value == null
