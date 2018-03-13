@@ -37,7 +37,7 @@ $(function () {
     });
 
     $('#updateTeacher').click(function () {
-        if (!validTeacher()) {
+        if (!validUpdateTeacher()) {
             return;
         }
         $.ajax({
@@ -101,7 +101,7 @@ function updateTeacher(id){
 
 
 
-function validTeacher() {
+function validUpdateTeacher() {
     var flag = true;
 
     var teacherId = $.trim($("#updateTeacherId").val());
