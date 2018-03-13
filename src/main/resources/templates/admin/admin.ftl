@@ -146,31 +146,11 @@
     <!-- Main content -->
     <section class="content">
     <div class="row">
-    
-         <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Collapsable</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              The body of the box
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        
           <div class="col-md-4">
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title">Collapsable</h3>
+              <h3 class="box-title">管理员管理</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -180,100 +160,180 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              The body of the box
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        
-        
-          <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Collapsable</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              The body of the box
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        
-        
-        
-          <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Collapsable</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              The body of the box
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        
-        
-        
-          <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Collapsable</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              The body of the box
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        
-        
-        
-          <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Collapsable</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              The body of the box
+             <li><i class="fa fa-fw fa-user-plus"></i>  添加管理员</li>
+            <li><i class="fa fa-fw fa-edit"></i>  修改管理员</li>
+            <li><i class="fa fa-fw fa-trash"></i>  删除管理员</li>
+            <li><i class="fa fa-fw fa-edit"></i>  管理员授权</li>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
 
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">教师管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-user-plus"></i>  添加教师</li>
+                    <li><i class="fa fa-fw fa-edit"></i>  修改教师</li>
+                    <li><i class="fa fa-fw fa-trash"></i>  删除教师</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">学生管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-user-plus"></i>  添加学生</li>
+                    <li><i class="fa fa-fw fa-edit"></i>  修改学生</li>
+                    <li><i class="fa fa-fw fa-trash"></i>  删除学生</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">权限管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-plus"></i>  添加权限</li>
+                    <li><i class="fa fa-fw fa-edit"></i>  修改权限</li>
+                    <li><i class="fa fa-fw fa-trash"></i>  删除权限</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">年级管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-plus"></i>  添加年级</li>
+                    <li><i class="fa fa-fw fa-edit"></i>  修改年级</li>
+                    <li><i class="fa fa-fw fa-trash"></i>  删除年级</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">班级管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-plus"></i>  添加班级</li>
+                    <li><i class="fa fa-fw fa-edit"></i>  修改班级</li>
+                    <li><i class="fa fa-fw fa-trash"></i>  删除班级</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">科目管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-plus"></i>  添加科目</li>
+                    <li><i class="fa fa-fw fa-edit"></i>  修改科目</li>
+                    <li><i class="fa fa-fw fa-trash"></i>  删除科目</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">视频管理</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <li><i class="fa fa-fw fa-eye"></i>  查看视频</li>
+                    <li><i class="fa fa-fw fa-check"></i>  审核通过</li>
+                    <li><i class="fa fa-fw fa-close"></i>  取消审核</li>
+                    <br/>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
         <!-- /.col -->
       </div>
 	</section>

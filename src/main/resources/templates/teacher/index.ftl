@@ -175,9 +175,220 @@
         <li class="active"><a href="${base}/teacher/index"><i class="fa fa-home"></i> 首页</a></li>
       </ol>
     </section>
-    
-    
 
+
+      <!-- Main content -->
+      <section class="content">
+          <div class="row">
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">视频管理</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-fw fa-plus"></i>  添加视频</li>
+                          <li><i class="fa fa-fw fa-edit"></i>  修改视频</li>
+                          <li><i class="fa fa-fw fa-trash"></i>  删除视频</li>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">班级分配</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-fw fa-plus"></i>  添加任课班级</li>
+                          <li><i class="fa fa-fw fa-edit"></i>  修改任课班级</li>
+                          <li><i class="fa fa-fw fa-trash"></i>  删除任课班级</li>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">学生管理</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-fw fa-eye"></i>  查看任课班级的学生</li>
+                         <br/>
+                          <br/>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">小测管理</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-fw fa-plus"></i>  添加小测</li>
+                          <li><i class="fa fa-fw fa-edit"></i>  修改小测</li>
+                          <li><i class="fa fa-fw fa-trash"></i>  删除小测</li>
+                          <li><i class="fa fa-fw fa-paint-brush"></i>小测试题管理</li>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">成绩查询</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-search"></i>  查询任课班级的学生成绩</li>
+                          <li><i class="fa fa-fw fa-eye"></i>  查看学生小测详情</li>
+                          <br/>
+                          <br/>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">班级分析</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-bar-chart"></i>  班级各科平均成绩的统计图表</li>
+                          <li><i class="fa fa-bar-chart"></i>  年级各科平均成绩的统计图表</li>
+                          <li><i class="fa fa-bar-chart"></i>  班级与年级各科平均成绩的对比统计图表</li>
+                          <br/>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">小测分析</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-bar-chart"></i>  小测各题错误率对比统计图表</li>
+                          <br/>
+                          <br/>
+                          <br/>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">学生分析</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-bar-chart"></i>  学生各科成绩的统计图表</li>
+                          <li><i class="fa fa-bar-chart"></i>  班级各科平均成绩的统计图表</li>
+                          <li><i class="fa fa-bar-chart"></i>  年级各科平均成绩的统计图表</li>
+                          <li><i class="fa fa-bar-chart"></i>  学生与班级与年级各科平均成绩的对比统计图表</li>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <div class="col-md-4">
+                  <div class="box box-default">
+                      <div class="box-header with-border">
+                          <h3 class="box-title">个人设置</h3>
+
+                          <div class="box-tools pull-right">
+                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                              </button>
+                          </div>
+                          <!-- /.box-tools -->
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body">
+                          <li><i class="fa fa-fw fa-edit"></i>  修改个人资料</li>
+                          <li><i class="fa fa-fw fa-edit"></i>  修改个人密码</li>
+                          <li><i class="fa fa-fw fa-edit"></i>  修改个人头像</li>
+                          <br/>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              </div>
+
+              <!-- /.col -->
+          </div>
+      </section>
 
  
    
