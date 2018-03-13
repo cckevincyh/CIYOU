@@ -13,6 +13,16 @@ class IndexController {
 
 
     /**
+     * 403界面
+     * @return
+     */
+    @RequestMapping("/403")
+    public String error403(){
+        return "403"
+    }
+
+
+    /**
      * 进入admin登录界面
      * @return
      */
