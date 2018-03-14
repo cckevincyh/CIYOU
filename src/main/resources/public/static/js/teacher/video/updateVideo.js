@@ -50,7 +50,7 @@ $(function () {
 
     $('#updateVideoButton').click(function () {
 
-        if (!validVideo()) {
+        if (!validUpdateVideo()) {
             return;
         }
         $.ajax({
@@ -93,7 +93,7 @@ $(function () {
 
 
 
-function validVideo() {
+function validUpdateVideo() {
     var flag = true;
 
     var videoName = $.trim($("#updateVideoName").val());

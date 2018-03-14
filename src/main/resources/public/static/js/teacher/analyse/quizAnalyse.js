@@ -52,6 +52,7 @@ $(function () {
 */
             var areaChartData = data.entity;
             var areaChartOptions = {
+                scaleFontSize : 0,
                 //Boolean - If we should show the scale at all
                 showScale               : true,
                 //Boolean - Whether grid lines are shown across the chart
@@ -115,6 +116,7 @@ $(function () {
             var barChart                         = new Chart(barChartCanvas);
             var barChartData                     = areaChartData;
             var barChartOptions                  = {
+                scaleFontSize : 0,
                 //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
                 scaleBeginAtZero        : true,
                 //Boolean - Whether grid lines are shown across the chart
@@ -215,6 +217,7 @@ $(function () {
             //- LINE CHART -
             //--------------
             var areaChartOptions = {
+                scaleFontSize : 0,
                 //Boolean - If we should show the scale at all
                 showScale               : true,
                 //Boolean - Whether grid lines are shown across the chart

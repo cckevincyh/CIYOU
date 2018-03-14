@@ -119,6 +119,7 @@ class QuizController {
         logger.info("学生ID：" + sid + ",小测ID：" + quizId + ",答案：" + answer)
         boolean b = quizService.quizExam(sid,quizId,answer)
         if(b){
+            studentService?.updateStudentLockState(sid,0)
             return JSONUtil.returnSuccessResult("交卷成功")
         }else{
             return JSONUtil.returnFailReuslt("交卷失败")

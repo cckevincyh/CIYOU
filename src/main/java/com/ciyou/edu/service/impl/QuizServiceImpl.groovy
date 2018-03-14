@@ -169,7 +169,7 @@ class QuizServiceImpl implements QuizService{
             scoreMapper?.addScore(score)
 
             //关闭学生的锁
-            studentMapper.updateStudentLockState(sid,0)
+            //studentMapper.updateStudentLockState(sid,0)
         }catch (Throwable e1) {
             b = false
             throw new RuntimeException(e1.getMessage())
