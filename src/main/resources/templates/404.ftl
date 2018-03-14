@@ -37,8 +37,7 @@ p{color:#fff;margin-top:40px;font-size:24px;}
 <div class="b">
 		<img src="${base}/static/img/404.png" class="center"/>
 		<p>
-			您已偏离路线<br>
-			正在为您重新导航路线...<br>
+            抱歉，您访问的页面被外星人掳走了...<br>
             <span id="num"></span>秒后自动跳转到主页
 		</p>
 	</div>
