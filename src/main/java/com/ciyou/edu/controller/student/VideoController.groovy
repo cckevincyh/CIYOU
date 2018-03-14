@@ -43,19 +43,19 @@ class VideoController {
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
         PageInfo<Video> pageInfo = null
         if((grade == null || grade == 0) && (subject == null || subject == 0)){
-            videos = videoService?.findVideoByPage(page)
+            videos = videoService?.findVideoByPage(page,8)
             pageInfo = new PageInfo<Video>(videos)
             pageInfo?.setUrl("/student/index?")
         }else if(subject == null || subject == 0){
-            videos = videoService?.findByGradeAndPage(grade,page)
+            videos = videoService?.findByGradeAndPage(grade,page,8)
             pageInfo = new PageInfo<Video>(videos)
             pageInfo?.setUrl("/student/index?grade=${grade}?")
         }else if(grade == null || grade == 0){
-            videos = videoService?.findBySubjectAndPage(subject,page)
+            videos = videoService?.findBySubjectAndPage(subject,page,8)
             pageInfo = new PageInfo<Video>(videos)
             pageInfo?.setUrl("/student/index?subject=${subject}?")
         }else{
-            videos = videoService?.findBySubjectGradePage(grade,subject,page)
+            videos = videoService?.findBySubjectGradePage(grade,subject,page,8)
             pageInfo = new PageInfo<Video>(videos)
             pageInfo?.setUrl("/student/index?grade=${grade}&subject=${subject}?")
         }
