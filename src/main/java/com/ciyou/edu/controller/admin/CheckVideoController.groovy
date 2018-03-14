@@ -33,7 +33,7 @@ class CheckVideoController {
         ModelAndView mv = new ModelAndView("admin/checkVideo")
         logger.info("findVideoByPage : 查询第${page}页")
         //不赋值pageSize，默认为10
-        Page<Video> videos = videoService?.findByPage(page)
+        Page<Video> videos = videoService?.findByPage(page,3)
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
         PageInfo<Video> pageInfo = new PageInfo<Video>(videos)
         pageInfo?.setUrl("/admin/checkVideo?")
@@ -54,7 +54,7 @@ class CheckVideoController {
             ModelAndView mv = new ModelAndView("/admin/checkVideo")
             logger.info("queryVideo : 查询第${page}页，携带查询参数=${searchContent}")
             //不赋值pageSize，默认为10
-            Page<Video> videos = videoService?.queryVideoByPage(searchContent?.trim(),page)
+            Page<Video> videos = videoService?.queryVideoByPage(searchContent?.trim(),page,3)
             // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
             PageInfo<Video> pageInfo = new PageInfo<Video>(videos)
             pageInfo?.setUrl("/admin/queryVideo?searchContent=${searchContent}&")
