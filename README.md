@@ -100,7 +100,7 @@ url：login
 
 - 管理员管理
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/管理员管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/管理员管理界面.png)
 
 - 添加管理员
 
@@ -112,7 +112,7 @@ url：login
 
 - 超级管理员授权
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/超级管理员授权.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/管理员授权.png)
 
 超级管理员可以对管理员的权限进行授权，前台通过ajax把管理员的ID传入后台，后台查询数据库，把管理员的权限信息构造为一个TreeNode的对象，并把这个对象转化为一个JSON字符串返回给前台，前台使用bootstrap-treeview插件，把后台传入的JSON字符串构造出一个权限树，并把该管理员的权限信息显示在权限树上。超级管理员可以勾选权限，点击保存提交到后台，后台对提交的权限字符串信息进行分割处理，然后添加到数据库中。
 
@@ -121,17 +121,17 @@ url：login
 
 - 教师管理
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师管理界面.png)
 
 
 - 添加教师
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加教师.png)
 
 
 - 修改教师
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改教师.png)
 
 
 
@@ -159,7 +159,7 @@ url：login
 
 - 查看权限
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/查看权限.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/权限管理.png)
 
 
 - 添加根权限
@@ -233,7 +233,7 @@ url：login
 #### 视频审核模块
 
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/视频审核.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/视频管理.png)
 
 
 
@@ -251,7 +251,7 @@ url：login
 
 - 视频上传
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/视频上传.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加视频.png)
 
 上传视频和对应的视频封面。文件上传使用的是Baidu WebFE(FEX)团队开发的一款上传插件：WebUploader。WebUploader会把大文件分割成一块块然后并发上传到后台，这大大的提高了文件上传效率。
 
@@ -275,7 +275,7 @@ url：login
 
 该教师只能查看自己班级的学生资料
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师查看学生.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/查看学生.png)
 
 
 
@@ -390,7 +390,7 @@ url：login
 
 - 头像上传
 
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/头像上传.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/上传头像.png)
 
 
 ### 学习参考
@@ -417,7 +417,7 @@ url：login
 4. 修改数据库配置
 ![image](https://github.com/cckevincyh/CIYOU/blob/master/img/数据库配置.png)
 5. 修改启动端口Maven pom.xml
-![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改启动端口.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改端口.png)
 6. 编译项目
 7. 项目运行
 ![image](https://github.com/cckevincyh/CIYOU/blob/master/img/运行设置入口.png)
