@@ -59,7 +59,7 @@ Druid是阿里巴巴开源平台上一个数据库连接池，具有强大的监
 
 由于时间紧迫，所以设计的功能比较少，有些设想好的功能也只能毙掉了，比如教师布置作业模块，学生教师交流解答模块，还有视频学习进度记录模块等等，答题模块也是从我github上的另一个[在线考试系统](https://github.com/cckevincyh/OnLineTest)项目中抽取出来的。下面就是这个项目已经实现好的功能模块图。
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/系统功能.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/系统功能.png)
 
 
 
@@ -72,7 +72,7 @@ Druid是阿里巴巴开源平台上一个数据库连接池，具有强大的监
 
 url：adminLogin
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/管理员登录.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/管理员登录.png)
 
 登陆模块是对不同用户的身份进行验证，然后进入主界面。登陆入口有三个，分别是学生、教师、管理员登陆入口。系统首先通过区分不同的登陆入口，不同的登录入口LoginType对应不同的角色，比如：Admin、Teacher、Student，前台页面先对输入的用户名和密码进行js校验判断输入值是否合法，然后在把用户名、密码还有LoginType传入后台进行判断，后台也会对传入的数据进行校验合法性，校验成功后使用Shiro对登陆用户进行认证和授权。Shiro根据LoginType的值去找对应的AuthorizingRealm进行认证，认证过程由Shiro自动完成，然后返回认证结果，认证成功则跳转到相应的主界面，认证失败则返回相应的错误信息。
 
@@ -80,19 +80,19 @@ url：adminLogin
 
 url：teacherLogin
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师登录.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师登录.png)
 
 
 #### 学生登录界面
 
 url：login
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/学生登录.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/学生登录.png)
 
 
 #### 管理员主界面
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/管理员主界面.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/管理员主界面.png)
 
 
 
@@ -100,19 +100,19 @@ url：login
 
 - 管理员管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/管理员管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/管理员管理.png)
 
 - 添加管理员
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加管理员.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加管理员.png)
 
 - 修改管理员
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改管理员.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改管理员.png)
 
 - 超级管理员授权
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/超级管理员授权.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/超级管理员授权.png)
 
 超级管理员可以对管理员的权限进行授权，前台通过ajax把管理员的ID传入后台，后台查询数据库，把管理员的权限信息构造为一个TreeNode的对象，并把这个对象转化为一个JSON字符串返回给前台，前台使用bootstrap-treeview插件，把后台传入的JSON字符串构造出一个权限树，并把该管理员的权限信息显示在权限树上。超级管理员可以勾选权限，点击保存提交到后台，后台对提交的权限字符串信息进行分割处理，然后添加到数据库中。
 
@@ -121,17 +121,17 @@ url：login
 
 - 教师管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师管理.png)
 
 
 - 添加教师
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加管理.png)
 
 
 - 修改教师
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改管理.png)
 
 
 
@@ -140,17 +140,17 @@ url：login
 
 - 学生管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/学生管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/学生管理.png)
 
 
 - 添加学生
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加学生.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加学生.png)
 
 
 - 修改学生
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改学生.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改学生.png)
 
 
 
@@ -159,21 +159,21 @@ url：login
 
 - 查看权限
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/查看权限.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/查看权限.png)
 
 
 - 添加根权限
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加根权限.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加根权限.png)
 
 
 - 添加子权限
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加子权限.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加子权限.png)
 
 - 编辑权限
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/编辑权限.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/编辑权限.png)
 
 
 
@@ -181,16 +181,16 @@ url：login
 
 - 年级管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/年级管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/年级管理.png)
 
 - 添加年级
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加年级.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加年级.png)
 
 
 - 修改年级
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改年级.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改年级.png)
 
 
 
@@ -199,16 +199,16 @@ url：login
 
 - 班级管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/班级管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/班级管理.png)
 
 - 添加班级
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加班级.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加班级.png)
 
 
 - 修改班级
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改班级.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改班级.png)
 
 
 
@@ -218,40 +218,40 @@ url：login
 
 - 科目管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/科目管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/科目管理.png)
 
 - 添加科目
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加科目.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加科目.png)
 
 
 - 修改科目
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改科目.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改科目.png)
 
 
 #### 视频审核模块
 
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/视频审核.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/视频审核.png)
 
 
 
 #### 教师主界面
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师主界面.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师主界面.png)
 
 
 #### 教师视频管理模块
 
 - 教师视频管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师视频管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师视频管理.png)
 
 
 - 视频上传
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/视频上传.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/视频上传.png)
 
 上传视频和对应的视频封面。文件上传使用的是Baidu WebFE(FEX)团队开发的一款上传插件：WebUploader。WebUploader会把大文件分割成一块块然后并发上传到后台，这大大的提高了文件上传效率。
 
@@ -259,23 +259,23 @@ url：login
 
 - 教师班级分配
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师班级分配.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师班级分配.png)
 
 - 添加班级分配
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加班级分配.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加班级分配.png)
 
 
 - 修改班级分配
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改班级分配.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改班级分配.png)
 
 
 #### 教师查看学生模块
 
 该教师只能查看自己班级的学生资料
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师查看学生.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师查看学生.png)
 
 
 
@@ -283,16 +283,16 @@ url：login
 
 - 教师小测管理
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师小测管理.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师小测管理.png)
 
 - 添加小测
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加小测.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加小测.png)
 
 
 - 修改小测
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改小测.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改小测.png)
 
 
 
@@ -300,11 +300,11 @@ url：login
 
 - 添加选择题
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加选择题.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加选择题.png)
 
 - 添加判断题
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/添加判断题.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/添加判断题.png)
 
 
 
@@ -312,7 +312,7 @@ url：login
 
 该教师只能查看自己班级学生的成绩
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师成绩查询.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师成绩查询.png)
 
 
 
@@ -322,29 +322,29 @@ url：login
 
 该教师只能查看自己班级学生的成绩
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师成绩查询.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师成绩查询.png)
 
 
 - 教师查看成绩详情
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/教师成绩详情.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/教师成绩详情.png)
 
 
 #### 班级分析模块
 分析该班级各科平均成绩与全年级各科平均成绩的对比图
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/班级分析.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/班级分析.png)
 
 
 #### 学生分析模块
 教师可以在学生分析模块中，教师可以选择学生并查看该学生的小测成绩分析，系统对该学生各科成绩与该学生所在班级和所在年级的各科平均成绩进行比较，获得对比的各种统计图表。统计图表使用Chart.js, Chart.js是开源的图表绘制工具库,可以很容易的绘制出好看的图表。
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/学生分析.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/学生分析.png)
 
 #### 小测分析模块
 在小测分析模块中，教师可以选择想要分析的小测，系统分析出各种图表，图表显示该小测的错题分布情况，可以查看错误率最高的题目是哪个。
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/小测分析.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/小测分析.png)
 
 
 
@@ -352,22 +352,22 @@ url：login
 
 - 学生观看视频
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/学生观看视频.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/学生观看视频.png)
 
 - 视频播放界面
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/视频播放.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/视频播放.png)
 
 
 #### 学生小测模块
 
 - 学生小测
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/学生小测.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/学生小测.png)
 
 - 学生答题界面
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/学生答题.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/学生答题.png)
 
 
 
@@ -375,22 +375,22 @@ url：login
 
 - 我的成绩
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/我的成绩.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/我的成绩.png)
 
 - 学生得分详情
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/得分详情.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/得分详情.png)
 
 
 ### 个人设置模块
 
 - 个人设置
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/个人设置.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/个人设置.png)
 
 - 头像上传
 
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/头像上传.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/头像上传.png)
 
 
 ### 学习参考
@@ -415,13 +415,13 @@ url：login
 2. 下载Redis，并打开Redis服务：[下载和安装方法](https://blog.csdn.net/cckevincyh/article/details/79632542)。
 3. 使用IDEA导入项目：[IntelliJ IDEA如何导入maven结构的web工程](https://jingyan.baidu.com/article/47a29f24460367c0142399ee.html)
 4. 修改数据库配置
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/数据库配置.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/数据库配置.png)
 5. 修改启动端口Maven pom.xml
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/修改启动端口.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/修改启动端口.png)
 6. 编译项目
 7. 项目运行
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/运行设置入口.png)
-![image](http://https://github.com/cckevincyh/CIYOU/blob/master/img/运行设置.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/运行设置入口.png)
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/运行设置.png)
 8. 管理员后台[http://localhost:8080/adminLogin](http://localhost:8080/adminLogin)，用户名密码都是admin
 9. 教师后台[http://localhost:8080/teacherLogin](http://localhost:8080/teacherLogin)
 10. 学生入口：[http://localhost:8080/login](http://localhost:8080/login)
