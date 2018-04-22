@@ -395,6 +395,26 @@ url：login
 ![image](https://github.com/cckevincyh/CIYOU/blob/master/img/上传头像.png)
 
 
+### 错误页面
+
+- 角色权限不通过页面
+
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/401.png)
+
+- 管理员权限不足页面
+
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/nopass.png)
+
+- 404页面
+
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/404.png)
+
+
+- 500页面
+
+![image](https://github.com/cckevincyh/CIYOU/blob/master/img/500.png)
+
+
 ### 学习参考
 
 想学习在线教育网站设计的可以参考下[因酷在线教育](http://wx.inxedu.com/)，使用java实现的。
@@ -427,3 +447,4 @@ url：login
 8. 管理员后台[http://localhost:8080/adminLogin](http://localhost:8080/adminLogin)，用户名密码都是admin
 9. 教师后台[http://localhost:8080/teacherLogin](http://localhost:8080/teacherLogin)
 10. 学生入口：[http://localhost:8080/login](http://localhost:8080/login)
+11. 添加学生和教师默认密码都是123456
