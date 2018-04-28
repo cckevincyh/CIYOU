@@ -144,6 +144,10 @@ class profileController {
         String originalFilename = file.getOriginalFilename()
         logger.info("上传文件名：" + originalFilename)
         String realPath = request.getServletContext().getRealPath("/public/teacher/")
+        File _dirFile = new File(realPath)
+        if (!_dirFile?.exists() && !_dirFile?.isDirectory()){
+            _dirFile?.mkdir()
+        }
         String uploadFileName = System.currentTimeMillis()+"_"+ originalFilename
         logger.info("获取上传路径：" + realPath + ", 上传的真实文件名：" + uploadFileName)
         boolean flag = true
